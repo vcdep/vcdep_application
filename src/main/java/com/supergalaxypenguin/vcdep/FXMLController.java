@@ -62,7 +62,7 @@ public class FXMLController implements Initializable {
      lang.getItems().add("PHP");
      lang.getItems().add("Java");
      lang.setValue("Java");
-    //this is initialization//   
+    //this is initialization   
 
 // TODO
     }    
