@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml" fx:controller="com.supergalaxypenguin.vcdep.FXMLController">
+
+<AnchorPane id="AnchorPane" prefHeight="522.0" prefWidth="594.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supergalaxypenguin.vcdep.FXMLController">
     <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
+      <TextField layoutX="46.0" layoutY="49.0" prefHeight="25.0" prefWidth="291.0" promptText="Git URL" style="-fx-background-color: white;" />
+      <TextField layoutX="46.0" layoutY="116.0" prefHeight="25.0" prefWidth="291.0" promptText="Branch" style="-fx-background-color: white;" />
+      <TextField layoutX="46.0" layoutY="178.0" prefHeight="25.0" prefWidth="291.0" promptText="Jenkins Server" style="-fx-background-color: white;" />
+      <ChoiceBox layoutX="130.0" layoutY="242.0" prefHeight="25.0" prefWidth="207.0" />
+      <Label layoutX="46.0" layoutY="246.0" prefHeight="17.0" prefWidth="89.0" text="Language:">
+         <font>
+            <Font name="Century Gothic" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="46.0" layoutY="290.0" prefHeight="18.0" prefWidth="140.0" text="Local Git Repository:">
+         <font>
+            <Font name="Century Gothic" size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="502.0" layoutY="480.0" mnemonicParsing="false" text="Sumbit">
+         <font>
+            <Font name="Century Gothic" size="14.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="267.0" fitWidth="195.0" layoutX="373.0" layoutY="49.0">
+         <image>
+            <Image url="@../../../../../../Peng.png" />
+         </image>
+      </ImageView>
     </children>
+   <effect>
+      <Blend mode="DARKEN" />
+   </effect>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
 </AnchorPane>

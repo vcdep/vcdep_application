@@ -16,11 +16,12 @@ public class FXMLController implements Initializable {
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
         label.setText("Hello World!");
+        // this area will change
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+     //this is initialization   
 
 // TODO
     }    
