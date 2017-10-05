@@ -43,6 +43,6 @@ public class MainApp extends Application {
 
     public void test(String test)
     {
-        System.out.println("Hello World");
+        System.out.println("World");
     }
 }
