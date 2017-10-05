@@ -34,4 +34,8 @@ public class MainApp extends Application {
         launch(args);
     }
 
+    public void test(String test)
+    {
+        System.out.println("Hello World");
+    }
 }
