@@ -34,15 +34,4 @@ public class MainApp extends Application {
         launch(args);
     }
     
-    public String test()
-    {
-        
-        return null;
-        
-    }
-
-    public void test(String test)
-    {
-        System.out.println("World");
-    }
 }
