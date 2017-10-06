@@ -1,4 +1,4 @@
-package com.supergalaxypenguin.vcdep;
+package com.supergalaxypenguin.vcdep.view.implementations;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class FXMLController implements Initializable {
+public class ConfigurationViewController implements Initializable {
     
     private String gitTxt;
     private String branchTxt;

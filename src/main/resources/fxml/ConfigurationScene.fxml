@@ -11,7 +11,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="615.0" prefWidth="793.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supergalaxypenguin.vcdep.FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="615.0" prefWidth="793.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supergalaxypenguin.vcdep.view.implementations.ConfigurationViewController">
     <children>
       <ImageView fx:id="background" fitHeight="742.0" fitWidth="793.0" nodeOrientation="INHERIT">
          <image>
