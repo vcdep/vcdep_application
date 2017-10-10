@@ -26,12 +26,13 @@ public class Model
      * @param jenkinsURL jenkinsURL the URL of the Jenkins server
      * @param branchName branchName the specific branch of the remote repository to access
      */
+
     public void setBuildInput(String jenkinsURL, String branchName)
     {
        
         this.setJenkinsURL(jenkinsURL);
         this.setBranchName(branchName);
-        
+
     }
         /**
      * Sets the necessary input variables for a pipeline config file
@@ -68,9 +69,7 @@ public class Model
      */
     public void setJenkinsURL(String jenkinsURL)
     {
-        
-        this.jenkinsURL = jenkinsURL;
-        
+        this.jenkinsURL = jenkinsURL;   
     }
     
     /**
