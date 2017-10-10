@@ -71,7 +71,7 @@ public class ConfigurationViewController implements Initializable {
         //Check that all inputs are entered properly...
 
         //Set all inputs in Controller
-        controller.setBranch(branchTxt);
+        controller.setBranchName(branchTxt);
         controller.setGitHubURL(gitTxt);
         controller.setJenkinsURL(jenkinsTxt);
         //controller.setLanguage();
