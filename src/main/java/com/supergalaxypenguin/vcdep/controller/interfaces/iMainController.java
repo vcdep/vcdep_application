@@ -10,7 +10,7 @@ import java.io.IOException;
 import javafx.stage.Stage;
 
 /**
- *
+ * The Main Controller Interface
  * @author Howtoon
  */
 public interface iMainController 
