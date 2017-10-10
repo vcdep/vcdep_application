@@ -5,12 +5,20 @@
  */
 package com.supergalaxypenguin.vcdep.controller.interfaces;
 
+import com.supergalaxypenguin.vcdep.model.implementations.Model;
+
 /**
  *
  * @author Howtoon
  */
 public interface iMainController 
 {
+    void runPipeline();
+    
+    Model getModel();
+    
+    void setModel(Model _model);
+    
     String getJenkinsURL();
 
     void setJenkinsURL(String _jenkinsURL);
