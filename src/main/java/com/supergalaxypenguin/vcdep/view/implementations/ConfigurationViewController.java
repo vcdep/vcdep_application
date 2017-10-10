@@ -20,14 +20,14 @@ public class ConfigurationViewController implements Initializable {
     public static ConfigurationViewController instance;
     private iMainController controller;
     
-    public ConfigurationViewController()
-    {
-        instance = this;
-    }
-    
-    public void setControllerInterface(iMainController _controller)
+    /**
+     * Creates the ConfigurationViewController
+     * @param _controller interface of the MainController
+     */
+    public ConfigurationViewController(iMainController _controller)
     {
         this.controller = _controller;
+        instance = this;
     }
     
     @FXML
@@ -69,6 +69,8 @@ public class ConfigurationViewController implements Initializable {
         //controller.setLanguage();
         //controller.setLocalRepo();
         //controller.setStages();
+        //Ready to Run the Pipeline?
+
     }
     @FXML
     private void handleBrowseButton(ActionEvent event) {
