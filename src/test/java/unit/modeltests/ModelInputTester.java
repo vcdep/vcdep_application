@@ -16,28 +16,56 @@ public class ModelInputTester
 {
 
     @Test
-    public void TestModelIsAbleToSetEachInputVariableToInstanceVariables()
+    public void TestModelIsAbleToSetBuildInputVariablesToInstanceVariables()
     {
         
         // Arrange
         Model model = new Model();
         String jenkinsURL = "jenkinsURL";
-        String gitHubURL = "gitHubURL";
         String branchName = "branchName";
-        String language = "language";
-        String localGitRepo = "localGitRepo";
         
         // Act
-        model.setInput(jenkinsURL, gitHubURL, branchName, language, localGitRepo);
+        model.setBuildInput(jenkinsURL, branchName);
         
         // Assert
         assertEquals(jenkinsURL, model.getJenkinsURL());
-        assertEquals(gitHubURL, model.getGitHubURL());
         assertEquals(branchName, model.getBranchName());
-        assertEquals(language, model.getLanguage());
-        assertEquals(localGitRepo, model.getLocalGitRepo());
-
         
+    }
+    @Test
+    public void TestModelIsAbleToSetConfigInputVariablesToInstanceVariables()
+    {
+       
+       //Arrange
+       Model model = new Model();
+       String gitHubURL = "gitHubURL";
+       String language = "language";
+       String localGitRepo = "localGitRepo";
+       
+       //Act
+       model.setConfigInput(gitHubURL, language, localGitRepo);
+       
+       //Assert
+       assertEquals(gitHubURL, model.getGitHubURL());
+       assertEquals(language, model.getLanguage());
+       assertEquals(localGitRepo, model.getLocalGitRepo());
+    }
+    @Test
+    public void TestMakeBuildMessageReturnsCorrectString()
+    {
+       
+       //Arrange
+       Model model = new Model();
+       String buildMessage = "http://jenkinsURL/jobs/jenkins_pipeline/branchName/api/json?tree=results,timestamp,estimatedDuration";
+       String jenkinsURL = "jenkinsURL";
+       String branchName = "branchName";
+       model.setBuildInput(jenkinsURL, branchName);
+       
+      //Act
+       String returnedBuildMessage = model.makeBuildMessage();
+       
+       //Assert
+       assertEquals(buildMessage, returnedBuildMessage);
     }
     
 }

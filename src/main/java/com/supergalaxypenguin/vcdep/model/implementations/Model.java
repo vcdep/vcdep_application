@@ -18,25 +18,49 @@ public class Model
     private String branchName;
     private String language;
     private String localGitRepo;
+    private String buildMessage;
+    private String configInput;
 
     /**
-     * Sets all the necessary input variables for a pipeline build
+     * Sets the necessary input variables for a pipeline build
      * @param jenkinsURL jenkinsURL the URL of the Jenkins server
-     * @param gitHubURL the URL of the specific remote repository
      * @param branchName branchName the specific branch of the remote repository to access
+     */
+    public void setBuildInput(String jenkinsURL, String branchName)
+    {
+       
+        this.setJenkinsURL(jenkinsURL);
+        this.setBranchName(branchName);
+        
+    }
+        /**
+     * Sets the necessary input variables for a pipeline config file
+     * @param gitHubURL the URL of the specific remote repository
      * @param language the programming language that the remote repository application is written in
      * @param localGitRepo the path to the local git repository
      */
-    public void setInput(String jenkinsURL, String gitHubURL, String branchName, String language, String localGitRepo)
+    public void setConfigInput(String gitHubURL, String language, String localGitRepo)
     {
-        
-        this.setJenkinsURL(jenkinsURL);
-        this.setGitHubURL(gitHubURL);
-        this.setBranchName(branchName);
-        this.setLanguage(language);
-        this.setLocalGitRepo(localGitRepo);
-        
+      this.setGitHubURL(gitHubURL);      
+      this.setLanguage(language);
+      this.setLocalGitRepo(localGitRepo);
     }
+     /**
+     * Creates a String formatted to input to the Jenkins server for the build
+     * 
+     */
+    public String makeBuildMessage()
+    {
+       return this.buildMessage = String.format("http://%s/jobs/jenkins_pipeline/%s/api/json?tree=results,timestamp,estimatedDuration", this.jenkinsURL, this.branchName);
+    }
+     /**
+     * Creates a String formatted to set configuration file for the github repo
+     * 
+     *
+    public String makeConfigInput()
+    {
+       this.configInput = String.format();
+    }*/
     
     /**
      * Sets the Jenkins URL address to the correct instance field for later use
