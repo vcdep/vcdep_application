@@ -9,7 +9,7 @@ import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 
 /**
  *
- * @author natha
+ * @author nathan
  */
 public class Model
 {
@@ -24,6 +24,15 @@ public class Model
     private String configInput;
     public static Model instance;
     private iMainController controller;
+
+    /**
+     * (Only for testing) Creates the Model
+     * 
+     */
+    public Model()
+    {
+        
+    }
     
     /**
      * Creates the Model
