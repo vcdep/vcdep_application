@@ -11,5 +11,27 @@ package com.supergalaxypenguin.vcdep.controller.interfaces;
  */
 public interface iMainController 
 {
-    
+    String getJenkinsURL();
+
+    void setJenkinsURL(String _jenkinsURL);
+
+    String getGitHubURL();
+
+    void setGitHubURL(String _gitHubURL);
+
+    String getBranch();
+
+    void setBranch(String _branch);
+
+    String getLanguage();
+
+    void setLanguage(String _language);
+
+    String[] getStages();
+
+    void setStages(String[] _stages);
+
+    String getLocalRepo();
+
+    void setLocalRepo(String _localRepo);
 }

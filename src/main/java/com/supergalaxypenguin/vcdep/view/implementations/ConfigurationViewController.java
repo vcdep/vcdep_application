@@ -16,6 +16,12 @@ public class ConfigurationViewController implements Initializable {
     private String gitTxt;
     private String branchTxt;
     private String jenkinsTxt;
+    public static ConfigurationViewController instance;
+    
+    public ConfigurationViewController()
+    {
+        instance = this;
+    }
     
     @FXML
     private ChoiceBox<String> lang;

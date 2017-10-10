@@ -1,5 +1,6 @@
 package com.supergalaxypenguin.vcdep;
 
+import com.supergalaxypenguin.vcdep.controller.implementations.MainController;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -12,14 +13,8 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ConfigurationScene.fxml"));
-        
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
-        
-        stage.setTitle("JavaFX and Maven");
-        stage.setScene(scene);
-        stage.show();
+        MainController controller = new MainController();
+        controller.start(stage);
     }
 
     /**
