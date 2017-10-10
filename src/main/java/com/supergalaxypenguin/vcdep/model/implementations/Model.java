@@ -25,12 +25,15 @@ public class Model
     public static Model instance;
     private iMainController controller;
     
+    /**
+     * Creates the Model
+     * @param _controller interface of the MainController
+     */
     public Model(iMainController _controller)
     {
         this.controller = _controller;
         instance = this;
     }
-    
 
     /**
      * Sets the necessary input variables for a pipeline build

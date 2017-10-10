@@ -15,10 +15,6 @@ public interface iMainController
 {
     void runPipeline();
     
-    Model getModel();
-    
-    void setModel(Model _model);
-    
     String getJenkinsURL();
 
     void setJenkinsURL(String _jenkinsURL);

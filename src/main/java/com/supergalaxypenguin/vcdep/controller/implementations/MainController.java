@@ -26,13 +26,29 @@ public class MainController implements iMainController
     private String language;
     private String[] stages;
     private String localRepo;
-    private ConfigurationViewController configurationViewController;
-    private Model model;
+    private final ConfigurationViewController configurationViewController;
+    private final Model model;
+    private Stage stage;
+    private static MainController instance;
     
-    public void start(Stage stage) throws IOException
+    /**
+     * creates the MainController, Model, and ConfigurationViewController
+     */
+    public MainController()
     {
+        this.instance = this;
         configurationViewController = new ConfigurationViewController((iMainController) this);
         model = new Model((iMainController) this);
+    }
+    
+    /**
+     * displays the ConfigurationScene
+     * @param _stage the window created by JavaFX
+     * @throws java.io.IOException
+     */
+    public void displayConfigurationScene(Stage _stage) throws IOException
+    {
+        stage = _stage;
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/ConfigurationScene.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
@@ -41,19 +57,12 @@ public class MainController implements iMainController
         stage.show();
     }
     
+    /**
+     *
+     */
     public void runPipeline()
     {
         model.setBuildInput(jenkinsURL, branchName);
-    }
-    
-    public Model getModel()
-    {
-        return model;
-    }
-    
-    public void setModel(Model _model)
-    {
-        this.model = _model;
     }
     
     public String getJenkinsURL() 
