@@ -10,6 +10,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 
 public class ConfigurationViewController implements Initializable {
     
@@ -17,10 +18,16 @@ public class ConfigurationViewController implements Initializable {
     private String branchTxt;
     private String jenkinsTxt;
     public static ConfigurationViewController instance;
+    private iMainController controller;
     
     public ConfigurationViewController()
     {
         instance = this;
+    }
+    
+    public void setControllerInterface(iMainController _controller)
+    {
+        this.controller = _controller;
     }
     
     @FXML
@@ -44,8 +51,6 @@ public class ConfigurationViewController implements Initializable {
     @FXML
     private ImageView background;
     
-    
-    
     @FXML
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
@@ -54,7 +59,6 @@ public class ConfigurationViewController implements Initializable {
         gitTxt = gitUrl.getText();
         branchTxt = branch.getText();
         jenkinsTxt = jenkins.getText();
-        
         System.out.println(gitTxt+"\n"+branchTxt+"\n"+jenkinsTxt);
         
     }

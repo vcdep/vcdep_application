@@ -28,14 +28,12 @@ public class Model
      * @param localGitRepo the path to the local git repository
      */
     public void setInput(String jenkinsURL, String gitHubURL, String branchName, String language, String localGitRepo)
-    {
-        
+    { 
         this.setJenkinsURL(jenkinsURL);
         this.setGitHubURL(gitHubURL);
         this.setBranchName(branchName);
         this.setLanguage(language);
-        this.setLocalGitRepo(localGitRepo);
-        
+        this.setLocalGitRepo(localGitRepo); 
     }
     
     /**
@@ -44,9 +42,7 @@ public class Model
      */
     public void setJenkinsURL(String jenkinsURL)
     {
-        
-        this.jenkinsURL = jenkinsURL;
-        
+        this.jenkinsURL = jenkinsURL;   
     }
     
     /**
