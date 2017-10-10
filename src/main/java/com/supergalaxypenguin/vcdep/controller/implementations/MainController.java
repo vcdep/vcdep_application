@@ -8,10 +8,12 @@ package com.supergalaxypenguin.vcdep.controller.implementations;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import com.supergalaxypenguin.vcdep.model.implementations.Model;
 import com.supergalaxypenguin.vcdep.view.implementations.ConfigurationViewController;
+import java.io.File;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 /**
@@ -39,6 +41,17 @@ public class MainController implements iMainController
         this.instance = this;
         configurationViewController = new ConfigurationViewController();
         model = new Model((iMainController) this);
+    }
+    
+    /**
+     * displays the DirectoryChooser
+     * @return Returns the absolute path of the directory chosen
+     */
+    public File displayDirectoryChooser()
+    {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        return directoryChooser.showDialog(stage);
+                
     }
     
     /**
@@ -173,5 +186,4 @@ public class MainController implements iMainController
     {
         this.localGitRepo = localGitRepo;
     }
-    
 }

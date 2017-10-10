@@ -11,6 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
+import java.io.File;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 
 public class ConfigurationViewController implements Initializable {
     
@@ -19,6 +22,7 @@ public class ConfigurationViewController implements Initializable {
     private String jenkinsTxt;
     public static ConfigurationViewController instance;
     private static iMainController controller;
+    private Stage stage;
     
     /**
      * Creates the ConfigurationViewController
@@ -38,6 +42,11 @@ public class ConfigurationViewController implements Initializable {
         this.controller = _controller;
     }
     
+    public void setStage(Stage stage)
+    {
+        this.stage = stage;
+    }
+    
     @FXML
     private ChoiceBox<String> lang;
     @FXML
@@ -50,6 +59,8 @@ public class ConfigurationViewController implements Initializable {
     private TextField branch;
     @FXML
     private TextField jenkins;
+    @FXML
+    private TextField localGitRepo;
     @FXML
     private Button submit;
     @FXML
@@ -82,7 +93,12 @@ public class ConfigurationViewController implements Initializable {
     }
     @FXML
     private void handleBrowseButton(ActionEvent event) {
-        System.out.println("Opening File Directory");
+        File selectedDirectory = controller.displayDirectoryChooser();
+        if(selectedDirectory == null){
+                    localGitRepo.setText("No Directory selected");
+                }else{
+                    localGitRepo.setText(selectedDirectory.getAbsolutePath());
+                }
     }
     
     @Override

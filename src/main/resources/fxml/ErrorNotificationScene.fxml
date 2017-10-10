@@ -44,7 +44,7 @@
          </image>
       </ImageView>
       <Button fx:id="browse" contentDisplay="RIGHT" layoutX="363.0" layoutY="283.0" mnemonicParsing="false" onAction="#handleBrowseButton" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: lightgrey;" text="Browse" />
-      <TextField fx:id="localGitRepo" alignment="CENTER_RIGHT" layoutX="192.0" layoutY="283.0" prefHeight="25.0" prefWidth="162.0" style="-fx-background-color: lightgrey;" />
+      <TextField alignment="CENTER_RIGHT" layoutX="192.0" layoutY="283.0" prefHeight="25.0" prefWidth="162.0" style="-fx-background-color: lightgrey;" />
     </children>
    <effect>
       <Blend mode="DARKEN" />
