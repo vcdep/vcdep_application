@@ -17,25 +17,25 @@ public interface iMainController
     
     String getJenkinsURL();
 
-    void setJenkinsURL(String _jenkinsURL);
+    void setJenkinsURL(String jenkinsURL);
 
     String getGitHubURL();
 
-    void setGitHubURL(String _gitHubURL);
+    void setGitHubURL(String gitHubURL);
 
-    String getBranch();
+    String getBranchName();
 
-    void setBranch(String _branch);
+    void setBranchName(String branch);
 
     String getLanguage();
 
-    void setLanguage(String _language);
+    void setLanguage(String language);
 
     String[] getStages();
 
-    void setStages(String[] _stages);
+    void setStages(String[] stages);
 
     String getLocalRepo();
 
-    void setLocalRepo(String _localRepo);
+    void setLocalRepo(String localRepo);
 }

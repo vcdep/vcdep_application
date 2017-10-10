@@ -21,14 +21,18 @@ public class ConfigurationViewController implements Initializable {
     private static iMainController controller;
     
     /**
-     * Creates the Model
-     * @param _controller interface of the MainController
+     * Creates the ConfigurationViewController
      */
     public ConfigurationViewController()
     {
         instance = this;
     }
     
+    /**
+     * Sets the controller variable to the interface of the MainController,
+     * This must be done before the view can be used.
+     * @param _controller interface of the MainController
+     */
     public void setMainControllerInterface(iMainController _controller)
     {
         this.controller = _controller;

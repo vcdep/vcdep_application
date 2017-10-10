@@ -25,7 +25,7 @@ public class MainController implements iMainController
     private String branchName;
     private String language;
     private String[] stages;
-    private String localRepo;
+    private String localGitRepo;
     private final ConfigurationViewController configurationViewController;
     private final Model model;
     private Stage stage;
@@ -66,68 +66,112 @@ public class MainController implements iMainController
         model.setBuildInput(jenkinsURL, branchName);
     }
     
+    /**
+     * Returns the Jenkins URL
+     * @return jenkinsURL the URL of the Jenkins server
+     */
     public String getJenkinsURL() 
     {
         return jenkinsURL;
     }
 
     /**
-     * 
-     * @param _jenkinsURL 
+     * Sets the Jenkins URL address to the correct instance field for later use
+     * @param jenkinsURL the URL of the Jenkins server
      */
-    public void setJenkinsURL(String _jenkinsURL) 
+    public void setJenkinsURL(String jenkinsURL) 
     {
-        this.jenkinsURL = _jenkinsURL;
+        this.jenkinsURL = jenkinsURL;
     }
 
+    /**
+     * Returns the GitHub URL
+     * @return gitHubURL the URL of the specific remote repository
+     */
     public String getGitHubURL() 
     {
         return gitHubURL;
     }
 
-    public void setGitHubURL(String _gitHubURL) 
+    /**
+     * Sets the GitHub URL address to the correct instance field for later use
+     * @param gitHubURL the URL of the specific remote repository
+     */
+    public void setGitHubURL(String gitHubURL) 
     {
-        this.gitHubURL = _gitHubURL;
+        this.gitHubURL = gitHubURL;
     }
 
-    public String getBranch() 
+    /**
+     * Returns the branch name
+     * @return branchName the specific branch of the remote repository to access
+     */
+    public String getBranchName() 
     {
         return branchName;
     }
 
-    public void setBranch(String _branch) 
+    /**
+     * Sets the name to the correct instance field for later use with specifying which branch to access
+     * @param branch the specific branch of the remote repository to access
+     */
+    public void setBranchName(String branch) 
     {
-        this.branchName = _branch;
+        this.branchName = branch;
     }
 
+    /**
+     * Returns the programming language of the remote repository application
+     * @return language the programming language that the remote repository application is written in
+     */
     public String getLanguage() 
     {
         return language;
     }
 
-    public void setLanguage(String _language) 
+    /**
+     * Sets the programming language to the correct instance field for determining the type of pipeline to create
+     * @param language the programming language that the remote repository application is written in
+     */
+    public void setLanguage(String language) 
     {
-        this.language = _language;
+        this.language = language;
     }
 
+    /**
+     * Returns the order of the pipeline stages in an array of Strings
+     * @return stages an array containing the order of the stages to be run in the pipeline
+     */
     public String[] getStages() 
     {
         return stages;
     }
 
-    public void setStages(String[] _stages) 
+    /**
+     * Sets the order of stages for the pipeline to run
+     * @param stages an array of Strings that holds the order of the stages to run
+     */
+    public void setStages(String[] stages) 
     {
-        this.stages = _stages;
+        this.stages = stages;
     }
 
+    /**
+     * Returns the path to the local git repository
+     * @return localGitRepo the path to the local git repository
+     */
     public String getLocalRepo() 
     {
-        return localRepo;
+        return localGitRepo;
     }
 
-    public void setLocalRepo(String _localRepo) 
+    /**
+     * Sets the path of the local git repository to the correct instance field for later use
+     * @param localGitRepo the path to the local git repository
+     */
+    public void setLocalRepo(String localGitRepo) 
     {
-        this.localRepo = _localRepo;
+        this.localGitRepo = localGitRepo;
     }
     
 }
