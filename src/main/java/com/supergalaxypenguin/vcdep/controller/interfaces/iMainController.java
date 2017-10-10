@@ -15,6 +15,10 @@ import javafx.stage.Stage;
  */
 public interface iMainController 
 {
+    /**
+     * displays the DirectoryChooser
+     * @return Returns the absolute path of the directory chosen
+     */
     File displayDirectoryChooser();
     
     /**

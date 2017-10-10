@@ -71,7 +71,8 @@ public class ConfigurationViewController implements Initializable {
     private ImageView background;
     
     @FXML
-    private void handleButtonAction(ActionEvent event) {
+    private void handleButtonAction(ActionEvent event) 
+    {
         System.out.println("You clicked me!");
         testLabel.setText(gitUrl.getText()+"\n"+branch.getText()+"\n"+jenkins.getText());
         // this area will change
@@ -92,17 +93,22 @@ public class ConfigurationViewController implements Initializable {
 
     }
     @FXML
-    private void handleBrowseButton(ActionEvent event) {
+    private void handleBrowseButton(ActionEvent event) 
+    {
         File selectedDirectory = controller.displayDirectoryChooser();
-        if(selectedDirectory == null){
-                    localGitRepo.setText("No Directory selected");
-                }else{
-                    localGitRepo.setText(selectedDirectory.getAbsolutePath());
-                }
+        if(selectedDirectory == null)
+        {
+            localGitRepo.setText("No Directory selected");
+        }
+        else
+        {
+            localGitRepo.setText(selectedDirectory.getAbsolutePath());
+        }
     }
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) 
+    {
      lang.getItems().add("PHP");
      lang.getItems().add("Java");
      lang.setValue("Java");
