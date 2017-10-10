@@ -12,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import java.io.File;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 public class ConfigurationViewController implements Initializable {
