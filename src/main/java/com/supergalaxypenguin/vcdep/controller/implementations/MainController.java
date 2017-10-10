@@ -5,7 +5,9 @@
  */
 package com.supergalaxypenguin.vcdep.controller.implementations;
 
+import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import com.supergalaxypenguin.vcdep.model.implementations.Model;
+import com.supergalaxypenguin.vcdep.view.implementations.ConfigurationViewController;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +18,7 @@ import javafx.stage.Stage;
  *
  * @author Howtoon
  */
-public class MainController 
+public class MainController implements iMainController
 {
     private String jenkinsURL;
     private String gitHubURL;
@@ -24,15 +26,16 @@ public class MainController
     private String language;
     private String[] stages;
     private String localRepo;
+    private ConfigurationViewController configurationViewController;
     private Model model;
     
     public void start(Stage stage) throws IOException
     {
+        configurationViewController = new ConfigurationViewController((iMainController) this);
+        model = new Model((iMainController) this);
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/ConfigurationScene.fxml"));
-        
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
-        
         stage.setTitle("JavaFX and Maven");
         stage.setScene(scene);
         stage.show();
