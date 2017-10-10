@@ -5,6 +5,8 @@
  */
 package com.supergalaxypenguin.vcdep.model.implementations;
 
+import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
+
 /**
  *
  * @author natha
@@ -20,13 +22,21 @@ public class Model
     private String localGitRepo;
     private String buildMessage;
     private String configInput;
+    public static Model instance;
+    private iMainController controller;
+    
+    public Model(iMainController _controller)
+    {
+        this.controller = _controller;
+        instance = this;
+    }
+    
 
     /**
      * Sets the necessary input variables for a pipeline build
      * @param jenkinsURL jenkinsURL the URL of the Jenkins server
      * @param branchName branchName the specific branch of the remote repository to access
      */
-
     public void setBuildInput(String jenkinsURL, String branchName)
     {
        
