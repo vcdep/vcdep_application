@@ -18,16 +18,20 @@ public class ConfigurationViewController implements Initializable {
     private String branchTxt;
     private String jenkinsTxt;
     public static ConfigurationViewController instance;
-    private iMainController controller;
+    private static iMainController controller;
     
     /**
-     * Creates the ConfigurationViewController
+     * Creates the Model
      * @param _controller interface of the MainController
      */
-    public ConfigurationViewController(iMainController _controller)
+    public ConfigurationViewController()
+    {
+        instance = this;
+    }
+    
+    public void setMainControllerInterface(iMainController _controller)
     {
         this.controller = _controller;
-        instance = this;
     }
     
     @FXML

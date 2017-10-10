@@ -37,7 +37,7 @@ public class MainController implements iMainController
     public MainController()
     {
         this.instance = this;
-        configurationViewController = new ConfigurationViewController((iMainController) this);
+        configurationViewController = new ConfigurationViewController();
         model = new Model((iMainController) this);
     }
     
@@ -50,6 +50,7 @@ public class MainController implements iMainController
     {
         stage = _stage;
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/ConfigurationScene.fxml"));
+        this.configurationViewController.setMainControllerInterface((iMainController) this);
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
         stage.setTitle("JavaFX and Maven");
@@ -58,7 +59,7 @@ public class MainController implements iMainController
     }
     
     /**
-     *
+     * 
      */
     public void runPipeline()
     {
@@ -70,6 +71,10 @@ public class MainController implements iMainController
         return jenkinsURL;
     }
 
+    /**
+     * 
+     * @param _jenkinsURL 
+     */
     public void setJenkinsURL(String _jenkinsURL) 
     {
         this.jenkinsURL = _jenkinsURL;
