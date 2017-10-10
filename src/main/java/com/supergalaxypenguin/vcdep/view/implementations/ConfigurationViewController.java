@@ -60,7 +60,15 @@ public class ConfigurationViewController implements Initializable {
         branchTxt = branch.getText();
         jenkinsTxt = jenkins.getText();
         System.out.println(gitTxt+"\n"+branchTxt+"\n"+jenkinsTxt);
-        
+        //Check that all inputs are entered properly...
+
+        //Set all inputs in Controller
+        controller.setBranch(branchTxt);
+        controller.setGitHubURL(gitTxt);
+        controller.setJenkinsURL(jenkinsTxt);
+        //controller.setLanguage();
+        //controller.setLocalRepo();
+        //controller.setStages();
     }
     @FXML
     private void handleBrowseButton(ActionEvent event) {
