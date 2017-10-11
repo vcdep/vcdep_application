@@ -17,7 +17,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 /**
- *
+ * The Main Controller
  * @author Howtoon
  */
 public class MainController implements iMainController
@@ -50,8 +50,7 @@ public class MainController implements iMainController
     public File displayDirectoryChooser()
     {
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        return directoryChooser.showDialog(stage);
-                
+        return directoryChooser.showDialog(stage);     
     }
     
     /**
