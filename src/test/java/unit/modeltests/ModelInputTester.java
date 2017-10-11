@@ -67,5 +67,22 @@ public class ModelInputTester
        //Assert
        assertEquals(buildMessage, returnedBuildMessage);
     }
+    /*
+    @Test
+    public void TestMakeConfigInputReturnsCorrectString()
+    {
+       
+       //Arrange
+       Model model = new Model();
+       String configInput = "";
+       String gitHubURL = "gitHubURL";
+       String language = "language";
+       String localGitRepo = "localGitRepo";
+       model.setConfigInput(gitHubURL, language, localGitRepo);
+       //Act
+       String returnedConfigInput = model.makeConfigInput(gitHubURL, language, localGitRepo)
+       //Assert
+       assertEquals(configInput, returnedConfigInput);
+    }*/
     
 }
