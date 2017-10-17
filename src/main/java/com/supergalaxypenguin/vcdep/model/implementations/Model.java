@@ -5,7 +5,12 @@
  */
 package com.supergalaxypenguin.vcdep.model.implementations;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  *
@@ -79,11 +84,18 @@ public class Model
      /**
      * Creates a String formatted to set configuration file for the github repo
      * 
-     *
+     */
     public String makeConfigInput()
     {
-       this.configInput = String.format();
-    }*/
+        ArrayList<String> stages = new ArrayList<String>();
+        stages.add("static");
+        stages.add("unit");
+        stages.add("integration");
+        stages.add("staging");
+        Pipeline pipeline = new Pipeline(this.getLanguage(), stages);
+        return this.createJson(pipeline);
+//       this.configInput = String.format();
+    }
     
     /**
      * Sets the Jenkins URL address to the correct instance field for later use
@@ -191,6 +203,33 @@ public class Model
         
         return this.localGitRepo;
         
+    }
+ 
+    public String createJson(Pipeline pipeline)
+    {
+
+        GsonBuilder builder = new GsonBuilder();
+        builder.setPrettyPrinting().serializeNulls();
+        Gson gson = builder.serializeNulls().create();
+
+        try
+        {
+
+            PrintWriter writer = new PrintWriter(this.getLocalGitRepo() + "/config.json", "UTF-8");
+            String json = gson.toJson(pipeline);
+            writer.println(json);
+            writer.close();
+            
+            return json;
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        
+        return null;
+
     }
     
 }

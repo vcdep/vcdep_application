@@ -6,6 +6,9 @@
 package unit.modeltests;
 
 import com.supergalaxypenguin.vcdep.model.implementations.Model;
+import com.supergalaxypenguin.vcdep.model.implementations.Pipeline;
+import java.io.File;
+import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 /**
@@ -50,6 +53,7 @@ public class ModelInputTester
        assertEquals(language, model.getLanguage());
        assertEquals(localGitRepo, model.getLocalGitRepo());
     }
+    
     @Test
     public void TestMakeBuildMessageReturnsCorrectString()
     {
@@ -67,22 +71,101 @@ public class ModelInputTester
        //Assert
        assertEquals(buildMessage, returnedBuildMessage);
     }
-    /*
+    
+    
     @Test
     public void TestMakeConfigInputReturnsCorrectString()
     {
        
        //Arrange
        Model model = new Model();
-       String configInput = "";
-       String gitHubURL = "gitHubURL";
-       String language = "language";
-       String localGitRepo = "localGitRepo";
-       model.setConfigInput(gitHubURL, language, localGitRepo);
-       //Act
-       String returnedConfigInput = model.makeConfigInput(gitHubURL, language, localGitRepo)
-       //Assert
-       assertEquals(configInput, returnedConfigInput);
-    }*/
+       String language = "php";
+       String localGitRepo = "./src/main/resources/";
+       model.setLanguage(language);
+       model.setLocalGitRepo(localGitRepo);
+        
+       String actual = "{\n" +
+"  \"language\": \"php\",\n" +
+"  \"stages\": [\n" +
+"    \"static\",\n" +
+"    \"unit\",\n" +
+"    \"integration\",\n" +
+"    \"staging\"\n" +
+"  ]\n" +
+"}";
+        
+        // Act
+        String result = model.makeConfigInput();
+        
+        // Assert
+        assertEquals(actual, result);
+    }
+    
+    @Test
+    public void TestCorrectPipelineCreated()
+    {
+        
+        // Arrange
+        Model model = new Model();
+        String language = "php";
+        String localGitRepo = "./src/main/resources/";
+        model.setLanguage(language);
+        model.setLocalGitRepo(localGitRepo);
+        
+        ArrayList<String> stages = new ArrayList<String>();
+        stages.add("static");
+        stages.add("unit");
+        stages.add("integration");
+        stages.add("staging");
+        Pipeline pipeline = new Pipeline(language, stages);
+        
+        model.createJson(pipeline);
+        
+        File config = new File(localGitRepo);
+        
+        // Act
+        boolean result = config.exists();
+        
+        
+        // Assert
+        assertEquals(true, result);
+        
+    }
+    
+    @Test
+    public void TestCreateJSONIsCorrect()
+    {
+    
+        // Arrange
+        Model model = new Model();
+        String language = "php";
+        String localGitRepo = "./src/main/resources/";
+        model.setLanguage(language);
+        model.setLocalGitRepo(localGitRepo);
+        
+        ArrayList<String> stages = new ArrayList<String>();
+        stages.add("static");
+        stages.add("unit");
+        stages.add("integration");
+        stages.add("staging");
+        Pipeline pipeline = new Pipeline(language, stages);
+        
+        String actual = "{\n" +
+"  \"language\": \"php\",\n" +
+"  \"stages\": [\n" +
+"    \"static\",\n" +
+"    \"unit\",\n" +
+"    \"integration\",\n" +
+"    \"staging\"\n" +
+"  ]\n" +
+"}";
+        
+        // Act
+        String result = model.createJson(pipeline);
+        
+        // Assert
+        assertEquals(actual, result);
+    
+    }
     
 }
