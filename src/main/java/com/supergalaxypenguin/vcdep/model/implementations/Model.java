@@ -8,8 +8,14 @@ package com.supergalaxypenguin.vcdep.model.implementations;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 /**
@@ -27,6 +33,7 @@ public class Model
     private String localGitRepo;
     private String buildMessage;
     private String configInput;
+    private String jenkinsResponse;
     public static Model instance;
     private iMainController controller;
 
@@ -79,7 +86,7 @@ public class Model
      */
     public String makeBuildMessage()
     {
-       return this.buildMessage = String.format("http://%s/jobs/jenkins_pipeline/%s/api/json?tree=results,timestamp,estimatedDuration", this.jenkinsURL, this.branchName);
+       return this.buildMessage = String.format("http://%s/job/jenkins_pipline/%s/api/json?tree=results,timestamp,estimatedDuration", this.jenkinsURL, this.branchName);
     }
      /**
      * Creates a String formatted to set configuration file for the github repo
@@ -230,6 +237,47 @@ public class Model
         
         return null;
 
+    }
+    
+    public boolean sendBuildMessage()
+    {
+        
+        try
+        {
+            URL url = new URL(this.buildMessage);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            int code = conn.getResponseCode();
+            if (code == HttpURLConnection.HTTP_OK)
+            {
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String inputLine;
+                
+                StringBuffer res = new StringBuffer();
+                
+                while ((inputLine = in.readLine()) != null) {
+                
+                    res.append(inputLine);
+                
+                }
+                
+                in.close();
+                this.jenkinsResponse = res.toString();
+                //System.out.println(res.toString());
+                return true;
+
+            }
+        }
+        catch (Exception e)
+        {
+            
+            e.printStackTrace();
+            return false;
+            
+        }
+        
+        return false;
+        
     }
     
 }

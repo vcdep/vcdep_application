@@ -60,9 +60,9 @@ public class ModelInputTester
        
        //Arrange
        Model model = new Model();
-       String buildMessage = "http://jenkinsURL/jobs/jenkins_pipeline/branchName/api/json?tree=results,timestamp,estimatedDuration";
+       String buildMessage = "http://jenkinsURL/job/jenkins_pipline/1/api/json?tree=results,timestamp,estimatedDuration";
        String jenkinsURL = "jenkinsURL";
-       String branchName = "branchName";
+       String branchName = "1";
        model.setBuildInput(jenkinsURL, branchName);
        
       //Act
@@ -166,6 +166,25 @@ public class ModelInputTester
         // Assert
         assertEquals(actual, result);
     
+    }
+    
+    @Test
+    public void TestModelSendsBuildMessageToJenkins()
+    {
+        
+        //Arrange
+       Model model = new Model();
+       String jenkinsURL = "34.228.23.117";
+       String branchName = "1";
+       model.setBuildInput(jenkinsURL, branchName);
+       model.makeBuildMessage();
+       
+      //Act
+      boolean result = model.sendBuildMessage();
+      
+      // Assert
+      assertEquals(true, result);
+      
     }
     
 }
