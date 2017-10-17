@@ -12,6 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.stage.Stage;
 
 public class ConfigurationViewController implements Initializable {
@@ -72,7 +75,7 @@ public class ConfigurationViewController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) 
     {
-        System.out.println("You clicked me!");
+        System.out.println("Opening Pipline Viewer Window");
         testLabel.setText(gitUrl.getText()+"\n"+branch.getText()+"\n"+jenkins.getText());
         // this area will change
         gitTxt = gitUrl.getText();
@@ -85,11 +88,18 @@ public class ConfigurationViewController implements Initializable {
         controller.setBranchName(branchTxt);
         controller.setGitHubURL(gitTxt);
         controller.setJenkinsURL(jenkinsTxt);
-        //controller.setLanguage();
-        //controller.setLocalRepo();
-        //controller.setStages();
-        //Ready to Run the Pipeline?
-
+        controller.runPipeline();
+        try {
+            //controller.setLanguage();
+            //controller.setLocalRepo();
+            //controller.setStages();
+            //Ready to Run the Pipeline?
+            //controller.runPipeline();
+            controller.displayPipelineScene();
+        } catch (IOException ex) {
+            Logger.getLogger(ConfigurationViewController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
     }
     @FXML
     private void handleBrowseButton(ActionEvent event) 

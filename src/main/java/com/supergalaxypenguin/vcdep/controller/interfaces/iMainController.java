@@ -7,6 +7,9 @@ package com.supergalaxypenguin.vcdep.controller.interfaces;
 
 import java.io.File;
 import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -23,12 +26,48 @@ public interface iMainController
     
     /**
      * displays the ConfigurationScene
-     * @param _stage the window created by JavaFX
      * @throws java.io.IOException
      */
-    void displayConfigurationScene(Stage _stage) throws IOException;
+    void displayConfigurationScene() throws IOException;
     
     /**
+     * displays the PipelineScene
+     * @throws IOException 
+     */
+    void displayPipelineScene() throws IOException;
+    
+    /**
+     * Returns the String associated with the next step in the process
+     * @return Returns a String containing the information about the next step
+     */
+    String stepForward();
+    
+    /**
+     * Returns the String associated with the last step in the process
+     * @return Returns a String containing the information about the last step
+     */
+    String stepBackward();
+    
+    /**
+     * Store the Log File from the Jenkins Server
+     * @param _logFile stores the log file the was received from the Jenkins Server
+     */
+    void setLogFile(String _logFile);
+    
+    /**
+     * Gets the last Log File received from the Jenkins Server
+     * @return Returns a String containing the file.
+     */
+    String getLogFile();
+    
+    /**
+     * Sets the Java FX Stage
+     * @param _javaFXStage the JavaFX stage for the application
+     */
+    void setJavaFXStage(Stage _stage);
+    
+    /**
+     * Runs the initializes and runs the pipeline.
      * 
      */
     void runPipeline();
