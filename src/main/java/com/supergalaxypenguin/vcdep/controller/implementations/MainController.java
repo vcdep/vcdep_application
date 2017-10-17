@@ -30,8 +30,10 @@ public class MainController implements iMainController
     private String localGitRepo;
     private final ConfigurationViewController configurationViewController;
     private final Model model;
-    private Stage stage;
+    private Stage javaFXStage;
     private static MainController instance;
+    private String logFile;
+    private int currentStage = -1;
     
     /**
      * creates the MainController, Model, and ConfigurationViewController
@@ -44,33 +46,108 @@ public class MainController implements iMainController
     }
     
     /**
+     * Sets the Java FX Stage
+     * @param _javaFXStage the JavaFX stage for the application
+     */
+    public void setJavaFXStage(Stage _javaFXStage)
+    {
+        this.javaFXStage = _javaFXStage;
+    }
+    
+    /**
      * displays the DirectoryChooser
      * @return Returns the absolute path of the directory chosen
      */
     public File displayDirectoryChooser()
     {
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        return directoryChooser.showDialog(stage);     
+        return directoryChooser.showDialog(javaFXStage);     
     }
     
     /**
      * displays the ConfigurationScene
-     * @param _stage the window created by JavaFX
      * @throws java.io.IOException
      */
-    public void displayConfigurationScene(Stage _stage) throws IOException
+    public void displayConfigurationScene() throws IOException
     {
-        stage = _stage;
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/ConfigurationScene.fxml"));
         this.configurationViewController.setMainControllerInterface((iMainController) this);
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
-        stage.setTitle("JavaFX and Maven");
-        stage.setScene(scene);
-        stage.show();
+        javaFXStage.setTitle("Configuration Viewer");
+        javaFXStage.setScene(scene);
+        javaFXStage.show();
     }
     
     /**
+     * displays the PipelineScene
+     * @throws IOException 
+     */
+    public void displayPipelineScene() throws IOException
+    {
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/PipelineScene.fxml"));
+        this.configurationViewController.setMainControllerInterface((iMainController) this);
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        javaFXStage.setTitle("Pipeline Viewer");
+        javaFXStage.setScene(scene);
+        javaFXStage.show();
+    }
+    
+    /**
+     * Returns the String associated with the next step in the process
+     * @return Returns a String containing the information about the next step
+     */
+    public String stepForward()
+    {
+        if (currentStage >= stages.length - 1)
+        {
+            return "cannot step forward";
+        }
+        else
+        {
+            currentStage++;
+            return "stepped forward";
+        }
+    }
+    
+    /**
+     * Returns the String associated with the last step in the process
+     * @return Returns a String containing the information about the last step
+     */
+    public String stepBackward()
+    {
+        if (currentStage <= 0)
+        {
+            return "cannot step backward";
+        }
+        else
+        {
+            currentStage--;
+            return "stepped backward";
+        }
+    }
+    
+    /**
+     * Store the Log File from the Jenkins Server
+     * @param _logFile stores the log file the was received from the Jenkins Server
+     */
+    public void setLogFile(String _logFile)
+    {
+        this.logFile = _logFile;
+    }
+    
+    /**
+     * Gets the last Log File received from the Jenkins Server
+     * @return Returns a String containing the file.
+     */
+    public String getLogFile()
+    {
+        return "log file";
+    }
+    
+    /**
+     * Runs the initializes and runs the pipeline.
      * 
      */
     public void runPipeline()

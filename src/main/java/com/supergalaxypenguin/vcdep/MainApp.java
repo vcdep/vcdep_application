@@ -11,7 +11,8 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         MainController controller = new MainController();
-        controller.displayConfigurationScene(stage);
+        controller.setJavaFXStage(stage);
+        controller.displayConfigurationScene();
     }
 
     /**
