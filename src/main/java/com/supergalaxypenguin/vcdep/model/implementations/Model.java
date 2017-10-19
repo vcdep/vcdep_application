@@ -7,6 +7,7 @@ package com.supergalaxypenguin.vcdep.model.implementations;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.supergalaxypenguin.vcdep.controller.implementations.MainController;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -323,6 +324,7 @@ public class Model
                 
                 in.close();
                 //this.jenkinsResponse = res.toString();
+                MainController.getInstance().setLogFile(res.toString());
                 System.out.println(res.toString());
                 return res.toString();
 

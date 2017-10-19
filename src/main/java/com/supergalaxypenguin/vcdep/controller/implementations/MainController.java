@@ -38,11 +38,20 @@ public class MainController implements iMainController
     /**
      * creates the MainController, Model, and ConfigurationViewController
      */
-    public MainController()
+    private MainController()
     {
-        this.instance = this;
         configurationViewController = new ConfigurationViewController();
         model = new Model((iMainController) this);
+    }
+    
+    public static MainController getInstance()
+    {
+    
+        if (instance == null)
+            instance = new MainController();
+
+        return instance;
+        
     }
     
     /**
