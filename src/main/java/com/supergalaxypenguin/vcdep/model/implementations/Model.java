@@ -211,7 +211,23 @@ public class Model
         return this.localGitRepo;
         
     }
+    
+    /**
+     * Returns the response from the Jenkins server
+     * @return the response from the Jenkins server
+     */
+    public String getJenkinsResponse()
+    {
+        
+        return this.jenkinsResponse;
+        
+    }
  
+    /**
+     * 
+     * @param pipeline
+     * @return 
+     */
     public String createJson(Pipeline pipeline)
     {
 
@@ -263,7 +279,7 @@ public class Model
                 
                 in.close();
                 this.jenkinsResponse = res.toString();
-                //System.out.println(res.toString());
+                System.out.println(res.toString());
                 return true;
 
             }
@@ -277,6 +293,50 @@ public class Model
         }
         
         return false;
+        
+    }
+    
+    public String requestLogFile()
+    {
+        
+        try
+        {
+            
+            String request = String.format("http://%s/job/jenkins_pipline/%s/consoleText", this.jenkinsURL, this.branchName);
+            
+            URL url = new URL(request);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            int code = conn.getResponseCode();
+            if (code == HttpURLConnection.HTTP_OK)
+            {
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String inputLine;
+                
+                StringBuffer res = new StringBuffer();
+                
+                while ((inputLine = in.readLine()) != null) {
+                
+                    res.append(inputLine + "\n");
+                
+                }
+                
+                in.close();
+                //this.jenkinsResponse = res.toString();
+                System.out.println(res.toString());
+                return res.toString();
+
+            }
+        }
+        catch (Exception e)
+        {
+            
+            e.printStackTrace();
+            return null;
+            
+        }
+        
+        return null;
         
     }
     
