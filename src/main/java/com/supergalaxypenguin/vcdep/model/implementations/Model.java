@@ -36,25 +36,37 @@ public class Model
     private String configInput;
     private String jenkinsResponse;
     public static Model instance;
-    private iMainController controller;
+    private static iMainController controller;
 
     /**
      * (Only for testing) Creates the Model
      * 
      */
-    public Model()
+    private Model()
     {
         
     }
     
     /**
-     * Creates the Model
-     * @param _controller interface of the MainController
+     * Sets the Controller interface
+     * @param _controller iMainController interface
      */
-    public Model(iMainController _controller)
+    public void setController(iMainController _controller){
+        controller = _controller;
+    }
+    
+    /**
+     * Creates the Model
+     * @return returns instance of Model
+     */
+    public static Model getInstance()
     {
-        this.controller = _controller;
-        instance = this;
+        
+        if (instance == null)
+            instance = new Model();
+
+        return instance;
+        
     }
 
     /**

@@ -31,7 +31,7 @@ public class MainController implements iMainController
     private final ConfigurationViewController configurationViewController;
     private final Model model;
     private Stage javaFXStage;
-    private static MainController instance;
+    private static MainController instance = null;
     private String logFile;
     private int currentStage = -1;
     
@@ -41,15 +41,17 @@ public class MainController implements iMainController
     private MainController()
     {
         configurationViewController = new ConfigurationViewController();
-        model = new Model((iMainController) this);
+        model = Model.getInstance();
+        model.setController((iMainController) this);
     }
     
     public static MainController getInstance()
     {
     
         if (instance == null)
+        {
             instance = new MainController();
-
+        }
         return instance;
         
     }

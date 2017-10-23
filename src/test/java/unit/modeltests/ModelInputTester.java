@@ -25,7 +25,7 @@ public class ModelInputTester
     {
         
         // Arrange
-        Model model = new Model();
+        Model model = Model.getInstance();
         String jenkinsURL = "jenkinsURL";
         String branchName = "branchName";
         
@@ -42,7 +42,7 @@ public class ModelInputTester
     {
        
        //Arrange
-       Model model = new Model();
+       Model model = Model.getInstance();
        String gitHubURL = "gitHubURL";
        String language = "language";
        String localGitRepo = "localGitRepo";
@@ -61,7 +61,7 @@ public class ModelInputTester
     {
        
        //Arrange
-       Model model = new Model();
+       Model model = Model.getInstance();
        String buildMessage = "http://jenkinsURL/job/jenkins_pipline/1/api/json?tree=results,timestamp,estimatedDuration";
        String jenkinsURL = "jenkinsURL";
        String branchName = "1";
@@ -80,7 +80,7 @@ public class ModelInputTester
     {
        
        //Arrange
-       Model model = new Model();
+       Model model = Model.getInstance();
        String language = "php";
        String localGitRepo = "./src/main/resources/";
        model.setLanguage(language);
@@ -108,7 +108,7 @@ public class ModelInputTester
     {
         
         // Arrange
-        Model model = new Model();
+        Model model = Model.getInstance();
         String language = "php";
         String localGitRepo = "./src/main/resources/";
         model.setLanguage(language);
@@ -139,7 +139,7 @@ public class ModelInputTester
     {
     
         // Arrange
-        Model model = new Model();
+        Model model = Model.getInstance();
         String language = "php";
         String localGitRepo = "./src/main/resources/";
         model.setLanguage(language);
@@ -175,7 +175,7 @@ public class ModelInputTester
     {
         
         //Arrange
-       Model model = new Model();
+       Model model = Model.getInstance();
        String branchName = "1";
        model.setBuildInput(testIP, branchName);
        model.makeBuildMessage();
@@ -193,7 +193,7 @@ public class ModelInputTester
     {
     
         // Arrange
-        Model model = new Model();
+        Model model = Model.getInstance();
        String branchName = "1";
        model.setBuildInput(testIP, branchName);
        model.makeBuildMessage();
@@ -211,7 +211,7 @@ public class ModelInputTester
     public void TestRequestAndReceiveLogFileFromJenkins()
     {
     
-        Model model = new Model();
+        Model model = Model.getInstance();
         String branchName = "1";
         model.setBuildInput(testIP, branchName);
         String logTest = "Started by user anonymous\n" +
