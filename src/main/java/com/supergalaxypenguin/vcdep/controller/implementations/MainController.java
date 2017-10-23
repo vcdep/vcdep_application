@@ -45,6 +45,10 @@ public class MainController implements iMainController
         model.setController((iMainController) this);
     }
     
+    /**
+     * 
+     * @return instance of MainController
+     */
     public static MainController getInstance()
     {
     
@@ -111,14 +115,14 @@ public class MainController implements iMainController
      */
     public String stepForward()
     {
-        if (currentStage >= stages.length - 1)
+        if (currentStage >= stages.length - 1 || stages == null)
         {
-            return "cannot step forward";
+            return null;
         }
         else
         {
             currentStage++;
-            return "stepped forward";
+            return stages[currentStage];
         }
     }
     
@@ -128,14 +132,14 @@ public class MainController implements iMainController
      */
     public String stepBackward()
     {
-        if (currentStage <= 0)
+        if (currentStage <= 0 || stages == null)
         {
-            return "cannot step backward";
+            return null;
         }
         else
         {
             currentStage--;
-            return "stepped backward";
+            return stages[currentStage];
         }
     }
     
@@ -154,7 +158,8 @@ public class MainController implements iMainController
      */
     public String getLogFile()
     {
-        return "log file";
+        logFile = model.requestLogFile();
+        return logFile;
     }
     
     /**
@@ -254,6 +259,7 @@ public class MainController implements iMainController
     public void setStages(String[] stages) 
     {
         this.stages = stages;
+        this.currentStage = 0;
     }
 
     /**
