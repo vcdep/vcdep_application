@@ -87,7 +87,7 @@ public class Model
      * @param language the programming language that the remote repository application is written in
      * @param localGitRepo the path to the local git repository
      */
-    public void setConfigInput(String gitHubURL, String language, String localGitRepo)
+    public void setConfigInput(String gitHubURL, String language, String localGitRepo, String[] stages)
     {
       this.setGitHubURL(gitHubURL);      
       this.setLanguage(language);
