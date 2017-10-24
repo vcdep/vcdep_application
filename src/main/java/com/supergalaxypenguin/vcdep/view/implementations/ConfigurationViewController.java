@@ -91,27 +91,19 @@ public class ConfigurationViewController implements Initializable {
         System.out.println("Opening Pipline Viewer Window");
         testLabel.setText(gitUrl.getText()+"\n"+branch.getText()+"\n"+jenkins.getText());
         // this area will change
-        gitTxt = gitUrl.getText();
-        branchTxt = branch.getText();
-        jenkinsTxt = jenkins.getText();
-        System.out.println(gitTxt+"\n"+branchTxt+"\n"+jenkinsTxt);
+        System.out.println(gitUrl.getText()+"\n"+branch.getText()+"\n"+jenkins.getText());
         //Check that all inputs are entered properly...
 
         //Set all inputs in Controller and runs the pipeline
         try
         {
-            controller.runPipeline(gitUrl.getText(), language, localGitRepo.getText(), jenkins.getText(), branch.getText(), stages);
+            controller.runPipeline(gitUrl.getText(), lang.getValue(), localGitRepo.getText(), jenkins.getText(), branch.getText(), stages);
         }
         catch(Exception e)
         {
             System.out.println("Exception in controller.runpipline(params)");
         }
         try {
-            //controller.setLanguage();
-            //controller.setLocalRepo();
-            //controller.setStages();
-            //Ready to Run the Pipeline?
-            //controller.runPipeline();
             controller.displayPipelineScene();
         } catch (IOException ex) {
             Logger.getLogger(ConfigurationViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -138,10 +130,5 @@ public class ConfigurationViewController implements Initializable {
      lang.getItems().add("PHP");
      lang.getItems().add("Java");
      lang.setValue("Java");
-     
-     language = lang.getValue();
-    //this is initialization//   
-
-// TODO
     }    
 }
