@@ -187,6 +187,7 @@ public class MainController implements iMainController
         model.makeConfigInput();
         model.setBuildInput(jenkinsURL, branchName);
         model.makeBuildMessage();
+        
     }
     
     /**

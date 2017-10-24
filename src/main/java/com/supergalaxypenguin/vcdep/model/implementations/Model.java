@@ -7,6 +7,8 @@ package com.supergalaxypenguin.vcdep.model.implementations;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 import com.supergalaxypenguin.vcdep.controller.implementations.MainController;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import java.io.BufferedReader;
@@ -23,7 +25,7 @@ import java.util.ArrayList;
  *
  * @author nathan
  */
-public class Model
+public class Model extends Thread implements Runnable
 {
     
     // All instance variables for defining a Jenkins Pipeline
@@ -37,7 +39,35 @@ public class Model
     private String jenkinsResponse;
     public static Model instance;
     private static iMainController controller;
+    private boolean isDone = false;
 
+    @Override
+    public void run()
+    {
+        try
+        {
+            while(!isDone)
+            {
+                if (this.isInterrupted())
+                {
+                    throw new InterruptedException();
+                }
+                else
+                {
+                    boolean isDone = this.sendBuildMessage();
+                }
+            }
+            
+            String log = this.requestLogFile();
+            controller.setLogFile(log);
+            
+        }
+        catch(InterruptedException e)
+        {
+            
+        }
+    }
+    
     /**
      * (Only for testing) Creates the Model
      * 
@@ -69,6 +99,13 @@ public class Model
         
     }
 
+    public void setIsDone(boolean isDone)
+    {
+    
+        this.isDone = isDone;
+    
+    }
+    
     /**
      * Sets the necessary input variables for a pipeline build
      * @param jenkinsURL jenkinsURL the URL of the Jenkins server
@@ -99,7 +136,7 @@ public class Model
      */
     public String makeBuildMessage()
     {
-       return this.buildMessage = String.format("http://%s/job/jenkins_pipline/%s/api/json?tree=results,timestamp,estimatedDuration", this.jenkinsURL, this.branchName);
+       return this.buildMessage = String.format("http://%s/job/jenkins_pipline/%s/api/json?tree=result,timestamp,estimatedDuration", this.jenkinsURL, this.branchName);
     }
      /**
      * Creates a String formatted to set configuration file for the github repo
@@ -292,6 +329,7 @@ public class Model
                 
                 in.close();
                 this.jenkinsResponse = res.toString();
+                System.out.println(this.parseResult(this.jenkinsResponse));
                 System.out.println(res.toString());
                 return true;
 
@@ -335,9 +373,9 @@ public class Model
                 }
                 
                 in.close();
-                //this.jenkinsResponse = res.toString();
-                MainController.getInstance().setLogFile(res.toString());
-                System.out.println(res.toString());
+                this.jenkinsResponse = res.toString();
+                MainController.getInstance().setLogFile(this.jenkinsResponse);
+                System.out.println(this.jenkinsResponse);
                 return res.toString();
 
             }
@@ -352,6 +390,16 @@ public class Model
         
         return null;
         
+    }
+    
+    private String parseResult(String build)
+    {
+    
+        JsonParser parser = new JsonParser();
+        String json = parser.parse(build).toString();
+        
+        return json;
+    
     }
     
 }
