@@ -37,7 +37,7 @@ public class PipelineSceneController implements Initializable {
     private String branchTxt;
     private String jenkinsTxt;
     private String status;
-    public static PipelineSceneController instance;
+    private static PipelineSceneController instance;
     private static iMainController controller;
     private Stage stage;
     Scanner logfile;
@@ -70,6 +70,7 @@ public class PipelineSceneController implements Initializable {
     
     @FXML
     private void handleDisplayLogAction(ActionEvent event) throws IOException{
+        /*
         try {
             File logPath = filechooser.showOpenDialog(null);
             if (logPath != null)
@@ -97,8 +98,11 @@ public class PipelineSceneController implements Initializable {
                 .prefWidth(400)
                 .wrapText(true)
                 .build();
-        */ 
+        */
+        /*
         scrollPane.setContent(label);
+        */
+        controller.updateStatusToView("Updated properly");
     }
     
     /**
@@ -133,6 +137,19 @@ public class PipelineSceneController implements Initializable {
     }
     
     /**
+     * Creates the PipelineSceneController
+     * @return returns instance of PipelineSceneController
+     */
+    public static PipelineSceneController getInstance()
+    {
+        
+        if (instance == null)
+            instance = new PipelineSceneController();
+
+        return instance;
+    }
+    
+    /**
      * Sets the controller variable to the interface of the MainController,
      * This must be done before the view can be used.
      * @param _controller interface of the MainController
@@ -142,6 +159,10 @@ public class PipelineSceneController implements Initializable {
         this.controller = _controller;
     }
     
+    /**
+     * Gets the current status message
+     * @return 
+     */
     public String getStatusMessage()
     {
         return status;

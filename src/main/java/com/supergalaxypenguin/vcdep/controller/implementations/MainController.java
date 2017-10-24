@@ -103,8 +103,9 @@ public class MainController implements iMainController
      */
     public void displayPipelineScene() throws IOException
     {
-        this.pipelineSceneController = new PipelineSceneController();
+        this.pipelineSceneController = PipelineSceneController.getInstance();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/PipelineScene.fxml"));
+        this.pipelineSceneController = PipelineSceneController.getInstance();
         this.pipelineSceneController.setMainControllerInterface((iMainController) this);
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");

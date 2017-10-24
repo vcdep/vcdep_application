@@ -9,6 +9,7 @@ package unit.controllertests;
  *
  * @author Howtoon
  */
+import com.supergalaxypenguin.vcdep.MainApp;
 import com.supergalaxypenguin.vcdep.controller.implementations.MainController;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import com.supergalaxypenguin.vcdep.model.implementations.Model;
@@ -123,14 +124,21 @@ public class ControllerInputTester
 */    
 
     @Test
-    public void TestControllerCanReceiveStatusUpdatesFromModel()
+    public void TestControllerCanReceiveandPassStatusUpdatesFromModelToView()
     {
         //Arrange
         MainController controller = MainController.getInstance();
         String status = "Waiting";
-        PipelineSceneController scene = new PipelineSceneController();
+        MainApp.main(new String[] {""});
+        try{
+            controller.displayPipelineScene();
+        }
+        catch(Exception e)
+        {
+            
+        }
+        PipelineSceneController scene = PipelineSceneController.getInstance();
         controller.setPipelineSceneController(scene);
-
         //Act
         controller.updateStatusToView(status);
         
