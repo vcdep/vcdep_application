@@ -101,7 +101,21 @@ public class PipelineSceneController implements Initializable {
         scrollPane.setContent(label);
     }
     
-        /**
+    /**
+     * Updates the message in the scroll pane window
+     * @param message 
+     */
+    public void updateScrollPane(String message){
+        label.setWrapText(true);
+        label.setText(message);
+        label.setPrefWidth(365);
+        scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+        scrollPane.setPrefSize(375, 385);
+        scrollPane.setContent(label);
+    }
+    
+    /**
      * Creates the ConfigurationViewController
      */
     public PipelineSceneController()
