@@ -21,10 +21,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-/**
- *
- * @author nathan
- */
+/********************
+ * @author natha
+ * @author agl11
+ *******************/
 public class Model extends Thread implements Runnable
 {
     

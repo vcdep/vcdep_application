@@ -11,15 +11,17 @@ import java.io.File;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-/**
- *
+/********************
  * @author natha
- */
+ * @author agl11
+ *******************/
 public class ModelInputTester
 {
 
     String testIP = "54.197.29.153";
-    /*
+    /*************************
+    * Unit test
+    *************************/
     @Test
     public void TestModelIsAbleToSetBuildInputVariablesToInstanceVariables()
     {
@@ -37,6 +39,9 @@ public class ModelInputTester
         assertEquals(branchName, model.getBranchName());
         
     }
+    /*************************
+    * Unit test
+    *************************/
     @Test
     public void TestModelIsAbleToSetConfigInputVariablesToInstanceVariables()
     {
@@ -56,7 +61,9 @@ public class ModelInputTester
        assertEquals(language, model.getLanguage());
        assertEquals(localGitRepo, model.getLocalGitRepo());
     }
-    
+    /*************************
+    * Unit test
+    *************************/
     @Test
     public void TestMakeBuildMessageReturnsCorrectString()
     {
@@ -103,7 +110,9 @@ public class ModelInputTester
         // Assert
         assertEquals(actual, result);
     }
-    
+    /*************************
+    * Unit test
+    *************************/
     @Test
     public void TestCorrectPipelineCreated()
     {
@@ -134,7 +143,9 @@ public class ModelInputTester
         assertEquals(true, result);
         
     }
-    
+    /*************************
+    * Unit test
+    *************************/
     @Test
     public void TestCreateJSONIsCorrect()
     {
@@ -170,8 +181,11 @@ public class ModelInputTester
         assertEquals(actual, result);
     
     }
-    
-    @Test // Integration Test
+    /*************************
+    * Integration test
+    * Requires Jenkins server up and running to pass
+    *************************/
+    @Test
     public void TestModelSendsBuildMessageToJenkins()
     {
         
@@ -187,9 +201,13 @@ public class ModelInputTester
       // Assert
       assertEquals(true, result);
       
-    }*/
+    }
+    /*************************
+    * Integration test
+    * Requires Jenkins server up and running to pass
+    *************************/
     
-    @Test // Integration Test
+    @Test
     public void TestResponseFromJenkinsIsReceivedByModel()
     {
     
@@ -207,8 +225,12 @@ public class ModelInputTester
         assertEquals(expectedMessage, model.getJenkinsResponse());
     
     }
-    /*
-    @Test // Integration Test
+    
+    /*************************
+    * Integration test
+    * Requires Jenkins server up and running to pass
+    *************************/
+    @Test
     public void TestRequestAndReceiveLogFileFromJenkins()
     {
     
@@ -265,7 +287,9 @@ public class ModelInputTester
          assertEquals(logTest, result);
                 
     }
-    /*
+    /******************
+     * Unit test 
+     *****************/
     @Test
     public void TestModelThreadIsRunning()
     {
@@ -292,6 +316,6 @@ public class ModelInputTester
         
         
     
-    }*/
+    }
     
 }
