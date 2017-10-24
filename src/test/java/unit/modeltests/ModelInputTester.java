@@ -46,9 +46,10 @@ public class ModelInputTester
        String gitHubURL = "gitHubURL";
        String language = "language";
        String localGitRepo = "localGitRepo";
+       String[] stages = new String[] {"nathan", "is", "a", "douche"};
        
        //Act
-       model.setConfigInput(gitHubURL, language, localGitRepo);
+       model.setConfigInput(gitHubURL, language, localGitRepo, stages);
        
        //Assert
        assertEquals(gitHubURL, model.getGitHubURL());
@@ -153,14 +154,14 @@ public class ModelInputTester
         Pipeline pipeline = new Pipeline(language, stages);
         
         String actual = "{\n" +
-"  \"language\": \"php\",\n" +
-"  \"stages\": [\n" +
-"    \"static\",\n" +
-"    \"unit\",\n" +
-"    \"integration\",\n" +
-"    \"staging\"\n" +
-"  ]\n" +
-"}";
+        "  \"language\": \"php\",\n" +
+        "  \"stages\": [\n" +
+        "    \"static\",\n" +
+        "    \"unit\",\n" +
+        "    \"integration\",\n" +
+        "    \"staging\"\n" +
+        "  ]\n" +
+        "}";
         
         // Act
         String result = model.createJson(pipeline);

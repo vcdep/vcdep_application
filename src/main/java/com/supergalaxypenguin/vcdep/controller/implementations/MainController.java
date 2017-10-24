@@ -164,11 +164,25 @@ public class MainController implements iMainController
     
     /**
      * Runs the initializes and runs the pipeline.
-     * 
+     * @param gitHubURL     what is the gitHubURL?
+     * @param language      in what language is the project?
+     * @param localGitRepo  where is the local git repo?
+     * @param jenkinsURL    what is the ip/url address of the jenkins server?
+     * @param branchName    on what branch are you working?
+     * @param stages        in what order are the stages?
      */
-    public void runPipeline()
+    public void runPipeline(String gitHubURL, String language, String localGitRepo, String jenkinsURL, String branchName, String[] stages)
     {
+        this.setGitHubURL(gitHubURL);
+        this.setLanguage(language);
+        this.setLocalRepo(localGitRepo);
+        this.setJenkinsURL(jenkinsURL);
+        this.setBranchName(branchName);
+        this.setStages(stages);
+        model.setConfigInput(gitHubURL, language, localGitRepo, stages);
+        model.makeConfigInput();
         model.setBuildInput(jenkinsURL, branchName);
+        model.makeBuildMessage();
     }
     
     /**
@@ -278,5 +292,32 @@ public class MainController implements iMainController
     public void setLocalRepo(String localGitRepo) 
     {
         this.localGitRepo = localGitRepo;
+    }
+    
+    /**
+     * Returns the Model object for communication testing
+     * @return Model
+     */
+    public Model getModel()
+    {
+        return model;
+    }
+    
+    /**
+     * Returns the javaFXStage object for testing
+     * @return Stage
+     */
+    public Stage getJavaFXStage()
+    {
+        return javaFXStage;
+    }
+    
+    /**
+     * Updates the status to the view
+     * @param status A String that is a message to the user
+     */
+    public void updateStatusToView(String status)
+    {
+        
     }
 }

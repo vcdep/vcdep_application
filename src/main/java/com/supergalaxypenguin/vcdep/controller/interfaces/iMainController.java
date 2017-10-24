@@ -70,7 +70,7 @@ public interface iMainController
      * Runs the initializes and runs the pipeline.
      * 
      */
-    void runPipeline();
+    void runPipeline(String gitHubURL, String language, String localGitRepo, String jenkinsURL, String branchName, String[] stages);
     
     /**
      * Returns the Jenkins URL
