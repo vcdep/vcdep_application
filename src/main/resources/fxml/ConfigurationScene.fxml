@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
@@ -18,6 +19,7 @@
             <Image url="@../Images/SpaceBackground.jpg" />
          </image>
       </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="194.0" layoutX="30.0" layoutY="435.0" stroke="BLACK" strokeType="INSIDE" width="628.0" />
       <TextField id="gitUrl" fx:id="gitUrl" layoutX="46.0" layoutY="49.0" prefHeight="25.0" prefWidth="384.0" promptText="Git URL" style="-fx-background-color: lightgrey;" />
       <TextField id="branch" fx:id="branch" layoutX="46.0" layoutY="116.0" prefHeight="25.0" prefWidth="384.0" promptText="Branch" style="-fx-background-color: lightgrey;" />
       <TextField id="jenkins" fx:id="jenkins" layoutX="46.0" layoutY="178.0" prefHeight="25.0" prefWidth="384.0" promptText="Jenkins Server" style="-fx-background-color: lightgrey;" />
@@ -45,6 +47,11 @@
       </ImageView>
       <Button fx:id="browse" contentDisplay="RIGHT" layoutX="356.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleBrowseButton" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: lightgrey;" text="Browse" />
       <TextField fx:id="localGitRepo" layoutX="201.0" layoutY="283.0" prefHeight="27.0" prefWidth="221.0" style="-fx-background-color: lightgrey;" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="121.0" layoutX="56.0" layoutY="473.0" stroke="BLACK" strokeType="INSIDE" width="121.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="121.0" layoutX="201.0" layoutY="473.0" stroke="BLACK" strokeType="INSIDE" width="121.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="121.0" layoutX="344.0" layoutY="473.0" stroke="BLACK" strokeType="INSIDE" width="121.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="121.0" layoutX="490.0" layoutY="473.0" stroke="BLACK" strokeType="INSIDE" width="121.0" />
+      <Text layoutX="56.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stage Configuration" />
     </children>
    <effect>
       <Blend mode="DARKEN" />
