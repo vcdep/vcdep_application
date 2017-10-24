@@ -8,6 +8,7 @@ package com.supergalaxypenguin.vcdep.controller.implementations;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import com.supergalaxypenguin.vcdep.model.implementations.Model;
 import com.supergalaxypenguin.vcdep.view.implementations.ConfigurationViewController;
+import com.supergalaxypenguin.vcdep.view.implementations.PipelineSceneController;
 import java.io.File;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
@@ -29,11 +30,13 @@ public class MainController implements iMainController
     private String[] stages;
     private String localGitRepo;
     private final ConfigurationViewController configurationViewController;
+    private PipelineSceneController pipelineSceneController;
     private final Model model;
     private Stage javaFXStage;
     private static MainController instance = null;
     private String logFile;
-    private int currentStage = -1;
+    private int currentStage = 0;
+    private String status = "Waiting for status update...";
     
     /**
      * creates the MainController, Model, and ConfigurationViewController
@@ -100,8 +103,9 @@ public class MainController implements iMainController
      */
     public void displayPipelineScene() throws IOException
     {
+        this.pipelineSceneController = new PipelineSceneController();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/PipelineScene.fxml"));
-        this.configurationViewController.setMainControllerInterface((iMainController) this);
+        this.pipelineSceneController.setMainControllerInterface((iMainController) this);
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
         javaFXStage.setTitle("Pipeline Viewer");
@@ -319,6 +323,7 @@ public class MainController implements iMainController
      */
     public void updateStatusToView(String status)
     {
-        
+        this.status = status;
+        this.pipelineSceneController.updateScrollPane(status);
     }
 }
