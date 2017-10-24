@@ -15,6 +15,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.stage.Stage;
 
 public class ConfigurationViewController implements Initializable {
@@ -23,6 +25,7 @@ public class ConfigurationViewController implements Initializable {
     private String branchTxt;
     private String jenkinsTxt;
     private String language;
+    private int progress = 0;
     
     private String[] stages;
     public static ConfigurationViewController instance;
@@ -74,6 +77,13 @@ public class ConfigurationViewController implements Initializable {
     private ImageView penguin;
     @FXML
     private ImageView background;
+    /*
+    //******Progress bar to be implemented on a later sprint//
+    @FXML
+    final ProgressBar pb = new ProgressBar(0);
+    @FXML
+    final ProgressIndicator pi = new ProgressIndicator(0);
+    */
     
     @FXML
     private void handleButtonAction(ActionEvent event) 
@@ -121,6 +131,8 @@ public class ConfigurationViewController implements Initializable {
      lang.getItems().add("PHP");
      lang.getItems().add("Java");
      lang.setValue("Java");
+     
+     language = lang.getValue();
     //this is initialization//   
 
 // TODO

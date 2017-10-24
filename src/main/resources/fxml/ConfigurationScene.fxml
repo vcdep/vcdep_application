@@ -19,7 +19,16 @@
             <Image url="@../Images/SpaceBackground.jpg" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="194.0" layoutX="30.0" layoutY="435.0" stroke="BLACK" strokeType="INSIDE" width="628.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="194.0" layoutX="42.0" layoutY="506.0" stroke="BLACK" strokeType="INSIDE" width="628.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="#03348a" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
       <TextField id="gitUrl" fx:id="gitUrl" layoutX="46.0" layoutY="49.0" prefHeight="25.0" prefWidth="384.0" promptText="Git URL" style="-fx-background-color: lightgrey;" />
       <TextField id="branch" fx:id="branch" layoutX="46.0" layoutY="116.0" prefHeight="25.0" prefWidth="384.0" promptText="Branch" style="-fx-background-color: lightgrey;" />
       <TextField id="jenkins" fx:id="jenkins" layoutX="46.0" layoutY="178.0" prefHeight="25.0" prefWidth="384.0" promptText="Jenkins Server" style="-fx-background-color: lightgrey;" />
@@ -39,19 +48,59 @@
             <Font name="Century Gothic" size="14.0" />
          </font>
       </Button>
-      <Label id="test label" fx:id="testLabel" layoutX="116.0" layoutY="391.0" prefHeight="142.0" prefWidth="361.0" textFill="#00ee34" />
-      <ImageView fx:id="penguin" fitHeight="312.0" fitWidth="221.0" layoutX="448.0" layoutY="35.0">
+      <Label id="test label" fx:id="testLabel" layoutX="68.0" layoutY="364.0" prefHeight="142.0" prefWidth="361.0" textFill="#00ee34" />
+      <ImageView fx:id="penguin" fitHeight="312.0" fitWidth="221.0" layoutX="452.0" layoutY="35.0">
          <image>
             <Image url="@../Images/Peng.png" />
          </image>
       </ImageView>
       <Button fx:id="browse" contentDisplay="RIGHT" layoutX="356.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleBrowseButton" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: lightgrey;" text="Browse" />
       <TextField fx:id="localGitRepo" layoutX="201.0" layoutY="283.0" prefHeight="27.0" prefWidth="221.0" style="-fx-background-color: lightgrey;" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="121.0" layoutX="56.0" layoutY="473.0" stroke="BLACK" strokeType="INSIDE" width="121.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="121.0" layoutX="201.0" layoutY="473.0" stroke="BLACK" strokeType="INSIDE" width="121.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="121.0" layoutX="344.0" layoutY="473.0" stroke="BLACK" strokeType="INSIDE" width="121.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="121.0" layoutX="490.0" layoutY="473.0" stroke="BLACK" strokeType="INSIDE" width="121.0" />
-      <Text layoutX="56.0" layoutY="458.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stage Configuration" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="121.0" layoutX="68.0" layoutY="544.0" stroke="BLACK" strokeType="INSIDE" width="121.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="#03348a" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="121.0" layoutX="213.0" layoutY="544.0" stroke="BLACK" strokeType="INSIDE" width="121.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="#03348a" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="121.0" layoutX="356.0" layoutY="544.0" stroke="BLACK" strokeType="INSIDE" width="121.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="#03348a" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="121.0" layoutX="502.0" layoutY="544.0" stroke="BLACK" strokeType="INSIDE" width="121.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="#03348a" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Text fill="#adaeae" layoutX="68.0" layoutY="529.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stage Configuration">
+         <font>
+            <Font name="Century Gothic Bold" size="14.0" />
+         </font>
+      </Text>
     </children>
    <effect>
       <Blend mode="DARKEN" />
