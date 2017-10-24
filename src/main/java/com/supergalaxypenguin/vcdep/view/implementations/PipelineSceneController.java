@@ -36,8 +36,8 @@ public class PipelineSceneController implements Initializable {
     private String gitTxt;
     private String branchTxt;
     private String jenkinsTxt;
-    //private Label label;
-    public static PipelineSceneController instance;
+    private String status;
+    private static PipelineSceneController instance;
     private static iMainController controller;
     private Stage stage;
     Scanner logfile;
@@ -70,6 +70,7 @@ public class PipelineSceneController implements Initializable {
     
     @FXML
     private void handleDisplayLogAction(ActionEvent event) throws IOException{
+        /*
         try {
             File logPath = filechooser.showOpenDialog(null);
             if (logPath != null)
@@ -97,22 +98,34 @@ public class PipelineSceneController implements Initializable {
                 .prefWidth(400)
                 .wrapText(true)
                 .build();
-        */ 
+        */
+        /*
         scrollPane.setContent(label);
+        */
+        controller.updateStatusToView("Updated properly");
     }
     
     /**
      * Updates the message in the scroll pane window
      * @param message 
      */
-    public void updateScrollPane(String message){
-        label.setWrapText(true);
-        label.setText(message);
-        label.setPrefWidth(365);
-        scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-        scrollPane.setPrefSize(375, 385);
-        scrollPane.setContent(label);
+    public void updateScrollPane(String message)
+    {
+        status = message;
+        try
+        {
+            label.setWrapText(true);
+            label.setText(message);
+            label.setPrefWidth(365);
+            scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
+            scrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+            scrollPane.setPrefSize(375, 385);
+            scrollPane.setContent(label);
+        }
+        catch(Exception e)
+        {
+            
+        }
     }
     
     /**
@@ -124,6 +137,19 @@ public class PipelineSceneController implements Initializable {
     }
     
     /**
+     * Creates the PipelineSceneController
+     * @return returns instance of PipelineSceneController
+     */
+    public static PipelineSceneController getInstance()
+    {
+        
+        if (instance == null)
+            instance = new PipelineSceneController();
+
+        return instance;
+    }
+    
+    /**
      * Sets the controller variable to the interface of the MainController,
      * This must be done before the view can be used.
      * @param _controller interface of the MainController
@@ -131,5 +157,14 @@ public class PipelineSceneController implements Initializable {
     public void setMainControllerInterface(iMainController _controller)
     {
         this.controller = _controller;
+    }
+    
+    /**
+     * Gets the current status message
+     * @return 
+     */
+    public String getStatusMessage()
+    {
+        return status;
     }
 }

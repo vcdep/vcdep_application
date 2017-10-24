@@ -103,8 +103,9 @@ public class MainController implements iMainController
      */
     public void displayPipelineScene() throws IOException
     {
-        this.pipelineSceneController = new PipelineSceneController();
+        this.pipelineSceneController = PipelineSceneController.getInstance();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/PipelineScene.fxml"));
+        this.pipelineSceneController = PipelineSceneController.getInstance();
         this.pipelineSceneController.setMainControllerInterface((iMainController) this);
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
@@ -318,12 +319,45 @@ public class MainController implements iMainController
     }
     
     /**
+     * Returns the PipelineSceneController Object
+     * @return PipelineSceneController
+     */
+    public PipelineSceneController getPipelineSceneController()
+    {
+        return this.pipelineSceneController;
+    }
+    
+    /**
+     * Sets the PipelineScene
+     * @param scene 
+     */
+    public void setPipelineSceneController(PipelineSceneController scene)
+    {
+        this.pipelineSceneController = scene;
+    }
+    
+    /**
      * Updates the status to the view
      * @param status A String that is a message to the user
      */
     public void updateStatusToView(String status)
     {
         this.status = status;
-        this.pipelineSceneController.updateScrollPane(status);
+        try{
+            this.pipelineSceneController.updateScrollPane(status);
+        }
+        catch(Exception e)
+        {
+            
+        }
+    }
+    
+    /**
+     * Returns the current status message
+     * @return 
+     */
+    public String getStatusMessage()
+    {
+        return status;
     }
 }

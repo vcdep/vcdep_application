@@ -60,7 +60,7 @@ public class Model extends Thread implements Runnable
             
             String log = this.requestLogFile();
             controller.setLogFile(log);
-            
+            controller.updateStatusToView(log);
         }
         catch(InterruptedException e)
         {
