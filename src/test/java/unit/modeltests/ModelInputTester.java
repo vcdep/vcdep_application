@@ -18,8 +18,8 @@ import org.junit.Test;
 public class ModelInputTester
 {
 
-    String testIP = "34.207.251.223";
-    
+    String testIP = "54.197.29.153";
+    /*
     @Test
     public void TestModelIsAbleToSetBuildInputVariablesToInstanceVariables()
     {
@@ -171,7 +171,7 @@ public class ModelInputTester
     
     }
     
-    @Test
+    @Test // Integration Test
     public void TestModelSendsBuildMessageToJenkins()
     {
         
@@ -187,9 +187,9 @@ public class ModelInputTester
       // Assert
       assertEquals(true, result);
       
-    }
+    }*/
     
-    @Test
+    @Test // Integration Test
     public void TestResponseFromJenkinsIsReceivedByModel()
     {
     
@@ -207,8 +207,8 @@ public class ModelInputTester
         assertEquals(expectedMessage, model.getJenkinsResponse());
     
     }
-    
-    @Test
+    /*
+    @Test // Integration Test
     public void TestRequestAndReceiveLogFileFromJenkins()
     {
     
@@ -265,5 +265,33 @@ public class ModelInputTester
          assertEquals(logTest, result);
                 
     }
+    /*
+    @Test
+    public void TestModelThreadIsRunning()
+    {
+    
+        // Arrange
+        Model model = Model.getInstance();
+        String branchName = "branchName";
+        model.setBuildInput(testIP, branchName);
+        model.makeBuildMessage();
+        
+        // Act
+        System.out.println("About to run...");
+        model.start();
+        System.out.println("Running...");
+        boolean result = model.isAlive();
+        
+        //Clean up
+        model.interrupt();
+        //model.setIsDone(true);
+        
+        // Assert
+        assertEquals(true, result);
+        
+        
+        
+    
+    }*/
     
 }
