@@ -114,9 +114,9 @@ public class ControllerInputTester
         
         
         // Act
-        controller.getLogFile();
+        controller.setLogFile(model.requestLogFile());
         
          // Assert
-         //assertEquals(logTest, result);
+         assertEquals(logTest, controller.getLogFile());
     }
 }
