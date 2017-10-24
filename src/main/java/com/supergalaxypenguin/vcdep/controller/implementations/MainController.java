@@ -166,9 +166,18 @@ public class MainController implements iMainController
      * Runs the initializes and runs the pipeline.
      * 
      */
-    public void runPipeline()
+    public void runPipeline(String gitHubURL, String language, String localGitRepo, String jenkinsURL, String branchName, String[] stages)
     {
+        this.setGitHubURL(gitHubURL);
+        this.setLanguage(language);
+        this.setLocalRepo(localGitRepo);
+        this.setJenkinsURL(jenkinsURL);
+        this.setBranchName(branchName);
+        this.setStages(stages);
+        model.setConfigInput(gitHubURL, language, localGitRepo, stages);
+        model.makeConfigInput();
         model.setBuildInput(jenkinsURL, branchName);
+        model.makeBuildMessage();
     }
     
     /**
