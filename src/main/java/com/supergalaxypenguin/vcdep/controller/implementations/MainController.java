@@ -33,7 +33,8 @@ public class MainController implements iMainController
     private Stage javaFXStage;
     private static MainController instance = null;
     private String logFile;
-    private int currentStage = -1;
+    private int currentStage = 0;
+    private String status;
     
     /**
      * creates the MainController, Model, and ConfigurationViewController
@@ -318,6 +319,6 @@ public class MainController implements iMainController
      */
     public void updateStatusToView(String status)
     {
-        
+        this.status = status;
     }
 }

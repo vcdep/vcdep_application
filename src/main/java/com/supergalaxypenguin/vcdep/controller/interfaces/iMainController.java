@@ -5,6 +5,7 @@
  */
 package com.supergalaxypenguin.vcdep.controller.interfaces;
 
+import com.supergalaxypenguin.vcdep.model.implementations.Model;
 import java.io.File;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
@@ -143,4 +144,22 @@ public interface iMainController
      * @param localGitRepo the path to the local git repository
      */
     void setLocalRepo(String localGitRepo);
+    
+    /**
+     * Returns the Model object for communication testing
+     * @return Model
+     */
+    Model getModel();
+    
+    /**
+     * Returns the javaFXStage object for testing
+     * @return Stage
+     */
+    Stage getJavaFXStage();
+    
+    /**
+     * Updates the status to the view
+     * @param status A String that is a message to the user
+     */
+    void updateStatusToView(String status);
 }
