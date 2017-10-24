@@ -6,17 +6,13 @@
 package com.supergalaxypenguin.vcdep.view.implementations;
 
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
-import static com.supergalaxypenguin.vcdep.view.implementations.ConfigurationViewController.instance;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -75,7 +71,11 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private void handleDisplayLogAction(ActionEvent event) throws IOException{
         try {
-            logfile = new Scanner(new FileReader(filechooser.showOpenDialog(null)));
+            File logPath = filechooser.showOpenDialog(null);
+            if (logPath != null)
+            {
+                logfile = new Scanner(new FileReader(logPath));
+            }
             // TODO
         } catch (FileNotFoundException ex) {
             //Logger.getLogger(PipelineSceneController.class.getName()).log(Level.SEVERE, null, ex);

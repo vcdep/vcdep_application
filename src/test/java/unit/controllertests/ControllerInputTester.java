@@ -19,7 +19,6 @@ import org.junit.Test;
 
 public class ControllerInputTester
 {
-
     @Test
     public void TestControllerIsSingleton()
     {
@@ -118,5 +117,17 @@ public class ControllerInputTester
         
          // Assert
          assertEquals(logTest, controller.getLogFile());
+    }
+    
+    @Test
+    public void TestControllerCanReceiveStatusUpdatesFromModel()
+    {
+        //Arrange
+        iMainController controller = (iMainController)MainController.getInstance();
+        
+        //Act
+        //controller.
+        
+        //Assert
     }
 }
