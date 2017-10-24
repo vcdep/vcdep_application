@@ -14,6 +14,7 @@ import com.supergalaxypenguin.vcdep.controller.implementations.MainController;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import com.supergalaxypenguin.vcdep.model.implementations.Model;
 import com.supergalaxypenguin.vcdep.view.implementations.PipelineSceneController;
+import java.io.IOException;
 import org.junit.Assert;
 import static org.junit.Assert.*;
 
@@ -128,21 +129,12 @@ public class ControllerInputTester
     {
         //Arrange
         MainController controller = MainController.getInstance();
-        String status = "Waiting";
-        MainApp.main(new String[] {""});
-        try{
-            controller.displayPipelineScene();
-        }
-        catch(Exception e)
-        {
-            
-        }
-        PipelineSceneController scene = PipelineSceneController.getInstance();
-        controller.setPipelineSceneController(scene);
+        String status = "Status";
+        
         //Act
         controller.updateStatusToView(status);
         
         //Assert
-        assertEquals(status, scene.getStatusMessage());
+        assertEquals(status, controller.getStatusMessage());
     }
 }

@@ -343,6 +343,21 @@ public class MainController implements iMainController
     public void updateStatusToView(String status)
     {
         this.status = status;
-        this.pipelineSceneController.updateScrollPane(status);
+        try{
+            this.pipelineSceneController.updateScrollPane(status);
+        }
+        catch(Exception e)
+        {
+            
+        }
+    }
+    
+    /**
+     * Returns the current status message
+     * @return 
+     */
+    public String getStatusMessage()
+    {
+        return status;
     }
 }
