@@ -12,6 +12,7 @@ package unit.controllertests;
 import com.supergalaxypenguin.vcdep.controller.implementations.MainController;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import com.supergalaxypenguin.vcdep.model.implementations.Model;
+import com.supergalaxypenguin.vcdep.view.implementations.PipelineSceneController;
 import org.junit.Assert;
 import static org.junit.Assert.*;
 
@@ -61,6 +62,7 @@ public class ControllerInputTester
         assertEquals(localGitRepo, controller.getLocalRepo());
     }
     
+    /*
     @Test
     public void TestControllerCanReceiveLogFileFromModel()
     {
@@ -118,16 +120,21 @@ public class ControllerInputTester
          // Assert
          assertEquals(logTest, controller.getLogFile());
     }
-    
+*/    
+
     @Test
     public void TestControllerCanReceiveStatusUpdatesFromModel()
     {
         //Arrange
-        iMainController controller = (iMainController)MainController.getInstance();
-        
+        MainController controller = MainController.getInstance();
+        String status = "Waiting";
+        PipelineSceneController scene = new PipelineSceneController();
+        controller.setPipelineSceneController(scene);
+
         //Act
-        //controller.
+        controller.updateStatusToView(status);
         
         //Assert
+        assertEquals(status, scene.getStatusMessage());
     }
 }

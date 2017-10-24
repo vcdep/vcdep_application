@@ -36,7 +36,7 @@ public class PipelineSceneController implements Initializable {
     private String gitTxt;
     private String branchTxt;
     private String jenkinsTxt;
-    //private Label label;
+    private String status;
     public static PipelineSceneController instance;
     private static iMainController controller;
     private Stage stage;
@@ -105,14 +105,23 @@ public class PipelineSceneController implements Initializable {
      * Updates the message in the scroll pane window
      * @param message 
      */
-    public void updateScrollPane(String message){
-        label.setWrapText(true);
-        label.setText(message);
-        label.setPrefWidth(365);
-        scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-        scrollPane.setPrefSize(375, 385);
-        scrollPane.setContent(label);
+    public void updateScrollPane(String message)
+    {
+        status = message;
+        try
+        {
+            label.setWrapText(true);
+            label.setText(message);
+            label.setPrefWidth(365);
+            scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
+            scrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+            scrollPane.setPrefSize(375, 385);
+            scrollPane.setContent(label);
+        }
+        catch(Exception e)
+        {
+            
+        }
     }
     
     /**
@@ -131,5 +140,10 @@ public class PipelineSceneController implements Initializable {
     public void setMainControllerInterface(iMainController _controller)
     {
         this.controller = _controller;
+    }
+    
+    public String getStatusMessage()
+    {
+        return status;
     }
 }

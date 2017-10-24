@@ -20,13 +20,8 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.stage.Stage;
 
 public class ConfigurationViewController implements Initializable {
-    
-    private String gitTxt;
-    private String branchTxt;
-    private String jenkinsTxt;
-    private String language;
+
     private int progress = 0;
-    
     private String[] stages;
     public static ConfigurationViewController instance;
     private static iMainController controller;
@@ -93,7 +88,7 @@ public class ConfigurationViewController implements Initializable {
         // this area will change
         System.out.println(gitUrl.getText()+"\n"+branch.getText()+"\n"+jenkins.getText());
         //Check that all inputs are entered properly...
-
+        //How to do that?
         //Set all inputs in Controller and runs the pipeline
         try
         {

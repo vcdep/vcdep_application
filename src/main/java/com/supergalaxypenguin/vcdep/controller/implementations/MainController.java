@@ -317,6 +317,24 @@ public class MainController implements iMainController
     }
     
     /**
+     * Returns the PipelineSceneController Object
+     * @return PipelineSceneController
+     */
+    public PipelineSceneController getPipelineSceneController()
+    {
+        return this.pipelineSceneController;
+    }
+    
+    /**
+     * Sets the PipelineScene
+     * @param scene 
+     */
+    public void setPipelineSceneController(PipelineSceneController scene)
+    {
+        this.pipelineSceneController = scene;
+    }
+    
+    /**
      * Updates the status to the view
      * @param status A String that is a message to the user
      */
