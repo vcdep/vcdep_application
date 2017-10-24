@@ -22,6 +22,9 @@ public class ConfigurationViewController implements Initializable {
     private String gitTxt;
     private String branchTxt;
     private String jenkinsTxt;
+    private String language;
+    
+    private String[] stages;
     public static ConfigurationViewController instance;
     private static iMainController controller;
     private Stage stage;
@@ -84,11 +87,8 @@ public class ConfigurationViewController implements Initializable {
         System.out.println(gitTxt+"\n"+branchTxt+"\n"+jenkinsTxt);
         //Check that all inputs are entered properly...
 
-        //Set all inputs in Controller
-        controller.setBranchName(branchTxt);
-        controller.setGitHubURL(gitTxt);
-        controller.setJenkinsURL(jenkinsTxt);
-        controller.runPipeline();
+        //Set all inputs in Controller and runs the pipeline
+        controller.runPipeline(gitUrl.getText(), language, localGitRepo.getText(), jenkins.getText(), branch.getText(), stages);
         try {
             //controller.setLanguage();
             //controller.setLocalRepo();

@@ -312,6 +312,10 @@ public class MainController implements iMainController
         return javaFXStage;
     }
     
+    /**
+     * Updates the status to the view
+     * @param status A String that is a message to the user
+     */
     public void updateStatusToView(String status)
     {
         
