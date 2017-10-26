@@ -8,6 +8,8 @@ package com.supergalaxypenguin.vcdep.model.implementations;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.supergalaxypenguin.vcdep.controller.implementations.MainController;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
@@ -329,10 +331,17 @@ public class Model extends Thread implements Runnable
                 
                 in.close();
                 this.jenkinsResponse = res.toString();
+                String result = parseResult(this.jenkinsResponse);
                 System.out.println(this.parseResult(this.jenkinsResponse));
                 System.out.println(res.toString());
-                return true;
-
+                if(!result.equals("null"))
+                {
+                 return true;
+                }
+                else
+                {
+                 return false;  
+                }
             }
         }
         catch (Exception e)
@@ -392,14 +401,13 @@ public class Model extends Thread implements Runnable
         
     }
     
-    private String parseResult(String build)
+    public String parseResult(String build)
     {
-    
-        JsonParser parser = new JsonParser();
-        String json = parser.parse(build).toString();
+       JsonElement jelement = new JsonParser().parse(build);
+       JsonObject jobject = jelement.getAsJsonObject();
+       String result = jobject.get("result").getAsString();
         
-        return json;
-    
+        return result;
     }
     
 }

@@ -18,7 +18,7 @@ import org.junit.Test;
 public class ModelInputTester
 {
 
-    String testIP = "54.197.29.153";
+    String testIP = "54.242.23.7";
     /*************************
     * Unit test
     *************************/
@@ -70,7 +70,7 @@ public class ModelInputTester
        
        //Arrange
        Model model = Model.getInstance();
-       String buildMessage = "http://jenkinsURL/job/jenkins_pipline/1/api/json?tree=results,timestamp,estimatedDuration";
+       String buildMessage = "http://jenkinsURL/job/jenkins_pipline/1/api/json?tree=result,timestamp,estimatedDuration";
        String jenkinsURL = "jenkinsURL";
        String branchName = "1";
        model.setBuildInput(jenkinsURL, branchName);
@@ -199,8 +199,14 @@ public class ModelInputTester
       boolean result = model.sendBuildMessage();
       
       // Assert
-      assertEquals(true, result);
-      
+      if(!model.parseResult(model.getJenkinsResponse()).equals("null"))
+      {
+         assertEquals(true, result);
+      }
+      else
+      {
+         assertEquals(false, result);
+      }      
     }
     /*************************
     * Integration test
@@ -211,11 +217,11 @@ public class ModelInputTester
     {
     
         // Arrange
-        Model model = Model.getInstance();
+       Model model = Model.getInstance();
        String branchName = "1";
        model.setBuildInput(testIP, branchName);
        model.makeBuildMessage();
-       String expectedMessage = "{\"_class\":\"org.jenkinsci.plugins.workflow.job.WorkflowRun\",\"estimatedDuration\":1486,\"timestamp\":1508262809866}";
+       String expectedMessage = "{\"_class\":\"org.jenkinsci.plugins.workflow.job.WorkflowRun\",\"estimatedDuration\":1486,\"result\":\"FAILURE\",\"timestamp\":1508262809866}";
         
         // Act
         model.sendBuildMessage();

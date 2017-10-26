@@ -98,11 +98,12 @@ public class PipelineSceneController implements Initializable {
                 .prefWidth(400)
                 .wrapText(true)
                 .build();
-        */
-        /*
+        
+        
         scrollPane.setContent(label);
         */
-        controller.updateStatusToView("Updated properly");
+        controller.updateStatusToView(controller.getLogFile());
+        //controller.updateStatusToView("Updated properly");
     }
     
     /**
