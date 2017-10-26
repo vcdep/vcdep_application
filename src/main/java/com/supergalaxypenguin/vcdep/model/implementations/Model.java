@@ -138,7 +138,7 @@ public class Model extends Thread implements Runnable
      */
     public String makeBuildMessage()
     {
-       return this.buildMessage = String.format("http://%s/job/jenkins_pipline/%s/api/json?tree=result,timestamp,estimatedDuration", this.jenkinsURL, this.branchName);
+       return this.buildMessage = String.format("http://%s/job/jenkins_pipeline/%s/api/json?tree=result,timestamp,estimatedDuration", this.jenkinsURL, this.branchName);
     }
      /**
      * Creates a String formatted to set configuration file for the github repo
@@ -362,7 +362,7 @@ public class Model extends Thread implements Runnable
         try
         {
             
-            String request = String.format("http://%s/job/jenkins_pipline/%s/consoleText", this.jenkinsURL, this.branchName);
+            String request = String.format("http://%s/job/jenkins_pipeline/%s/consoleText", this.jenkinsURL, this.branchName);
             
             URL url = new URL(request);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
