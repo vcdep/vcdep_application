@@ -122,8 +122,8 @@ public class ConfigurationViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-     lang.getItems().add("PHP");
-     lang.getItems().add("Java");
-     lang.setValue("Java");
+     lang.getItems().add("php");
+     lang.getItems().add("java");
+     lang.setValue("java");
     }    
 }
