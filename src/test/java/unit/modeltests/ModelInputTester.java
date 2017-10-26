@@ -206,7 +206,6 @@ public class ModelInputTester
     * Integration test
     * Requires Jenkins server up and running to pass
     *************************/
-    
     @Test
     public void TestResponseFromJenkinsIsReceivedByModel()
     {
