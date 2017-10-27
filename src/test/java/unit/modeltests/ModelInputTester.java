@@ -18,7 +18,7 @@ import org.junit.Test;
 public class ModelInputTester
 {
 
-    String testIP = "54.242.23.7";
+    String testIP = "52.202.94.31";
     /*************************
     * Unit test
     *************************/
@@ -70,7 +70,7 @@ public class ModelInputTester
        
        //Arrange
        Model model = Model.getInstance();
-       String buildMessage = "http://jenkinsURL/job/jenkins_pipline/1/api/json?tree=result,timestamp,estimatedDuration";
+       String buildMessage = "http://jenkinsURL/job/jenkins_pipeline/1/api/json?tree=result,timestamp,estimatedDuration";
        String jenkinsURL = "jenkinsURL";
        String branchName = "1";
        model.setBuildInput(jenkinsURL, branchName);
