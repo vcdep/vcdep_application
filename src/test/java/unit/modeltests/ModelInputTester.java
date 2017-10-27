@@ -317,10 +317,7 @@ public class ModelInputTester
         
         // Assert
         assertEquals(true, result);
-        
-        
-        
-    
+         
     }
     
 }
