@@ -8,6 +8,8 @@ package com.supergalaxypenguin.vcdep.model.implementations;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.supergalaxypenguin.vcdep.controller.implementations.MainController;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
@@ -21,10 +23,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-/**
- *
- * @author nathan
- */
+/********************
+ * @author natha
+ * @author agl11
+ *******************/
 public class Model extends Thread implements Runnable
 {
     
@@ -42,6 +44,10 @@ public class Model extends Thread implements Runnable
     private boolean isDone = false;
     private String[] stages;
 
+    
+    /*************************
+     * Method implements run for thread
+     */
     @Override
     public void run()
     {
@@ -69,26 +75,25 @@ public class Model extends Thread implements Runnable
         }
     }
     
-    /**
-     * (Only for testing) Creates the Model
-     * 
+    /*************************************
+     * (Only for testing) Function creates the Model
      */
     private Model()
     {
         
     }
     
-    /**
-     * Sets the Controller interface
+    /******************************
+     * Function sets the Controller interface
      * @param _controller iMainController interface
      */
     public void setController(iMainController _controller){
         controller = _controller;
     }
     
-    /**
-     * Creates the Model
-     * @return returns instance of Model
+    /********************************
+     * Function creates the Model
+     * @return the instance of Model
      */
     public static Model getInstance()
     {
@@ -99,7 +104,10 @@ public class Model extends Thread implements Runnable
         return instance;
         
     }
-
+    /***********************************
+     * Function to set the isDone variable
+     * @param isDone boolean representing completion or not
+     */
     public void setIsDone(boolean isDone)
     {
     
@@ -108,9 +116,9 @@ public class Model extends Thread implements Runnable
     }
     
     /**
-     * Sets the necessary input variables for a pipeline build
-     * @param jenkinsURL jenkinsURL the URL of the Jenkins server
-     * @param branchName branchName the specific branch of the remote repository to access
+     * Function sets the necessary input variables for a pipeline build
+     * @param jenkinsURL String representing jenkinsURL the URL of the Jenkins server
+     * @param branchName String representing branchName the specific branch of the remote repository to access
      */
     public void setBuildInput(String jenkinsURL, String branchName)
     {
@@ -119,11 +127,12 @@ public class Model extends Thread implements Runnable
         this.setBranchName(branchName);
 
     }
-        /**
-     * Sets the necessary input variables for a pipeline config file
-     * @param gitHubURL the URL of the specific remote repository
-     * @param language the programming language that the remote repository application is written in
-     * @param localGitRepo the path to the local git repository
+     /************************************************************
+     * Function sets the necessary input variables for a pipeline config file
+     * @param gitHubURL String representing the URL of the specific remote repository
+     * @param language String representing the programming language that the remote repository application is written in
+     * @param localGitRepo String representing the path to the local git repository
+     * @param stages String[] of stage names
      */
     public void setConfigInput(String gitHubURL, String language, String localGitRepo, String[] stages)
     {
@@ -132,17 +141,17 @@ public class Model extends Thread implements Runnable
       this.setLocalGitRepo(localGitRepo);
       this.stages = stages;
     }
-     /**
-     * Creates a String formatted to input to the Jenkins server for the build
-     * 
+     /****************************
+     * Function creates a String formatted to input to the Jenkins server for the build
+     * @return String buildMessage
      */
     public String makeBuildMessage()
     {
-       return this.buildMessage = String.format("http://%s/job/jenkins_pipline/%s/api/json?tree=result,timestamp,estimatedDuration", this.jenkinsURL, this.branchName);
+       return this.buildMessage = String.format("http://%s/job/jenkins_pipeline/%s/api/json?tree=result,timestamp,estimatedDuration", this.jenkinsURL, this.branchName);
     }
-     /**
-     * Creates a String formatted to set configuration file for the github repo
-     * 
+     /*****************************
+     * Function creates a String formatted to set configuration file for the github repo
+     * @return String JSON message of pipeline configuration
      */
     public String makeConfigInput()
     {
@@ -156,18 +165,18 @@ public class Model extends Thread implements Runnable
 //       this.configInput = String.format();
     }
     
-    /**
-     * Sets the Jenkins URL address to the correct instance field for later use
-     * @param jenkinsURL the URL of the Jenkins server
+    /******************************************
+     * Function sets the Jenkins URL address to the correct instance field for later use
+     * @param jenkinsURL String representing the URL of the Jenkins server
      */
     public void setJenkinsURL(String jenkinsURL)
     {
         this.jenkinsURL = jenkinsURL;   
     }
     
-    /**
-     * Sets the GitHub URL address to the correct instance field for later use
-     * @param gitHubURL the URL of the specific remote repository
+    /****************************************
+     * Function sets the GitHub URL address to the correct instance field for later use
+     * @param gitHubURL String representing the URL of the specific remote repository
      */
     public void setGitHubURL(String gitHubURL)
     {
@@ -176,9 +185,9 @@ public class Model extends Thread implements Runnable
         
     }
     
-    /**
-     * Sets the name to the correct instance field for later use with specifying which branch to access
-     * @param branchName the specific branch of the remote repository to access
+    /***************************************
+     * Function sets the name to the correct instance field for later use with specifying which branch to access
+     * @param branchName String representing the specific branch of the remote repository to access
      */
     public void setBranchName(String branchName)
     {
@@ -187,9 +196,9 @@ public class Model extends Thread implements Runnable
         
     }
     
-    /**
-     * Sets the programming language to the correct instance field for determining the type of pipeline to create
-     * @param language the programming language that the remote repository application is written in
+    /************************************
+     * Function sets the programming language to the correct instance field for determining the type of pipeline to create
+     * @param language String representing the programming language that the remote repository application is written in
      */
     public void setLanguage(String language)
     {
@@ -198,9 +207,9 @@ public class Model extends Thread implements Runnable
         
     }
     
-    /**
-     * Sets the path of the local git repository to the correct instance field for later use
-     * @param localGitRepo the path to the local git repository
+    /*******************************************
+     * Function sets the path of the local git repository to the correct instance field for later use
+     * @param localGitRepo String representing the path to the local git repository
      */
     public void setLocalGitRepo(String localGitRepo)
     {
@@ -209,9 +218,9 @@ public class Model extends Thread implements Runnable
         
     }
     
-    /**
-     * Returns the Jenkins URL
-     * @return jenkinsURL the URL of the Jenkins server
+    /***************************
+     * Function returns the Jenkins URL
+     * @return String jenkinsURL (the URL of the Jenkins server)
      */
     public String getJenkinsURL()
     {
@@ -220,9 +229,9 @@ public class Model extends Thread implements Runnable
         
     }
     
-    /**
-     * Returns the GitHub URL
-     * @return gitHubURL the URL of the specific remote repository
+    /*************************
+     * Function returns the GitHub URL
+     * @return String gitHubURL (the URL of the specific remote repository)
      */
     public String getGitHubURL()
     {
@@ -231,9 +240,9 @@ public class Model extends Thread implements Runnable
         
     }
     
-    /**
-     * Returns the branch name
-     * @return branchName the specific branch of the remote repository to access
+    /****************************
+     * Function returns the branch name
+     * @return String branchName (the specific branch of the remote repository to access)
      */
     public String getBranchName()
     {
@@ -242,9 +251,9 @@ public class Model extends Thread implements Runnable
         
     }
     
-    /**
-     * Returns the programming language of the remote repository application
-     * @return language the programming language that the remote repository application is written in
+    /*************************
+     * Function returns the programming language of the remote repository application
+     * @return String language (the programming language that the remote repository application is written in)
      */
     public String getLanguage()
     {
@@ -253,9 +262,9 @@ public class Model extends Thread implements Runnable
         
     }
     
-    /**
-     * Returns the path to the local git repository
-     * @return localGitRepo the path to the local git repository
+    /*****************************
+     * Function to return the path to the local git repo
+     * @return String localGitRepo (the path to the local git repository)
      */
     public String getLocalGitRepo()
     {
@@ -264,9 +273,9 @@ public class Model extends Thread implements Runnable
         
     }
     
-    /**
-     * Returns the response from the Jenkins server
-     * @return the response from the Jenkins server
+    /*********************************************
+     * function to get the Jenkins response
+     * @return String (the response from the Jenkins server)
      */
     public String getJenkinsResponse()
     {
@@ -275,10 +284,10 @@ public class Model extends Thread implements Runnable
         
     }
  
-    /**
-     * 
-     * @param pipeline
-     * @return 
+    /****************************************
+     * function to create a JSON message formate for communicating with Jenkins
+     * @param pipeline (JSON Pipeline object)
+     * @return String
      */
     public String createJson(Pipeline pipeline)
     {
@@ -306,7 +315,10 @@ public class Model extends Thread implements Runnable
         return null;
 
     }
-    
+    /******************************
+     * function to create a connection and send the message to Jenkins
+     * @return boolean
+     */
     public boolean sendBuildMessage()
     {
         
@@ -331,10 +343,17 @@ public class Model extends Thread implements Runnable
                 
                 in.close();
                 this.jenkinsResponse = res.toString();
+                String result = parseResult(this.jenkinsResponse);
                 System.out.println(this.parseResult(this.jenkinsResponse));
                 System.out.println(res.toString());
-                return true;
-
+                if(!result.equals("null"))
+                {
+                  return true;
+                }
+                else
+                {
+                  return false;  
+                }
             }
         }
         catch (Exception e)
@@ -346,16 +365,18 @@ public class Model extends Thread implements Runnable
         }
         
         return false;
-        
     }
-    
+    /***************************
+     * function to request the log file from Jenkins
+     * @return String
+     */
     public String requestLogFile()
     {
         
         try
         {
             
-            String request = String.format("http://%s/job/jenkins_pipline/%s/consoleText", this.jenkinsURL, this.branchName);
+            String request = String.format("http://%s/job/jenkins_pipeline/%s/consoleText", this.jenkinsURL, this.branchName);
             
             URL url = new URL(request);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -393,15 +414,18 @@ public class Model extends Thread implements Runnable
         return null;
         
     }
-    
-    private String parseResult(String build)
+    /*****************
+     * function to parse the result of the run for the model thread
+     * @param build (String)
+     * @return String result
+     */
+    public String parseResult(String build)
     {
-    
-        JsonParser parser = new JsonParser();
-        String json = parser.parse(build).toString();
+       JsonElement jelement = new JsonParser().parse(build);
+       JsonObject jobject = jelement.getAsJsonObject();
+       String result = jobject.get("result").getAsString();
         
-        return json;
-    
+        return result;
     }
     
     public String[] getStages()

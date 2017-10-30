@@ -11,15 +11,17 @@ import java.io.File;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-/**
- *
+/********************
  * @author natha
- */
+ * @author agl11
+ *******************/
 public class ModelInputTester
 {
 
-    String testIP = "54.197.29.153";
-    /*
+    String testIP = "52.202.94.31";
+    /*************************
+    * Unit test
+    *************************/
     @Test
     public void TestModelIsAbleToSetBuildInputVariablesToInstanceVariables()
     {
@@ -37,6 +39,9 @@ public class ModelInputTester
         assertEquals(branchName, model.getBranchName());
         
     }
+    /*************************
+    * Unit test
+    *************************/
     @Test
     public void TestModelIsAbleToSetConfigInputVariablesToInstanceVariables()
     {
@@ -56,14 +61,16 @@ public class ModelInputTester
        assertEquals(language, model.getLanguage());
        assertEquals(localGitRepo, model.getLocalGitRepo());
     }
-    
+    /*************************
+    * Unit test
+    *************************/
     @Test
     public void TestMakeBuildMessageReturnsCorrectString()
     {
        
        //Arrange
        Model model = Model.getInstance();
-       String buildMessage = "http://jenkinsURL/job/jenkins_pipline/1/api/json?tree=results,timestamp,estimatedDuration";
+       String buildMessage = "http://jenkinsURL/job/jenkins_pipeline/1/api/json?tree=result,timestamp,estimatedDuration";
        String jenkinsURL = "jenkinsURL";
        String branchName = "1";
        model.setBuildInput(jenkinsURL, branchName);
@@ -103,7 +110,9 @@ public class ModelInputTester
         // Assert
         assertEquals(actual, result);
     }
-    
+    /*************************
+    * Unit test
+    *************************/
     @Test
     public void TestCorrectPipelineCreated()
     {
@@ -134,7 +143,9 @@ public class ModelInputTester
         assertEquals(true, result);
         
     }
-    
+    /*************************
+    * Unit test
+    *************************/
     @Test
     public void TestCreateJSONIsCorrect()
     {
@@ -170,8 +181,11 @@ public class ModelInputTester
         assertEquals(actual, result);
     
     }
-    
-    @Test // Integration Test
+    /*************************
+    * Integration test
+    * Requires Jenkins server up and running to pass
+    *************************/
+    @Test
     public void TestModelSendsBuildMessageToJenkins()
     {
         
@@ -185,20 +199,29 @@ public class ModelInputTester
       boolean result = model.sendBuildMessage();
       
       // Assert
-      assertEquals(true, result);
-      
-    }*/
-    
-    @Test // Integration Test
+      if(!model.parseResult(model.getJenkinsResponse()).equals("null"))
+      {
+         assertEquals(true, result);
+      }
+      else
+      {
+         assertEquals(false, result);
+      }      
+    }
+    /*************************
+    * Integration test
+    * Requires Jenkins server up and running to pass
+    *************************/
+    @Test
     public void TestResponseFromJenkinsIsReceivedByModel()
     {
     
         // Arrange
-        Model model = Model.getInstance();
+       Model model = Model.getInstance();
        String branchName = "1";
        model.setBuildInput(testIP, branchName);
        model.makeBuildMessage();
-       String expectedMessage = "{\"_class\":\"org.jenkinsci.plugins.workflow.job.WorkflowRun\",\"estimatedDuration\":1486,\"timestamp\":1508262809866}";
+       String expectedMessage = "{\"_class\":\"org.jenkinsci.plugins.workflow.job.WorkflowRun\",\"estimatedDuration\":1486,\"result\":\"FAILURE\",\"timestamp\":1508262809866}";
         
         // Act
         model.sendBuildMessage();
@@ -208,7 +231,12 @@ public class ModelInputTester
     
     }
     
-    @Test // Integration Test
+    // Integration Test
+    /*************************
+    * Integration test
+    * Requires Jenkins server up and running to pass
+    *************************/
+    @Test
     public void TestRequestAndReceiveLogFileFromJenkins()
     {
     
@@ -265,7 +293,9 @@ public class ModelInputTester
          assertEquals(logTest, result);
                 
     }
-    /*
+    /******************
+     * Unit test 
+     *****************/
     @Test
     public void TestModelThreadIsRunning()
     {
@@ -288,10 +318,7 @@ public class ModelInputTester
         
         // Assert
         assertEquals(true, result);
-        
-        
-        
-    
-    }*/
+         
+    }
     
 }
