@@ -207,7 +207,7 @@ public class ModelInputTester
         assertEquals(expectedMessage, model.getJenkinsResponse());
     
     }
-    /*
+    
     @Test // Integration Test
     public void TestRequestAndReceiveLogFileFromJenkins()
     {

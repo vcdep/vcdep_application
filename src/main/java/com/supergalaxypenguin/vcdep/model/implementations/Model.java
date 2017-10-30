@@ -40,6 +40,7 @@ public class Model extends Thread implements Runnable
     public static Model instance;
     private static iMainController controller;
     private boolean isDone = false;
+    private String[] stages;
 
     @Override
     public void run()
@@ -129,6 +130,7 @@ public class Model extends Thread implements Runnable
       this.setGitHubURL(gitHubURL);      
       this.setLanguage(language);
       this.setLocalGitRepo(localGitRepo);
+      this.stages = stages;
     }
      /**
      * Creates a String formatted to input to the Jenkins server for the build
@@ -400,6 +402,11 @@ public class Model extends Thread implements Runnable
         
         return json;
     
+    }
+    
+    public String[] getStages()
+    {
+        return this.stages;
     }
     
 }
