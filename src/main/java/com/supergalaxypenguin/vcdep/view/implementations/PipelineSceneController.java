@@ -18,9 +18,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextArea;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 //import javafx.scene.control.TextAreaBuilder;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -56,11 +60,23 @@ public class PipelineSceneController implements Initializable {
     private ScrollPane imagePane = new ScrollPane();
     
     @FXML
+    private Rectangle stage1 = new Rectangle();
+    @FXML
+    private Rectangle stage2 = new Rectangle();
+    @FXML
+    private Rectangle stage3 = new Rectangle();
+    @FXML
+    private Rectangle stage4 = new Rectangle();
+    @FXML
+    private Rectangle stage5 = new Rectangle();
+    
+    DropShadow shadow = new DropShadow();
+    
+    @FXML
     private ScrollPane scrollPane = new ScrollPane();
     final TextArea textArea= new TextArea();
     private Label label = new Label();
     
-    Image goBack = new Image(getClass().getResourceAsStream("../Cleanup.png"));
     
     /**
      * Initializes the controller class.
@@ -68,7 +84,17 @@ public class PipelineSceneController implements Initializable {
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        btnGoBack.setGraphic(new ImageView(goBack));
+        stage1.setFill(Color.GRAY);
+    }
+        
+    @FXML
+    private void handleMouseExitedGoBack(ActionEvent event){
+        btnGoBack.setEffect(null);
+    }
+    
+    @FXML
+    private void handleMouseEnteredGoBack(ActionEvent event){
+        btnGoBack.setEffect(shadow);
     }
     
     @FXML
