@@ -48,7 +48,7 @@ public class PipelineSceneController implements Initializable {
     
     
     @FXML
-    private ImageView background2;
+    private ImageView cartoonSpaceBackground;
     @FXML
     private ImageView deploymentBackground;
     @FXML
@@ -69,6 +69,7 @@ public class PipelineSceneController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         deploymentBackground.setFitHeight(529);
         deploymentBackground.setFitWidth(1356);
+        deploymentBackground.setTranslateY(-200);
         
         TranslateTransition transition = new TranslateTransition();
         transition.setDuration(Duration.seconds(10));
