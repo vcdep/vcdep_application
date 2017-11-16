@@ -126,6 +126,7 @@ public class ConfigurationViewController implements Initializable {
             System.out.println(ex);
         }
     }
+    
     @FXML
     private void handleBrowseButton(ActionEvent event) 
     {

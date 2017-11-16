@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.effect.*?>
@@ -12,16 +13,20 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supergalaxypenguin.vcdep.view.implementations.PipelineSceneController">
    <children>
-      <ImageView fx:id="cartoonSpaceBackground" fitHeight="584.0" fitWidth="846.0" layoutY="-2.0">
+      <ImageView fx:id="cartoonSpaceBackground" fitHeight="640.0" fitWidth="880.0" layoutY="-2.0">
          <image>
             <Image url="@../Images/cartoon-earth-and-moon-from-space-with-starry-night_4klio3fkg__F0007.png" />
          </image>
       </ImageView>
-      <ScrollPane id="scrollPane" fx:id="scrollPane" layoutX="14.0" layoutY="134.0" opacity="0.7" prefHeight="385.0" prefWidth="410.0" />
-      <SplitPane layoutX="435.0" layoutY="134.0" orientation="VERTICAL" prefHeight="385.0" prefWidth="398.0" />
-      <Button fx:id="btnGoBack" layoutX="190.0" layoutY="533.0" mnemonicParsing="false" text="Go Back" />
-      <Button fx:id="btnForward" layoutX="604.0" layoutY="533.0" mnemonicParsing="false" text="Forward" />
-      <Button fx:id="btnReSubmit" layoutX="748.0" layoutY="24.0" mnemonicParsing="false" text="Re-Submit" />
-      <Button fx:id="btnReset" layoutX="748.0" layoutY="74.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="84.0" text="Reset" />
+      <ScrollPane id="scrollPane" fx:id="scrollPane" layoutX="14.0" layoutY="135.0" opacity="0.7" prefHeight="406.0" prefWidth="410.0" />
+      <Button fx:id="btnGoBack" layoutX="182.0" layoutY="564.0" mnemonicParsing="false" onAction="#handleBtnGoBack" text="Go Back" />
+      <Button fx:id="btnForward" layoutX="604.0" layoutY="563.0" mnemonicParsing="false" onAction="#handleBtnForward" text="Forward" />
+      <Button fx:id="btnReSubmit" layoutX="748.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleReSubmit" text="Re-Submit" />
+      <Button fx:id="btnReset" layoutX="748.0" layoutY="74.0" mnemonicParsing="false" onAction="#handleBtnReset" prefHeight="27.0" prefWidth="84.0" text="Reset" />
+      <Rectangle fx:id="stage1" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="70.0" layoutX="430.0" layoutY="134.0" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Rectangle fx:id="stage2" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="430.0" layoutY="211.0" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Rectangle fx:id="stage3" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="430.0" layoutY="295.0" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Rectangle fx:id="stage4" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="430.0" layoutY="380.0" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Rectangle fx:id="stage5" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="430.0" layoutY="465.0" stroke="BLACK" strokeType="INSIDE" width="439.0" />
    </children>
 </AnchorPane>

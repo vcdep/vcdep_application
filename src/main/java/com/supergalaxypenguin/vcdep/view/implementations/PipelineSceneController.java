@@ -6,10 +6,6 @@
 package com.supergalaxypenguin.vcdep.view.implementations;
 
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -22,9 +18,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 //import javafx.scene.control.TextAreaBuilder;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -44,15 +40,18 @@ public class PipelineSceneController implements Initializable {
     private Stage stage;
     Scanner logfile;
     String log = "";
-    FileChooser filechooser = new FileChooser();
     
     
     @FXML
     private ImageView cartoonSpaceBackground;
     @FXML
-    private ImageView deploymentBackground;
+    private Button btnReset = new Button();
     @FXML
-    private Button displayLog;
+    private Button btnReSubmit = new Button();
+    @FXML
+    private Button btnForward = new Button();
+    @FXML
+    private Button btnGoBack = new Button();
     @FXML
     private ScrollPane imagePane = new ScrollPane();
     
@@ -61,64 +60,40 @@ public class PipelineSceneController implements Initializable {
     final TextArea textArea= new TextArea();
     private Label label = new Label();
     
+    Image goBack = new Image(getClass().getResourceAsStream("../Cleanup.png"));
+    
     /**
      * Initializes the controller class.
      */
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        deploymentBackground.setFitHeight(529);
-        deploymentBackground.setFitWidth(1356);
-        deploymentBackground.setTranslateY(-200);
-        
-        TranslateTransition transition = new TranslateTransition();
-        transition.setDuration(Duration.seconds(10));
-        transition.setNode(deploymentBackground);
-        
-        transition.setToX(-850);
-        
-        transition.play();
-        
+        btnGoBack.setGraphic(new ImageView(goBack));
     }
     
     @FXML
-    private void handleDisplayLogAction(ActionEvent event) throws IOException{
-        /*
-        try {
-            File logPath = filechooser.showOpenDialog(null);
-            if (logPath != null)
-            {
-                logfile = new Scanner(new FileReader(logPath));
-            }
-            // TODO
-        } catch (FileNotFoundException ex) {
-            //Logger.getLogger(PipelineSceneController.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("File Not found");
-        }
-        while (logfile.hasNextLine())
-        {
-            log = log + logfile.nextLine()+ " ";
-        }
-        label.setWrapText(true);
-        label.setText(log);
-        label.setPrefWidth(365);
-        scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-        scrollPane.setPrefSize(375, 385);
-        //textArea.setText("THIS IS MY LOG FILE");
-        
-        /*textArea = TextAreaBuilder.create()
-                .prefWidth(400)
-                .wrapText(true)
-                .build();
-        
-        
-        scrollPane.setContent(label);
-        */
-        controller.updateStatusToView(controller.getLogFile());
-        //controller.updateStatusToView("Updated properly");
+    private void handleBtnGoBack(ActionEvent event)
+    {
+        System.out.println("Test Go Back Button");
     }
     
+    @FXML
+    private void handleBtnForward(ActionEvent event)
+    {
+        System.out.println("Test Forward Button");
+    }
+    
+    @FXML
+    private void handleBtnReset(ActionEvent event)
+    {
+        System.out.println("Test Reset Button");
+    }
+    
+    @FXML
+    private void handleBtnReSubmit(ActionEvent event)
+    {
+        System.out.println("Test Re-Submit Button");
+    }
     /**
      * Updates the message in the scroll pane window
      * @param message 
