@@ -17,7 +17,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.image.Image;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+//import jfxtras.lab.util.event;
 
 public class ConfigurationViewController implements Initializable {
 
@@ -48,6 +51,8 @@ public class ConfigurationViewController implements Initializable {
     public void setStage(Stage stage)
     {
         this.stage = stage;
+        
+        //MouseControlUtil.makeDraggable(deploy);
     }
     
     @FXML
@@ -72,6 +77,22 @@ public class ConfigurationViewController implements Initializable {
     private ImageView penguin;
     @FXML
     private ImageView background;
+    @FXML
+    private Rectangle target_1;
+    @FXML
+    private Rectangle target_2;
+    @FXML
+    private Rectangle target_3;
+    @FXML
+    private Rectangle target_4;
+    @FXML
+    private ImageView deploy;
+    @FXML
+    private ImageView integration;
+    @FXML
+    private ImageView static_a;
+    @FXML
+    private ImageView unit_test;
     /*
     //******Progress bar to be implemented on a later sprint//
     @FXML
@@ -84,9 +105,9 @@ public class ConfigurationViewController implements Initializable {
     private void handleButtonAction(ActionEvent event) 
     {
         System.out.println("Opening Pipline Viewer Window");
-        testLabel.setText(gitUrl.getText()+"\n"+branch.getText()+"\n"+jenkins.getText());
+        //testLabel.setText(gitUrl.getText()+"\n"+branch.getText()+"\n"+jenkins.getText());
         // this area will change
-        System.out.println(gitUrl.getText()+"\n"+branch.getText()+"\n"+jenkins.getText());
+        //System.out.println(gitUrl.getText()+"\n"+branch.getText()+"\n"+jenkins.getText());
         //Check that all inputs are entered properly...
         //How to do that?
         //Set all inputs in Controller and runs the pipeline
@@ -117,6 +138,10 @@ public class ConfigurationViewController implements Initializable {
         {
             localGitRepo.setText(selectedDirectory.getAbsolutePath());
         }
+    }
+    public void registerDragEvent(){
+        //Image deploy = new Image(getClass().getResourceAsStream("/com/lynden/planning/ui/container2.png"));
+         
     }
     
     @Override

@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,6 +26,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -46,12 +48,13 @@ public class PipelineSceneController implements Initializable {
     
     
     @FXML
-    private ImageView background1;
-    @FXML
     private ImageView background2;
     @FXML
+    private ImageView deploymentBackground;
+    @FXML
     private Button displayLog;
-    
+    @FXML
+    private ScrollPane imagePane = new ScrollPane();
     
     @FXML
     private ScrollPane scrollPane = new ScrollPane();
@@ -64,7 +67,16 @@ public class PipelineSceneController implements Initializable {
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-     
+        deploymentBackground.setFitHeight(529);
+        deploymentBackground.setFitWidth(1356);
+        
+        TranslateTransition transition = new TranslateTransition();
+        transition.setDuration(Duration.seconds(10));
+        transition.setNode(deploymentBackground);
+        
+        transition.setToX(-850);
+        
+        transition.play();
         
     }
     

@@ -42,6 +42,8 @@ public class Model extends Thread implements Runnable
     public static Model instance;
     private static iMainController controller;
     private boolean isDone = false;
+    private String[] stages;
+
     
     /*************************
      * Method implements run for thread
@@ -137,6 +139,7 @@ public class Model extends Thread implements Runnable
       this.setGitHubURL(gitHubURL);      
       this.setLanguage(language);
       this.setLocalGitRepo(localGitRepo);
+      this.stages = stages;
     }
      /****************************
      * Function creates a String formatted to input to the Jenkins server for the build
@@ -423,6 +426,11 @@ public class Model extends Thread implements Runnable
        String result = jobject.get("result").getAsString();
         
         return result;
+    }
+    
+    public String[] getStages()
+    {
+        return this.stages;
     }
     
 }
