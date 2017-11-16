@@ -13,13 +13,13 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supergalaxypenguin.vcdep.view.implementations.PipelineSceneController">
    <children>
-      <ImageView fx:id="cartoonSpaceBackground" fitHeight="640.0" fitWidth="880.0" layoutY="-2.0">
+      <ImageView fx:id="cartoonSpaceBackground" fitHeight="743.0" fitWidth="992.0" layoutY="-2.0">
          <image>
             <Image url="@../Images/cartoon-earth-and-moon-from-space-with-starry-night_4klio3fkg__F0007.png" />
          </image>
       </ImageView>
-      <ScrollPane id="scrollPane" fx:id="scrollPane" layoutX="14.0" layoutY="135.0" opacity="0.7" prefHeight="406.0" prefWidth="410.0" />
-      <Button fx:id="btnGoBack" layoutX="163.0" layoutY="566.0" mnemonicParsing="false" onAction="#handleBtnGoBack" prefHeight="48.0" prefWidth="148.0" text="Last Stage">
+      <ScrollPane id="scrollPane" fx:id="scrollPane" layoutX="14.0" layoutY="135.0" opacity="0.7" prefHeight="491.0" prefWidth="476.0" />
+      <Button fx:id="btnGoBack" layoutX="192.0" layoutY="652.0" mnemonicParsing="false" onAction="#handleBtnGoBack" prefHeight="48.0" prefWidth="148.0" text="Last Stage">
          <graphic>
             <ImageView fitHeight="38.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -28,7 +28,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnForward" layoutX="579.0" layoutY="566.0" mnemonicParsing="false" onAction="#handleBtnForward" prefHeight="48.0" prefWidth="140.0" text="Next Stage">
+      <Button fx:id="btnForward" layoutX="652.0" layoutY="652.0" mnemonicParsing="false" onAction="#handleBtnForward" prefHeight="48.0" prefWidth="140.0" text="Next Stage">
          <graphic>
             <ImageView fitHeight="38.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -36,12 +36,13 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button fx:id="btnReSubmit" layoutX="748.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleBtnReSubmit" text="Re-Submit" />
-      <Button fx:id="btnReset" layoutX="748.0" layoutY="74.0" mnemonicParsing="false" onAction="#handleBtnReset" prefHeight="27.0" prefWidth="84.0" text="Reset" />
-      <Rectangle fx:id="stage1" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="70.0" layoutX="430.0" layoutY="134.0" stroke="BLACK" strokeType="INSIDE" width="439.0" />
-      <Rectangle fx:id="stage2" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="430.0" layoutY="211.0" stroke="BLACK" strokeType="INSIDE" width="439.0" />
-      <Rectangle fx:id="stage3" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="430.0" layoutY="295.0" stroke="BLACK" strokeType="INSIDE" width="439.0" />
-      <Rectangle fx:id="stage4" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="430.0" layoutY="380.0" stroke="BLACK" strokeType="INSIDE" width="439.0" />
-      <Rectangle fx:id="stage5" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="430.0" layoutY="465.0" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Button fx:id="btnReSubmit" layoutX="848.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleBtnReSubmit" text="Re-Submit" />
+      <Button fx:id="btnReset" layoutX="849.0" layoutY="75.0" mnemonicParsing="false" onAction="#handleBtnReset" prefHeight="27.0" prefWidth="84.0" text="Reset" />
+      <Rectangle fx:id="stage1" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="70.0" layoutX="500.0" layoutY="134.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Rectangle fx:id="stage2" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="211.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Rectangle fx:id="stage3" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="295.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Rectangle fx:id="stage4" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="380.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Rectangle fx:id="stage5" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="465.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Rectangle fx:id="stage51" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="550.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
    </children>
 </AnchorPane>
