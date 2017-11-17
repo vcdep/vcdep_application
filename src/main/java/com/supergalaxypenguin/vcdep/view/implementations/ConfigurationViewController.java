@@ -147,7 +147,6 @@ public class ConfigurationViewController implements Initializable {
 
     public void registerDragEvent() {
         //Image deploy = new Image(getClass().getResourceAsStream("/com/lynden/planning/ui/container2.png"));
-
     }
 
     @Override

@@ -6,13 +6,10 @@
 package com.supergalaxypenguin.vcdep.view.implementations;
 
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,10 +18,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextArea;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 //import javafx.scene.control.TextAreaBuilder;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -42,21 +44,39 @@ public class PipelineSceneController implements Initializable {
     private Stage stage;
     Scanner logfile;
     String log = "";
-    FileChooser filechooser = new FileChooser();
     
     
     @FXML
-    private ImageView background1;
+    private ImageView cartoonSpaceBackground;
     @FXML
-    private ImageView background2;
+    private Button btnReset = new Button();
     @FXML
-    private Button displayLog;
+    private Button btnReSubmit = new Button();
+    @FXML
+    private Button btnForward = new Button();
+    @FXML
+    private Button btnGoBack = new Button();
+    @FXML
+    private ScrollPane imagePane = new ScrollPane();
     
+    @FXML
+    private Rectangle stage1 = new Rectangle();
+    @FXML
+    private Rectangle stage2 = new Rectangle();
+    @FXML
+    private Rectangle stage3 = new Rectangle();
+    @FXML
+    private Rectangle stage4 = new Rectangle();
+    @FXML
+    private Rectangle stage5 = new Rectangle();
+    
+    DropShadow shadow = new DropShadow();
     
     @FXML
     private ScrollPane scrollPane = new ScrollPane();
     final TextArea textArea= new TextArea();
     private Label label = new Label();
+    
     
     /**
      * Initializes the controller class.
@@ -64,48 +84,44 @@ public class PipelineSceneController implements Initializable {
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-     
+        stage1.setFill(Color.GRAY);
+    }
         
+    @FXML
+    private void handleMouseExitedButton(ActionEvent event){
+        Button clickedButton = (Button)event.getSource();
+        clickedButton.setEffect(null);
     }
     
     @FXML
-    private void handleDisplayLogAction(ActionEvent event) throws IOException{
-        /*
-        try {
-            File logPath = filechooser.showOpenDialog(null);
-            if (logPath != null)
-            {
-                logfile = new Scanner(new FileReader(logPath));
-            }
-            // TODO
-        } catch (FileNotFoundException ex) {
-            //Logger.getLogger(PipelineSceneController.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("File Not found");
-        }
-        while (logfile.hasNextLine())
-        {
-            log = log + logfile.nextLine()+ " ";
-        }
-        label.setWrapText(true);
-        label.setText(log);
-        label.setPrefWidth(365);
-        scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-        scrollPane.setPrefSize(375, 385);
-        //textArea.setText("THIS IS MY LOG FILE");
-        
-        /*textArea = TextAreaBuilder.create()
-                .prefWidth(400)
-                .wrapText(true)
-                .build();
-        
-        
-        scrollPane.setContent(label);
-        */
-        controller.updateStatusToView(controller.getLogFile());
-        //controller.updateStatusToView("Updated properly");
+    private void handleMouseEnteredButton(ActionEvent event){
+        Button clickedButton = (Button)event.getSource();
+        clickedButton.setEffect(shadow);
     }
     
+    @FXML
+    private void handleBtnGoBack(ActionEvent event)
+    {
+        System.out.println("Test Go Back Button");
+    }
+    
+    @FXML
+    private void handleBtnForward(ActionEvent event)
+    {
+        System.out.println("Test Forward Button");
+    }
+    
+    @FXML
+    private void handleBtnReset(ActionEvent event)
+    {
+        System.out.println("Test Reset Button");
+    }
+    
+    @FXML
+    private void handleBtnReSubmit(ActionEvent event)
+    {
+        System.out.println("Test Re-Submit Button");
+    }
     /**
      * Updates the message in the scroll pane window
      * @param message 
