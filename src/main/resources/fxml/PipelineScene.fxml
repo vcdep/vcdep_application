@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.paint.*?>
@@ -13,13 +14,13 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supergalaxypenguin.vcdep.view.implementations.PipelineSceneController">
    <children>
-      <ImageView fx:id="cartoonSpaceBackground" fitHeight="743.0" fitWidth="992.0" layoutY="-2.0">
+      <ImageView fx:id="cartoonSpaceBackground" fitHeight="743.0" fitWidth="995.0" layoutY="-2.0">
          <image>
             <Image url="@../Images/cartoon-earth-and-moon-from-space-with-starry-night_4klio3fkg__F0007.png" />
          </image>
       </ImageView>
       <ScrollPane id="scrollPane" fx:id="scrollPane" layoutX="14.0" layoutY="135.0" opacity="0.7" prefHeight="491.0" prefWidth="476.0" />
-      <Button fx:id="btnGoBack" layoutX="192.0" layoutY="652.0" mnemonicParsing="false" onAction="#handleBtnGoBack" prefHeight="48.0" prefWidth="148.0" text="Last Stage">
+      <Button fx:id="btnGoBack" layoutX="192.0" layoutY="652.0" mnemonicParsing="false" onAction="#handleBtnGoBack" onMouseDragEntered="#handleMouseEnteredButton" onMouseDragExited="#handleMouseExitedButton" prefHeight="48.0" prefWidth="148.0" text="Last Stage">
          <graphic>
             <ImageView fitHeight="38.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -28,7 +29,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnForward" layoutX="652.0" layoutY="652.0" mnemonicParsing="false" onAction="#handleBtnForward" onMouseDragEntered="#handleMouseEnteredForward" onMouseDragExited="#handleMouseExitedForward" prefHeight="48.0" prefWidth="140.0" text="Next Stage">
+      <Button fx:id="btnForward" layoutX="652.0" layoutY="652.0" mnemonicParsing="false" onAction="#handleBtnForward" onMouseDragEntered="#handleMouseEnteredButton" onMouseDragExited="#handleMouseExitedButton" prefHeight="48.0" prefWidth="140.0" text="Next Stage">
          <graphic>
             <ImageView fitHeight="38.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -44,5 +45,154 @@
       <Rectangle fx:id="stage4" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="380.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
       <Rectangle fx:id="stage5" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="465.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
       <Rectangle fx:id="stage51" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="550.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="793.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/Jenkins.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="521.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/Jenkins.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="521.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/Jenkins.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="521.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/Jenkins.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="521.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/Jenkins.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="653.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/staticAnalysis.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="792.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/Code.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="73.0" fitWidth="104.0" layoutX="680.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/moduleDual.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="49.0" fitWidth="55.0" layoutX="653.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/Github.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="52.0" fitWidth="73.0" layoutX="707.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/productionEnvironment.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="792.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/Code.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="520.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/Code.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="868.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/Pass.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="866.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/Pass.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="866.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/Pass.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="866.0" layoutY="394.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/Pass.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="865.0" layoutY="479.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/Pass.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="866.0" layoutY="564.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/Pass.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="48.0" layoutX="657.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons/Code.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="941.0" layoutY="144.0" mnemonicParsing="false" onMouseDragEntered="#handleMouseEnteredButton" onMouseDragExited="#handleMouseExitedButton">
+         <graphic>
+            <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/help.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="941.0" layoutY="223.0" mnemonicParsing="false" onMouseDragEntered="#handleMouseEnteredButton" onMouseDragExited="#handleMouseExitedButton">
+         <graphic>
+            <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/help.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="941.0" layoutY="311.0" mnemonicParsing="false" onMouseDragEntered="#handleMouseEnteredButton" onMouseDragExited="#handleMouseExitedButton">
+         <graphic>
+            <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/help.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="941.0" layoutY="565.0" mnemonicParsing="false" onMouseDragEntered="#handleMouseEnteredButton" onMouseDragExited="#handleMouseExitedButton">
+         <graphic>
+            <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/help.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="941.0" layoutY="480.0" mnemonicParsing="false" onMouseDragEntered="#handleMouseEnteredButton" onMouseDragExited="#handleMouseExitedButton">
+         <graphic>
+            <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/help.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="941.0" layoutY="394.0" mnemonicParsing="false" onMouseDragEntered="#handleMouseEnteredButton" onMouseDragExited="#handleMouseExitedButton">
+         <graphic>
+            <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/help.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

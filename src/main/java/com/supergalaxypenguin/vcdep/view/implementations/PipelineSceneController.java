@@ -88,13 +88,15 @@ public class PipelineSceneController implements Initializable {
     }
         
     @FXML
-    private void handleMouseExitedGoBack(ActionEvent event){
-        btnGoBack.setEffect(null);
+    private void handleMouseExitedButton(ActionEvent event){
+        Button clickedButton = (Button)event.getSource();
+        clickedButton.setEffect(null);
     }
     
     @FXML
-    private void handleMouseEnteredGoBack(ActionEvent event){
-        btnGoBack.setEffect(shadow);
+    private void handleMouseEnteredButton(ActionEvent event){
+        Button clickedButton = (Button)event.getSource();
+        clickedButton.setEffect(shadow);
     }
     
     @FXML
