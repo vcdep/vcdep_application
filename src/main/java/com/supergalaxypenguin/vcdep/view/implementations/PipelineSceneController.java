@@ -42,25 +42,6 @@ public class PipelineSceneController implements Initializable {
     private int numStages;
     private int currentStage;
     private ArrayList<Rectangle> backGrounds = new ArrayList<>();
-    /*
-    private Stage stage;
-    private StageType type;
-    private int orderNumber;
-    private boolean passed;
-    private static final int OFFSET = 85;
-    private static final int ORIGIN = 137;
-    private int yPos;
-    private static final int stdHeight = 54;
-    private static final int stdWidth = 48;
-    private static final int wideWidth = 104;
-    private static final int firstColumnX = 520;
-    private static final int secondColumnX = 654;
-    private static final int thirdColumnX = 791;
-    private static final int passFailColumnX = 868;
-    private static final int integrationMiddleColumnX = 680;
-    private static final int deployMiddleColumnX = 707;
-    */
-    @FXML
     private ArrayList<StageAnimation> animations = new ArrayList<>();
     @FXML
     public ImageView chkoutImage1;
@@ -116,17 +97,6 @@ public class PipelineSceneController implements Initializable {
     private ImageView BuildImagePassed;
     @FXML
     private ImageView BuildImageFailed;
-    /*
-    @FXML
-    private Button btnReset = new Button();
-    @FXML
-    private Button btnReSubmit = new Button();
-    @FXML
-    private Button btnForward = new Button();
-    @FXML
-    private Button btnGoBack = new Button();
-    @FXML
-    */
     @FXML
     private Rectangle stage1;
     @FXML
@@ -143,7 +113,6 @@ public class PipelineSceneController implements Initializable {
     private ScrollPane scrollPane;
     @FXML
     private Label label;
-    
     
     /**
      * Initializes the controller class.
@@ -240,6 +209,18 @@ public class PipelineSceneController implements Initializable {
     private void handleMouseEnteredButton(ActionEvent event){
         Button clickedButton = (Button)event.getSource();
         clickedButton.setEffect(shadow);
+    }
+    
+    public void handleBtnPause(ActionEvent event)
+    {
+        System.out.println("Test Pause Button");
+        
+    }
+    
+    public void handleBtnPlay(ActionEvent event)
+    {
+        System.out.println("Test Play Button");
+        
     }
     
     @FXML
@@ -527,7 +508,7 @@ public class PipelineSceneController implements Initializable {
                 moveToEnd.setNode(i);
                 moveToEnd.setAutoReverse(true);
                 moveToEnd.setToY(0);
-                moveToEnd.setDuration(Duration.seconds(0.0001));
+                moveToEnd.setDuration(Duration.seconds(0.00001));
                 moveToEnd.play();
                 i.setVisible(false);
             }
