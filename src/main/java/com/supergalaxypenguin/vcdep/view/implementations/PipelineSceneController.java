@@ -34,8 +34,8 @@ public class PipelineSceneController implements Initializable {
 
     private String status;
     private static PipelineSceneController instance;
-    private static iMainController controller;
-    private final DropShadow shadow = new DropShadow();
+    private static iMainController controller;          //Reference to the main controller (Used to Call to Model)
+    private final DropShadow shadow = new DropShadow();     // A generic drop shadow effect
     private final HashMap<String,ImageView> animationIcons = new HashMap<>();
     private String log = "";
     private ArrayList<StageInfo> stageInfo = new ArrayList<>();
@@ -198,31 +198,51 @@ public class PipelineSceneController implements Initializable {
         this.animationIcons.put("BuildImageFailed",this.BuildImageFailed);
         this.animationIcons.put("BuildImagePassed",this.BuildImagePassed);
     }
-        
+    
+    /**
+     * Removes a drop shadow upon exiting a hover any button in the scene
+     * @param event 
+     */    
     @FXML
     private void handleMouseExitedButton(ActionEvent event){
         Button clickedButton = (Button)event.getSource();
         clickedButton.setEffect(null);
     }
     
+    /**
+     * Creates a drop shadow upon hovering over any button in the scene
+     * @param event 
+     */
     @FXML
     private void handleMouseEnteredButton(ActionEvent event){
         Button clickedButton = (Button)event.getSource();
         clickedButton.setEffect(shadow);
     }
     
+    /**
+     * Used to pause the play function
+     * @param event 
+     */
     public void handleBtnPause(ActionEvent event)
     {
         System.out.println("Test Pause Button");
         
     }
     
+    /**
+     * Play through the stages in a timed order
+     * @param event 
+     */
     public void handleBtnPlay(ActionEvent event)
     {
         System.out.println("Test Play Button");
         
     }
     
+    /**
+     * Remove the current stage information in order to go back a stage
+     * @param event 
+     */
     @FXML
     private void handleBtnGoBack(ActionEvent event)
     {
@@ -230,6 +250,10 @@ public class PipelineSceneController implements Initializable {
         this.getLastAnimation();
     }
     
+    /**
+     * Goto the next Stage and display the animation and text
+     * @param event 
+     */
     @FXML
     private void handleBtnForward(ActionEvent event)
     {
@@ -237,17 +261,26 @@ public class PipelineSceneController implements Initializable {
         this.getNextAnimation();
     }
     
+    /**
+     * Reset button should simply reset the drag and drop to its original position
+     * @param event 
+     */
     @FXML
     private void handleBtnReset(ActionEvent event)
     {
         System.out.println("Test Reset Button");
     }
     
+    /**
+     * ReSubmit button should clear all current animations and seek an updated log file to build new animations
+     * @param event 
+     */
     @FXML
     private void handleBtnReSubmit(ActionEvent event)
     {
         System.out.println("Test Re-Submit Button");
     }
+    
     /**
      * Updates the message in the scroll pane window
      * @param message 
@@ -308,15 +341,29 @@ public class PipelineSceneController implements Initializable {
     {
         return status;
     }
+    
+    /**
+     * Adds a new animation to the animations list using the stage info and background
+     * @param i currentStage
+     */
     private void createNewAnimations(int i)
     {
         animations.add(new StageAnimation(stageInfo.get(i+1), this.animationIcons, backGrounds.get(i+1)));
     }
+    
+    /**
+     * removes the last animation from the animations list
+     * @param i 
+     */
     private void removeAnimation(int i)
     {
         animations.get(i).moveToEnd();
         animations.remove(i);
     }
+    
+    /**
+     * increment currentStage if a next stage exists
+     */
     private void getNextAnimation()
     {
         if (this.currentStage<stageInfo.size()-1)
@@ -325,6 +372,10 @@ public class PipelineSceneController implements Initializable {
             this.currentStage++;
         }
     }
+    
+    /**
+     * decrement currentStage till all are gone
+     */
     private void getLastAnimation()
     {
         if (this.currentStage>-1)
