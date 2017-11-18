@@ -336,31 +336,34 @@ public class PipelineSceneController implements Initializable {
 
 
 /**
- *
+ * This Class contains all the necessary information to create
+ * a modular animation and control it throughout it's life-cycle.
  * @author Howtoon
  */
     class StageAnimation{
-        private StageType type;
-        private int orderNumber;
-        private boolean passed;
-        private static final int OFFSET = 85;
-        private static final int ORIGIN = 137;
-        private Rectangle backGround;
-        //private int yPos;
-        /*
-        private static final int stdHeight = 54;
-        private static final int stdWidth = 48;
-        private static final int wideWidth = 104;
-        private static final int firstColumnX = 520;
-        private static final int secondColumnX = 654;
-        private static final int thirdColumnX = 791;
-        private static final int passFailColumnX = 868;
-        private static final int integrationMiddleColumnX = 680;
-        private static final int deployMiddleColumnX = 707;
-        */
-        //private HashMap<String,ImageView> animationIcons;
-        private ImageView[] images;
+        private StageType type;         //What kind of Stage is it? Only one of each type is allowed
+        private int orderNumber;            //what number in the list of stages EG. 1st? 2nd? Starts at 0
+        private boolean passed;         //did this stage fail?
+        private static final int OFFSET = 85;       //Space between middle of other stage backgrounds
+        //private static final int ORIGIN = 137;      
+        private Rectangle backGround;                       //The background Area
+//        private static final int stdHeight = 54;
+//        private static final int stdWidth = 48;
+//        private static final int wideWidth = 104;
+//        private static final int firstColumnX = 520;
+//        private static final int secondColumnX = 654;
+//        private static final int thirdColumnX = 791;
+//        private static final int passFailColumnX = 868;
+//        private static final int integrationMiddleColumnX = 680;
+//        private static final int deployMiddleColumnX = 707;
+        private ImageView[] images;                             //necessary Animations
 
+        /**
+         * Creates a Stage Animation
+         * @param info StageInfo class containing stage information
+         * @param animationIcons    All animation images
+         * @param backGround    The background that corresponds to this stage animation
+         */
         public StageAnimation(StageInfo info, HashMap<String,ImageView> animationIcons, Rectangle backGround)
         {
             this.orderNumber = info.getOrderNumber();
@@ -394,6 +397,10 @@ public class PipelineSceneController implements Initializable {
             }
         }
 
+        /**
+         * Gathers images for the Build Animation
+         * @param animationIcons All animation icons
+         */
         private void BuildAnimation(HashMap<String,ImageView> animationIcons)
         {
             ImageView[] images = {animationIcons.get("BuildImage1"), 
@@ -406,6 +413,10 @@ public class PipelineSceneController implements Initializable {
             this.moveToStart(images);
         }
 
+        /**
+         * Gathers images for the Checkout Animation
+         * @param animationIcons All animation icons
+         */
         private void CheckoutAnimation(HashMap<String,ImageView> animationIcons)
         {
             ImageView[] images = {animationIcons.get("chkoutImage1"), 
@@ -418,6 +429,10 @@ public class PipelineSceneController implements Initializable {
             this.moveToStart(images);
         }
 
+        /**
+         * Gathers images for the Deployment Animation
+         * @param animationIcons All animation icons
+         */
         private void DeployAnimation(HashMap<String,ImageView> animationIcons)
         {
             ImageView[] images = {animationIcons.get("DeployImage1"), 
@@ -429,6 +444,10 @@ public class PipelineSceneController implements Initializable {
             this.moveToStart(images);
         }
 
+        /**
+         * Gathers images for the Integration Test Animation
+         * @param animationIcons All animation icons
+         */
         private void IntegrationAnimation(HashMap<String,ImageView> animationIcons)
         {
             ImageView[] images = {animationIcons.get("IntegrationImage1"), 
@@ -440,6 +459,10 @@ public class PipelineSceneController implements Initializable {
             this.moveToStart(images);
         }
 
+        /**
+         * Gathers images for the StaticAnalysis Animation
+         * @param animationIcons All animation icons
+         */
         private void StaticAnimation(HashMap<String,ImageView> animationIcons)
         {
             ImageView[] images = {animationIcons.get("SAImage1"), 
@@ -451,7 +474,10 @@ public class PipelineSceneController implements Initializable {
             this.images = images;
             this.moveToStart(images);
         }
-
+        /**
+         * Gathers images for the UnitTest Animation
+         * @param animationIcons All animation icons
+         */
         private void UnitAnimation(HashMap<String,ImageView> animationIcons)
         {
             ImageView[] images = {animationIcons.get("UnitImage1"), 
@@ -463,6 +489,10 @@ public class PipelineSceneController implements Initializable {
             this.images = images;
             this.moveToStart(images);
         }
+        /**
+         * Move Icons to the proper stage position
+         * @param images All images necessary for the animation;
+         */
         private void moveToStart(ImageView[] images)
         {
             TranslateTransition moveToStart;
@@ -499,6 +529,9 @@ public class PipelineSceneController implements Initializable {
                 moveToStart.play();
             }
         }
+        /**
+         * Move Icons back to their original positions
+         */
         private void moveToEnd()
         {
             TranslateTransition moveToEnd;
