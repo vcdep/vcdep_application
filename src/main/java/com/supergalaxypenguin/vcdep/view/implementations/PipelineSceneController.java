@@ -112,7 +112,6 @@ public class PipelineSceneController implements Initializable {
     private ImageView DeployImagePassed;
     @FXML
     private ImageView DeployImageFailed;
-    
     @FXML
     private ImageView BuildImage1;
     @FXML
@@ -121,7 +120,6 @@ public class PipelineSceneController implements Initializable {
     private ImageView BuildImagePassed;
     @FXML
     private ImageView BuildImageFailed;
-    
     @FXML
     private Button btnReset = new Button();
     @FXML
@@ -132,7 +130,6 @@ public class PipelineSceneController implements Initializable {
     private Button btnGoBack = new Button();
     @FXML
     private ScrollPane imagePane = new ScrollPane();
-    
     @FXML
     private Rectangle stage1 = new Rectangle();
     @FXML
@@ -159,8 +156,6 @@ public class PipelineSceneController implements Initializable {
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        stage1.setFill(Color.GRAY);
-        
         this.chkoutImage1.setVisible(false);
         this.chkoutImage2.setVisible(false);
         this.chkoutImage3.setVisible(false);
@@ -216,7 +211,6 @@ public class PipelineSceneController implements Initializable {
         this.animationIcons.put("BuildImage2",this.BuildImage2);
         this.animationIcons.put("BuildImageFailed",this.BuildImageFailed);
         this.animationIcons.put("BuildImagePassed",this.BuildImagePassed);
-        
     }
         
     @FXML
@@ -241,18 +235,7 @@ public class PipelineSceneController implements Initializable {
     private void handleBtnForward(ActionEvent event)
     {
         System.out.println("Test Forward Button");
-        this.DeployImage1.setVisible(true);
-        
-        TranslateTransition stage1 = new TranslateTransition();
-        stage1.setNode(this.chkoutImage1);
-        stage1.setToY(0);
-        stage1.setDuration(Duration.seconds(0.001));
-        stage1.play();
-        this.chkoutImage1.setVisible(true);
-        this.chkoutImage2.setVisible(true);
-        this.animationIcons.get("UnitImage2").setVisible(true);
         newAnimation = getNextAnimation();
-        newAnimation.start();
     }
     
     @FXML
@@ -303,10 +286,8 @@ public class PipelineSceneController implements Initializable {
      */
     public static PipelineSceneController getInstance()
     {
-        
         if (instance == null)
             instance = new PipelineSceneController();
-
         return instance;
     }
     
@@ -344,14 +325,13 @@ public class PipelineSceneController implements Initializable {
  *
  * @author Howtoon
  */
-    class StageAnimation extends Thread implements Runnable{
+    class StageAnimation{
         private StageType type;
-        private StageInfo info;
         private int orderNumber;
         private boolean passed;
         private static final int OFFSET = 85;
-        private static final int ORIGIN = 137;
-        private int yPos;
+        //private int yPos;
+        /*
         private static final int stdHeight = 54;
         private static final int stdWidth = 48;
         private static final int wideWidth = 104;
@@ -361,71 +341,43 @@ public class PipelineSceneController implements Initializable {
         private static final int passFailColumnX = 868;
         private static final int integrationMiddleColumnX = 680;
         private static final int deployMiddleColumnX = 707;
-        private HashMap<String,ImageView> animationIcons;
-
-        ImageView[] images;
-
-        public StageType getType() {
-            return type;
-        }
-
-        public void setType(StageType type) {
-            this.type = type;
-        }
-
-        public int getOrderNumber() {
-            return orderNumber;
-        }
-
-        public void setOrderNumber(int orderNumber) {
-            this.orderNumber = orderNumber;
-        }
-
-        public boolean isPassed() {
-            return passed;
-        }
-
-        public void setPassed(boolean passed) {
-            this.passed = passed;
-        }
+        */
+        //private HashMap<String,ImageView> animationIcons;
+        private ImageView[] images;
 
         public StageAnimation(StageInfo info, HashMap<String,ImageView> animationIcons)
         {
             this.orderNumber = info.getOrderNumber();
             this.passed = info.isPassed();
             this.type = info.getType();
-            this.yPos = ORIGIN + (this.orderNumber*OFFSET);
-            this.animationIcons = animationIcons;
-            this.info = info;
+            //this.animationIcons = animationIcons;
 
-            if (this.type == StageType.BUILD)
-            {
-                this.BuildAnimation();
+            if (null != this.type)
+            switch (this.type) {
+                case BUILD:
+                    this.BuildAnimation(animationIcons);
+                    break;
+                case CHECKOUT:
+                    this.CheckoutAnimation(animationIcons);
+                    break;
+                case DEPLOY:
+                    this.DeployAnimation(animationIcons);
+                    break;
+                case INTEGRATION:
+                    this.IntegrationAnimation(animationIcons);
+                    break;
+                case STATIC:
+                    this.StaticAnimation(animationIcons);
+                    break;
+                case UNIT:
+                    this.UnitAnimation(animationIcons);
+                    break;
+                default:
+                    break;
             }
-            else if (this.type == StageType.CHECKOUT)
-            {
-                this.CheckoutAnimation();
-            }
-            else if (this.type == StageType.DEPLOY)
-            {
-                this.DeployAnimation();
-            }
-            else if (this.type == StageType.INTEGRATION)
-            {
-                this.IntegrationAnimation();
-            }
-            else if (this.type == StageType.STATIC)
-            {
-                this.StaticAnimation();
-            }
-            else if (this.type == StageType.UNIT)
-            {
-                this.UnitAnimation();
-            }
-            Logger.logMsg(0, "Logger.ERROR");
         }
 
-        private void BuildAnimation()
+        private void BuildAnimation(HashMap<String,ImageView> animationIcons)
         {
             ImageView[] images = {animationIcons.get("BuildImage1"), 
                 animationIcons.get("BuildImage1"), 
@@ -433,17 +385,11 @@ public class PipelineSceneController implements Initializable {
                 animationIcons.get("BuildImage1"), 
                 animationIcons.get("BuildImage1")
             };
-            for (ImageView i : images){
-                TranslateTransition moveToStart = new TranslateTransition();
-                moveToStart.setNode(i);
-                moveToStart.setToY(info.getOrderNumber()*OFFSET);
-                moveToStart.setDuration(Duration.seconds(1));
-                moveToStart.play();
-                i.setVisible(true);
-            }
+            this.images = images;
+            this.moveToStart(images);
         }
 
-        private void CheckoutAnimation()
+        private void CheckoutAnimation(HashMap<String,ImageView> animationIcons)
         {
             ImageView[] images = {animationIcons.get("chkoutImage1"), 
                 animationIcons.get("chkoutImage2"), 
@@ -451,51 +397,33 @@ public class PipelineSceneController implements Initializable {
                 animationIcons.get("chkoutImagePassed"), 
                 animationIcons.get("chkoutImageFailed")
             };
-            for (ImageView i : images){
-                TranslateTransition moveToStart = new TranslateTransition();
-                moveToStart.setNode(i);
-                moveToStart.setToY(info.getOrderNumber()*OFFSET);
-                moveToStart.setDuration(Duration.seconds(1));
-                moveToStart.play();
-                i.setVisible(true);
-            }
+            this.images = images;
+            this.moveToStart(images);
         }
 
-        private void DeployAnimation()
+        private void DeployAnimation(HashMap<String,ImageView> animationIcons)
         {
             ImageView[] images = {animationIcons.get("DeployImage1"), 
                 animationIcons.get("DeployImage2"), 
                 animationIcons.get("DeployImagePassed"), 
                 animationIcons.get("DeployImageFailed")
             };
-            for (ImageView i : images){
-                TranslateTransition moveToStart = new TranslateTransition();
-                moveToStart.setNode(i);
-                moveToStart.setToY(info.getOrderNumber()*OFFSET);
-                moveToStart.setDuration(Duration.seconds(1));
-                moveToStart.play();
-                i.setVisible(true);
-            }
+            this.images = images;
+            this.moveToStart(images);
         }
 
-        private void IntegrationAnimation()
+        private void IntegrationAnimation(HashMap<String,ImageView> animationIcons)
         {
             ImageView[] images = {animationIcons.get("IntegrationImage1"), 
                 animationIcons.get("IntegrationImage2"), 
                 animationIcons.get("IntegrationImagePassed"), 
                 animationIcons.get("IntegrationImageFailed")
             };
-            for (ImageView i : images){
-                TranslateTransition moveToStart = new TranslateTransition();
-                moveToStart.setNode(i);
-                moveToStart.setToY(info.getOrderNumber()*OFFSET);
-                moveToStart.setDuration(Duration.seconds(1));
-                moveToStart.play();
-                i.setVisible(true);
-            }
+            this.images = images;
+            this.moveToStart(images);
         }
 
-        private void StaticAnimation()
+        private void StaticAnimation(HashMap<String,ImageView> animationIcons)
         {
             ImageView[] images = {animationIcons.get("SAImage1"), 
                 animationIcons.get("SAImage2"), 
@@ -503,17 +431,11 @@ public class PipelineSceneController implements Initializable {
                 animationIcons.get("SAImagePassed"), 
                 animationIcons.get("SAImageFailed")
             };
-            for (ImageView i : images){
-                TranslateTransition moveToStart = new TranslateTransition();
-                moveToStart.setNode(i);
-                moveToStart.setToY(info.getOrderNumber()*OFFSET);
-                moveToStart.setDuration(Duration.seconds(1));
-                moveToStart.play();
-                i.setVisible(true);
-            }
+            this.images = images;
+            this.moveToStart(images);
         }
 
-        private void UnitAnimation()
+        private void UnitAnimation(HashMap<String,ImageView> animationIcons)
         {
             ImageView[] images = {animationIcons.get("UnitImage1"), 
                 animationIcons.get("UnitImage2"), 
@@ -521,10 +443,15 @@ public class PipelineSceneController implements Initializable {
                 animationIcons.get("UnitImagePassed"), 
                 animationIcons.get("UnitImageFailed")
             };
+            this.images = images;
+            this.moveToStart(images);
+        }
+        private void moveToStart(ImageView[] images)
+        {
             for (ImageView i : images){
                 TranslateTransition moveToStart = new TranslateTransition();
                 moveToStart.setNode(i);
-                moveToStart.setToY(info.getOrderNumber()*OFFSET);
+                moveToStart.setToY(this.orderNumber*OFFSET);
                 moveToStart.setDuration(Duration.seconds(1));
                 moveToStart.play();
                 i.setVisible(true);
