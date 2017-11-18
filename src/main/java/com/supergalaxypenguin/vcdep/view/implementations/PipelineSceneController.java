@@ -312,8 +312,8 @@ public class PipelineSceneController implements Initializable {
     public StageAnimation getNextAnimation()
     {
         newAnimation = new StageAnimation(new StageInfo(StageType.CHECKOUT, 0, true), this.animationIcons);
-        newAnimation = new StageAnimation(new StageInfo(StageType.DEPLOY, 1, true), this.animationIcons);
-        newAnimation = new StageAnimation(new StageInfo(StageType.INTEGRATION, 3, true), this.animationIcons);
+        newAnimation = new StageAnimation(new StageInfo(StageType.DEPLOY, 1, false), this.animationIcons);
+        newAnimation = new StageAnimation(new StageInfo(StageType.INTEGRATION, 3, false), this.animationIcons);
         newAnimation = new StageAnimation(new StageInfo(StageType.STATIC, 4, true), this.animationIcons);
         newAnimation = new StageAnimation(new StageInfo(StageType.UNIT, 5, true), this.animationIcons);
         return newAnimation;
@@ -453,8 +453,30 @@ public class PipelineSceneController implements Initializable {
                 moveToStart.setNode(i);
                 moveToStart.setToY(this.orderNumber*OFFSET);
                 moveToStart.setDuration(Duration.seconds(1));
+                if ( 
+                        i == animationIcons.get("UnitImagePassed") ||
+                        i == animationIcons.get("SAImagePassed") ||
+                        i == animationIcons.get("DeployImagePassed") ||
+                        i == animationIcons.get("IntegrationImagePassed") ||
+                        i == animationIcons.get("chkoutImagePassed")
+                        )
+                {
+                    i.setVisible(passed);
+                }
+                else if (
+                        i == animationIcons.get("UnitImageFailed") ||
+                        i == animationIcons.get("SAImageFailed") ||
+                        i == animationIcons.get("DeployImageFailed") ||
+                        i == animationIcons.get("IntegrationImageFailed") ||
+                        i == animationIcons.get("chkoutImageFailed")
+                        )
+                {
+                    i.setVisible(!passed);
+                }
+                else{
+                    i.setVisible(true);
+                }
                 moveToStart.play();
-                i.setVisible(true);
             }
         }
     }
