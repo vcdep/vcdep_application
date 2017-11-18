@@ -44,7 +44,7 @@
       <Rectangle fx:id="stage3" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="295.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
       <Rectangle fx:id="stage4" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="380.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
       <Rectangle fx:id="stage5" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="465.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
-      <Rectangle fx:id="stage51" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="550.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Rectangle fx:id="stage6" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="550.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
       <ImageView fx:id="chkoutImage3" fitHeight="54.0" fitWidth="48.0" layoutX="791.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Jenkins.png" />

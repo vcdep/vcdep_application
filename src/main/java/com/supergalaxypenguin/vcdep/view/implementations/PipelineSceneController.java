@@ -7,12 +7,11 @@ package com.supergalaxypenguin.vcdep.view.implementations;
 
 
 
-import com.sun.media.jfxmedia.logging.Logger;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-import java.util.Scanner;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,13 +20,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.control.TextArea;
 import javafx.scene.effect.DropShadow;
-//import javafx.scene.control.TextAreaBuilder;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
@@ -43,6 +38,10 @@ public class PipelineSceneController implements Initializable {
     private final DropShadow shadow = new DropShadow();
     private final HashMap<String,ImageView> animationIcons = new HashMap<>();
     private String log = "";
+    private ArrayList<StageInfo> stageInfo = new ArrayList<>();
+    private int numStages;
+    private int currentStage;
+    private ArrayList<Rectangle> backGrounds = new ArrayList<>();
     /*
     private Stage stage;
     private StageType type;
@@ -61,7 +60,8 @@ public class PipelineSceneController implements Initializable {
     private static final int integrationMiddleColumnX = 680;
     private static final int deployMiddleColumnX = 707;
     */
-    
+    @FXML
+    private ArrayList<StageAnimation> animations = new ArrayList<>();
     @FXML
     public ImageView chkoutImage1;
     @FXML
@@ -127,6 +127,7 @@ public class PipelineSceneController implements Initializable {
     private Button btnGoBack = new Button();
     @FXML
     */
+    @FXML
     private Rectangle stage1;
     @FXML
     private Rectangle stage2;
@@ -137,12 +138,13 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private Rectangle stage5;
     @FXML
+    private Rectangle stage6;
+    @FXML
     private ScrollPane scrollPane;
     @FXML
     private Label label;
     
-    @FXML
-    private StageAnimation newAnimation;
+    
     /**
      * Initializes the controller class.
      * @param url
@@ -151,6 +153,26 @@ public class PipelineSceneController implements Initializable {
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        numStages = 5;
+        currentStage = -1;
+        this.stageInfo.add(new StageInfo(StageType.CHECKOUT, 0, false));
+        this.stageInfo.add(new StageInfo(StageType.DEPLOY, 1, true));
+        this.stageInfo.add(new StageInfo(StageType.INTEGRATION, 2, false));
+        this.stageInfo.add(new StageInfo(StageType.STATIC, 3, true));
+        this.stageInfo.add(new StageInfo(StageType.UNIT, 4, false));
+        
+        this.backGrounds.add(stage1);
+        this.backGrounds.add(stage2);
+        this.backGrounds.add(stage3);
+        this.backGrounds.add(stage4);
+        this.backGrounds.add(stage5);
+        this.backGrounds.add(stage6);
+        
+        for (int i = 0; i<backGrounds.size(); i++)
+        {
+            backGrounds.get(i).setVisible(false);
+        }
+        
         this.chkoutImage1.setVisible(false);
         this.chkoutImage2.setVisible(false);
         this.chkoutImage3.setVisible(false);
@@ -224,13 +246,14 @@ public class PipelineSceneController implements Initializable {
     private void handleBtnGoBack(ActionEvent event)
     {
         System.out.println("Test Go Back Button");
+        this.getLastAnimation();
     }
     
     @FXML
     private void handleBtnForward(ActionEvent event)
     {
         System.out.println("Test Forward Button");
-        newAnimation = getNextAnimation();
+        this.getNextAnimation();
     }
     
     @FXML
@@ -304,14 +327,30 @@ public class PipelineSceneController implements Initializable {
     {
         return status;
     }
-    private StageAnimation getNextAnimation()
+    private void createNewAnimations(int i)
     {
-        newAnimation = new StageAnimation(new StageInfo(StageType.CHECKOUT, 0, true), this.animationIcons);
-        newAnimation = new StageAnimation(new StageInfo(StageType.DEPLOY, 1, false), this.animationIcons);
-        newAnimation = new StageAnimation(new StageInfo(StageType.INTEGRATION, 3, false), this.animationIcons);
-        newAnimation = new StageAnimation(new StageInfo(StageType.STATIC, 4, true), this.animationIcons);
-        newAnimation = new StageAnimation(new StageInfo(StageType.UNIT, 5, true), this.animationIcons);
-        return newAnimation;
+        animations.add(new StageAnimation(stageInfo.get(i+1), this.animationIcons, backGrounds.get(i+1)));
+    }
+    private void removeAnimation(int i)
+    {
+        animations.get(i).moveToEnd();
+        animations.remove(i);
+    }
+    private void getNextAnimation()
+    {
+        if (this.currentStage<stageInfo.size()-1)
+        {
+            createNewAnimations(this.currentStage);
+            this.currentStage++;
+        }
+    }
+    private void getLastAnimation()
+    {
+        if (this.currentStage>-1)
+        {
+            removeAnimation(this.currentStage);
+            this.currentStage--;
+        }
     }
 
 
@@ -324,6 +363,8 @@ public class PipelineSceneController implements Initializable {
         private int orderNumber;
         private boolean passed;
         private static final int OFFSET = 85;
+        private static final int ORIGIN = 137;
+        private Rectangle backGround;
         //private int yPos;
         /*
         private static final int stdHeight = 54;
@@ -339,11 +380,12 @@ public class PipelineSceneController implements Initializable {
         //private HashMap<String,ImageView> animationIcons;
         private ImageView[] images;
 
-        public StageAnimation(StageInfo info, HashMap<String,ImageView> animationIcons)
+        public StageAnimation(StageInfo info, HashMap<String,ImageView> animationIcons, Rectangle backGround)
         {
             this.orderNumber = info.getOrderNumber();
             this.passed = info.isPassed();
             this.type = info.getType();
+            this.backGround = backGround;
             //this.animationIcons = animationIcons;
 
             if (null != this.type)
@@ -442,11 +484,14 @@ public class PipelineSceneController implements Initializable {
         }
         private void moveToStart(ImageView[] images)
         {
-            for (ImageView i : images){
-                TranslateTransition moveToStart = new TranslateTransition();
+            TranslateTransition moveToStart;
+            this.backGround.setVisible(true);
+            for (ImageView i : images)
+            {
+                moveToStart = new TranslateTransition();
                 moveToStart.setNode(i);
                 moveToStart.setToY(this.orderNumber*OFFSET);
-                moveToStart.setDuration(Duration.seconds(1));
+                moveToStart.setDuration(Duration.seconds(0.0001));
                 if ( 
                         i == animationIcons.get("UnitImagePassed") ||
                         i == animationIcons.get("SAImagePassed") ||
@@ -473,5 +518,20 @@ public class PipelineSceneController implements Initializable {
                 moveToStart.play();
             }
         }
+        private void moveToEnd()
+        {
+            TranslateTransition moveToEnd;
+            this.backGround.setVisible(false);
+            for (ImageView i : images){
+                moveToEnd = new TranslateTransition();
+                moveToEnd.setNode(i);
+                moveToEnd.setAutoReverse(true);
+                moveToEnd.setToY(0);
+                moveToEnd.setDuration(Duration.seconds(0.0001));
+                moveToEnd.play();
+                i.setVisible(false);
+            }
+        }
     }
 }
+    
