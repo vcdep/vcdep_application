@@ -50,37 +50,37 @@
             <Image url="@../Images/AnimationIcons/Jenkins.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="UnitImage1" fitHeight="54.0" fitWidth="48.0" layoutX="520.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="UnitImage1" fitHeight="54.0" fitWidth="48.0" layoutX="520.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Jenkins.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="SAImage1" fitHeight="54.0" fitWidth="48.0" layoutX="520.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="SAImage1" fitHeight="54.0" fitWidth="48.0" layoutX="520.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Jenkins.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="IntegrationImage1" fitHeight="54.0" fitWidth="48.0" layoutX="520.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="IntegrationImage1" fitHeight="54.0" fitWidth="48.0" layoutX="520.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Jenkins.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="DeployImage1" fitHeight="54.0" fitWidth="48.0" layoutX="516.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="DeployImage1" fitHeight="54.0" fitWidth="48.0" layoutX="516.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Jenkins.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="SAImage2" fitHeight="54.0" fitWidth="48.0" layoutX="655.0" layoutY="222.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="SAImage2" fitHeight="54.0" fitWidth="48.0" layoutX="655.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/staticAnalysis.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="UnitImage3" fitHeight="54.0" fitWidth="48.0" layoutX="792.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="UnitImage3" fitHeight="54.0" fitWidth="48.0" layoutX="792.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Code.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="IntegrationImage2" fitHeight="54.0" fitWidth="104.0" layoutX="680.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="IntegrationImage2" fitHeight="54.0" fitWidth="104.0" layoutX="680.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/moduleDual.png" />
          </image>
@@ -90,12 +90,12 @@
             <Image url="@../Images/AnimationIcons/Github.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="DeployImage2" fitHeight="54.0" fitWidth="48.0" layoutX="707.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="DeployImage2" fitHeight="54.0" fitWidth="48.0" layoutX="707.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/productionEnvironment.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="SAImage3" fitHeight="54.0" fitWidth="48.0" layoutX="791.0" layoutY="223.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="SAImage3" fitHeight="54.0" fitWidth="48.0" layoutX="791.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Code.png" />
          </image>
@@ -110,32 +110,32 @@
             <Image url="@../Images/AnimationIcons/Pass.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="SAImagePassed" fitHeight="54.0" fitWidth="48.0" layoutX="866.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="SAImagePassed" fitHeight="54.0" fitWidth="48.0" layoutX="866.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Pass.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="UnitImagePassed" fitHeight="54.0" fitWidth="48.0" layoutX="866.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="UnitImagePassed" fitHeight="54.0" fitWidth="48.0" layoutX="866.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Pass.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="IntegrationImagePassed" fitHeight="54.0" fitWidth="48.0" layoutX="866.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="IntegrationImagePassed" fitHeight="54.0" fitWidth="48.0" layoutX="866.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Pass.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="DeployImagePassed" fitHeight="54.0" fitWidth="48.0" layoutX="865.0" layoutY="477.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="DeployImagePassed" fitHeight="54.0" fitWidth="48.0" layoutX="865.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Pass.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="BuildImagePassed" fitHeight="54.0" fitWidth="48.0" layoutX="866.0" layoutY="562.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="BuildImagePassed" fitHeight="54.0" fitWidth="48.0" layoutX="866.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Pass.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="UnitImage2" fitHeight="54.0" fitWidth="48.0" layoutX="657.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="UnitImage2" fitHeight="54.0" fitWidth="48.0" layoutX="657.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Code.png" />
          </image>
@@ -199,27 +199,27 @@
             <Image url="@../Images/AnimationIcons/Fail.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="SAImageFailed" fitHeight="54.0" fitWidth="48.0" layoutX="865.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="SAImageFailed" fitHeight="54.0" fitWidth="48.0" layoutX="865.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Fail.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="UnitImageFailed" fitHeight="54.0" fitWidth="48.0" layoutX="865.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="UnitImageFailed" fitHeight="54.0" fitWidth="48.0" layoutX="865.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Fail.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="IntegrationImageFailed" fitHeight="54.0" fitWidth="48.0" layoutX="865.0" layoutY="393.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="IntegrationImageFailed" fitHeight="54.0" fitWidth="48.0" layoutX="865.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Fail.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="DeployImageFailed" fitHeight="54.0" fitWidth="48.0" layoutX="865.0" layoutY="478.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="DeployImageFailed" fitHeight="54.0" fitWidth="48.0" layoutX="865.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Fail.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="BuildImageFailed" fitHeight="54.0" fitWidth="48.0" layoutX="866.0" layoutY="563.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="BuildImageFailed" fitHeight="54.0" fitWidth="48.0" layoutX="866.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Fail.png" />
          </image>

@@ -13,7 +13,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -192,7 +191,7 @@ public class PipelineSceneController implements Initializable {
         
         this.animationIcons.put("chkoutImage1",this.chkoutImage1);
         this.animationIcons.put("chkoutImage2",this.chkoutImage2);
-        this.animationIcons.put("chkoutImage2",this.chkoutImage2);
+        this.animationIcons.put("chkoutImage3",this.chkoutImage3);
         this.animationIcons.put("chkoutImageFailed",this.chkoutImageFailed);
         this.animationIcons.put("chkoutImagePassed",this.chkoutImagePassed);
         this.animationIcons.put("SAImage1",this.SAImage1);
@@ -210,7 +209,7 @@ public class PipelineSceneController implements Initializable {
         this.animationIcons.put("IntegrationImageFailed",this.IntegrationImageFailed);
         this.animationIcons.put("IntegrationImagePassed",this.IntegrationImagePassed);
         this.animationIcons.put("DeployImage1",this.DeployImage1);
-        this.animationIcons.put("DeployImage1",this.DeployImage1);
+        this.animationIcons.put("DeployImage2",this.DeployImage2);
         this.animationIcons.put("DeployImageFailed",this.DeployImageFailed);
         this.animationIcons.put("DeployImagePassed",this.DeployImagePassed);
         this.animationIcons.put("BuildImage1",this.BuildImage1);
@@ -331,8 +330,11 @@ public class PipelineSceneController implements Initializable {
     }
     public StageAnimation getNextAnimation()
     {
-        newAnimation = new StageAnimation(new StageInfo(StageType.CHECKOUT, 2, true), this.animationIcons);
-        
+        newAnimation = new StageAnimation(new StageInfo(StageType.CHECKOUT, 0, true), this.animationIcons);
+        newAnimation = new StageAnimation(new StageInfo(StageType.DEPLOY, 1, true), this.animationIcons);
+        newAnimation = new StageAnimation(new StageInfo(StageType.INTEGRATION, 3, true), this.animationIcons);
+        newAnimation = new StageAnimation(new StageInfo(StageType.STATIC, 4, true), this.animationIcons);
+        newAnimation = new StageAnimation(new StageInfo(StageType.UNIT, 5, true), this.animationIcons);
         return newAnimation;
     }
     
@@ -344,6 +346,7 @@ public class PipelineSceneController implements Initializable {
  */
     class StageAnimation extends Thread implements Runnable{
         private StageType type;
+        private StageInfo info;
         private int orderNumber;
         private boolean passed;
         private static final int OFFSET = 85;
@@ -393,6 +396,7 @@ public class PipelineSceneController implements Initializable {
             this.type = info.getType();
             this.yPos = ORIGIN + (this.orderNumber*OFFSET);
             this.animationIcons = animationIcons;
+            this.info = info;
 
             if (this.type == StageType.BUILD)
             {
@@ -423,42 +427,108 @@ public class PipelineSceneController implements Initializable {
 
         private void BuildAnimation()
         {
-
+            ImageView[] images = {animationIcons.get("BuildImage1"), 
+                animationIcons.get("BuildImage1"), 
+                animationIcons.get("BuildImage1"), 
+                animationIcons.get("BuildImage1"), 
+                animationIcons.get("BuildImage1")
+            };
+            for (ImageView i : images){
+                TranslateTransition moveToStart = new TranslateTransition();
+                moveToStart.setNode(i);
+                moveToStart.setToY(info.getOrderNumber()*OFFSET);
+                moveToStart.setDuration(Duration.seconds(1));
+                moveToStart.play();
+                i.setVisible(true);
+            }
         }
 
         private void CheckoutAnimation()
         {
-                System.out.println("StageAnimation.CheckoutAnimation()");
-                //animationIcons.get("chkoutImage1").setFitHeight(this.stdHeight);
-                //animationIcons.get("chkoutImage1").setFitWidth(this.stdWidth);
-                //animationIcons.get("chkoutImage1").setX(this.firstColumnX);
-                //animationIcons.get("chkoutImage1").setY(this.yPos);
-                animationIcons.get("chkoutImage1").setVisible(true);
-                animationIcons.get("chkoutImage2").setVisible(true);
-                animationIcons.get("SAImage1").setVisible(true);
-                chkoutImage3.setVisible(true);
-                chkoutImageFailed.setVisible(true);
-                //animationIcons.get("chkoutImage1").toFront();
+            ImageView[] images = {animationIcons.get("chkoutImage1"), 
+                animationIcons.get("chkoutImage2"), 
+                animationIcons.get("chkoutImage3"), 
+                animationIcons.get("chkoutImagePassed"), 
+                animationIcons.get("chkoutImageFailed")
+            };
+            for (ImageView i : images){
+                TranslateTransition moveToStart = new TranslateTransition();
+                moveToStart.setNode(i);
+                moveToStart.setToY(info.getOrderNumber()*OFFSET);
+                moveToStart.setDuration(Duration.seconds(1));
+                moveToStart.play();
+                i.setVisible(true);
+            }
         }
 
         private void DeployAnimation()
         {
-
+            ImageView[] images = {animationIcons.get("DeployImage1"), 
+                animationIcons.get("DeployImage2"), 
+                animationIcons.get("DeployImagePassed"), 
+                animationIcons.get("DeployImageFailed")
+            };
+            for (ImageView i : images){
+                TranslateTransition moveToStart = new TranslateTransition();
+                moveToStart.setNode(i);
+                moveToStart.setToY(info.getOrderNumber()*OFFSET);
+                moveToStart.setDuration(Duration.seconds(1));
+                moveToStart.play();
+                i.setVisible(true);
+            }
         }
 
         private void IntegrationAnimation()
         {
-
+            ImageView[] images = {animationIcons.get("IntegrationImage1"), 
+                animationIcons.get("IntegrationImage2"), 
+                animationIcons.get("IntegrationImagePassed"), 
+                animationIcons.get("IntegrationImageFailed")
+            };
+            for (ImageView i : images){
+                TranslateTransition moveToStart = new TranslateTransition();
+                moveToStart.setNode(i);
+                moveToStart.setToY(info.getOrderNumber()*OFFSET);
+                moveToStart.setDuration(Duration.seconds(1));
+                moveToStart.play();
+                i.setVisible(true);
+            }
         }
 
         private void StaticAnimation()
         {
-
+            ImageView[] images = {animationIcons.get("SAImage1"), 
+                animationIcons.get("SAImage2"), 
+                animationIcons.get("SAImage3"), 
+                animationIcons.get("SAImagePassed"), 
+                animationIcons.get("SAImageFailed")
+            };
+            for (ImageView i : images){
+                TranslateTransition moveToStart = new TranslateTransition();
+                moveToStart.setNode(i);
+                moveToStart.setToY(info.getOrderNumber()*OFFSET);
+                moveToStart.setDuration(Duration.seconds(1));
+                moveToStart.play();
+                i.setVisible(true);
+            }
         }
 
         private void UnitAnimation()
         {
-
+            ImageView[] images = {animationIcons.get("UnitImage1"), 
+                animationIcons.get("UnitImage2"), 
+                animationIcons.get("UnitImage3"), 
+                animationIcons.get("UnitImagePassed"), 
+                animationIcons.get("UnitImageFailed")
+            };
+            for (ImageView i : images){
+                TranslateTransition moveToStart = new TranslateTransition();
+                moveToStart.setNode(i);
+                moveToStart.setToY(info.getOrderNumber()*OFFSET);
+                moveToStart.setDuration(Duration.seconds(1));
+                moveToStart.play();
+                i.setVisible(true);
+            }
         }
     }
 }
