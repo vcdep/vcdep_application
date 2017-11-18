@@ -37,15 +37,14 @@ import javafx.util.Duration;
  */
 public class PipelineSceneController implements Initializable {
 
-    private String gitTxt;
-    private String branchTxt;
-    private String jenkinsTxt;
     private String status;
     private static PipelineSceneController instance;
     private static iMainController controller;
+    private final DropShadow shadow = new DropShadow();
+    private final HashMap<String,ImageView> animationIcons = new HashMap<>();
+    private String log = "";
+    /*
     private Stage stage;
-    Scanner logfile;
-    String log = "";
     private StageType type;
     private int orderNumber;
     private boolean passed;
@@ -61,11 +60,8 @@ public class PipelineSceneController implements Initializable {
     private static final int passFailColumnX = 868;
     private static final int integrationMiddleColumnX = 680;
     private static final int deployMiddleColumnX = 707;
+    */
     
-    private HashMap<String,ImageView> animationIcons = new HashMap<>();
-    
-    @FXML
-    private ImageView cartoonSpaceBackground;
     @FXML
     public ImageView chkoutImage1;
     @FXML
@@ -120,6 +116,7 @@ public class PipelineSceneController implements Initializable {
     private ImageView BuildImagePassed;
     @FXML
     private ImageView BuildImageFailed;
+    /*
     @FXML
     private Button btnReset = new Button();
     @FXML
@@ -129,29 +126,27 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private Button btnGoBack = new Button();
     @FXML
-    private ScrollPane imagePane = new ScrollPane();
+    */
+    private Rectangle stage1;
     @FXML
-    private Rectangle stage1 = new Rectangle();
+    private Rectangle stage2;
     @FXML
-    private Rectangle stage2 = new Rectangle();
+    private Rectangle stage3;
     @FXML
-    private Rectangle stage3 = new Rectangle();
+    private Rectangle stage4;
     @FXML
-    private Rectangle stage4 = new Rectangle();
+    private Rectangle stage5;
     @FXML
-    private Rectangle stage5 = new Rectangle();
-    
-    DropShadow shadow = new DropShadow();
-    
+    private ScrollPane scrollPane;
     @FXML
-    private ScrollPane scrollPane = new ScrollPane();
-    final TextArea textArea= new TextArea();
-    private Label label = new Label();
+    private Label label;
     
     @FXML
     private StageAnimation newAnimation;
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @FXML
     @Override
@@ -298,7 +293,7 @@ public class PipelineSceneController implements Initializable {
      */
     public void setMainControllerInterface(iMainController _controller)
     {
-        this.controller = _controller;
+        PipelineSceneController.controller = _controller;
     }
     
     /**
@@ -309,7 +304,7 @@ public class PipelineSceneController implements Initializable {
     {
         return status;
     }
-    public StageAnimation getNextAnimation()
+    private StageAnimation getNextAnimation()
     {
         newAnimation = new StageAnimation(new StageInfo(StageType.CHECKOUT, 0, true), this.animationIcons);
         newAnimation = new StageAnimation(new StageInfo(StageType.DEPLOY, 1, false), this.animationIcons);
@@ -318,7 +313,6 @@ public class PipelineSceneController implements Initializable {
         newAnimation = new StageAnimation(new StageInfo(StageType.UNIT, 5, true), this.animationIcons);
         return newAnimation;
     }
-    
 
 
 /**
