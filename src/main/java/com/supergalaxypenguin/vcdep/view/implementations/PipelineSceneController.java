@@ -43,6 +43,7 @@ public class PipelineSceneController implements Initializable {
     private int currentStage;   //The stage currently active (if no stage active = -1)
     private ArrayList<Rectangle> backGrounds = new ArrayList<>();    //list of rectangle backgrounds for animations
     private ArrayList<StageAnimation> animations = new ArrayList<>();  //list of currently active animations
+    private HashMap<String, Boolean> passFail = new HashMap<>();
     @FXML
     public ImageView chkoutImage1;
     @FXML
@@ -114,10 +115,11 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private Label label;
     
-    private HashMap<Integer, String> stages;
+    private HashMap<Integer, String> stages = new HashMap<>();
     
     /**
      * Initializes the controller class.
+     * runs upon load of view
      * @param url
      * @param rb
      */
@@ -125,13 +127,18 @@ public class PipelineSceneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         currentStage = -1;
-        
-        stages =  new HashMap<>();
+
         stages.put(0, "Checkout");
         stages.put(1, "Static");
         stages.put(2, "Unit");
         stages.put(3, "Integration");
         stages.put(4, "Deploy");
+        
+        passFail.put("Checkout", Boolean.TRUE);
+        passFail.put("Static", Boolean.TRUE);
+        passFail.put("Unit", Boolean.TRUE);
+        passFail.put("Integration", Boolean.FALSE);
+        passFail.put("Deploy", Boolean.FALSE);
         
         this.backGrounds.add(stage0);
         this.backGrounds.add(stage1);
@@ -145,57 +152,7 @@ public class PipelineSceneController implements Initializable {
             backGrounds.get(i).setVisible(false);
         }
         
-        for (int i = 0; i<stages.size(); i++)
-        {
-            if (stages.get(i).compareToIgnoreCase("Checkout")==0)
-            {   
-                this.stageInfo.add(new StageInfo(StageType.CHECKOUT, i, true, backGrounds.get(i)));
-                if (!this.stageInfo.get(i).isPassed())
-                {
-                    break;
-                }
-            }
-            else if(stages.get(i).compareToIgnoreCase("Static")==0)
-            {
-                this.stageInfo.add(new StageInfo(StageType.STATIC, i, true, backGrounds.get(i)));
-                if (!this.stageInfo.get(i).isPassed())
-                {
-                    break;
-                }
-            }
-            else if(stages.get(i).compareToIgnoreCase("Unit")==0)
-            {
-                this.stageInfo.add(new StageInfo(StageType.UNIT, i, false, backGrounds.get(i)));
-                if (!this.stageInfo.get(i).isPassed())
-                {
-                    break;
-                }
-            }
-            else if(stages.get(i).compareToIgnoreCase("Integration")==0)
-            {
-                this.stageInfo.add(new StageInfo(StageType.INTEGRATION, i, false, backGrounds.get(i)));
-                if (!this.stageInfo.get(i).isPassed())
-                {
-                    break;
-                }
-            }
-            else if(stages.get(i).compareToIgnoreCase("Deploy")==0)
-            {
-                this.stageInfo.add(new StageInfo(StageType.DEPLOY, i, false, backGrounds.get(i)));
-                if (!this.stageInfo.get(i).isPassed())
-                {
-                    break;
-                }
-            }
-            else if(stages.get(i).compareToIgnoreCase("Build")==0)
-            {
-                this.stageInfo.add(new StageInfo(StageType.BUILD, i, false, backGrounds.get(i)));
-                if (!this.stageInfo.get(i).isPassed())
-                {
-                    break;
-                }
-            }
-        }
+        parseStages(stages);
         
         this.chkoutImage1.setVisible(false);
         this.chkoutImage2.setVisible(false);
@@ -439,7 +396,64 @@ public class PipelineSceneController implements Initializable {
             this.currentStage--;
         }
     }
-
+    /**
+     * Create stage info from Stages List
+     * @param stages List of stages
+     */
+    private void parseStages(HashMap<Integer, String> stages)
+    {
+            for (int i = 0; i<stages.size(); i++)
+        {
+            if (stages.get(i).compareToIgnoreCase("Checkout")==0)
+            {   
+                this.stageInfo.add(new StageInfo(StageType.CHECKOUT, i, this.passFail.get("Checkout"), backGrounds.get(i)));
+                if (!this.stageInfo.get(i).isPassed())
+                {
+                    break;
+                }
+            }
+            else if(stages.get(i).compareToIgnoreCase("Static")==0)
+            {
+                this.stageInfo.add(new StageInfo(StageType.STATIC, i, this.passFail.get("Static"), backGrounds.get(i)));
+                if (!this.stageInfo.get(i).isPassed())
+                {
+                    break;
+                }
+            }
+            else if(stages.get(i).compareToIgnoreCase("Unit")==0)
+            {
+                this.stageInfo.add(new StageInfo(StageType.UNIT, i, this.passFail.get("Unit"), backGrounds.get(i)));
+                if (!this.stageInfo.get(i).isPassed())
+                {
+                    break;
+                }
+            }
+            else if(stages.get(i).compareToIgnoreCase("Integration")==0)
+            {
+                this.stageInfo.add(new StageInfo(StageType.INTEGRATION, i, this.passFail.get("Integration"), backGrounds.get(i)));
+                if (!this.stageInfo.get(i).isPassed())
+                {
+                    break;
+                }
+            }
+            else if(stages.get(i).compareToIgnoreCase("Deploy")==0)
+            {
+                this.stageInfo.add(new StageInfo(StageType.DEPLOY, i, this.passFail.get("Deploy"), backGrounds.get(i)));
+                if (!this.stageInfo.get(i).isPassed())
+                {
+                    break;
+                }
+            }
+            else if(stages.get(i).compareToIgnoreCase("Build")==0)
+            {
+                this.stageInfo.add(new StageInfo(StageType.BUILD, i, this.passFail.get("Build"), backGrounds.get(i)));
+                if (!this.stageInfo.get(i).isPassed())
+                {
+                    break;
+                }
+            }
+        }
+    }
 
 /**
  * This Class contains all the necessary information to create
