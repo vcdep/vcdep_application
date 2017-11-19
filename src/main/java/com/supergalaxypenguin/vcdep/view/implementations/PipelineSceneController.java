@@ -22,6 +22,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Border;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -32,17 +33,16 @@ import javafx.util.Duration;
  */
 public class PipelineSceneController implements Initializable {
 
-    private String status;
-    private static PipelineSceneController instance;
+    private String status;   //currently displayed text?
+    private static PipelineSceneController instance;   //Singleton instance
     private static iMainController controller;          //Reference to the main controller (Used to Call to Model)
     private final DropShadow shadow = new DropShadow();     // A generic drop shadow effect
-    private final HashMap<String,ImageView> animationIcons = new HashMap<>();
-    private String log = "";
-    private ArrayList<StageInfo> stageInfo = new ArrayList<>();
-    private int numStages;
-    private int currentStage;
-    private ArrayList<Rectangle> backGrounds = new ArrayList<>();
-    private ArrayList<StageAnimation> animations = new ArrayList<>();
+    private final HashMap<String,ImageView> animationIcons = new HashMap<>();  //master list of animation icons/images
+    private String log = "";    //log file as a String?
+    private ArrayList<StageInfo> stageInfo = new ArrayList<>();  //info about all stages from last pipe run 
+    private int currentStage;   //The stage currently active (if no stage active = -1)
+    private ArrayList<Rectangle> backGrounds = new ArrayList<>();    //list of rectangle backgrounds for animations
+    private ArrayList<StageAnimation> animations = new ArrayList<>();  //list of currently active animations
     @FXML
     public ImageView chkoutImage1;
     @FXML
@@ -82,7 +82,7 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private ImageView IntegrationImageFailed;
     @FXML
-    private ImageView DeployImage1;
+    private ImageView DeployImage1;  //Jenkins icon
     @FXML
     private ImageView DeployImage2;
     @FXML
@@ -122,7 +122,6 @@ public class PipelineSceneController implements Initializable {
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        numStages = 5;
         currentStage = -1;
         this.stageInfo.add(new StageInfo(StageType.CHECKOUT, 0, false));
         this.stageInfo.add(new StageInfo(StageType.DEPLOY, 1, true));
