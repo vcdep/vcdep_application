@@ -39,12 +39,12 @@
          </graphic></Button>
       <Button fx:id="btnReSubmit" layoutX="848.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleBtnReSubmit" text="Re-Submit" />
       <Button fx:id="btnReset" layoutX="849.0" layoutY="75.0" mnemonicParsing="false" onAction="#handleBtnReset" prefHeight="27.0" prefWidth="84.0" text="Reset" />
-      <Rectangle fx:id="stage1" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="125.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
-      <Rectangle fx:id="stage2" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="210.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
-      <Rectangle fx:id="stage3" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="295.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
-      <Rectangle fx:id="stage4" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="380.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
-      <Rectangle fx:id="stage5" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="465.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
-      <Rectangle fx:id="stage6" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="550.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Rectangle fx:id="stage0" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="125.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Rectangle fx:id="stage1" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="210.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Rectangle fx:id="stage2" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="295.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Rectangle fx:id="stage3" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="380.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Rectangle fx:id="stage4" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="465.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Rectangle fx:id="stage5" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="550.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
       <ImageView fx:id="chkoutImage3" fitHeight="54.0" fitWidth="48.0" layoutX="791.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Jenkins.png" />

@@ -5,6 +5,8 @@
  */
 package com.supergalaxypenguin.vcdep.view.implementations;
 
+import javafx.scene.shape.Rectangle;
+
 /**
  *
  * @author Howtoon
@@ -13,12 +15,22 @@ public class StageInfo {
     private StageType type;
     private int orderNumber;
     private boolean passed;
+    private Rectangle backGround;
+
+    public Rectangle getBackGround() {
+        return backGround;
+    }
+
+    public void setBackGround(Rectangle backGround) {
+        this.backGround = backGround;
+    }
     
-    public StageInfo(StageType type, int orderNumber, boolean passed)
+    public StageInfo(StageType type, int orderNumber, boolean passed, Rectangle backGround)
     {
         this.type = type;
         this.orderNumber = orderNumber;
         this.passed = passed;
+        this.backGround = backGround;
     }
 
     public StageType getType() {

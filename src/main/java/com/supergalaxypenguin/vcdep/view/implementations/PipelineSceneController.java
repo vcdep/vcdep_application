@@ -98,6 +98,8 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private ImageView BuildImageFailed;
     @FXML
+    private Rectangle stage0;
+    @FXML
     private Rectangle stage1;
     @FXML
     private Rectangle stage2;
@@ -108,11 +110,11 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private Rectangle stage5;
     @FXML
-    private Rectangle stage6;
-    @FXML
     private ScrollPane scrollPane;
     @FXML
     private Label label;
+    
+    private HashMap<Integer, String> stages;
     
     /**
      * Initializes the controller class.
@@ -123,22 +125,76 @@ public class PipelineSceneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         currentStage = -1;
-        this.stageInfo.add(new StageInfo(StageType.CHECKOUT, 0, false));
-        this.stageInfo.add(new StageInfo(StageType.DEPLOY, 1, true));
-        this.stageInfo.add(new StageInfo(StageType.INTEGRATION, 2, false));
-        this.stageInfo.add(new StageInfo(StageType.STATIC, 3, true));
-        this.stageInfo.add(new StageInfo(StageType.UNIT, 4, false));
         
+        stages =  new HashMap<>();
+        stages.put(0, "Checkout");
+        stages.put(1, "Static");
+        stages.put(2, "Unit");
+        stages.put(3, "Integration");
+        stages.put(4, "Deploy");
+        
+        this.backGrounds.add(stage0);
         this.backGrounds.add(stage1);
         this.backGrounds.add(stage2);
         this.backGrounds.add(stage3);
         this.backGrounds.add(stage4);
         this.backGrounds.add(stage5);
-        this.backGrounds.add(stage6);
         
         for (int i = 0; i<backGrounds.size(); i++)
         {
             backGrounds.get(i).setVisible(false);
+        }
+        
+        for (int i = 0; i<stages.size(); i++)
+        {
+            if (stages.get(i).compareToIgnoreCase("Checkout")==0)
+            {   
+                this.stageInfo.add(new StageInfo(StageType.CHECKOUT, i, true, backGrounds.get(i)));
+                if (!this.stageInfo.get(i).isPassed())
+                {
+                    break;
+                }
+            }
+            else if(stages.get(i).compareToIgnoreCase("Static")==0)
+            {
+                this.stageInfo.add(new StageInfo(StageType.STATIC, i, true, backGrounds.get(i)));
+                if (!this.stageInfo.get(i).isPassed())
+                {
+                    break;
+                }
+            }
+            else if(stages.get(i).compareToIgnoreCase("Unit")==0)
+            {
+                this.stageInfo.add(new StageInfo(StageType.UNIT, i, false, backGrounds.get(i)));
+                if (!this.stageInfo.get(i).isPassed())
+                {
+                    break;
+                }
+            }
+            else if(stages.get(i).compareToIgnoreCase("Integration")==0)
+            {
+                this.stageInfo.add(new StageInfo(StageType.INTEGRATION, i, false, backGrounds.get(i)));
+                if (!this.stageInfo.get(i).isPassed())
+                {
+                    break;
+                }
+            }
+            else if(stages.get(i).compareToIgnoreCase("Deploy")==0)
+            {
+                this.stageInfo.add(new StageInfo(StageType.DEPLOY, i, false, backGrounds.get(i)));
+                if (!this.stageInfo.get(i).isPassed())
+                {
+                    break;
+                }
+            }
+            else if(stages.get(i).compareToIgnoreCase("Build")==0)
+            {
+                this.stageInfo.add(new StageInfo(StageType.BUILD, i, false, backGrounds.get(i)));
+                if (!this.stageInfo.get(i).isPassed())
+                {
+                    break;
+                }
+            }
         }
         
         this.chkoutImage1.setVisible(false);
