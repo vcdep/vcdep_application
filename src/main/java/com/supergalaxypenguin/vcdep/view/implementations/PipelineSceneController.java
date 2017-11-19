@@ -22,7 +22,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
