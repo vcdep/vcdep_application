@@ -124,7 +124,8 @@ public class PipelineSceneController implements Initializable {
      */
     @FXML
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) 
+    {
         currentStage = -1;
 
         stages.put(0, "Checkout");

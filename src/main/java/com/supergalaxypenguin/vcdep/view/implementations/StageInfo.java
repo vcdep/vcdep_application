@@ -16,15 +16,14 @@ public class StageInfo {
     private int orderNumber;
     private boolean passed;
     private Rectangle backGround;
-
-    public Rectangle getBackGround() {
-        return backGround;
-    }
-
-    public void setBackGround(Rectangle backGround) {
-        this.backGround = backGround;
-    }
     
+    /**
+     * Holds the info of a stage
+     * @param type
+     * @param orderNumber
+     * @param passed
+     * @param backGround 
+     */
     public StageInfo(StageType type, int orderNumber, boolean passed, Rectangle backGround)
     {
         this.type = type;
@@ -32,27 +31,68 @@ public class StageInfo {
         this.passed = passed;
         this.backGround = backGround;
     }
+    
+    /**
+     * Background of stage
+     * @return Rectangle
+     */
+    public Rectangle getBackGround() {
+        return backGround;
+    }
 
+    /**
+     * Background of stage
+     * @param backGround stage number should match orderNumber
+     */
+    public void setBackGround(Rectangle backGround) {
+        this.backGround = backGround;
+    }
+
+    /**
+     * StageType."stage_name"
+     * 
+     * @return 
+     */
     public StageType getType() {
         return type;
     }
 
+    /**
+     * StageType."stage_name"
+     *  
+     */
     public void setType(StageType type) {
         this.type = type;
     }
 
+    /**
+     * What order the stage goes in
+     * @return 
+     */
     public int getOrderNumber() {
         return orderNumber;
     }
 
+    /**
+     * What order the stage goes in
+     * 
+     */
     public void setOrderNumber(int orderNumber) {
         this.orderNumber = orderNumber;
     }
 
+    /**
+     * Whether or not the stage passed
+     * @return 
+     */
     public boolean isPassed() {
         return passed;
     }
 
+    /**
+     * Whether or not the stage passed
+     * @return 
+     */
     public void setPassed(boolean passed) {
         this.passed = passed;
     }
