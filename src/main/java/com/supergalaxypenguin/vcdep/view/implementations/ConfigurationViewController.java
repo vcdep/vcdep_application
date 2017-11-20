@@ -67,16 +67,15 @@ public class ConfigurationViewController implements Initializable {
     @FXML
     private Rectangle target_4;
     @FXML
-    private ImageView deploy;
-    @FXML
-    private ImageView integration;
-    @FXML
-    private ImageView static_a;
-    @FXML
-    private ImageView unit_test;
-
-    @FXML
     private Label deployment;
+    @FXML
+    private Label integration;
+    @FXML
+    private Label static_a;
+    @FXML
+    private Label unit_test;
+
+    
 
     private ClipboardContent content = new ClipboardContent();
 
@@ -166,6 +165,42 @@ public class ConfigurationViewController implements Initializable {
 
             }
         });
+        integration.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Dragboard db = integration.startDragAndDrop(TransferMode.MOVE);
+
+                content.putString("Integration");
+                db.setContent(content);
+                System.out.println("drag detected");
+                event.consume();
+
+            }
+        });
+        static_a.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Dragboard db = static_a.startDragAndDrop(TransferMode.MOVE);
+
+                content.putString("Static Analysis");
+                db.setContent(content);
+                System.out.println("drag detected");
+                event.consume();
+
+            }
+        });
+        unit_test.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Dragboard db = unit_test.startDragAndDrop(TransferMode.MOVE);
+
+                content.putString("Unit Test");
+                db.setContent(content);
+                System.out.println("drag detected");
+                event.consume();
+
+            }
+        });
         target_1.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                 /* data is dragged over the target */
@@ -177,15 +212,233 @@ public class ConfigurationViewController implements Initializable {
                     event.acceptTransferModes(TransferMode.MOVE);
                     //target_1.setFill(Color.BLACK);
                     //Pos pos = new Pos(target_1.getLayoutX(),target_1.getLayoutY());
-                    Label movedLabel = (Label)event.getGestureSource();
-                    movedLabel.setLayoutX(target_1.getLayoutX()+6);
-                    movedLabel.setLayoutY(target_1.getLayoutY()+3);
+                    Label labelOne = (Label)event.getGestureSource();
+                    labelOne.setLayoutX(target_1.getLayoutX());
+                    labelOne.setLayoutY(target_1.getLayoutY()-11);
                     
 
                 }
 
                 event.consume();
                 System.out.println(content.getString());
+            }
+        });
+        target_1.setOnDragEntered(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                /* the drag-and-drop gesture entered the target */
+                /* show to the user that it is an actual gesture target */
+                if (event.getGestureSource() != target_1
+                        && event.getDragboard().hasString()) {
+                    target_1.setFill(Color.GREEN);
+                }
+
+                event.consume();
+            }
+        });
+        
+        target_1.setOnDragExited(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+            /* mouse moved away, remove the graphical cues */
+                target_1.setFill(Color.BLACK);
+
+                event.consume();
+            }
+        });
+        target_1.setOnDragDropped(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                /* data dropped */
+                /* if there is a string data on dragboard, read it and use it */
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasString()) {
+                    //target_1.setText(db.getString());
+                    success = true;
+                }
+                /* let the source know whether the string was successfully 
+         * transferred and used */
+                event.setDropCompleted(success);
+
+                event.consume();
+            }
+        });
+        target_2.setOnDragOver(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                /* data is dragged over the target */
+                /* accept it only if it is not dragged from the same node 
+                 * and if it has a string data */
+                if (event.getGestureSource() != target_2
+                        && event.getDragboard().hasString()) {
+                    /* allow for moving */
+                    event.acceptTransferModes(TransferMode.MOVE);
+                    //target_1.setFill(Color.BLACK);
+                    //Pos pos = new Pos(target_1.getLayoutX(),target_1.getLayoutY());
+                    Label labelTwo = (Label)event.getGestureSource();
+                    labelTwo.setLayoutX(target_2.getLayoutX());
+                    labelTwo.setLayoutY(target_2.getLayoutY()-11);
+                    
+
+                }
+
+                event.consume();
+                System.out.println(content.getString());
+            }
+        });
+        target_2.setOnDragEntered(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                /* the drag-and-drop gesture entered the target */
+                /* show to the user that it is an actual gesture target */
+                if (event.getGestureSource() != target_2
+                        && event.getDragboard().hasString()) {
+                    target_2.setFill(Color.GREEN);
+                }
+
+                event.consume();
+            }
+        });
+        
+        target_2.setOnDragExited(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+            /* mouse moved away, remove the graphical cues */
+                target_2.setFill(Color.BLACK);
+
+                event.consume();
+            }
+        });
+        target_2.setOnDragDropped(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                /* data dropped */
+                /* if there is a string data on dragboard, read it and use it */
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasString()) {
+                    //target_1.setText(db.getString());
+                    success = true;
+                }
+                /* let the source know whether the string was successfully 
+         * transferred and used */
+                event.setDropCompleted(success);
+
+                event.consume();
+            }
+        });
+        target_3.setOnDragOver(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                /* data is dragged over the target */
+                /* accept it only if it is not dragged from the same node 
+                 * and if it has a string data */
+                if (event.getGestureSource() != target_3
+                        && event.getDragboard().hasString()) {
+                    /* allow for moving */
+                    event.acceptTransferModes(TransferMode.MOVE);
+                    //target_1.setFill(Color.BLACK);
+                    //Pos pos = new Pos(target_1.getLayoutX(),target_1.getLayoutY());
+                    Label labelThree = (Label)event.getGestureSource();
+                    labelThree.setLayoutX(target_3.getLayoutX());
+                    labelThree.setLayoutY(target_3.getLayoutY()-11);
+                    
+
+                }
+
+                event.consume();
+                System.out.println(content.getString());
+            }
+        });
+        target_3.setOnDragEntered(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                /* the drag-and-drop gesture entered the target */
+                /* show to the user that it is an actual gesture target */
+                if (event.getGestureSource() != target_3
+                        && event.getDragboard().hasString()) {
+                    target_3.setFill(Color.GREEN);
+                }
+
+                event.consume();
+            }
+        });
+        
+        target_3.setOnDragExited(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+            /* mouse moved away, remove the graphical cues */
+                target_3.setFill(Color.BLACK);
+
+                event.consume();
+            }
+        });
+        target_3.setOnDragDropped(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                /* data dropped */
+                /* if there is a string data on dragboard, read it and use it */
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasString()) {
+                    //target_1.setText(db.getString());
+                    success = true;
+                }
+                /* let the source know whether the string was successfully 
+         * transferred and used */
+                event.setDropCompleted(success);
+
+                event.consume();
+            }
+        });
+        target_4.setOnDragOver(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                /* data is dragged over the target */
+                /* accept it only if it is not dragged from the same node 
+                 * and if it has a string data */
+                if (event.getGestureSource() != target_4
+                        && event.getDragboard().hasString()) {
+                    /* allow for moving */
+                    event.acceptTransferModes(TransferMode.MOVE);
+                    //target_1.setFill(Color.BLACK);
+                    //Pos pos = new Pos(target_1.getLayoutX(),target_1.getLayoutY());
+                    Label labelFour = (Label)event.getGestureSource();
+                    labelFour.setLayoutX(target_4.getLayoutX());
+                    labelFour.setLayoutY(target_4.getLayoutY()-11);
+                    
+
+                }
+
+                event.consume();
+                System.out.println(content.getString());
+            }
+        });
+        target_4.setOnDragEntered(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                /* the drag-and-drop gesture entered the target */
+                /* show to the user that it is an actual gesture target */
+                if (event.getGestureSource() != target_4
+                        && event.getDragboard().hasString()) {
+                    target_4.setFill(Color.GREEN);
+                }
+
+                event.consume();
+            }
+        });
+        
+        target_4.setOnDragExited(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+            /* mouse moved away, remove the graphical cues */
+                target_4.setFill(Color.BLACK);
+
+                event.consume();
+            }
+        });
+        target_4.setOnDragDropped(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                /* data dropped */
+                /* if there is a string data on dragboard, read it and use it */
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasString()) {
+                    //target_1.setText(db.getString());
+                    success = true;
+                }
+                /* let the source know whether the string was successfully 
+         * transferred and used */
+                event.setDropCompleted(success);
+
+                event.consume();
             }
         });
     }
