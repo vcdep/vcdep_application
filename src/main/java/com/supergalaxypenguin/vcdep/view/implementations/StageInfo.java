@@ -26,6 +26,7 @@ public class StageInfo {
      * @param orderNumber
      * @param passed
      * @param backGround 
+     * @param helpButtons 
      */
     public StageInfo(StageType type, int orderNumber, boolean passed, Rectangle backGround, HashMap<StageType, Button> helpButtons)
     {
