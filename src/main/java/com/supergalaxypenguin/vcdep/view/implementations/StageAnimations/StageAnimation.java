@@ -43,7 +43,7 @@ public class StageAnimation{
     /**
      * Creates a Stage Animation
      * @param info StageInfo class containing stage information
-     * @param _animationIcons    All animation images
+     * @param animationIcons    All animation images
      * @param backGround    The background that corresponds to this stage animation
      * @return 
      */
@@ -103,11 +103,11 @@ public class StageAnimation{
             moveToStart.setDuration(Duration.seconds(0.0001));
             if (i == this.passImage)
             {
-                i.setVisible(passed);
+                i.setVisible(this.passed);
             }
             else if (i == this.failImage)
             {
-                i.setVisible(!passed);
+                i.setVisible(!this.passed);
             }
             else{
                 i.setVisible(true);
@@ -128,7 +128,7 @@ public class StageAnimation{
         moveToEnd.play();
         this.helpButton.setVisible(false);
         this.backGround.setVisible(false);
-        for (ImageView i : images){
+        for (ImageView i : this.images){
             moveToEnd = new TranslateTransition();
             moveToEnd.setNode(i);
             moveToEnd.setToY(0);
