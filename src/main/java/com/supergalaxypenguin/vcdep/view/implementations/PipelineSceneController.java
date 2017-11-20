@@ -54,6 +54,12 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private ImageView chkoutImageFailed;
     @FXML
+    private ImageView chkoutArrow1;
+    @FXML
+    private ImageView chkoutArrow2;
+    @FXML
+    private ImageView chkoutArrow3;
+    @FXML
     private ImageView SAImage1;
     @FXML
     private ImageView SAImage2;
@@ -63,6 +69,14 @@ public class PipelineSceneController implements Initializable {
     private ImageView SAImagePassed;
     @FXML
     private ImageView SAImageFailed;
+    @FXML
+    private ImageView SAArrow1;
+    @FXML
+    private ImageView SAArrow2;
+    @FXML
+    private ImageView SAArrow3;
+    @FXML
+    private ImageView SAArrow4;
     @FXML
     private ImageView UnitImage1;
     @FXML
@@ -74,6 +88,14 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private ImageView UnitImageFailed;
     @FXML
+    private ImageView UnitArrow1;
+    @FXML
+    private ImageView UnitArrow2;
+    @FXML
+    private ImageView UnitArrow3;
+    @FXML
+    private ImageView UnitArrow4;
+    @FXML
     private ImageView IntegrationImage1;
     @FXML
     private ImageView IntegrationImage2;
@@ -82,6 +104,10 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private ImageView IntegrationImageFailed;
     @FXML
+    private ImageView IntegrationArrow1;
+    @FXML
+    private ImageView IntegrationArrow2;
+    @FXML
     private ImageView DeployImage1;  //Jenkins icon
     @FXML
     private ImageView DeployImage2;
@@ -89,6 +115,10 @@ public class PipelineSceneController implements Initializable {
     private ImageView DeployImagePassed;
     @FXML
     private ImageView DeployImageFailed;
+    @FXML
+    private ImageView DeployArrow1;
+    @FXML
+    private ImageView DeployArrow2;
     @FXML
     private ImageView BuildImage1;
     @FXML
@@ -159,24 +189,39 @@ public class PipelineSceneController implements Initializable {
         this.chkoutImage3.setVisible(false);
         this.chkoutImageFailed.setVisible(false);
         this.chkoutImagePassed.setVisible(false);
+        //this.chkoutArrow1.setVisible(false);
+        //this.chkoutArrow2.setVisible(false);
+        //this.chkoutArrow3.setVisible(false);
         this.SAImage1.setVisible(false);
         this.SAImage2.setVisible(false);
         this.SAImage3.setVisible(false);
         this.SAImageFailed.setVisible(false);
         this.SAImagePassed.setVisible(false);
+        //this.SAArrow1.setVisible(false);
+        //this.SAArrow2.setVisible(false);
+        //this.SAArrow3.setVisible(false);
+        //this.SAArrow4.setVisible(false);
         this.UnitImage1.setVisible(false);
         this.UnitImage2.setVisible(false);
         this.UnitImage3.setVisible(false);
         this.UnitImageFailed.setVisible(false);
         this.UnitImagePassed.setVisible(false);
+        //this.UnitArrow1.setVisible(false);
+        //this.UnitArrow2.setVisible(false);
+        //this.UnitArrow3.setVisible(false);
+        //this.UnitArrow4.setVisible(false);
         this.IntegrationImage1.setVisible(false);
         this.IntegrationImage2.setVisible(false);
         this.IntegrationImageFailed.setVisible(false);
         this.IntegrationImagePassed.setVisible(false);
+        //this.IntegrationArrow1.setVisible(false);
+        //this.IntegrationArrow2.setVisible(false);
         this.DeployImage1.setVisible(false);
         this.DeployImage2.setVisible(false);
         this.DeployImageFailed.setVisible(false);
         this.DeployImagePassed.setVisible(false);
+        //this.DeployArrow1.setVisible(false);
+        //this.DeployArrow2.setVisible(false);
         //this.BuildImage1.setVisible(false);
         //this.BuildImage2.setVisible(false);
         this.BuildImageFailed.setVisible(false);
@@ -187,24 +232,39 @@ public class PipelineSceneController implements Initializable {
         this.animationIcons.put("chkoutImage3",this.chkoutImage3);
         this.animationIcons.put("chkoutImageFailed",this.chkoutImageFailed);
         this.animationIcons.put("chkoutImagePassed",this.chkoutImagePassed);
+        //this.animationIcons.put("chkoutArrow1", this.chkoutArrow1);
+        //this.animationIcons.put("chkoutArrow2", this.chkoutArrow2);
+        //this.animationIcons.put("chkoutArrow3", this.chkoutArrow3);
         this.animationIcons.put("SAImage1",this.SAImage1);
         this.animationIcons.put("SAImage2",this.SAImage2);
         this.animationIcons.put("SAImage3",this.SAImage3);
         this.animationIcons.put("SAImageFailed",this.SAImageFailed);
         this.animationIcons.put("SAImagePassed",this.SAImagePassed);
+        //this.animationIcons.put("SAArrow1",this.SAArrow1);
+        //this.animationIcons.put("SAArrow2",this.SAArrow2);
+        //this.animationIcons.put("SAArrow3",this.SAArrow3);
+        //this.animationIcons.put("SAArrow4",this.SAArrow4);
         this.animationIcons.put("UnitImage1",this.UnitImage1);
         this.animationIcons.put("UnitImage2",this.UnitImage2);
         this.animationIcons.put("UnitImage3",this.UnitImage3);
         this.animationIcons.put("UnitImageFailed",this.UnitImageFailed);
         this.animationIcons.put("UnitImagePassed",this.UnitImagePassed);
+        //this.animationIcons.put("UnitArrow1",this.UnitArrow1);
+        //this.animationIcons.put("UnitArrow2",this.UnitArrow2);
+        //this.animationIcons.put("UnitArrow3",this.UnitArrow3);
+        //this.animationIcons.put("UnitArrow4",this.UnitArrow4);
         this.animationIcons.put("IntegrationImage1",this.IntegrationImage1);
         this.animationIcons.put("IntegrationImage2",this.IntegrationImage2);
         this.animationIcons.put("IntegrationImageFailed",this.IntegrationImageFailed);
         this.animationIcons.put("IntegrationImagePassed",this.IntegrationImagePassed);
+        //this.animationIcons.put("IntegrationArrow1",this.IntegrationArrow1);
+        //this.animationIcons.put("IntegrationArrow2",this.IntegrationArrow2);
         this.animationIcons.put("DeployImage1",this.DeployImage1);
         this.animationIcons.put("DeployImage2",this.DeployImage2);
         this.animationIcons.put("DeployImageFailed",this.DeployImageFailed);
         this.animationIcons.put("DeployImagePassed",this.DeployImagePassed);
+        //this.animationIcons.put("DeployArrow1",this.DeployArrow1);
+        //this.animationIcons.put("DeployArrow2",this.DeployArrow2);
         this.animationIcons.put("BuildImage1",this.BuildImage1);
         this.animationIcons.put("BuildImage2",this.BuildImage2);
         this.animationIcons.put("BuildImageFailed",this.BuildImageFailed);
