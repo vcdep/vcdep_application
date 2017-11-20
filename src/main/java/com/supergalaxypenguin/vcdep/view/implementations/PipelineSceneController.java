@@ -7,12 +7,14 @@ package com.supergalaxypenguin.vcdep.view.implementations;
 
 
 
+import com.supergalaxypenguin.vcdep.view.implementations.StageAnimations.StageType;
+import com.supergalaxypenguin.vcdep.view.implementations.StageAnimations.StageInfo;
+import com.supergalaxypenguin.vcdep.view.implementations.StageAnimations.StageAnimation;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +25,6 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -481,7 +482,7 @@ public class PipelineSceneController implements Initializable {
      */
     private void createNewAnimations(int i)
     {
-        animations.add(new StageAnimation(stageInfo.get(i+1), this.animationIcons, backGrounds.get(i+1)));
+        animations.add(StageAnimation.getInstance(stageInfo.get(i+1), this.animationIcons, backGrounds.get(i+1)));
     }
     
     /**
