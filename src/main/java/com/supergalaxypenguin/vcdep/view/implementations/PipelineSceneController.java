@@ -142,6 +142,19 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private ScrollPane scrollPane;
     @FXML
+    private Button btnCheckOut;
+    @FXML
+    private Button btnSA;
+    @FXML
+    private Button btnUnit;
+    @FXML
+    private Button btnIntegration;
+    @FXML
+    private Button btnDeploy;
+    @FXML
+    private Button btnBuild;
+    HashMap<StageType, Button> helpButtons = new HashMap<>();
+    @FXML
     private Label label;
     
     private HashMap<Integer, String> stages = new HashMap<>();
@@ -161,14 +174,14 @@ public class PipelineSceneController implements Initializable {
         stages.put(0, "Checkout");
         stages.put(1, "Static");
         stages.put(2, "Unit");
-        stages.put(3, "Integration");
-        stages.put(4, "Deploy");
+        stages.put(4, "Integration");
+        stages.put(3, "Deploy");
         
         passFail.put("Checkout", Boolean.TRUE);
         passFail.put("Static", Boolean.TRUE);
         passFail.put("Unit", Boolean.TRUE);
         passFail.put("Integration", Boolean.FALSE);
-        passFail.put("Deploy", Boolean.FALSE);
+        passFail.put("Deploy", Boolean.TRUE);
         
         this.backGrounds.add(stage0);
         this.backGrounds.add(stage1);
@@ -176,6 +189,13 @@ public class PipelineSceneController implements Initializable {
         this.backGrounds.add(stage3);
         this.backGrounds.add(stage4);
         this.backGrounds.add(stage5);
+        
+        this.helpButtons.put(StageType.CHECKOUT, this.btnCheckOut);
+        this.helpButtons.put(StageType.STATIC, this.btnSA);
+        this.helpButtons.put(StageType.UNIT, this.btnUnit);
+        this.helpButtons.put(StageType.INTEGRATION, this.btnIntegration);
+        this.helpButtons.put(StageType.DEPLOY, this.btnDeploy);
+        this.helpButtons.put(StageType.BUILD, this.btnBuild);
         
         for (int i = 0; i<backGrounds.size(); i++)
         {
@@ -189,6 +209,7 @@ public class PipelineSceneController implements Initializable {
         this.chkoutImage3.setVisible(false);
         this.chkoutImageFailed.setVisible(false);
         this.chkoutImagePassed.setVisible(false);
+        this.btnCheckOut.setVisible(false);
         //this.chkoutArrow1.setVisible(false);
         //this.chkoutArrow2.setVisible(false);
         //this.chkoutArrow3.setVisible(false);
@@ -197,6 +218,7 @@ public class PipelineSceneController implements Initializable {
         this.SAImage3.setVisible(false);
         this.SAImageFailed.setVisible(false);
         this.SAImagePassed.setVisible(false);
+        this.btnSA.setVisible(false);
         //this.SAArrow1.setVisible(false);
         //this.SAArrow2.setVisible(false);
         //this.SAArrow3.setVisible(false);
@@ -206,6 +228,7 @@ public class PipelineSceneController implements Initializable {
         this.UnitImage3.setVisible(false);
         this.UnitImageFailed.setVisible(false);
         this.UnitImagePassed.setVisible(false);
+        this.btnUnit.setVisible(false);
         //this.UnitArrow1.setVisible(false);
         //this.UnitArrow2.setVisible(false);
         //this.UnitArrow3.setVisible(false);
@@ -214,18 +237,21 @@ public class PipelineSceneController implements Initializable {
         this.IntegrationImage2.setVisible(false);
         this.IntegrationImageFailed.setVisible(false);
         this.IntegrationImagePassed.setVisible(false);
+        this.btnIntegration.setVisible(false);
         //this.IntegrationArrow1.setVisible(false);
         //this.IntegrationArrow2.setVisible(false);
         this.DeployImage1.setVisible(false);
         this.DeployImage2.setVisible(false);
         this.DeployImageFailed.setVisible(false);
         this.DeployImagePassed.setVisible(false);
+        this.btnDeploy.setVisible(false);
         //this.DeployArrow1.setVisible(false);
         //this.DeployArrow2.setVisible(false);
         //this.BuildImage1.setVisible(false);
         //this.BuildImage2.setVisible(false);
         this.BuildImageFailed.setVisible(false);
         this.BuildImagePassed.setVisible(false);
+        this.btnBuild.setVisible(false);
         
         this.animationIcons.put("chkoutImage1",this.chkoutImage1);
         this.animationIcons.put("chkoutImage2",this.chkoutImage2);
@@ -289,6 +315,42 @@ public class PipelineSceneController implements Initializable {
     private void handleMouseEnteredButton(ActionEvent event){
         Button clickedButton = (Button)event.getSource();
         clickedButton.setEffect(shadow);
+    }
+    
+    public void handleBtnCheckout(ActionEvent event)
+    {
+        System.out.println("Test btnCheckOut");
+        
+    }
+    
+    public void handleBtnSA(ActionEvent event)
+    {
+        System.out.println("Test btnSA");
+        
+    }
+    
+    public void handleBtnUnit(ActionEvent event)
+    {
+        System.out.println("Test btnUnit");
+        
+    }
+    
+    public void handleBtnIntegration(ActionEvent event)
+    {
+        System.out.println("Test btnIntegration");
+        
+    }
+    
+    public void handleBtnDeploy(ActionEvent event)
+    {
+        System.out.println("Test btnDeploy");
+        
+    }
+    
+    public void handleBtnBuild(ActionEvent event)
+    {
+        System.out.println("Test btnBuild");
+        
     }
     
     /**
@@ -466,7 +528,7 @@ public class PipelineSceneController implements Initializable {
         {
             if (stages.get(i).compareToIgnoreCase("Checkout")==0)
             {   
-                this.stageInfo.add(new StageInfo(StageType.CHECKOUT, i, this.passFail.get("Checkout"), backGrounds.get(i)));
+                this.stageInfo.add(new StageInfo(StageType.CHECKOUT, i, this.passFail.get("Checkout"), backGrounds.get(i), this.helpButtons));
                 if (!this.stageInfo.get(i).isPassed())
                 {
                     break;
@@ -474,7 +536,7 @@ public class PipelineSceneController implements Initializable {
             }
             else if(stages.get(i).compareToIgnoreCase("Static")==0)
             {
-                this.stageInfo.add(new StageInfo(StageType.STATIC, i, this.passFail.get("Static"), backGrounds.get(i)));
+                this.stageInfo.add(new StageInfo(StageType.STATIC, i, this.passFail.get("Static"), backGrounds.get(i), this.helpButtons));
                 if (!this.stageInfo.get(i).isPassed())
                 {
                     break;
@@ -482,7 +544,7 @@ public class PipelineSceneController implements Initializable {
             }
             else if(stages.get(i).compareToIgnoreCase("Unit")==0)
             {
-                this.stageInfo.add(new StageInfo(StageType.UNIT, i, this.passFail.get("Unit"), backGrounds.get(i)));
+                this.stageInfo.add(new StageInfo(StageType.UNIT, i, this.passFail.get("Unit"), backGrounds.get(i), this.helpButtons));
                 if (!this.stageInfo.get(i).isPassed())
                 {
                     break;
@@ -490,7 +552,7 @@ public class PipelineSceneController implements Initializable {
             }
             else if(stages.get(i).compareToIgnoreCase("Integration")==0)
             {
-                this.stageInfo.add(new StageInfo(StageType.INTEGRATION, i, this.passFail.get("Integration"), backGrounds.get(i)));
+                this.stageInfo.add(new StageInfo(StageType.INTEGRATION, i, this.passFail.get("Integration"), backGrounds.get(i), this.helpButtons));
                 if (!this.stageInfo.get(i).isPassed())
                 {
                     break;
@@ -498,7 +560,7 @@ public class PipelineSceneController implements Initializable {
             }
             else if(stages.get(i).compareToIgnoreCase("Deploy")==0)
             {
-                this.stageInfo.add(new StageInfo(StageType.DEPLOY, i, this.passFail.get("Deploy"), backGrounds.get(i)));
+                this.stageInfo.add(new StageInfo(StageType.DEPLOY, i, this.passFail.get("Deploy"), backGrounds.get(i), this.helpButtons));
                 if (!this.stageInfo.get(i).isPassed())
                 {
                     break;
@@ -506,7 +568,7 @@ public class PipelineSceneController implements Initializable {
             }
             else if(stages.get(i).compareToIgnoreCase("Build")==0)
             {
-                this.stageInfo.add(new StageInfo(StageType.BUILD, i, this.passFail.get("Build"), backGrounds.get(i)));
+                this.stageInfo.add(new StageInfo(StageType.BUILD, i, this.passFail.get("Build"), backGrounds.get(i), this.helpButtons));
                 if (!this.stageInfo.get(i).isPassed())
                 {
                     break;
@@ -526,7 +588,8 @@ public class PipelineSceneController implements Initializable {
         private boolean passed;         //did this stage fail?
         private static final int OFFSET = 85;       //Space between middle of other stage backgrounds
         //private static final int ORIGIN = 137;      
-        private Rectangle backGround;                       //The background Area
+        private Rectangle backGround;//The background Area
+        private Button helpButton;
 //        private static final int stdHeight = 54;
 //        private static final int stdWidth = 48;
 //        private static final int wideWidth = 104;
@@ -550,6 +613,8 @@ public class PipelineSceneController implements Initializable {
             this.passed = info.isPassed();
             this.type = info.getType();
             this.backGround = backGround;
+            this.helpButton = info.getHelpButton();
+            
             //this.animationIcons = animationIcons;
 
             if (null != this.type)
@@ -581,7 +646,7 @@ public class PipelineSceneController implements Initializable {
          * Gathers images for the Build Animation
          * @param animationIcons All animation icons
          */
-        private void BuildAnimation(HashMap<String,ImageView> animationIcons)
+        private void BuildAnimation(HashMap<String, ImageView> animationIcons)
         {
             ImageView[] images = {animationIcons.get("BuildImage1"), 
                 animationIcons.get("BuildImage1"), 
@@ -692,6 +757,14 @@ public class PipelineSceneController implements Initializable {
         {
             TranslateTransition moveToStart;
             this.backGround.setVisible(true);
+            
+            moveToStart = new TranslateTransition();
+            moveToStart.setNode(this.helpButton);
+            moveToStart.setToY(this.orderNumber*OFFSET);
+            moveToStart.setDuration(Duration.seconds(0.0001));
+            moveToStart.play();
+            this.helpButton.setVisible(true);
+            
             for (ImageView i : images)
             {
                 moveToStart = new TranslateTransition();
@@ -730,11 +803,18 @@ public class PipelineSceneController implements Initializable {
         private void moveToEnd()
         {
             TranslateTransition moveToEnd;
+            
+            moveToEnd = new TranslateTransition();
+            moveToEnd.setNode(this.helpButton);
+            moveToEnd.setToY(0);
+            moveToEnd.setDuration(Duration.seconds(1));
+            moveToEnd.play();
+            this.helpButton.setVisible(false);
+            
             this.backGround.setVisible(false);
             for (ImageView i : images){
                 moveToEnd = new TranslateTransition();
                 moveToEnd.setNode(i);
-                moveToEnd.setAutoReverse(true);
                 moveToEnd.setToY(0);
                 moveToEnd.setDuration(Duration.seconds(0.00001));
                 moveToEnd.play();

@@ -5,6 +5,8 @@
  */
 package com.supergalaxypenguin.vcdep.view.implementations;
 
+import java.util.HashMap;
+import javafx.scene.control.Button;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -16,6 +18,7 @@ public class StageInfo {
     private int orderNumber;
     private boolean passed;
     private Rectangle backGround;
+    private Button helpButton;
     
     /**
      * Holds the info of a stage
@@ -24,12 +27,21 @@ public class StageInfo {
      * @param passed
      * @param backGround 
      */
-    public StageInfo(StageType type, int orderNumber, boolean passed, Rectangle backGround)
+    public StageInfo(StageType type, int orderNumber, boolean passed, Rectangle backGround, HashMap<StageType, Button> helpButtons)
     {
         this.type = type;
         this.orderNumber = orderNumber;
         this.passed = passed;
         this.backGround = backGround;
+        this.helpButton = helpButtons.get(type);
+    }
+    
+    public Button getHelpButton() {
+        return helpButton;
+    }
+
+    public void setHelpButton(Button helpButton) {
+        this.helpButton = helpButton;
     }
     
     /**

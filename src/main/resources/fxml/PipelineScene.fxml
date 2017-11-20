@@ -14,12 +14,12 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supergalaxypenguin.vcdep.view.implementations.PipelineSceneController">
    <children>
-      <ImageView fx:id="cartoonSpaceBackground" fitHeight="743.0" fitWidth="995.0" layoutY="-2.0">
+      <ImageView fx:id="cartoonSpaceBackground" fitHeight="743.0" fitWidth="946.0" layoutY="-2.0">
          <image>
             <Image url="@../Images/cartoon-earth-and-moon-from-space-with-starry-night_4klio3fkg__F0007.png" />
          </image>
       </ImageView>
-      <ScrollPane id="scrollPane" fx:id="scrollPane" layoutX="14.0" layoutY="127.0" opacity="0.7" prefHeight="499.0" prefWidth="476.0" />
+      <ScrollPane id="scrollPane" fx:id="scrollPane" layoutX="14.0" layoutY="127.0" opacity="0.7" prefHeight="499.0" prefWidth="328.0" />
       <Button fx:id="btnGoBack" layoutX="192.0" layoutY="652.0" mnemonicParsing="false" onAction="#handleBtnGoBack" onMouseDragEntered="#handleMouseEnteredButton" onMouseDragExited="#handleMouseExitedButton" prefHeight="48.0" prefWidth="148.0" text="Last Stage">
          <graphic>
             <ImageView fitHeight="38.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
@@ -39,12 +39,12 @@
          </graphic></Button>
       <Button fx:id="btnReSubmit" layoutX="848.0" layoutY="29.0" mnemonicParsing="false" onAction="#handleBtnReSubmit" text="Re-Submit" />
       <Button fx:id="btnReset" layoutX="849.0" layoutY="75.0" mnemonicParsing="false" onAction="#handleBtnReset" prefHeight="27.0" prefWidth="84.0" text="Reset" />
-      <Rectangle fx:id="stage0" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="125.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
-      <Rectangle fx:id="stage1" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="210.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
-      <Rectangle fx:id="stage2" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="295.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
-      <Rectangle fx:id="stage3" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="380.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
-      <Rectangle fx:id="stage4" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="465.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
-      <Rectangle fx:id="stage5" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="500.0" layoutY="550.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="439.0" />
+      <Rectangle fx:id="stage0" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="384.0" layoutY="125.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="555.0" />
+      <Rectangle fx:id="stage1" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="384.0" layoutY="210.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="555.0" />
+      <Rectangle fx:id="stage2" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="384.0" layoutY="295.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="555.0" />
+      <Rectangle fx:id="stage3" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="384.0" layoutY="380.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="555.0" />
+      <Rectangle fx:id="stage4" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="384.0" layoutY="465.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="555.0" />
+      <Rectangle fx:id="stage5" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="384.0" layoutY="550.0" opacity="0.67" stroke="BLACK" strokeType="INSIDE" width="555.0" />
       <ImageView fx:id="chkoutImage3" fitHeight="54.0" fitWidth="48.0" layoutX="791.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Jenkins.png" />
@@ -140,60 +140,6 @@
             <Image url="@../Images/AnimationIcons/Code.png" />
          </image>
       </ImageView>
-      <Button layoutX="941.0" layoutY="139.0" mnemonicParsing="false" onMouseDragEntered="#handleMouseEnteredButton" onMouseDragExited="#handleMouseExitedButton">
-         <graphic>
-            <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/help.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button layoutX="941.0" layoutY="223.0" mnemonicParsing="false" onMouseDragEntered="#handleMouseEnteredButton" onMouseDragExited="#handleMouseExitedButton">
-         <graphic>
-            <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/help.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button layoutX="941.0" layoutY="311.0" mnemonicParsing="false" onMouseDragEntered="#handleMouseEnteredButton" onMouseDragExited="#handleMouseExitedButton">
-         <graphic>
-            <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/help.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button layoutX="941.0" layoutY="565.0" mnemonicParsing="false" onMouseDragEntered="#handleMouseEnteredButton" onMouseDragExited="#handleMouseExitedButton">
-         <graphic>
-            <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/help.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button layoutX="941.0" layoutY="480.0" mnemonicParsing="false" onMouseDragEntered="#handleMouseEnteredButton" onMouseDragExited="#handleMouseExitedButton">
-         <graphic>
-            <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/help.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button layoutX="941.0" layoutY="394.0" mnemonicParsing="false" onMouseDragEntered="#handleMouseEnteredButton" onMouseDragExited="#handleMouseExitedButton">
-         <graphic>
-            <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/help.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
       <ImageView fx:id="chkoutImageFailed" fitHeight="54.0" fitWidth="48.0" layoutX="868.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons/Fail.png" />
@@ -233,5 +179,11 @@
             </ImageView>
          </graphic>
       </Button>
+      <Button fx:id="btnCheckOut" layoutX="395.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleBtnCheckout" text="Checkout?" />
+      <Button fx:id="btnSA" layoutX="396.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleBtnSA" text="Static Analysis?" />
+      <Button fx:id="btnUnit" layoutX="396.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleBtnUnit" text="Unit Test?" />
+      <Button fx:id="btnIntegration" layoutX="396.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleBtnIntegration" text="Integration Test?" />
+      <Button fx:id="btnDeploy" layoutX="396.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleBtnDeploy" text="Deployment?" />
+      <Button fx:id="btnBuild" layoutX="396.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleBtnBuild" text="Build?" />
    </children>
 </AnchorPane>
