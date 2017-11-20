@@ -177,11 +177,11 @@ public class PipelineSceneController implements Initializable {
         stages.put(4, "Integration");
         stages.put(3, "Deploy");
         
-        passFail.put("Checkout", Boolean.TRUE);
-        passFail.put("Static", Boolean.TRUE);
-        passFail.put("Unit", Boolean.TRUE);
-        passFail.put("Integration", Boolean.FALSE);
-        passFail.put("Deploy", Boolean.TRUE);
+        this.passFail.put("Checkout", Boolean.TRUE);
+        this.passFail.put("Static", Boolean.TRUE);
+        this.passFail.put("Unit", Boolean.TRUE);
+        this.passFail.put("Integration", Boolean.FALSE);
+        this.passFail.put("Deploy", Boolean.TRUE);
         
         this.backGrounds.add(stage0);
         this.backGrounds.add(stage1);
@@ -320,37 +320,37 @@ public class PipelineSceneController implements Initializable {
     public void handleBtnCheckout(ActionEvent event)
     {
         System.out.println("Test btnCheckOut");
-        
+        //Open Help Window/Description
     }
     
     public void handleBtnSA(ActionEvent event)
     {
         System.out.println("Test btnSA");
-        
+        //Open Help Window/Description
     }
     
     public void handleBtnUnit(ActionEvent event)
     {
         System.out.println("Test btnUnit");
-        
+        //Open Help Window/Description
     }
     
     public void handleBtnIntegration(ActionEvent event)
     {
         System.out.println("Test btnIntegration");
-        
+        //Open Help Window/Description
     }
     
     public void handleBtnDeploy(ActionEvent event)
     {
         System.out.println("Test btnDeploy");
-        
+        //Open Help Window/Description
     }
     
     public void handleBtnBuild(ActionEvent event)
     {
         System.out.println("Test btnBuild");
-        
+        //Open Help Window/Description
     }
     
     /**
@@ -360,7 +360,6 @@ public class PipelineSceneController implements Initializable {
     public void handleBtnPause(ActionEvent event)
     {
         System.out.println("Test Pause Button");
-        
     }
     
     /**
