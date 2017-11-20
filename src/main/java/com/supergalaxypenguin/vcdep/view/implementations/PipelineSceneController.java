@@ -603,7 +603,10 @@ public class PipelineSceneController implements Initializable {
                 animationIcons.get("chkoutImage2"), 
                 animationIcons.get("chkoutImage3"), 
                 animationIcons.get("chkoutImagePassed"), 
-                animationIcons.get("chkoutImageFailed")
+                animationIcons.get("chkoutImageFailed")//,
+                //animationIcons.get("chkoutArrow1"),
+                //animationIcons.get("chkoutArrow1"),
+                //animationIcons.get("chkoutArrow1")
             };
             this.images = images;
             this.moveToStart(images);
@@ -618,7 +621,9 @@ public class PipelineSceneController implements Initializable {
             ImageView[] images = {animationIcons.get("DeployImage1"), 
                 animationIcons.get("DeployImage2"), 
                 animationIcons.get("DeployImagePassed"), 
-                animationIcons.get("DeployImageFailed")
+                animationIcons.get("DeployImageFailed")//,
+                //animationIcons.get("DeployArrow1"),
+                //animationIcons.get("DeployArrow2")
             };
             this.images = images;
             this.moveToStart(images);
@@ -633,7 +638,9 @@ public class PipelineSceneController implements Initializable {
             ImageView[] images = {animationIcons.get("IntegrationImage1"), 
                 animationIcons.get("IntegrationImage2"), 
                 animationIcons.get("IntegrationImagePassed"), 
-                animationIcons.get("IntegrationImageFailed")
+                animationIcons.get("IntegrationImageFailed")//,
+                //animationIcons.get("IntegrationArrow1"),
+                //animationIcons.get("IntegrationArrow2")
             };
             this.images = images;
             this.moveToStart(images);
@@ -649,7 +656,11 @@ public class PipelineSceneController implements Initializable {
                 animationIcons.get("SAImage2"), 
                 animationIcons.get("SAImage3"), 
                 animationIcons.get("SAImagePassed"), 
-                animationIcons.get("SAImageFailed")
+                animationIcons.get("SAImageFailed")//,
+                //animationIcons.get("SAArrow1"),
+                //animationIcons.get("SAArrow2"),
+                //animationIcons.get("SAArrow3"),
+                //animationIcons.get("SAArrow4")
             };
             this.images = images;
             this.moveToStart(images);
@@ -664,7 +675,11 @@ public class PipelineSceneController implements Initializable {
                 animationIcons.get("UnitImage2"), 
                 animationIcons.get("UnitImage3"), 
                 animationIcons.get("UnitImagePassed"), 
-                animationIcons.get("UnitImageFailed")
+                animationIcons.get("UnitImageFailed")//,
+                //animationIcons.get("UnitArrow1"),
+                //animationIcons.get("UnitArrow2"),
+                //animationIcons.get("UnitArrow3"),
+                //animationIcons.get("UnitArrow4")
             };
             this.images = images;
             this.moveToStart(images);
