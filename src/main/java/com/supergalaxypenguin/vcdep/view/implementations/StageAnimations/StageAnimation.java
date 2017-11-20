@@ -17,7 +17,7 @@ import javafx.util.Duration;
  * a modular animation and control it throughout it's life-cycle.
  * @author Howtoon
  */
-public class StageAnimation{
+public abstract class StageAnimation{
 
     protected StageType type;         //What kind of Stage is it? Only one of each type is allowed
     protected int orderNumber;            //what number in the list of stages EG. 1st? 2nd? Starts at 0
@@ -137,4 +137,8 @@ public class StageAnimation{
             i.setVisible(false);
         }
     }
+    
+    public abstract void play();
+    
+    public abstract void stop();
 }

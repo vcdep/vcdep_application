@@ -30,4 +30,14 @@ class DeployAnimation extends StageAnimation{
         super.failImage = animationIcons.get("DeployImageFailed");
         super.moveToStart();
     }
+
+    @Override
+    public void play() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void stop() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
