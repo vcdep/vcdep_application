@@ -26,7 +26,8 @@ public class StageAnimation{
     protected Rectangle backGround;//The background Area
     protected Button helpButton;
     protected ImageView[] images;
-    protected static HashMap<String,ImageView> animationIcons;
+    protected ImageView passImage;
+    protected ImageView failImage;
 //        private static final int ORIGIN = 137; 
 //        private static final int stdHeight = 54;
 //        private static final int stdWidth = 48;
@@ -46,9 +47,8 @@ public class StageAnimation{
      * @param backGround    The background that corresponds to this stage animation
      * @return 
      */
-    public static StageAnimation getInstance(StageInfo info, HashMap<String,ImageView> _animationIcons, Rectangle backGround)
+    public static StageAnimation getInstance(StageInfo info, HashMap<String,ImageView> animationIcons, Rectangle backGround)
     {
-        animationIcons = _animationIcons;
         
         if (info.getType() == StageType.CHECKOUT){
                 return new CheckoutAnimation(info, animationIcons, backGround);
@@ -101,23 +101,11 @@ public class StageAnimation{
             moveToStart.setNode(i);
             moveToStart.setToY(this.orderNumber*OFFSET);
             moveToStart.setDuration(Duration.seconds(0.0001));
-            if ( 
-                    i == animationIcons.get("UnitImagePassed") ||
-                    i == animationIcons.get("SAImagePassed") ||
-                    i == animationIcons.get("DeployImagePassed") ||
-                    i == animationIcons.get("IntegrationImagePassed") ||
-                    i == animationIcons.get("chkoutImagePassed")
-                    )
+            if (i == this.passImage)
             {
                 i.setVisible(passed);
             }
-            else if (
-                    i == animationIcons.get("UnitImageFailed") ||
-                    i == animationIcons.get("SAImageFailed") ||
-                    i == animationIcons.get("DeployImageFailed") ||
-                    i == animationIcons.get("IntegrationImageFailed") ||
-                    i == animationIcons.get("chkoutImageFailed")
-                    )
+            else if (i == this.failImage)
             {
                 i.setVisible(!passed);
             }

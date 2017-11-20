@@ -29,6 +29,8 @@ class UnitAnimation extends StageAnimation{
             //animationIcons.get("UnitArrow4")
         };
         super.images = _images;
+        super.passImage = animationIcons.get("UnitImagePassed");
+        super.failImage = animationIcons.get("UnitImageFailed");
         super.moveToStart();
     }
 }

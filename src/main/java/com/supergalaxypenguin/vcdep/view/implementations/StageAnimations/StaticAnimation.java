@@ -29,6 +29,8 @@ class StaticAnimation extends StageAnimation{
             //animationIcons.get("SAArrow4")
         };
         super.images = _images;
+        super.passImage = animationIcons.get("SAImagePassed");
+        super.failImage = animationIcons.get("SAImageFailed");
         super.moveToStart();
     }
 }

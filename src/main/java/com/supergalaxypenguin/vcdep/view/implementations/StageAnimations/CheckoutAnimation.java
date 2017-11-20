@@ -28,6 +28,8 @@ class CheckoutAnimation extends StageAnimation{
             //animationIcons.get("chkoutArrow1")
         };
         super.images = _images;
+        super.passImage = animationIcons.get("chkoutImagePassed");
+        super.failImage = animationIcons.get("chkoutImageFailed");
         super.moveToStart();
     }
 }

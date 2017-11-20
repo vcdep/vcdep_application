@@ -25,6 +25,8 @@ class BuildAnimation extends StageAnimation{
             animationIcons.get("BuildImage1")
         };
         super.images = _images;
+        super.passImage = animationIcons.get("");
+        super.failImage = animationIcons.get("");
         super.moveToStart();
     }
 }

@@ -26,6 +26,8 @@ class DeployAnimation extends StageAnimation{
             //animationIcons.get("DeployArrow2")
         };
         super.images = _images;
+        super.passImage = animationIcons.get("DeployImagePassed");
+        super.failImage = animationIcons.get("DeployImageFailed");
         super.moveToStart();
     }
 }

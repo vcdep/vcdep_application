@@ -5,8 +5,6 @@
  */
 package com.supergalaxypenguin.vcdep.view.implementations.StageAnimations;
 
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimations.StageInfo;
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimations.StageAnimation;
 import java.util.HashMap;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
@@ -28,6 +26,8 @@ class IntegrationAnimation extends StageAnimation{
             //animationIcons.get("IntegrationArrow2")
         };
         super.images = _images;
+        super.passImage = animationIcons.get("IntegrationImagePassed");
+        super.failImage = animationIcons.get("IntegrationImageFailed");
         super.moveToStart();
     }
 }
