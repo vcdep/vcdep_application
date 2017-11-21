@@ -91,7 +91,7 @@
             <InnerShadow choke="0.26" color="WHITE" />
          </effect>
       </Rectangle>
-      <Rectangle fx:id="target_2" arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="358.0" layoutY="533.0" stroke="BLACK" strokeType="INSIDE" width="105.0">
+      <Rectangle fx:id="target_2" arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="358.0" layoutY="533.0" onDragDropped="#handleOnDragDropped" onDragEntered="#handleOnDragEntered" onDragExited="#handleOnDragExited" onDragOver="#handleOnDragOver" stroke="BLACK" strokeType="INSIDE" width="105.0">
          <effect>
             <InnerShadow choke="0.26" color="WHITE" />
          </effect>
@@ -104,7 +104,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Rectangle fx:id="target_3" arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="478.0" layoutY="533.0" stroke="BLACK" strokeType="INSIDE" width="105.0">
+      <Rectangle fx:id="target_3" arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="478.0" layoutY="533.0" onDragDropped="#handleOnDragDropped" onDragEntered="#handleOnDragEntered" onDragExited="#handleOnDragExited" onDragOver="#handleOnDragOver" stroke="BLACK" strokeType="INSIDE" width="105.0">
          <effect>
             <InnerShadow choke="0.26" color="WHITE" />
          </effect>
@@ -130,7 +130,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Rectangle fx:id="target_4" arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="597.0" layoutY="533.0" stroke="BLACK" strokeType="INSIDE" width="105.0">
+      <Rectangle fx:id="target_4" arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="597.0" layoutY="533.0" onDragDropped="#handleOnDragDropped" onDragEntered="#handleOnDragEntered" onDragExited="#handleOnDragExited" onDragOver="#handleOnDragOver" stroke="BLACK" strokeType="INSIDE" width="105.0">
          <effect>
             <InnerShadow choke="0.26" color="WHITE" />
          </effect>
@@ -153,7 +153,7 @@
             <Image url="@../Images/Icons/Cleanup.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="target_1" arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="238.0" layoutY="533.0" stroke="BLACK" strokeType="INSIDE" width="105.0">
+      <Rectangle fx:id="target_1" arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="238.0" layoutY="533.0" onDragDropped="#handleOnDragDropped" onDragEntered="#handleOnDragEntered" onDragExited="#handleOnDragExited" onDragOver="#handleOnDragOver" stroke="BLACK" strokeType="INSIDE" width="105.0">
          <effect>
             <InnerShadow choke="0.26" color="WHITE" />
          </effect>
