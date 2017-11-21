@@ -1,0 +1,1160 @@
+Started by remote host 192.30.252.40
+Checking out git https://github.com/UWF-HMCSE-CS/DevOps_ConfigurationTools to read Jenkinsfile
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/UWF-HMCSE-CS/DevOps_ConfigurationTools # timeout=10
+Fetching upstream changes from https://github.com/UWF-HMCSE-CS/DevOps_ConfigurationTools
+ > git --version # timeout=10
+using GIT_ASKPASS to set credentials 
+ > git fetch --tags --progress https://github.com/UWF-HMCSE-CS/DevOps_ConfigurationTools +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/shared_library^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/shared_library^{commit} # timeout=10
+Checking out Revision 0c891c963d57760521843a581c5619f6ef5b52c1 (refs/remotes/origin/shared_library)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 0c891c963d57760521843a581c5619f6ef5b52c1
+ > git rev-list 0c891c963d57760521843a581c5619f6ef5b52c1 # timeout=10
+Loading library shared_libraries@shared_library
+ > git rev-parse --is-inside-work-tree # timeout=10
+Setting origin to https://github.com/UWF-HMCSE-CS/DevOps_ConfigurationTools.git
+ > git config remote.origin.url https://github.com/UWF-HMCSE-CS/DevOps_ConfigurationTools.git # timeout=10
+Fetching origin...
+Fetching upstream changes from origin
+ > git --version # timeout=10
+using GIT_ASKPASS to set credentials 
+ > git fetch --tags --progress origin +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse shared_library^{commit} # timeout=10
+ > git rev-parse origin/shared_library^{commit} # timeout=10
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/UWF-HMCSE-CS/DevOps_ConfigurationTools.git # timeout=10
+Fetching upstream changes from https://github.com/UWF-HMCSE-CS/DevOps_ConfigurationTools.git
+ > git --version # timeout=10
+using GIT_ASKPASS to set credentials 
+ > git fetch --tags --progress https://github.com/UWF-HMCSE-CS/DevOps_ConfigurationTools.git +refs/heads/*:refs/remotes/origin/*
+Checking out Revision 0c891c963d57760521843a581c5619f6ef5b52c1 (shared_library)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 0c891c963d57760521843a581c5619f6ef5b52c1
+ > git rev-list 0c891c963d57760521843a581c5619f6ef5b52c1 # timeout=10
+[Pipeline] node
+Running on docker_box in /home/ec2-user/workspace/jenkins_pipeline
+[Pipeline] {
+[Pipeline] dir
+Running in /home/ec2-user/workspace/DevOps
+[Pipeline] {
+[Pipeline] sh
+[DevOps] Running shell script
++ git pull
+Already up-to-date.
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] sh
+[DevOps] Running shell script
++ git clone git@github.com:DevOpsActivity/se2_devops_tr_15.git /home/ec2-user/workspace/jenkins_pipeline/se2_devops_tr_15
+Cloning into '/home/ec2-user/workspace/jenkins_pipeline/se2_devops_tr_15'...
+[Pipeline] dir
+Running in /home/ec2-user/workspace/jenkins_pipeline/se2_devops_tr_15
+[Pipeline] {
+[Pipeline] sh
+[se2_devops_tr_15] Running shell script
++ git checkout feature
+Switched to a new branch 'feature'
+Branch feature set up to track remote branch feature from origin.
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] echo
+Updated the tester repo
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] dir
+Running in /home/ec2-user/workspace/jenkins_pipeline/se2_devops_tr_15
+[Pipeline] {
+[Pipeline] sh
+[se2_devops_tr_15] Running shell script
++ cat config.json
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] stage
+[Pipeline] { (Static Analysis)
+[Pipeline] dir
+Running in /home/ec2-user/workspace/DevOps/tests/php/static
+[Pipeline] {
+[Pipeline] sh
+[static] Running shell script
++ docker build -t static .
+Sending build context to Docker daemon  7.68 kB
+Step 1 : FROM ubuntu:latest
+ ---> 6a2f32de169d
+Step 2 : RUN apt-get update && apt-get -y install php-pear && pear install PHP_CodeSniffer
+ ---> Using cache
+ ---> 2cdaf11cca55
+Step 3 : EXPOSE 8080
+ ---> Using cache
+ ---> fa976668245a
+Successfully built fa976668245a
+[Pipeline] dockerFingerprintFrom
+[Pipeline] sh
+[static] Running shell script
++ docker inspect -f . static
+.
+[Pipeline] withDockerContainer
+$ docker run -t -d -u 500:500 -v /home/ec2-user/workspace/jenkins_pipeline/se2_devops_tr_15:/cdep -w /home/ec2-user/workspace/DevOps/tests/php/static -v /home/ec2-user/workspace/DevOps/tests/php/static:/home/ec2-user/workspace/DevOps/tests/php/static:rw -v /home/ec2-user/workspace/DevOps/tests/php/static@tmp:/home/ec2-user/workspace/DevOps/tests/php/static@tmp:rw -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** --entrypoint cat static
+[Pipeline] {
+[Pipeline] sh
+[static] Running shell script
++ bash build.sh
+
+FILE: /cdep/index/Gadget.php
+----------------------------------------------------------------------
+FOUND 283 ERRORS AND 1 WARNING AFFECTING 100 LINES
+----------------------------------------------------------------------
+   2 | ERROR   | [ ] Missing file doc comment
+   4 | ERROR   | [ ] Missing class doc comment
+   4 | ERROR   | [x] Opening brace of a class must be on the line
+     |         |     after the definition
+   6 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+   6 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+   6 | ERROR   | [ ] Private member variable "item" must be prefixed
+     |         |     with an underscore
+   7 | ERROR   | [ ] Private member variable "name" must be prefixed
+     |         |     with an underscore
+   8 | ERROR   | [ ] Private member variable "model" must be prefixed
+     |         |     with an underscore
+   9 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+   9 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+   9 | ERROR   | [ ] Private member variable "cost" must be prefixed
+     |         |     with an underscore
+  10 | ERROR   | [ ] Private member variable "manufacturer" must be
+     |         |     prefixed with an underscore
+  11 | ERROR   | [ ] Private member variable "link" must be prefixed
+     |         |     with an underscore
+  12 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  12 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  12 | ERROR   | [ ] Private member variable "imgName" must be
+     |         |     prefixed with an underscore
+  13 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  13 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  13 | ERROR   | [ ] Private member variable "icon" must be prefixed
+     |         |     with an underscore
+  15 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  15 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  15 | ERROR   | [x] The open comment tag must be the only content on
+     |         |     the line
+  15 | ERROR   | [ ] Doc comment for parameter "$item" missing
+  15 | ERROR   | [ ] Doc comment for parameter "$name" missing
+  15 | ERROR   | [ ] Doc comment for parameter "$model" missing
+  15 | ERROR   | [ ] Doc comment for parameter "$cost" missing
+  15 | ERROR   | [ ] Doc comment for parameter "$manufacturer"
+     |         |     missing
+  15 | ERROR   | [ ] Doc comment for parameter "$link" missing
+  15 | ERROR   | [ ] Doc comment for parameter "$imgName" missing
+  15 | ERROR   | [ ] Doc comment for parameter "$icon" missing
+  15 | ERROR   | [x] Doc comment short description must be on the
+     |         |     first line
+  15 | ERROR   | [x] The close comment tag must be the only content
+     |         |     on the line
+  16 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  16 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  16 | WARNING | [ ] Line exceeds 85 characters; contains 96
+     |         |     characters
+  17 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  17 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  19 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  19 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 2
+  20 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  20 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 2
+  21 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  21 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 2
+  22 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  22 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 2
+  23 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  23 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 2
+  24 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  24 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 2
+  25 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  25 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 2
+  26 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  26 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 2
+  28 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  28 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  30 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  30 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  30 | ERROR   | [x] The open comment tag must be the only content on
+     |         |     the line
+  30 | ERROR   | [ ] Doc comment for parameter "$item" missing
+  30 | ERROR   | [x] Doc comment short description must be on the
+     |         |     first line
+  30 | ERROR   | [x] The close comment tag must be the only content
+     |         |     on the line
+  30 | ERROR   | [ ] Missing @return tag in function comment
+  31 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  31 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  32 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  32 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  34 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  34 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 2
+  36 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  36 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  38 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  38 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  38 | ERROR   | [x] The open comment tag must be the only content on
+     |         |     the line
+  38 | ERROR   | [ ] Doc comment for parameter "$name" missing
+  38 | ERROR   | [x] Doc comment short description must be on the
+     |         |     first line
+  38 | ERROR   | [x] The close comment tag must be the only content
+     |         |     on the line
+  38 | ERROR   | [ ] Missing @return tag in function comment
+  39 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  39 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  40 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  40 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  42 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  42 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 2
+  44 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  44 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  46 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  46 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  46 | ERROR   | [x] The open comment tag must be the only content on
+     |         |     the line
+  46 | ERROR   | [ ] Doc comment for parameter "$model" missing
+  46 | ERROR   | [x] Doc comment short description must be on the
+     |         |     first line
+  46 | ERROR   | [x] The close comment tag must be the only content
+     |         |     on the line
+  46 | ERROR   | [ ] Missing @return tag in function comment
+  48 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  48 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  48 | ERROR   | [x] Opening brace indented incorrectly; expected 4
+     |         |     spaces, found 1
+  50 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  52 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  52 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  52 | ERROR   | [x] Closing brace indented incorrectly; expected 4
+     |         |     spaces, found 1
+  54 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  54 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  54 | ERROR   | [x] The open comment tag must be the only content on
+     |         |     the line
+  54 | ERROR   | [ ] Doc comment for parameter "$cost" missing
+  54 | ERROR   | [x] Doc comment short description must be on the
+     |         |     first line
+  54 | ERROR   | [x] The close comment tag must be the only content
+     |         |     on the line
+  54 | ERROR   | [ ] Missing @return tag in function comment
+  55 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  55 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  56 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  56 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  58 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  60 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  60 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  62 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  62 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  62 | ERROR   | [x] The open comment tag must be the only content on
+     |         |     the line
+  62 | ERROR   | [ ] Doc comment for parameter "$manufacturer"
+     |         |     missing
+  62 | ERROR   | [x] Doc comment short description must be on the
+     |         |     first line
+  62 | ERROR   | [x] The close comment tag must be the only content
+     |         |     on the line
+  62 | ERROR   | [ ] Missing @return tag in function comment
+  63 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  63 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 2
+  64 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  64 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  64 | ERROR   | [x] Opening brace indented incorrectly; expected 2
+     |         |     spaces, found 1
+  66 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  68 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  68 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  68 | ERROR   | [x] Closing brace indented incorrectly; expected 2
+     |         |     spaces, found 1
+  70 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  70 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  70 | ERROR   | [x] The open comment tag must be the only content on
+     |         |     the line
+  70 | ERROR   | [ ] Doc comment for parameter "$link" missing
+  70 | ERROR   | [x] Doc comment short description must be on the
+     |         |     first line
+  70 | ERROR   | [x] The close comment tag must be the only content
+     |         |     on the line
+  70 | ERROR   | [ ] Missing @return tag in function comment
+  71 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  71 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  72 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  72 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  74 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  74 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 6
+  76 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  76 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  78 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  78 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  78 | ERROR   | [x] The open comment tag must be the only content on
+     |         |     the line
+  78 | ERROR   | [ ] Doc comment for parameter "$imgName" missing
+  78 | ERROR   | [x] Doc comment short description must be on the
+     |         |     first line
+  78 | ERROR   | [x] The close comment tag must be the only content
+     |         |     on the line
+  78 | ERROR   | [ ] Missing @return tag in function comment
+  79 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  79 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  80 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  80 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  82 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  82 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 6
+  84 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  84 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  86 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  86 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  86 | ERROR   | [x] The open comment tag must be the only content on
+     |         |     the line
+  86 | ERROR   | [ ] Doc comment for parameter "$icon" missing
+  86 | ERROR   | [x] Doc comment short description must be on the
+     |         |     first line
+  86 | ERROR   | [x] The close comment tag must be the only content
+     |         |     on the line
+  86 | ERROR   | [ ] Missing @return tag in function comment
+  87 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  87 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  88 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  88 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  90 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  90 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 6
+  92 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  92 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+  94 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  94 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  94 | ERROR   | [x] The open comment tag must be the only content on
+     |         |     the line
+  94 | ERROR   | [x] Doc comment short description must be on the
+     |         |     first line
+  94 | ERROR   | [x] The close comment tag must be the only content
+     |         |     on the line
+  94 | ERROR   | [ ] Missing @return tag in function comment
+  96 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  96 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+  96 | ERROR   | [x] Opening brace indented incorrectly; expected 4
+     |         |     spaces, found 1
+  98 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+  98 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 3
+ 100 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 100 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+ 100 | ERROR   | [x] Closing brace indented incorrectly; expected 4
+     |         |     spaces, found 1
+ 102 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 102 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+ 102 | ERROR   | [x] The open comment tag must be the only content on
+     |         |     the line
+ 102 | ERROR   | [x] Doc comment short description must be on the
+     |         |     first line
+ 102 | ERROR   | [x] The close comment tag must be the only content
+     |         |     on the line
+ 102 | ERROR   | [ ] Missing @return tag in function comment
+ 103 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 104 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 104 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+ 104 | ERROR   | [x] Opening brace indented incorrectly; expected 4
+     |         |     spaces, found 1
+ 106 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 106 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 6
+ 108 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 108 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+ 108 | ERROR   | [x] Closing brace indented incorrectly; expected 4
+     |         |     spaces, found 1
+ 110 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 110 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+ 110 | ERROR   | [x] The open comment tag must be the only content on
+     |         |     the line
+ 110 | ERROR   | [x] Doc comment short description must be on the
+     |         |     first line
+ 110 | ERROR   | [x] The close comment tag must be the only content
+     |         |     on the line
+ 112 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 112 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+ 112 | ERROR   | [x] The open comment tag must be the only content on
+     |         |     the line
+ 112 | ERROR   | [x] Doc comment short description must be on the
+     |         |     first line
+ 112 | ERROR   | [x] The close comment tag must be the only content
+     |         |     on the line
+ 114 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 114 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+ 114 | ERROR   | [x] The open comment tag must be the only content on
+     |         |     the line
+ 114 | ERROR   | [x] Doc comment short description must be on the
+     |         |     first line
+ 114 | ERROR   | [x] The close comment tag must be the only content
+     |         |     on the line
+ 114 | ERROR   | [ ] Missing @return tag in function comment
+ 115 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 115 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+ 116 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 116 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+ 118 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 118 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 6
+ 120 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 120 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+ 122 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 122 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+ 122 | ERROR   | [x] The open comment tag must be the only content on
+     |         |     the line
+ 122 | ERROR   | [x] Doc comment short description must be on the
+     |         |     first line
+ 122 | ERROR   | [x] The close comment tag must be the only content
+     |         |     on the line
+ 122 | ERROR   | [ ] Missing @return tag in function comment
+ 123 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 123 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+ 124 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 124 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+ 126 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 128 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 128 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+ 130 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 130 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+ 130 | ERROR   | [x] The open comment tag must be the only content on
+     |         |     the line
+ 130 | ERROR   | [x] Doc comment short description must be on the
+     |         |     first line
+ 130 | ERROR   | [x] The close comment tag must be the only content
+     |         |     on the line
+ 130 | ERROR   | [ ] Missing @return tag in function comment
+ 131 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 131 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+ 132 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 132 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+ 134 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 136 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 136 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+ 138 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 138 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+ 138 | ERROR   | [x] The open comment tag must be the only content on
+     |         |     the line
+ 138 | ERROR   | [x] Doc comment short description must be on the
+     |         |     first line
+ 138 | ERROR   | [x] The close comment tag must be the only content
+     |         |     on the line
+ 138 | ERROR   | [ ] Missing @return tag in function comment
+ 139 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 139 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+ 140 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 140 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+ 142 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 144 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 144 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+ 146 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 146 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+ 146 | ERROR   | [ ] Missing function doc comment
+ 147 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 147 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+ 148 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 148 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 2
+ 149 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 149 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+ 150 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 150 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+ 150 | ERROR   | [ ] Missing function doc comment
+ 151 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 151 | ERROR   | [x] Line indented incorrectly; expected at least 4
+     |         |     spaces, found 1
+ 152 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 152 | ERROR   | [x] Line indented incorrectly; expected at least 8
+     |         |     spaces, found 2
+ 153 | ERROR   | [x] Spaces must be used to indent lines; tabs are
+     |         |     not allowed
+ 153 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+     |         |     found 1
+----------------------------------------------------------------------
+PHPCBF CAN FIX THE 241 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+
+FILE: /cdep/index/databaseConnection.php
+----------------------------------------------------------------------
+FOUND 142 ERRORS AND 1 WARNING AFFECTING 58 LINES
+----------------------------------------------------------------------
+  2 | ERROR   | [ ] Missing file doc comment
+  3 | ERROR   | [x] "require_once" is a statement not a function; no
+    |         |     parentheses are required
+  5 | ERROR   | [ ] Missing class doc comment
+  5 | ERROR   | [ ] Class name must begin with a capital letter
+  5 | ERROR   | [x] Opening brace of a class must be on the line
+    |         |     after the definition
+  7 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+  7 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+    |         |     found 1
+  8 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+  8 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+    |         |     found 1
+  9 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+  9 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+    |         |     found 1
+ 10 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 10 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+    |         |     found 1
+ 11 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 11 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+    |         |     found 1
+ 13 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 13 | ERROR   | [x] Line indented incorrectly; expected at least 4
+    |         |     spaces, found 1
+ 13 | ERROR   | [x] The open comment tag must be the only content on
+    |         |     the line
+ 13 | ERROR   | [x] Doc comment short description must be on the
+    |         |     first line
+ 13 | ERROR   | [x] The close comment tag must be the only content on
+    |         |     the line
+ 14 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 14 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+    |         |     found 1
+ 15 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 15 | ERROR   | [x] Line indented incorrectly; expected at least 4
+    |         |     spaces, found 1
+ 17 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 18 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 19 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 20 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 22 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 22 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+    |         |     found 1
+ 24 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 24 | ERROR   | [x] Line indented incorrectly; expected at least 4
+    |         |     spaces, found 1
+ 24 | ERROR   | [x] The open comment tag must be the only content on
+    |         |     the line
+ 24 | ERROR   | [x] Doc comment short description must be on the
+    |         |     first line
+ 24 | ERROR   | [x] The close comment tag must be the only content on
+    |         |     the line
+ 24 | ERROR   | [ ] Missing @return tag in function comment
+ 25 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 25 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+    |         |     found 1
+ 26 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 26 | ERROR   | [x] Line indented incorrectly; expected at least 4
+    |         |     spaces, found 1
+ 28 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 28 | ERROR   | [x] Line indented incorrectly; expected 8 spaces,
+    |         |     found 5
+ 29 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 29 | ERROR   | [x] Line indented incorrectly; expected at least 8
+    |         |     spaces, found 2
+ 31 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 31 | ERROR   | [x] Line indented incorrectly; expected at least 12
+    |         |     spaces, found 9
+ 31 | WARNING | [ ] Line exceeds 85 characters; contains 110
+    |         |     characters
+ 33 | ERROR   | [x] Closing brace indented incorrectly; expected 5
+    |         |     spaces, found 8
+ 34 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 34 | ERROR   | [x] Line indented incorrectly; expected 8 spaces,
+    |         |     found 2
+ 35 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 35 | ERROR   | [x] Line indented incorrectly; expected at least 8
+    |         |     spaces, found 2
+ 37 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 37 | ERROR   | [x] Line indented incorrectly; expected at least 12
+    |         |     spaces, found 3
+ 39 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 39 | ERROR   | [x] Line indented incorrectly; expected 8 spaces,
+    |         |     found 2
+ 41 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 41 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+    |         |     found 1
+ 43 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 43 | ERROR   | [x] Line indented incorrectly; expected at least 4
+    |         |     spaces, found 1
+ 43 | ERROR   | [x] The open comment tag must be the only content on
+    |         |     the line
+ 43 | ERROR   | [ ] Doc comment for parameter "$id" missing
+ 43 | ERROR   | [x] Doc comment short description must be on the
+    |         |     first line
+ 43 | ERROR   | [x] The close comment tag must be the only content on
+    |         |     the line
+ 43 | ERROR   | [ ] Missing @return tag in function comment
+ 44 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 44 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+    |         |     found 1
+ 45 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 45 | ERROR   | [x] Line indented incorrectly; expected at least 4
+    |         |     spaces, found 1
+ 47 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 47 | ERROR   | [x] Line indented incorrectly; expected at least 8
+    |         |     spaces, found 2
+ 48 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 48 | ERROR   | [x] Line indented incorrectly; expected at least 8
+    |         |     spaces, found 2
+ 49 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 49 | ERROR   | [x] Line indented incorrectly; expected at least 8
+    |         |     spaces, found 2
+ 50 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 50 | ERROR   | [x] Line indented incorrectly; expected at least 8
+    |         |     spaces, found 2
+ 51 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 51 | ERROR   | [x] Line indented incorrectly; expected at least 8
+    |         |     spaces, found 2
+ 53 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 53 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+    |         |     found 1
+ 55 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 55 | ERROR   | [x] Line indented incorrectly; expected at least 4
+    |         |     spaces, found 1
+ 55 | ERROR   | [x] The open comment tag must be the only content on
+    |         |     the line
+ 55 | ERROR   | [ ] Doc comment for parameter "$id" missing
+ 55 | ERROR   | [x] Doc comment short description must be on the
+    |         |     first line
+ 55 | ERROR   | [x] The close comment tag must be the only content on
+    |         |     the line
+ 55 | ERROR   | [ ] Missing @return tag in function comment
+ 56 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 56 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+    |         |     found 1
+ 57 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 57 | ERROR   | [x] Line indented incorrectly; expected at least 4
+    |         |     spaces, found 1
+ 59 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 59 | ERROR   | [x] Line indented incorrectly; expected 8 spaces,
+    |         |     found 2
+ 59 | ERROR   | [ ] Expected "foreach (...) {\n"; found
+    |         |     "foreach(...)\n\t\t{\n"
+ 60 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 60 | ERROR   | [x] Line indented incorrectly; expected at least 8
+    |         |     spaces, found 2
+ 62 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 62 | ERROR   | [x] Line indented incorrectly; expected at least 12
+    |         |     spaces, found 3
+ 62 | ERROR   | [x] Opening parenthesis of a multi-line function call
+    |         |     must be the last content on the line
+ 63 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 63 | ERROR   | [x] Multi-line function call not indented correctly;
+    |         |     expected 7 spaces but found 9
+ 63 | ERROR   | [x] Line indented incorrectly; expected at least 12
+    |         |     spaces, found 9
+ 64 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 64 | ERROR   | [x] Multi-line function call not indented correctly;
+    |         |     expected 7 spaces but found 9
+ 64 | ERROR   | [x] Line indented incorrectly; expected at least 12
+    |         |     spaces, found 9
+ 65 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 65 | ERROR   | [x] Multi-line function call not indented correctly;
+    |         |     expected 7 spaces but found 9
+ 65 | ERROR   | [x] Line indented incorrectly; expected at least 12
+    |         |     spaces, found 9
+ 66 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 66 | ERROR   | [x] Multi-line function call not indented correctly;
+    |         |     expected 7 spaces but found 9
+ 66 | ERROR   | [x] Line indented incorrectly; expected at least 12
+    |         |     spaces, found 9
+ 67 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 67 | ERROR   | [x] Multi-line function call not indented correctly;
+    |         |     expected 7 spaces but found 9
+ 67 | ERROR   | [x] Line indented incorrectly; expected at least 12
+    |         |     spaces, found 9
+ 68 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 68 | ERROR   | [x] Multi-line function call not indented correctly;
+    |         |     expected 7 spaces but found 9
+ 68 | ERROR   | [x] Line indented incorrectly; expected at least 12
+    |         |     spaces, found 9
+ 69 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 69 | ERROR   | [x] Multi-line function call not indented correctly;
+    |         |     expected 3 spaces but found 9
+ 69 | ERROR   | [x] Line indented incorrectly; expected at least 12
+    |         |     spaces, found 9
+ 69 | ERROR   | [x] Closing parenthesis of a multi-line function call
+    |         |     must be on a line by itself
+ 71 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 71 | ERROR   | [x] Line indented incorrectly; expected 8 spaces,
+    |         |     found 2
+ 73 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 73 | ERROR   | [x] Line indented incorrectly; expected at least 8
+    |         |     spaces, found 2
+ 75 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 75 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+    |         |     found 1
+ 77 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 77 | ERROR   | [x] Line indented incorrectly; expected at least 4
+    |         |     spaces, found 1
+ 77 | ERROR   | [x] The open comment tag must be the only content on
+    |         |     the line
+ 77 | ERROR   | [ ] Doc comment for parameter "$ID" missing
+ 77 | ERROR   | [x] Doc comment short description must be on the
+    |         |     first line
+ 77 | ERROR   | [x] The close comment tag must be the only content on
+    |         |     the line
+ 77 | ERROR   | [ ] Missing @return tag in function comment
+ 78 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 78 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+    |         |     found 1
+ 79 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 79 | ERROR   | [x] Line indented incorrectly; expected at least 4
+    |         |     spaces, found 1
+ 81 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 81 | ERROR   | [x] Line indented incorrectly; expected at least 8
+    |         |     spaces, found 2
+ 83 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 83 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+    |         |     found 1
+----------------------------------------------------------------------
+PHPCBF CAN FIX THE 131 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+
+FILE: /cdep/index/index.php
+----------------------------------------------------------------------
+FOUND 33 ERRORS AND 5 WARNINGS AFFECTING 26 LINES
+----------------------------------------------------------------------
+ 26 | ERROR   | [ ] Missing file doc comment
+ 27 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 27 | ERROR   | [x] "require_once" is a statement not a function; no
+    |         |     parentheses are required
+ 28 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 29 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 30 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 30 | WARNING | [x] Inline control structures are discouraged
+ 30 | ERROR   | [x] TRUE, FALSE and NULL must be lowercase; expected
+    |         |     "null" but found "NULL"
+ 31 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 32 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 32 | WARNING | [x] Inline control structures are discouraged
+ 32 | ERROR   | [x] Line indented incorrectly; expected 0 spaces,
+    |         |     found 1
+ 35 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 38 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 39 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 40 | WARNING | [ ] Line exceeds 85 characters; contains 103
+    |         |     characters
+ 43 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 44 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 45 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 45 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+    |         |     found 2
+ 47 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 47 | ERROR   | [x] Line indented incorrectly; expected at least 4
+    |         |     spaces, found 3
+ 48 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 48 | ERROR   | [x] Line indented incorrectly; expected at least 4
+    |         |     spaces, found 3
+ 49 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 49 | ERROR   | [x] Line indented incorrectly; expected at least 4
+    |         |     spaces, found 3
+ 51 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 51 | ERROR   | [x] Line indented incorrectly; expected 4 spaces,
+    |         |     found 2
+ 52 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 54 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 55 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 56 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 56 | WARNING | [ ] Line exceeds 85 characters; contains 109
+    |         |     characters
+ 57 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 57 | WARNING | [ ] Line exceeds 85 characters; contains 109
+    |         |     characters
+ 58 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 59 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+ 61 | ERROR   | [x] Spaces must be used to indent lines; tabs are not
+    |         |     allowed
+----------------------------------------------------------------------
+PHPCBF CAN FIX THE 34 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+Time: 25ms; Memory: 4Mb
+
+[Pipeline] }
+$ docker stop --time=1 10518dfdbbf9156bbe2743f1d4539708b05a17d7df00383fc765beb3eadfae78
+$ docker rm -f 10518dfdbbf9156bbe2743f1d4539708b05a17d7df00383fc765beb3eadfae78
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Unit Testing)
+[Pipeline] dir
+Running in /home/ec2-user/workspace/DevOps/tests/php/unit
+[Pipeline] {
+[Pipeline] sh
+[unit] Running shell script
++ docker build -t unit .
+Sending build context to Docker daemon 3.072 kB
+Step 1 : FROM ubuntu:latest
+ ---> 6a2f32de169d
+Step 2 : RUN apt-get update && apt-get -y install phpunit
+ ---> Using cache
+ ---> 68c8a4870c90
+Step 3 : EXPOSE 8080
+ ---> Using cache
+ ---> a3ce385df138
+Successfully built a3ce385df138
+[Pipeline] dockerFingerprintFrom
+[Pipeline] sh
+[unit] Running shell script
++ docker inspect -f . unit
+.
+[Pipeline] withDockerContainer
+$ docker run -t -d -u 500:500 -v /home/ec2-user/workspace/jenkins_pipeline/se2_devops_tr_15:/cdep -w /home/ec2-user/workspace/DevOps/tests/php/unit -v /home/ec2-user/workspace/DevOps/tests/php/unit:/home/ec2-user/workspace/DevOps/tests/php/unit:rw -v /home/ec2-user/workspace/DevOps/tests/php/unit@tmp:/home/ec2-user/workspace/DevOps/tests/php/unit@tmp:rw -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** --entrypoint cat unit
+[Pipeline] {
+[Pipeline] sh
+[unit] Running shell script
++ bash build.sh
+PHPUnit 5.1.3 by Sebastian Bergmann and contributors.
+
+......                                                              6 / 6 (100%)
+
+Time: 22 ms, Memory: 4.00Mb
+
+OK (6 tests, 6 assertions)
+[Pipeline] }
+$ docker stop --time=1 9d9dc6f2fda14c4c709284d335b23311f9a03740860fbe4370ff53650b2ea552
+$ docker rm -f 9d9dc6f2fda14c4c709284d335b23311f9a03740860fbe4370ff53650b2ea552
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Integration Testing)
+[Pipeline] dir
+Running in /home/ec2-user/workspace/DevOps/tests/php/integration
+[Pipeline] {
+[Pipeline] sh
+[integration] Running shell script
++ docker build -t integration .
+Sending build context to Docker daemon 3.072 kB
+Step 1 : FROM ubuntu:latest
+ ---> 6a2f32de169d
+Step 2 : RUN apt-get update && apt-get -y install php phpunit php-mysql
+ ---> Using cache
+ ---> 9fe49db15793
+Successfully built 9fe49db15793
+[Pipeline] dockerFingerprintFrom
+[Pipeline] sh
+[integration] Running shell script
++ docker inspect -f . integration
+.
+[Pipeline] withDockerContainer
+$ docker run -t -d -u 500:500 --link database:db -v /home/ec2-user/workspace/jenkins_pipeline/se2_devops_tr_15:/cdep -w /home/ec2-user/workspace/DevOps/tests/php/integration -v /home/ec2-user/workspace/DevOps/tests/php/integration:/home/ec2-user/workspace/DevOps/tests/php/integration:rw -v /home/ec2-user/workspace/DevOps/tests/php/integration@tmp:/home/ec2-user/workspace/DevOps/tests/php/integration@tmp:rw -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** --entrypoint cat integration
+[Pipeline] {
+[Pipeline] sh
+[integration] Running shell script
++ bash build.sh
+PHPUnit 5.1.3 by Sebastian Bergmann and contributors.
+
+.........                                                           9 / 9 (100%)
+
+Time: 26 ms, Memory: 4.00Mb
+
+OK (9 tests, 8 assertions)
+[Pipeline] }
+$ docker stop --time=1 5a3c49a0d94dc8773b755b290d339a0505eb910bd799846d32c7ece3d77ecdd7
+$ docker rm -f 5a3c49a0d94dc8773b755b290d339a0505eb910bd799846d32c7ece3d77ecdd7
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Staging)
+[Pipeline] sh
+[jenkins_pipeline] Running shell script
++ bash /home/ec2-user/workspace/DevOps/tests/staging/stage/php_stage/bash/push.sh se2_devops_tr_15
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Merging)
+[Pipeline] dir
+Running in /home/ec2-user/workspace/jenkins_pipeline/se2_devops_tr_15
+[Pipeline] {
+[Pipeline] sh
+[se2_devops_tr_15] Running shell script
++ git checkout master
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
+[Pipeline] sh
+[se2_devops_tr_15] Running shell script
++ git merge feature
+Updating 84d0695..ccc1bc7
+Fast-forward
+ index/index.php | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+[Pipeline] sh
+[se2_devops_tr_15] Running shell script
++ git push origin master
+To git@github.com:DevOpsActivity/se2_devops_tr_15.git
+   84d0695..ccc1bc7  master -> master
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Cleanup)
+[Pipeline] sh
+[jenkins_pipeline] Running shell script
++ sudo rm -rf /home/ec2-user/workspace/jenkins_pipeline/se2_devops_tr_15
+[Pipeline] sh
+[jenkins_pipeline] Running shell script
++ sudo rm -rf /home/ec2-user/workspace/jenkins_pipeline/se2_devops_tr_15@tmp
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: UNSTABLE

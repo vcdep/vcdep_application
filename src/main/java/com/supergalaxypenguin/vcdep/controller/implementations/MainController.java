@@ -360,4 +360,106 @@ public class MainController implements iMainController
     {
         return status;
     }
+    public int search(String stageInfo)
+    {
+       String [] stageArray = this.logFile.split("\n");
+       for(int i=0; i<stageArray.length; i++)
+       {
+          if(stageArray[i].equals(stageInfo))
+          {
+             return i;
+          }
+       }
+       return -1;
+    }
+    public String getCheckoutStatus()
+    {
+       String output = "";
+       int index = search("[Pipeline] { (Checkout)");
+       String [] checkoutArray = this.logFile.split("\n");
+       while(!checkoutArray[++index].contains("[Pipeline] { ("))
+       {
+          output = output + checkoutArray[index] + "\n";
+          if(index == checkoutArray.length-1)
+          {
+             break;
+          }
+       }
+       return output;
+    }
+    public String getBuildStatus()              //only run if it is a Java project
+    {
+       String output = "";
+       int index = search("[Pipeline] { (Build)");
+       String [] checkoutArray = this.logFile.split("\n");
+       while(!checkoutArray[++index].contains("[Pipeline] { ("))
+       {
+          output = output + checkoutArray[index] + "\n";
+          if(index == checkoutArray.length-1)
+          {
+             break;
+          }
+       }
+       return output;
+    }
+    public String getStaticAnalysisStatus()
+    {
+       String output = "";
+       int index = search("[Pipeline] { (Static Analysis)");
+       String [] checkoutArray = this.logFile.split("\n");
+       while(!checkoutArray[++index].contains("[Pipeline] { ("))
+       {
+          output = output + checkoutArray[index] + "\n";
+          if(index == checkoutArray.length-1)
+          {
+             break;
+          }
+       }
+       return output;
+    }
+    public String getUnitTestStatus()
+    {
+       String output = "";
+       int index = search("[Pipeline] { (Unit Testing)");
+       String [] checkoutArray = this.logFile.split("\n");
+       while(!checkoutArray[++index].contains("[Pipeline] { ("))
+       {
+          output = output + checkoutArray[index] + "\n";
+          if(index == checkoutArray.length-1)
+          {
+             break;
+          }
+       }
+       return output;
+    }
+    public String getIntegrationStatus()
+    {
+       String output = "";
+       int index = search("[Pipeline] { (Integration Testing)");
+       String [] checkoutArray = this.logFile.split("\n");
+       while(!checkoutArray[++index].contains("[Pipeline] { ("))
+       {
+          output = output + checkoutArray[index] + "\n";
+          if(index == checkoutArray.length-1)
+          {
+             break;
+          }
+       }
+       return output;
+    }
+    public String getDeploymentStatus()
+    {
+       String output = "";
+       int index = search("[Pipeline] { (Staging)");
+       String [] checkoutArray = this.logFile.split("\n");
+       while(!checkoutArray[++index].contains("[Pipeline] { ("))
+       {
+          output = output + checkoutArray[index] + "\n";
+          if(index == checkoutArray.length-1)
+          {
+             break;
+          }
+       }
+       return output;
+    }
 }
