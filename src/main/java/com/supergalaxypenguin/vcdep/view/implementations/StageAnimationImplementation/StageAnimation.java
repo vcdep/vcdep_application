@@ -3,8 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.supergalaxypenguin.vcdep.view.implementations.StageAnimations;
+package com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation;
 
+import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.BuildAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.CheckoutAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.DeployAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.IntegrationAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.StaticAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.UnitAnimation;
 import java.util.HashMap;
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.Button;

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.supergalaxypenguin.vcdep.view.implementations.StageAnimations;
+package com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes;
 
+import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.StageAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.StageInfo;
 import java.util.HashMap;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
@@ -13,7 +15,7 @@ import javafx.scene.shape.Rectangle;
  *
  * @author Howtoon
  */
-class UnitAnimation extends StageAnimation{
+public class UnitAnimation extends StageAnimation{
     
     public UnitAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
         super(info, backGround);
