@@ -1307,5 +1307,124 @@ public class ControllerInputTester
        //Assert
        assertEquals(result, actual);
        
-    }    
+    }   
+    @Test
+    public void TestCheckoutScript() throws FileNotFoundException
+    {
+       //Arrange
+       String [] testArray = {"static", "unit", "integration", "deployment"};
+       MainController controller = MainController.getInstance();
+       controller.setGitHubURL("gitHubURL");
+       controller.setBranchName("branchName");
+       controller.setStages(testArray);
+       controller.setLocalRepo("yourComputer");
+       controller.setLanguage("language");
+       File logFile = new File("./src/main/resources/textFiles/TestconsoleText.txt");
+       Scanner logScan = new Scanner(logFile);
+       String actual = "Welcome to the checkout stage.  Currently, the Jenkins pipeline is locating your Github repository "
+               + "located at gitHubURL and grabbing the branch labelled branchName and configuring the pipeline to analyze "
+               + "your project.  Jenkins is initializing using the language language, with the following stages enabled:\n" 
+               + "static\n" + "unit\n" + "integration\n" + "deployment\n" + "Additionally, Jenkins is creating a configuration "
+               + "file and saving it to your local git repository located at yourComputer\n" + "Build successful.  Continue "
+               + "to next stage.\n" + "If you would like to see details, click the log file button below.\n";
+       String logText = "";
+       while(logScan.hasNextLine())
+       {
+          logText = logText + logScan.nextLine() + "\n";
+       }
+       controller.setLogFile(logText);
+       //Act
+       String result = controller.parseCheckout();
+       //Assert
+       assertEquals(result, actual);
+    }
+    @Test
+    public void TestStaticAnalysisScript() throws FileNotFoundException
+    {
+       //Arrange
+
+       MainController controller = MainController.getInstance();
+       File logFile = new File("./src/main/resources/textFiles/TestconsoleText.txt");
+       Scanner logScan = new Scanner(logFile);
+       String actual = "Welcome to the Static Analysis stage.  Currently, the Jenkins pipeline is comparing your code with "
+               + "coding standards, looking for ways to improve your coding structure.\n" + "Static Analysis found 458 problems "
+               + "with your code.\n" + "If you would like to see details, click the log file button below.\n";
+       String logText = "";
+       while(logScan.hasNextLine())
+       {
+          logText = logText + logScan.nextLine() + "\n";
+       }
+       controller.setLogFile(logText);
+       //Act
+       String result = controller.parseStaticAnalysis();
+       //Assert
+       assertEquals(result, actual);
+    }
+    @Test
+    public void TestUnitTestScript() throws FileNotFoundException
+    {
+       //Arrange
+
+       MainController controller = MainController.getInstance();
+       File logFile = new File("./src/main/resources/textFiles/TestconsoleText.txt");
+       Scanner logScan = new Scanner(logFile);
+       String actual = "Welcome to unit testing.  Currently, the Jenkins pipeline is running your code’s unit tests to ensure "
+               + "that your changes still pass their respective unit tests.\n" + "All the unit tests passed.  Continue to next "
+               + "stage.\n" + "If you would like to see details, click the log file button below.\n";
+       String logText = "";
+       while(logScan.hasNextLine())
+       {
+          logText = logText + logScan.nextLine() + "\n";
+       }
+       controller.setLogFile(logText);
+       //Act
+       String result = controller.parseUnitTests();
+       //Assert
+       assertEquals(result, actual);
+    }
+    @Test
+    public void TestIntegrationScript() throws FileNotFoundException
+    {
+       //Arrange
+
+       MainController controller = MainController.getInstance();
+       File logFile = new File("./src/main/resources/textFiles/TestconsoleText.txt");
+       Scanner logScan = new Scanner(logFile);
+       String actual = "Welcome to integration.  Currently the Jenkins pipeline is integrating the modules within your project, "
+               + "ensuring that the changes have not caused any integration issues.\n" + "All the integration tests passed.  "
+               + "Continue to next stage.\n" + "If you would like to see details, click the log file button below.\n";
+       String logText = "";
+       while(logScan.hasNextLine())
+       {
+          logText = logText + logScan.nextLine() + "\n";
+       }
+       controller.setLogFile(logText);
+       //Act
+       String result = controller.parseIntegration();
+       //Assert
+       assertEquals(result, actual);
+    }
+    @Test
+    public void TestDeploymentScript() throws FileNotFoundException
+    {
+       //Arrange
+
+       MainController controller = MainController.getInstance();
+       File logFile = new File("./src/main/resources/textFiles/TestconsoleText.txt");
+       Scanner logScan = new Scanner(logFile);
+       String actual = "Welcome to deployment.  Currently, the Jenkins pipeline is deploying your new solution to production "
+               + "machines and checking that the new code is compatible with your production hardware and software.\nYour project"
+               + " passed the deployment stage.  Now your code is ready to be released.\n" + "If you would like to see details, "
+               + "click the log file button below.\n";
+       String logText = "";
+       while(logScan.hasNextLine())
+       {
+          logText = logText + logScan.nextLine() + "\n";
+       }
+       controller.setLogFile(logText);
+       //Act
+       String result = controller.parseDeployment();
+       //Assert
+       assertEquals(result, actual);
+    }
 }

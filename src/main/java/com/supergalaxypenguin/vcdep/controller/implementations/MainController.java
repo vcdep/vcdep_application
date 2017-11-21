@@ -5,6 +5,7 @@
  */
 package com.supergalaxypenguin.vcdep.controller.implementations;
 
+import com.sun.xml.internal.ws.util.StringUtils;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import com.supergalaxypenguin.vcdep.model.implementations.Model;
 import com.supergalaxypenguin.vcdep.view.implementations.ConfigurationViewController;
@@ -461,5 +462,117 @@ public class MainController implements iMainController
           }
        }
        return output;
+    }
+    public String parseCheckout()
+    {
+       String output = "Welcome to the checkout stage.  Currently, the Jenkins pipeline is locating your Github repository "
+               + "located at " + this.getGitHubURL() + " and grabbing the branch labelled " + this.getBranchName() + " and "
+               + "configuring the pipeline to analyze your project.  " + "Jenkins is initializing using the " + this.getLanguage() 
+               + " language, with the following stages enabled:\n";
+       for(int i=0; i<this.stages.length; i++)
+       {
+          output = output + this.stages[i] + "\n";
+       }
+       output = output + "Additionally, Jenkins is creating a configuration file and saving it to your local git repository "
+               + "located at " + this.getLocalRepo() + "\n";
+       //events
+       if(this.getCheckoutStatus().contains("ERROR:"))
+       {
+          output = output + "Build failed.  Github repository not found. Aborting.\n";
+       }
+       else
+       {
+          output = output + "Build successful.  Continue to next stage.\n";
+       }
+       output =  output + "If you would like to see details, click the log file button below.\n";
+       System.out.println(output);
+       return (output);
+    }
+    /* deal with later
+    public String parseBuild()               //java only
+    {
+       String output = "Welcome to the build stage.  Currently, the Jenkins pipeline is building your project and compiling "
+               + "the required files.";
+       //events
+       if(this.getBuildStatus().contains(""))
+       {
+          output = output + "Build failed.  Unable to compile project. Aborting.\n";
+       }
+       else
+       {
+          output = output + "Build successful.  Continue to next stage.\n";
+       }
+       output =  output + "If you would like to see details, click the log file button below.\n";
+       return (output);
+    }*/
+    public int findErrorCount()        //used to find staticAnalysis errors
+    {
+       int filesCount = this.getStaticAnalysisStatus().length() - this.getStaticAnalysisStatus().replace("FILE:", "").length();
+       filesCount = filesCount / 5;
+       int errorsCount = this.getStaticAnalysisStatus().length() - this.getStaticAnalysisStatus().replace("ERROR", "").length();
+       errorsCount = errorsCount / 5;
+       return(errorsCount - filesCount);
+    }
+    public String parseStaticAnalysis()
+    {
+      String output = "Welcome to the Static Analysis stage.  Currently, the Jenkins pipeline is comparing your code with coding "
+              + "standards, looking for ways to improve your coding structure.\n";
+       //events
+       int numErrors = this.findErrorCount();
+       if(numErrors > 0)
+       {
+          output = output + "Static Analysis found " + numErrors + " problems with your code.\n";
+       }
+       else
+       {
+          output = output + "Static Analysis found no issues with your code.  Continue to next stage.\n";
+       }
+       output =  output + "If you would like to see details, click the log file button below.\n";
+       System.out.println(output);
+       return (output);
+    }
+    public String parseUnitTests()
+    {
+      String output = "Welcome to unit testing.  Currently, the Jenkins pipeline is running your code’s unit tests to ensure "
+              + "that your changes still pass their respective unit tests.\n";
+       //events
+       if(this.getUnitTestStatus().contains("FAILURES!"))
+       {
+          output = output + "Unit testing found problems with your code. Aborting.\n";
+       }
+       else
+       {
+          output = output + "All the unit tests passed.  Continue to next stage.\n";
+       }
+       output =  output + "If you would like to see details, click the log file button below.\n";
+       System.out.println(output);
+       return (output);
+    }
+    public String parseIntegration()
+    {
+      String output = "Welcome to integration.  Currently the Jenkins pipeline is integrating the modules within your project,"
+              + " ensuring that the changes have not caused any integration issues.\n";
+       //events
+       if(this.getIntegrationStatus().contains("FAILURES!"))
+       {
+          output = output + "Integration testing found problems with your code. Aborting.\n";
+       }
+       else
+       {
+          output = output + "All the integration tests passed.  Continue to next stage.\n";
+       }
+       output =  output + "If you would like to see details, click the log file button below.\n";
+       System.out.println(output);
+       return (output);
+    }
+    public String parseDeployment()
+    {
+      String output = "Welcome to deployment.  Currently, the Jenkins pipeline is deploying your new solution to production "
+              + "machines and checking that the new code is compatible with your production hardware and software.\n";
+       //events
+       output = output + "Your project passed the deployment stage.  Now your code is ready to be released.\n";
+       output =  output + "If you would like to see details, click the log file button below.\n";
+       System.out.println(output);
+       return (output);
     }
 }
