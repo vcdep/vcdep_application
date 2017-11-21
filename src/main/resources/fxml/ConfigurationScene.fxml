@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.embed.swing.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.image.*?>
@@ -19,7 +20,10 @@
             <Image url="@../Images/galaxy.jpg" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" blendMode="DIFFERENCE" height="241.0" layoutX="10.0" layoutY="412.0" stroke="BLACK" strokeType="INSIDE" width="902.0">
+      <Rectangle fx:id="target_11" arcHeight="5.0" arcWidth="5.0" blendMode="DIFFERENCE" height="327.0" layoutX="39.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="406.0">
+         <effect>
+            <InnerShadow choke="0.26" color="WHITE" />
+         </effect>
          <fill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -29,10 +33,6 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <TextField id="gitUrl" fx:id="gitUrl" blendMode="DIFFERENCE" layoutX="46.0" layoutY="49.0" prefHeight="25.0" prefWidth="384.0" promptText="Git URL" style="-fx-background-color: lightgrey;" />
-      <TextField id="branch" fx:id="branch" blendMode="DIFFERENCE" layoutX="46.0" layoutY="116.0" prefHeight="25.0" prefWidth="384.0" promptText="Branch" style="-fx-background-color: lightgrey;" />
-      <TextField id="jenkins" fx:id="jenkins" blendMode="DIFFERENCE" layoutX="46.0" layoutY="178.0" prefHeight="25.0" prefWidth="384.0" promptText="Jenkins Server" style="-fx-background-color: lightgrey;" />
-      <ChoiceBox fx:id="lang" blendMode="DIFFERENCE" layoutX="47.0" layoutY="244.0" prefHeight="25.0" prefWidth="384.0" style="-fx-background-color: lightgrey;" />
       <Label layoutX="47.0" layoutY="160.0" prefHeight="18.0" prefWidth="121.0" text="Jenkin's Server:" textFill="#a4a1a1">
          <font>
             <Font name="Century Gothic Bold" size="14.0" />
@@ -48,15 +48,12 @@
             <Font name="Century Gothic" size="14.0" />
          </font>
       </Button>
-      <Label id="test label" fx:id="testLabel" layoutX="68.0" layoutY="364.0" prefHeight="142.0" prefWidth="361.0" textFill="#00ee34" />
       <ImageView fx:id="penguin" fitHeight="312.0" fitWidth="221.0" layoutX="606.0" layoutY="47.0">
          <image>
             <Image url="@../Images/Peng.png" />
          </image>
       </ImageView>
-      <Button fx:id="browse" contentDisplay="RIGHT" layoutX="364.0" layoutY="309.0" mnemonicParsing="false" onAction="#handleBrowseButton" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: lightgrey;" text="Browse" />
-      <TextField fx:id="localGitRepo" blendMode="DIFFERENCE" layoutX="47.0" layoutY="308.0" prefHeight="27.0" prefWidth="293.0" style="-fx-background-color: lightgrey;" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="117.0" layoutY="470.0" stroke="BLACK" strokeType="INSIDE" width="105.0">
+      <Rectangle fx:id="test" arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="117.0" layoutY="533.0" stroke="BLACK" strokeType="INSIDE" width="105.0">
          <fill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -69,7 +66,7 @@
             <InnerShadow choke="0.26" color="WHITE" />
          </effect>
       </Rectangle>
-      <Text fill="#d7d7d7" layoutX="411.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stage Configuration">
+      <Text fill="#d7d7d7" layoutX="398.0" layoutY="397.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stage Configuration">
          <font>
             <Font name="Century Gothic Bold" size="14.0" />
          </font>
@@ -89,7 +86,12 @@
             <Font name="Century Gothic Bold" size="14.0" />
          </font>
       </Label>
-      <Rectangle fx:id="target_1" arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="238.0" layoutY="470.0" stroke="BLACK" strokeType="INSIDE" width="105.0">
+      <Rectangle fx:id="target_111" arcHeight="5.0" arcWidth="5.0" blendMode="SCREEN" fill="#246e83" height="284.0" layoutX="42.0" layoutY="362.0" opacity="0.65" stroke="BLACK" strokeType="INSIDE" width="870.0">
+         <effect>
+            <InnerShadow choke="0.26" color="WHITE" />
+         </effect>
+      </Rectangle>
+      <Rectangle fx:id="target_2" arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="358.0" layoutY="533.0" stroke="BLACK" strokeType="INSIDE" width="105.0">
          <effect>
             <InnerShadow choke="0.26" color="WHITE" />
          </effect>
@@ -102,7 +104,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Rectangle fx:id="target_2" arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="358.0" layoutY="470.0" stroke="BLACK" strokeType="INSIDE" width="105.0">
+      <Rectangle fx:id="target_3" arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="478.0" layoutY="533.0" stroke="BLACK" strokeType="INSIDE" width="105.0">
          <effect>
             <InnerShadow choke="0.26" color="WHITE" />
          </effect>
@@ -115,7 +117,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Rectangle fx:id="target_3" arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="478.0" layoutY="470.0" stroke="BLACK" strokeType="INSIDE" width="105.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="716.0" layoutY="534.0" stroke="BLACK" strokeType="INSIDE" width="105.0">
          <effect>
             <InnerShadow choke="0.26" color="WHITE" />
          </effect>
@@ -128,7 +130,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Rectangle fx:id="target_4" arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="597.0" layoutY="470.0" stroke="BLACK" strokeType="INSIDE" width="105.0">
+      <Rectangle fx:id="target_4" arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="597.0" layoutY="533.0" stroke="BLACK" strokeType="INSIDE" width="105.0">
          <effect>
             <InnerShadow choke="0.26" color="WHITE" />
          </effect>
@@ -141,49 +143,74 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="716.0" layoutY="470.0" stroke="BLACK" strokeType="INSIDE" width="105.0">
-         <effect>
-            <InnerShadow choke="0.26" color="WHITE" />
-         </effect>
-         <fill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="BLACK" />
-                  <Stop color="#03348a" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </fill>
-      </Rectangle>
-      <ImageView fx:id="Deploy" fitHeight="105.0" fitWidth="105.0" layoutX="238.0" layoutY="471.0" mouseTransparent="true">
-         <image>
-            <Image url="@../Images/Icons/Deployment.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="integration" fitHeight="105.0" fitWidth="105.0" layoutX="359.0" layoutY="471.0" mouseTransparent="true">
-         <image>
-            <Image url="@../Images/Icons/Integration.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="static_a" fitHeight="105.0" fitWidth="105.0" layoutX="478.0" layoutY="470.0" mouseTransparent="true">
-         <image>
-            <Image url="@../Images/Icons/Static_Analysis.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="unit_test" fitHeight="56.0" fitWidth="105.0" layoutX="597.0" layoutY="495.0" mouseTransparent="true">
-         <image>
-            <Image url="@../Images/Icons/UnitTest.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="64.0" fitWidth="105.0" layoutX="117.0" layoutY="491.0">
+      <ImageView fitHeight="64.0" fitWidth="105.0" layoutX="116.0" layoutY="554.0">
          <image>
             <Image url="@../Images/Icons/Checkout.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="105.0" fitWidth="105.0" layoutX="716.0" layoutY="471.0">
+      <ImageView fitHeight="105.0" fitWidth="105.0" layoutX="716.0" layoutY="536.0">
          <image>
             <Image url="@../Images/Icons/Cleanup.png" />
          </image>
       </ImageView>
+      <Rectangle fx:id="target_1" arcHeight="5.0" arcWidth="5.0" blendMode="EXCLUSION" height="105.0" layoutX="238.0" layoutY="533.0" stroke="BLACK" strokeType="INSIDE" width="105.0">
+         <effect>
+            <InnerShadow choke="0.26" color="WHITE" />
+         </effect>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="#03348a" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <TextField fx:id="localGitRepo" layoutX="47.0" layoutY="308.0" prefHeight="27.0" prefWidth="293.0" style="-fx-background-color: lightgrey;" />
+      <ChoiceBox fx:id="lang" layoutX="47.0" layoutY="244.0" prefHeight="25.0" prefWidth="384.0" style="-fx-background-color: lightgrey;" />
+      <TextField id="jenkins" fx:id="jenkins" layoutX="46.0" layoutY="178.0" prefHeight="25.0" prefWidth="384.0" promptText="Jenkins Server" style="-fx-background-color: lightgrey;" />
+      <TextField id="branch" fx:id="branch" layoutX="46.0" layoutY="116.0" prefHeight="25.0" prefWidth="384.0" promptText="Branch" style="-fx-background-color: lightgrey;" />
+      <TextField id="gitUrl" fx:id="gitUrl" layoutX="46.0" layoutY="49.0" prefHeight="25.0" prefWidth="384.0" promptText="Git URL" style="-fx-background-color: lightgrey;" />
+      <Button fx:id="browse" contentDisplay="RIGHT" layoutX="364.0" layoutY="309.0" mnemonicParsing="false" onAction="#handleBrowseButton" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: lightgrey;" text="Browse" />
+      <Label fx:id="deployment" contentDisplay="TOP" layoutX="238.0" layoutY="409.0" prefHeight="17.0" prefWidth="21.0" textAlignment="JUSTIFY" textFill="#c9c8c8">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="105.0" fitWidth="105.0" mouseTransparent="true">
+               <image>
+                  <Image url="@../Images/Icons/Deployment.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <Label fx:id="integration" contentDisplay="TOP" layoutX="358.0" layoutY="411.0">
+         <graphic>
+            <ImageView fitHeight="105.0" fitWidth="105.0" mouseTransparent="true">
+               <image>
+                  <Image url="@../Images/Icons/Integration.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <Label fx:id="static_a" contentDisplay="TOP" layoutX="480.0" layoutY="411.0">
+         <graphic>
+            <ImageView fitHeight="105.0" fitWidth="105.0" mouseTransparent="true">
+               <image>
+                  <Image url="@../Images/Icons/Static_Analysis.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <Label fx:id="unit_test" contentDisplay="TOP" layoutX="597.0" layoutY="435.0">
+         <graphic>
+            <ImageView fitHeight="56.0" fitWidth="105.0" mouseTransparent="true">
+               <image>
+                  <Image url="@../Images/Icons/UnitTest.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
     </children>
    <effect>
       <Blend mode="DARKEN" />
