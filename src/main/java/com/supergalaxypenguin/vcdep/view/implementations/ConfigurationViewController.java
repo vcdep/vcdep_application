@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
@@ -74,6 +75,26 @@ public class ConfigurationViewController implements Initializable {
     private Label static_a;
     @FXML
     private Label unit_test;
+    @FXML
+    private ImageView cleanUp;
+    @FXML 
+    private CheckBox java;
+    @FXML
+    private CheckBox php;
+    @FXML
+    private Button stageReset;
+    
+    private String languageSelection = "";
+    
+    double deployX = 238.0;
+    double deployY = 411.0;
+    double integrateX = 358.0;
+    double integrateY = 411.0;
+    double staticX = 480.0;
+    double staticY = 411.0;
+    double unitX = 597.0;
+    double unitY = 411.0;
+    
 
     
 
@@ -122,7 +143,7 @@ public class ConfigurationViewController implements Initializable {
         //Set all inputs in Controller and runs the pipeline
         //language.equalsIgnoreCase(lang.getValue());
         try {
-            controller.runPipeline(gitUrl.getText(), lang.getValue(), localGitRepo.getText(), jenkins.getText(), branch.getText(), stages);
+            controller.runPipeline(gitUrl.getText(), languageSelection, localGitRepo.getText(), jenkins.getText(), branch.getText(), stages);
         } catch (Exception e) {
             System.out.println("Exception in controller.runpipline(params)");
         }
@@ -144,15 +165,60 @@ public class ConfigurationViewController implements Initializable {
         }
     }
 
-    public void registerDragEvent() {
-        //Image deploy = new Image(getClass().getResourceAsStream("/com/lynden/planning/ui/container2.png"));
+    public void handleStageReset(ActionEvent event) {
+        deployment.setLayoutX(deployX);
+        deployment.setLayoutY(deployY);
+        integration.setLayoutX(integrateX);
+        integration.setLayoutY(integrateY);
+        static_a.setLayoutX(staticX);
+        static_a.setLayoutY(staticY);
+        unit_test.setLayoutX(unitX);
+        unit_test.setLayoutY(unitY);
     }
 
+    public void handleDropDownTouchReleased(ActionEvent event)
+    {
+        System.out.println("Test Drop Down Touch Released");
+    }
+    
+    @FXML
+    public void handleCheckBox(ActionEvent event){
+        System.out.println("box checked");
+        CheckBox target = (CheckBox)event.getSource();
+        
+        
+        if(java == target){
+            php.setSelected(false);
+            cleanUp.setVisible(true);
+            languageSelection = "java";
+                    
+        }else if(php == target){
+            java.setSelected(false);
+            cleanUp.setVisible(false);
+            languageSelection = "php";
+        }
+        System.out.println(languageSelection);
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lang.getItems().add("PHP");
+        /*lang.getItems().add("PHP");
         lang.getItems().add("Java");
-        lang.setValue("Java");
+        lang.setValue("Java");*/
+        
+        
+        
+//        lang.onTouchPressedProperty();
+//        if (lang.hasProperties()) {
+//            if (lang.getValue().equals("Java")) {
+//                cleanUp.setVisible(true);
+//            } else {
+//                cleanUp.setVisible(false);
+//            }
+//        }
+        
+
+        
         deployment.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

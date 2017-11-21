@@ -38,7 +38,7 @@
             <Font name="Century Gothic Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="47.0" layoutY="290.0" prefHeight="18.0" prefWidth="140.0" text="Local Git Repository:" textFill="#a19d9d">
+      <Label layoutX="46.0" layoutY="229.0" prefHeight="18.0" prefWidth="140.0" text="Local Git Repository:" textFill="#a19d9d">
          <font>
             <Font name="Century Gothic Bold" size="14.0" />
          </font>
@@ -48,7 +48,7 @@
             <Font name="Century Gothic" size="14.0" />
          </font>
       </Button>
-      <ImageView fx:id="penguin" fitHeight="312.0" fitWidth="221.0" layoutX="606.0" layoutY="47.0">
+      <ImageView fx:id="penguin" fitHeight="312.0" fitWidth="221.0" layoutX="691.0" layoutY="47.0">
          <image>
             <Image url="@../Images/Peng.png" />
          </image>
@@ -81,7 +81,7 @@
             <Font name="Century Gothic Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="47.0" layoutY="226.0" prefHeight="17.0" prefWidth="89.0" text="Language:" textFill="#a4a1a1">
+      <Label layoutX="47.0" layoutY="307.0" prefHeight="17.0" prefWidth="89.0" text="Language:" textFill="#a4a1a1">
          <font>
             <Font name="Century Gothic Bold" size="14.0" />
          </font>
@@ -148,7 +148,7 @@
             <Image url="@../Images/Icons/Checkout.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="105.0" fitWidth="105.0" layoutX="716.0" layoutY="536.0">
+      <ImageView fx:id="cleanUp" fitHeight="105.0" fitWidth="105.0" layoutX="716.0" layoutY="536.0">
          <image>
             <Image url="@../Images/Icons/Cleanup.png" />
          </image>
@@ -166,12 +166,11 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <TextField fx:id="localGitRepo" layoutX="47.0" layoutY="308.0" prefHeight="27.0" prefWidth="293.0" style="-fx-background-color: lightgrey;" />
-      <ChoiceBox fx:id="lang" layoutX="47.0" layoutY="244.0" prefHeight="25.0" prefWidth="384.0" style="-fx-background-color: lightgrey;" />
+      <TextField fx:id="localGitRepo" layoutX="47.0" layoutY="247.0" prefHeight="27.0" prefWidth="293.0" style="-fx-background-color: lightgrey;" />
       <TextField id="jenkins" fx:id="jenkins" layoutX="46.0" layoutY="178.0" prefHeight="25.0" prefWidth="384.0" promptText="Jenkins Server" style="-fx-background-color: lightgrey;" />
       <TextField id="branch" fx:id="branch" layoutX="46.0" layoutY="116.0" prefHeight="25.0" prefWidth="384.0" promptText="Branch" style="-fx-background-color: lightgrey;" />
       <TextField id="gitUrl" fx:id="gitUrl" layoutX="46.0" layoutY="49.0" prefHeight="25.0" prefWidth="384.0" promptText="Git URL" style="-fx-background-color: lightgrey;" />
-      <Button fx:id="browse" contentDisplay="RIGHT" layoutX="364.0" layoutY="309.0" mnemonicParsing="false" onAction="#handleBrowseButton" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: lightgrey;" text="Browse" />
+      <Button fx:id="browse" contentDisplay="RIGHT" layoutX="358.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleBrowseButton" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: lightgrey;" text="Browse" />
       <Label fx:id="deployment" contentDisplay="TOP" layoutX="238.0" layoutY="409.0" prefHeight="17.0" prefWidth="21.0" textAlignment="JUSTIFY" textFill="#c9c8c8">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -202,15 +201,24 @@
             </ImageView>
          </graphic>
       </Label>
-      <Label fx:id="unit_test" contentDisplay="TOP" layoutX="597.0" layoutY="435.0">
+      <Label fx:id="unit_test" contentDisplay="TOP" layoutX="597.0" layoutY="411.0">
          <graphic>
-            <ImageView fitHeight="56.0" fitWidth="105.0" mouseTransparent="true">
+            <ImageView fitHeight="105.0" fitWidth="105.0" mouseTransparent="true">
                <image>
                   <Image url="@../Images/Icons/UnitTest.png" />
                </image>
             </ImageView>
          </graphic>
       </Label>
+      <CheckBox fx:id="java" layoutX="164.0" layoutY="302.0" mnemonicParsing="false" onAction="#handleCheckBox" text="Java" textFill="#ebe4e4">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></CheckBox>
+      <CheckBox fx:id="php" layoutX="291.0" layoutY="302.0" mnemonicParsing="false" onAction="#handleCheckBox" text="PHP" textFill="#fcefef">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></CheckBox>
+      <Button fx:id="stageReset" layoutX="820.0" layoutY="388.0" mnemonicParsing="false" onAction="#handleStageReset" text="Reset Stage" />
     </children>
    <effect>
       <Blend mode="DARKEN" />
