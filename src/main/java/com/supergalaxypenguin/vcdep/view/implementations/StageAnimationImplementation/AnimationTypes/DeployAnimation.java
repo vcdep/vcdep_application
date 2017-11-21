@@ -15,7 +15,7 @@ import javafx.scene.shape.Rectangle;
  *
  * @author Howtoon
  */
-class DeployAnimation extends StageAnimation{
+public class DeployAnimation extends StageAnimation{
     
     public DeployAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
         super(info, backGround);

@@ -15,7 +15,7 @@ import javafx.scene.shape.Rectangle;
  *
  * @author Howtoon
  */
-class CheckoutAnimation extends StageAnimation{
+public class CheckoutAnimation extends StageAnimation{
     
     public CheckoutAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
         super(info, backGround);

@@ -15,7 +15,7 @@ import javafx.scene.shape.Rectangle;
  *
  * @author Howtoon
  */
-class StaticAnimation extends StageAnimation{
+public class StaticAnimation extends StageAnimation{
 
     public StaticAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
         super(info, backGround);

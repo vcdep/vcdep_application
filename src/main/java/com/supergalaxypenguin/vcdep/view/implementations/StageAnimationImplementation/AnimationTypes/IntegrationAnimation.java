@@ -15,7 +15,7 @@ import javafx.scene.shape.Rectangle;
  *
  * @author Howtoon
  */
-class IntegrationAnimation extends StageAnimation{
+public class IntegrationAnimation extends StageAnimation{
     
     public IntegrationAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
         super(info, backGround);
