@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
@@ -31,7 +32,7 @@ import javafx.scene.paint.Color;
 public class ConfigurationViewController implements Initializable {
 
     private int progress = 0;
-    private String[] stages;
+    private String[] stages = new String[5];
     public static ConfigurationViewController instance;
     private static iMainController controller;
     private Stage stage;
@@ -95,6 +96,10 @@ public class ConfigurationViewController implements Initializable {
     double unitX = 597.0;
     double unitY = 411.0;
     
+    String payloadOne = "";
+    String payloadTwo = "";
+    String payloadThree = "";
+    String payloadFour = "";
 
     
 
@@ -135,6 +140,8 @@ public class ConfigurationViewController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) {
         System.out.println("Opening Pipline Viewer Window");
+        
+        System.out.println(Arrays.toString(stages));
         //testLabel.setText(gitUrl.getText()+"\n"+branch.getText()+"\n"+jenkins.getText());
         // this area will change
         //System.out.println(gitUrl.getText()+"\n"+branch.getText()+"\n"+jenkins.getText());
@@ -142,6 +149,7 @@ public class ConfigurationViewController implements Initializable {
         //How to do that?
         //Set all inputs in Controller and runs the pipeline
         //language.equalsIgnoreCase(lang.getValue());
+        
         try {
             controller.runPipeline(gitUrl.getText(), languageSelection, localGitRepo.getText(), jenkins.getText(), branch.getText(), stages);
         } catch (Exception e) {
@@ -220,6 +228,19 @@ public class ConfigurationViewController implements Initializable {
         event.consume();
         System.out.println(content.getString());
         System.out.println(target);
+        if (target == target_1){
+            payloadOne = content.getString();
+            stages[0] = payloadOne;
+        }else if (target == target_2){
+            payloadTwo = content.getString();
+            stages[1] = payloadTwo;
+        }else if (target == target_3){
+            payloadThree = content.getString();
+            stages[2] = payloadThree;
+        }else if (target == target_4){
+            payloadFour = content.getString();
+            stages[3] = payloadFour;
+        }
     }
     
     @FXML
@@ -265,6 +286,8 @@ public class ConfigurationViewController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+       
         
         deployment.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
@@ -315,77 +338,7 @@ public class ConfigurationViewController implements Initializable {
             }
         });
         
-//        target_1.setOnDragDropped(new EventHandler<DragEvent>() {
-//            public void handle(DragEvent event) {
-//                /* data dropped */
-//                /* if there is a string data on dragboard, read it and use it */
-//                Dragboard db = event.getDragboard();
-//                boolean success = false;
-//                if (db.hasString()) {
-//                    //target_1.setText(db.getString());
-//                    success = true;
-//                }
-//                /* let the source know whether the string was successfully 
-//         * transferred and used */
-//                event.setDropCompleted(success);
-//
-//                event.consume();
-//            }
-//        });
 
-//        target_2.setOnDragDropped(new EventHandler<DragEvent>() {
-//            public void handle(DragEvent event) {
-//                /* data dropped */
-//                /* if there is a string data on dragboard, read it and use it */
-//                Dragboard db = event.getDragboard();
-//                boolean success = false;
-//                if (db.hasString()) {
-//                    //target_1.setText(db.getString());
-//                    success = true;
-//                }
-//                /* let the source know whether the string was successfully 
-//         * transferred and used */
-//                event.setDropCompleted(success);
-//
-//                event.consume();
-//            }
-//        });
-
-//        target_3.setOnDragDropped(new EventHandler<DragEvent>() {
-//            public void handle(DragEvent event) {
-//                /* data dropped */
-//                /* if there is a string data on dragboard, read it and use it */
-//                Dragboard db = event.getDragboard();
-//                boolean success = false;
-//                if (db.hasString()) {
-//                    //target_1.setText(db.getString());
-//                    success = true;
-//                }
-//                /* let the source know whether the string was successfully 
-//         * transferred and used */
-//                event.setDropCompleted(success);
-//
-//                event.consume();
-//            }
-//        });
-
-//        target_4.setOnDragDropped(new EventHandler<DragEvent>() {
-//            public void handle(DragEvent event) {
-//                /* data dropped */
-//                /* if there is a string data on dragboard, read it and use it */
-//                Dragboard db = event.getDragboard();
-//                boolean success = false;
-//                if (db.hasString()) {
-//                    //target_1.setText(db.getString());
-//                    success = true;
-//                }
-//                /* let the source know whether the string was successfully 
-//         * transferred and used */
-//                event.setDropCompleted(success);
-//
-//                event.consume();
-//            }
-//        });
     }
 
 }
