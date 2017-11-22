@@ -127,13 +127,10 @@ public class ConfigurationViewController implements Initializable {
         System.out.println("Opening Pipline Viewer Window");
         
         System.out.println(Arrays.toString(stages));
-        //testLabel.setText(gitUrl.getText()+"\n"+branch.getText()+"\n"+jenkins.getText());
         // this area will change
-        //System.out.println(gitUrl.getText()+"\n"+branch.getText()+"\n"+jenkins.getText());
         //Check that all inputs are entered properly...
         //How to do that?
         //Set all inputs in Controller and runs the pipeline
-        //language.equalsIgnoreCase(lang.getValue());
         
         ArrayList<String> stagesList = new ArrayList<>();
         for (int i = 0; i< stages.length; i++)
@@ -333,80 +330,5 @@ public class ConfigurationViewController implements Initializable {
                 event.consume();
             }
         });
-<<<<<<< HEAD
-        
-//        target_1.setOnDragDropped(new EventHandler<DragEvent>() {
-//            public void handle(DragEvent event) {
-//                /* data dropped */
-//                /* if there is a string data on dragboard, read it and use it */
-//                Dragboard db = event.getDragboard();
-//                boolean success = false;
-//                if (db.hasString()) {
-//                    //target_1.setText(db.getString());
-//                    success = true;
-//                }
-//                /* let the source know whether the string was successfully 
-//         * transferred and used */
-//                event.setDropCompleted(success);
-//
-//                event.consume();
-//            }
-//        });
-
-        target_2.setOnDragDropped(new EventHandler<DragEvent>() {
-            public void handle(DragEvent event) {
-                /* data dropped */
-                /* if there is a string data on dragboard, read it and use it */
-                Dragboard db = event.getDragboard();
-                boolean success = false;
-                if (db.hasString()) {
-                    //target_1.setText(db.getString());
-                    success = true;
-                }
-                /* let the source know whether the string was successfully 
-             * transferred and used */
-                event.setDropCompleted(success);
-                event.consume();
-                System.out.println("Drag Dropped");
-            }
-        });
-
-//        target_3.setOnDragDropped(new EventHandler<DragEvent>() {
-//            public void handle(DragEvent event) {
-//                /* data dropped */
-//                /* if there is a string data on dragboard, read it and use it */
-//                Dragboard db = event.getDragboard();
-//                boolean success = false;
-//                if (db.hasString()) {
-//                    //target_1.setText(db.getString());
-//                    success = true;
-//                }
-//                /* let the source know whether the string was successfully 
-//         * transferred and used */
-//                event.setDropCompleted(success);
-//
-//                event.consume();
-//            }
-//        });
-
-//        target_4.setOnDragDropped(new EventHandler<DragEvent>() {
-//            public void handle(DragEvent event) {
-//                /* data dropped */
-//                /* if there is a string data on dragboard, read it and use it */
-//                Dragboard db = event.getDragboard();
-//                boolean success = false;
-//                if (db.hasString()) {
-//                    //target_1.setText(db.getString());
-//                    success = true;
-//                }
-//                /* let the source know whether the string was successfully 
-//         * transferred and used */
-//                event.setDropCompleted(success);
-//
-//                event.consume();
-//            }
-//        });
-=======
->>>>>>> a2e15d12a5b41966dca923b569bdf65015589126
     }
 }
