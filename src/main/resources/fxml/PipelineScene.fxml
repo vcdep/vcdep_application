@@ -77,7 +77,7 @@
       </ImageView>
       <ImageView fx:id="UnitImage3" fitHeight="54.0" fitWidth="48.0" layoutX="792.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/AnimationIcons/Code.png" />
+            <Image url="@../Images/AnimationIcons/localRepo.png" />
          </image>
       </ImageView>
       <ImageView fx:id="IntegrationImage2" fitHeight="54.0" fitWidth="104.0" layoutX="680.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
@@ -102,7 +102,7 @@
       </ImageView>
       <ImageView fx:id="chkoutImage1" fitHeight="54.0" fitWidth="48.0" layoutX="520.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/AnimationIcons/Code.png" />
+            <Image url="@../Images/AnimationIcons/localRepo.png" />
          </image>
       </ImageView>
       <ImageView fx:id="chkoutImagePassed" fitHeight="54.0" fitWidth="48.0" layoutX="868.0" layoutY="139.0" pickOnBounds="true" preserveRatio="true">
@@ -186,5 +186,80 @@
       <Button fx:id="btnUnit" layoutX="388.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleBtnUnit" prefHeight="27.0" prefWidth="122.0" text="Unit Test?" />
       <Button fx:id="btnSA" layoutX="388.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleBtnSA" prefHeight="27.0" prefWidth="122.0" text="Static Analysis?" />
       <Button layoutX="28.0" layoutY="651.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="133.0" text="Log File/Script" />
+      <ImageView fx:id="chkoutArrow1" fitHeight="18.0" fitWidth="31.0" layoutX="565.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Icons/arrow-right.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="chkoutArrow2" fitHeight="18.0" fitWidth="31.0" layoutX="707.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Icons/arrow-right.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="chkoutArrow3" fitHeight="9.0" fitWidth="31.0" layoutX="762.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Icons/arrow-left.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="SAArrow1" fitHeight="18.0" fitWidth="31.0" layoutX="565.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Icons/arrow-right.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="SAArrow2" fitHeight="18.0" fitWidth="31.0" layoutX="707.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Icons/arrow-right.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="SAArrow3" fitHeight="9.0" fitWidth="31.0" layoutX="762.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Icons/arrow-left.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="SAArrow4" fitHeight="9.0" fitWidth="31.0" layoutX="624.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Icons/arrow-left.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="UnitArrow1" fitHeight="18.0" fitWidth="31.0" layoutX="565.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Icons/arrow-right.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="UnitArrow2" fitHeight="18.0" fitWidth="31.0" layoutX="707.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Icons/arrow-right.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="UnitArrow3" fitHeight="9.0" fitWidth="31.0" layoutX="762.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Icons/arrow-left.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="UnitArrow4" fitHeight="9.0" fitWidth="31.0" layoutX="624.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Icons/arrow-left.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="IntegrationArrow1" fitHeight="18.0" fitWidth="31.0" layoutX="565.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Icons/arrow-right.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="IntegrationArrow2" fitHeight="9.0" fitWidth="31.0" layoutX="624.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Icons/arrow-left.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="DeployArrow1" fitHeight="18.0" fitWidth="31.0" layoutX="565.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Icons/arrow-right.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="DeployArrow2" fitHeight="9.0" fitWidth="31.0" layoutX="624.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/Icons/arrow-left.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

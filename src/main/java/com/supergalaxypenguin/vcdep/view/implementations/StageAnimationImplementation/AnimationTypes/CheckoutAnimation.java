@@ -26,8 +26,8 @@ public class CheckoutAnimation extends StageAnimation{
             animationIcons.get("chkoutImagePassed"), 
             animationIcons.get("chkoutImageFailed")//,
             //animationIcons.get("chkoutArrow1"),
-            //animationIcons.get("chkoutArrow1"),
-            //animationIcons.get("chkoutArrow1")
+            //animationIcons.get("chkoutArrow2"),
+            //animationIcons.get("chkoutArrow3")
         };
         super.images = _images;
         super.passImage = animationIcons.get("chkoutImagePassed");
