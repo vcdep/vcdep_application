@@ -333,23 +333,23 @@ public class ConfigurationViewController implements Initializable {
 //            }
 //        });
 
-//        target_2.setOnDragDropped(new EventHandler<DragEvent>() {
-//            public void handle(DragEvent event) {
-//                /* data dropped */
-//                /* if there is a string data on dragboard, read it and use it */
-//                Dragboard db = event.getDragboard();
-//                boolean success = false;
-//                if (db.hasString()) {
-//                    //target_1.setText(db.getString());
-//                    success = true;
-//                }
-//                /* let the source know whether the string was successfully 
-//         * transferred and used */
-//                event.setDropCompleted(success);
-//
-//                event.consume();
-//            }
-//        });
+        target_2.setOnDragDropped(new EventHandler<DragEvent>() {
+            public void handle(DragEvent event) {
+                /* data dropped */
+                /* if there is a string data on dragboard, read it and use it */
+                Dragboard db = event.getDragboard();
+                boolean success = false;
+                if (db.hasString()) {
+                    //target_1.setText(db.getString());
+                    success = true;
+                }
+                /* let the source know whether the string was successfully 
+             * transferred and used */
+                event.setDropCompleted(success);
+                event.consume();
+                System.out.println("Drag Dropped");
+            }
+        });
 
 //        target_3.setOnDragDropped(new EventHandler<DragEvent>() {
 //            public void handle(DragEvent event) {
