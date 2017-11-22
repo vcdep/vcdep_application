@@ -5,7 +5,6 @@
  */
 package com.supergalaxypenguin.vcdep.controller.implementations;
 
-import com.sun.xml.internal.ws.util.StringUtils;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import com.supergalaxypenguin.vcdep.model.implementations.Model;
 import com.supergalaxypenguin.vcdep.view.implementations.ConfigurationViewController;
@@ -68,6 +67,7 @@ public class MainController implements iMainController
      * Sets the Java FX Stage
      * @param _javaFXStage the JavaFX stage for the application
      */
+    @Override
     public void setJavaFXStage(Stage _javaFXStage)
     {
         this.javaFXStage = _javaFXStage;
@@ -77,6 +77,7 @@ public class MainController implements iMainController
      * displays the DirectoryChooser
      * @return Returns the absolute path of the directory chosen
      */
+    @Override
     public File displayDirectoryChooser()
     {
         DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -87,6 +88,7 @@ public class MainController implements iMainController
      * displays the ConfigurationScene
      * @throws java.io.IOException
      */
+    @Override
     public void displayConfigurationScene() throws IOException
     {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/ConfigurationScene.fxml"));
@@ -102,6 +104,7 @@ public class MainController implements iMainController
      * displays the PipelineScene
      * @throws IOException 
      */
+    @Override
     public void displayPipelineScene() throws IOException
     {
         this.pipelineSceneController = PipelineSceneController.getInstance();
@@ -119,6 +122,7 @@ public class MainController implements iMainController
      * Returns the String associated with the next step in the process
      * @return Returns a String containing the information about the next step
      */
+    @Override
     public String stepForward()
     {
         if (currentStage >= stages.length - 1 || stages == null)
@@ -136,6 +140,7 @@ public class MainController implements iMainController
      * Returns the String associated with the last step in the process
      * @return Returns a String containing the information about the last step
      */
+    @Override
     public String stepBackward()
     {
         if (currentStage <= 0 || stages == null)
@@ -153,6 +158,7 @@ public class MainController implements iMainController
      * Store the Log File from the Jenkins Server
      * @param _logFile stores the log file the was received from the Jenkins Server
      */
+    @Override
     public void setLogFile(String _logFile)
     {
         this.logFile = _logFile;
@@ -162,6 +168,7 @@ public class MainController implements iMainController
      * Gets the last Log File received from the Jenkins Server
      * @return Returns a String containing the file.
      */
+    @Override
     public String getLogFile()
     {
         logFile = model.requestLogFile();
@@ -177,6 +184,7 @@ public class MainController implements iMainController
      * @param branchName    on what branch are you working?
      * @param stages        in what order are the stages?
      */
+    @Override
     public void runPipeline(String gitHubURL, String language, String localGitRepo, String jenkinsURL, String branchName, String[] stages)
     {
         this.setGitHubURL(gitHubURL);
@@ -196,6 +204,7 @@ public class MainController implements iMainController
      * Returns the Jenkins URL
      * @return jenkinsURL the URL of the Jenkins server
      */
+    @Override
     public String getJenkinsURL() 
     {
         return jenkinsURL;
@@ -205,6 +214,7 @@ public class MainController implements iMainController
      * Sets the Jenkins URL address to the correct instance field for later use
      * @param jenkinsURL the URL of the Jenkins server
      */
+    @Override
     public void setJenkinsURL(String jenkinsURL) 
     {
         this.jenkinsURL = jenkinsURL;
@@ -214,6 +224,7 @@ public class MainController implements iMainController
      * Returns the GitHub URL
      * @return gitHubURL the URL of the specific remote repository
      */
+    @Override
     public String getGitHubURL() 
     {
         return gitHubURL;
@@ -223,6 +234,7 @@ public class MainController implements iMainController
      * Sets the GitHub URL address to the correct instance field for later use
      * @param gitHubURL the URL of the specific remote repository
      */
+    @Override
     public void setGitHubURL(String gitHubURL) 
     {
         this.gitHubURL = gitHubURL;
@@ -232,6 +244,7 @@ public class MainController implements iMainController
      * Returns the branch name
      * @return branchName the specific branch of the remote repository to access
      */
+    @Override
     public String getBranchName() 
     {
         return branchName;
@@ -241,6 +254,7 @@ public class MainController implements iMainController
      * Sets the name to the correct instance field for later use with specifying which branch to access
      * @param branch the specific branch of the remote repository to access
      */
+    @Override
     public void setBranchName(String branch) 
     {
         this.branchName = branch;
@@ -250,6 +264,7 @@ public class MainController implements iMainController
      * Returns the programming language of the remote repository application
      * @return language the programming language that the remote repository application is written in
      */
+    @Override
     public String getLanguage() 
     {
         return language;
@@ -259,6 +274,7 @@ public class MainController implements iMainController
      * Sets the programming language to the correct instance field for determining the type of pipeline to create
      * @param language the programming language that the remote repository application is written in
      */
+    @Override
     public void setLanguage(String language) 
     {
         this.language = language;
@@ -268,6 +284,7 @@ public class MainController implements iMainController
      * Returns the order of the pipeline stages in an array of Strings
      * @return stages an array containing the order of the stages to be run in the pipeline
      */
+    @Override
     public String[] getStages() 
     {
         return stages;
@@ -277,6 +294,7 @@ public class MainController implements iMainController
      * Sets the order of stages for the pipeline to run
      * @param stages an array of Strings that holds the order of the stages to run
      */
+    @Override
     public void setStages(String[] stages) 
     {
         this.stages = stages;
@@ -287,6 +305,7 @@ public class MainController implements iMainController
      * Returns the path to the local git repository
      * @return localGitRepo the path to the local git repository
      */
+    @Override
     public String getLocalRepo() 
     {
         return localGitRepo;
@@ -296,6 +315,7 @@ public class MainController implements iMainController
      * Sets the path of the local git repository to the correct instance field for later use
      * @param localGitRepo the path to the local git repository
      */
+    @Override
     public void setLocalRepo(String localGitRepo) 
     {
         this.localGitRepo = localGitRepo;
@@ -305,6 +325,7 @@ public class MainController implements iMainController
      * Returns the Model object for communication testing
      * @return Model
      */
+    @Override
     public Model getModel()
     {
         return model;
@@ -314,6 +335,7 @@ public class MainController implements iMainController
      * Returns the javaFXStage object for testing
      * @return Stage
      */
+    @Override
     public Stage getJavaFXStage()
     {
         return javaFXStage;
@@ -341,6 +363,7 @@ public class MainController implements iMainController
      * Updates the status to the view
      * @param status A String that is a message to the user
      */
+    @Override
     public void updateStatusToView(String status)
     {
         this.status = status;
@@ -395,7 +418,7 @@ public class MainController implements iMainController
        String [] checkoutArray = this.logFile.split("\n");
        while(!checkoutArray[++index].contains("BUILD"))
        {
-          continue;
+          continue; //LOL
        }
        String buildArray;
        index = index -1;
