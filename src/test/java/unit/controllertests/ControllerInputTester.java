@@ -166,14 +166,29 @@ public class ControllerInputTester
        //Assert
        assertEquals(result, actual);
     }
-    /*@Test
-    public void TestGetBuildStageInfoMethod()
+    @Test
+    public void TestGetBuildStageInfoMethod() throws FileNotFoundException
     {
        //Arrange
        MainController controller = MainController.getInstance();
-       File logFile = new File("./src/main/resources/textFiles/TestconsoleText.txt");
+       File logFile = new File("./src/main/resources/textFiles/javaConsoleText.txt");
        Scanner logScan = new Scanner(logFile);
-       String actual = ;
+       String actual = 
+"[INFO] BUILD SUCCESS\n" +
+"[INFO] ------------------------------------------------------------------------\n" +
+"[INFO] Total time: 8.298 s\n" +
+"[INFO] Finished at: 2017-11-22T00:47:27+00:00\n" +
+"[INFO] Final Memory: 17M/42M\n" +
+"[INFO] ------------------------------------------------------------------------\n" +
+"[Pipeline] }\n" +
+"$ docker stop --time=1 e5ecf18ac4a1b4431a4e0c1ebe49690f24d2c22a1587e85e52c794777d4ce81d\n" +
+"$ docker rm -f e5ecf18ac4a1b4431a4e0c1ebe49690f24d2c22a1587e85e52c794777d4ce81d\n" +
+"[Pipeline] // withDockerContainer\n" +
+"[Pipeline] }\n" +
+"[Pipeline] // dir\n" +
+"[Pipeline] }\n" +
+"[Pipeline] // stage\n" +
+"[Pipeline] stage\n";
        String logText = "";
        while(logScan.hasNextLine())
        {
@@ -181,11 +196,11 @@ public class ControllerInputTester
        }
        controller.setLogFile(logText);
        //Act
-       String result = controller.getCheckoutStatus();
+       String result = controller.getBuildStatus();
        System.out.println(result);
        //Assert
        assertEquals(result, actual);
-    }  */
+    }
     @Test
     public void TestGetStaticAnalysisStageInfoMethod() throws FileNotFoundException
     {
@@ -1339,15 +1354,39 @@ public class ControllerInputTester
        assertEquals(result, actual);
     }
     @Test
-    public void TestStaticAnalysisScript() throws FileNotFoundException
+    public void TestStaticAnalysisPHPScript() throws FileNotFoundException
     {
        //Arrange
 
        MainController controller = MainController.getInstance();
+       controller.setLanguage("php");
        File logFile = new File("./src/main/resources/textFiles/TestconsoleText.txt");
        Scanner logScan = new Scanner(logFile);
        String actual = "Welcome to the Static Analysis stage.  Currently, the Jenkins pipeline is comparing your code with "
                + "coding standards, looking for ways to improve your coding structure.\n" + "Static Analysis found 458 problems "
+               + "with your code.\n" + "If you would like to see details, click the log file button below.\n";
+       String logText = "";
+       while(logScan.hasNextLine())
+       {
+          logText = logText + logScan.nextLine() + "\n";
+       }
+       controller.setLogFile(logText);
+       //Act
+       String result = controller.parseStaticAnalysis();
+       //Assert
+       assertEquals(result, actual);
+    }
+    @Test
+    public void TestStaticAnalysisJAVAScript() throws FileNotFoundException
+    {
+       //Arrange
+
+       MainController controller = MainController.getInstance();
+       controller.setLanguage("java");
+       File logFile = new File("./src/main/resources/textFiles/JavaConsoleText.txt");
+       Scanner logScan = new Scanner(logFile);
+       String actual = "Welcome to the Static Analysis stage.  Currently, the Jenkins pipeline is comparing your code with "
+               + "coding standards, looking for ways to improve your coding structure.\n" + "Static Analysis found 14 problems "
                + "with your code.\n" + "If you would like to see details, click the log file button below.\n";
        String logText = "";
        while(logScan.hasNextLine())
@@ -1424,6 +1463,27 @@ public class ControllerInputTester
        controller.setLogFile(logText);
        //Act
        String result = controller.parseDeployment();
+       //Assert
+       assertEquals(result, actual);
+    }
+    @Test
+    public void TestBuildScript() throws FileNotFoundException
+    {
+       //Arrange
+       MainController controller = MainController.getInstance();
+       File logFile = new File("./src/main/resources/textFiles/javaConsoleText.txt");
+       Scanner logScan = new Scanner(logFile);
+       String actual = "Welcome to the build stage.  Currently, the Jenkins pipeline is building your project and compiling "
+               + "the required files.Build successful.  Continue to next stage.\n" + "If you would like to see details, click "
+               + "the log file button below.\n";
+       String logText = "";
+       while(logScan.hasNextLine())
+       {
+          logText = logText + logScan.nextLine() + "\n";
+       }
+       controller.setLogFile(logText);
+       //Act
+       String result = controller.parseBuild();
        //Assert
        assertEquals(result, actual);
     }

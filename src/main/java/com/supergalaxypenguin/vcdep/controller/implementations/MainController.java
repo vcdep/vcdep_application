@@ -393,6 +393,12 @@ public class MainController implements iMainController
        String output = "";
        int index = search("[Pipeline] { (Build)");
        String [] checkoutArray = this.logFile.split("\n");
+       while(!checkoutArray[++index].contains("BUILD"))
+       {
+          continue;
+       }
+       String buildArray;
+       index = index -1;
        while(!checkoutArray[++index].contains("[Pipeline] { ("))
        {
           output = output + checkoutArray[index] + "\n";
@@ -485,33 +491,50 @@ public class MainController implements iMainController
           output = output + "Build successful.  Continue to next stage.\n";
        }
        output =  output + "If you would like to see details, click the log file button below.\n";
-       System.out.println(output);
        return (output);
+
     }
-    /* deal with later
     public String parseBuild()               //java only
     {
-       String output = "Welcome to the build stage.  Currently, the Jenkins pipeline is building your project and compiling "
-               + "the required files.";
-       //events
-       if(this.getBuildStatus().contains(""))
+      String output = "Welcome to the build stage.  Currently, the Jenkins pipeline is building your project and compiling "
+                 + "the required files.";
+      //events
+      if(this.getBuildStatus().contains("FAILURE"))
+      {
+         output = output + "Build failed.  Unable to compile project. Aborting.\n";
+      }
+      else
+      {
+         output = output + "Build successful.  Continue to next stage.\n";
+      }
+      output =  output + "If you would like to see details, click the log file button below.\n";
+      System.out.println(output);
+      return (output);
+    }
+    public int findErrorCount()        //used to find staticAnalysis errors
+    {
+       int errorsCount=0;
+       if(this.getLanguage().equals("php"))
        {
-          output = output + "Build failed.  Unable to compile project. Aborting.\n";
+         int filesCount = this.getStaticAnalysisStatus().length() - this.getStaticAnalysisStatus().replace("FILE:", "").length();
+         filesCount = filesCount / 5;
+         errorsCount = this.getStaticAnalysisStatus().length() - this.getStaticAnalysisStatus().replace("ERROR", "").length();
+         errorsCount = errorsCount / 5;
+         return(errorsCount - filesCount);
        }
        else
        {
-          output = output + "Build successful.  Continue to next stage.\n";
+          String [] staticArray = this.getStaticAnalysisStatus().split("\n");
+          int i;
+          for(i=0; i<staticArray.length; i++)
+          {
+             if(staticArray[i].contains("/cdep/src/"))
+             {
+                errorsCount++;
+             }
+          }
+          return errorsCount;
        }
-       output =  output + "If you would like to see details, click the log file button below.\n";
-       return (output);
-    }*/
-    public int findErrorCount()        //used to find staticAnalysis errors
-    {
-       int filesCount = this.getStaticAnalysisStatus().length() - this.getStaticAnalysisStatus().replace("FILE:", "").length();
-       filesCount = filesCount / 5;
-       int errorsCount = this.getStaticAnalysisStatus().length() - this.getStaticAnalysisStatus().replace("ERROR", "").length();
-       errorsCount = errorsCount / 5;
-       return(errorsCount - filesCount);
     }
     public String parseStaticAnalysis()
     {
@@ -528,7 +551,6 @@ public class MainController implements iMainController
           output = output + "Static Analysis found no issues with your code.  Continue to next stage.\n";
        }
        output =  output + "If you would like to see details, click the log file button below.\n";
-       System.out.println(output);
        return (output);
     }
     public String parseUnitTests()
@@ -545,7 +567,6 @@ public class MainController implements iMainController
           output = output + "All the unit tests passed.  Continue to next stage.\n";
        }
        output =  output + "If you would like to see details, click the log file button below.\n";
-       System.out.println(output);
        return (output);
     }
     public String parseIntegration()
@@ -562,7 +583,6 @@ public class MainController implements iMainController
           output = output + "All the integration tests passed.  Continue to next stage.\n";
        }
        output =  output + "If you would like to see details, click the log file button below.\n";
-       System.out.println(output);
        return (output);
     }
     public String parseDeployment()
@@ -572,7 +592,6 @@ public class MainController implements iMainController
        //events
        output = output + "Your project passed the deployment stage.  Now your code is ready to be released.\n";
        output =  output + "If you would like to see details, click the log file button below.\n";
-       System.out.println(output);
        return (output);
     }
 }
