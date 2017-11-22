@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes;
+package com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animationtypes;
 
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.StageAnimation;
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.StageInfo;
+import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.StageAnimation;
+import com.supergalaxypenguin.vcdep.domain.StageInfo;
 import java.util.HashMap;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;

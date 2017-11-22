@@ -7,10 +7,10 @@ package com.supergalaxypenguin.vcdep.view.implementations;
 
 
 
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.StageType;
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.StageInfo;
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.StageAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.StageAnimation;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
+import com.supergalaxypenguin.vcdep.domain.StageInfo;
+import com.supergalaxypenguin.vcdep.domain.StageType;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;

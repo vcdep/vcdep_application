@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation;
+package com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation;
 
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.BuildAnimation;
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.CheckoutAnimation;
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.DeployAnimation;
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.IntegrationAnimation;
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.StaticAnimation;
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.UnitAnimation;
+import com.supergalaxypenguin.vcdep.domain.StageInfo;
+import com.supergalaxypenguin.vcdep.domain.StageType;
+import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animationtypes.BuildAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animationtypes.CheckoutAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animationtypes.DeployAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animationtypes.IntegrationAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animationtypes.StaticAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animationtypes.UnitAnimation;
 import java.util.HashMap;
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.Button;
