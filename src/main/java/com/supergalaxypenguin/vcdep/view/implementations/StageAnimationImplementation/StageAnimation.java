@@ -15,6 +15,8 @@ import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplement
 import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animationtypes.UnitAnimation;
 import java.util.HashMap;
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
@@ -87,6 +89,36 @@ public abstract class StageAnimation{
         this.backGround = backGround;
     }
 
+    protected static TranslateTransition getArrowAnimation(ImageView image, int X)
+    {
+        final TranslateTransition arrow = new TranslateTransition();
+        
+        arrow.setNode(image);
+        arrow.setToX(X);
+        arrow.setDuration(Duration.seconds(1));
+        arrow.cycleCountProperty().setValue(3);
+        arrow.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                arrow.setToX(0);
+                arrow.setDuration(Duration.seconds(0.0001));
+                arrow.play();
+                event.consume();
+            }
+        });
+        arrow.play();
+        return arrow;
+    }
+    
+    protected static void resetArrow(ImageView image)
+    {
+        TranslateTransition arrow1;
+        arrow1 = new TranslateTransition();
+        arrow1.setNode(image);
+        arrow1.setToX(0);
+        arrow1.setDuration(Duration.seconds(0.0001));
+        arrow1.play();
+    }
 
     /**
      * Move Icons to the proper stage position

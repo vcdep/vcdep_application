@@ -22,6 +22,7 @@ import javafx.util.Duration;
 public class DeployAnimation extends StageAnimation{
     TranslateTransition arrow1 = new TranslateTransition();
     TranslateTransition arrow2 = new TranslateTransition();
+    int arrowDist = 110;
     
     public DeployAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
         super(info, backGround);
@@ -43,35 +44,8 @@ public class DeployAnimation extends StageAnimation{
     public void play() {
         System.out.println("Play Deploy animation");
         
-        arrow1.setNode(super.images[4]);
-        arrow1.setToX(110);
-        arrow1.setDuration(Duration.seconds(1));
-        arrow1.cycleCountProperty().setValue(3);
-        arrow1.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                arrow1.setToX(0);
-                arrow1.setDuration(Duration.seconds(0.0001));
-                arrow1.play();
-                event.consume();
-            }
-        });
-        arrow1.play();
-        
-        arrow2.setNode(super.images[5]);
-        arrow2.setToX(-110);
-        arrow2.setDuration(Duration.seconds(1));
-        arrow2.cycleCountProperty().setValue(3);
-        arrow2.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                arrow2.setToX(0);
-                arrow2.setDuration(Duration.seconds(0.0001));
-                arrow2.play();
-                event.consume();
-            }
-        });
-        arrow2.play();
+        this.arrow1 = StageAnimation.getArrowAnimation(super.images[4], arrowDist);
+        this.arrow2 = StageAnimation.getArrowAnimation(super.images[5], -arrowDist);
     }
 
     @Override
@@ -79,19 +53,9 @@ public class DeployAnimation extends StageAnimation{
         System.out.println("Stop Deploy animation");
         
         this.arrow1.stop();
-        TranslateTransition arrow1;
-        arrow1 = new TranslateTransition();
-        arrow1.setNode(super.images[4]);
-        arrow1.setToX(0);
-        arrow1.setDuration(Duration.seconds(0.0001));
-        arrow1.play();
+        StageAnimation.resetArrow(super.images[4]);
         
         this.arrow2.stop();
-        TranslateTransition arrow2;
-        arrow2 = new TranslateTransition();
-        arrow2.setNode(super.images[5]);
-        arrow2.setToX(0);
-        arrow2.setDuration(Duration.seconds(0.0001));
-        arrow2.play();
+        StageAnimation.resetArrow(super.images[5]);
     }
 }
