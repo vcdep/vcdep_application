@@ -13,15 +13,12 @@ import javafx.scene.image.ImageView;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.image.Image;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -101,19 +98,8 @@ public class ConfigurationViewController implements Initializable {
     String payloadThree = "";
     String payloadFour = "";
 
-    
-
     private ClipboardContent content = new ClipboardContent();
-
-    //private Image unitTest = new Image("..\\Images\\Icons\\UnitTest.png");
-    /*
-    //******Progress bar to be implemented on a later sprint//
-    @FXML
-    final ProgressBar pb = new ProgressBar(0);
-    @FXML
-    final ProgressIndicator pi = new ProgressIndicator(0);
-     */
-
+    
     /**
      * Creates the ConfigurationViewController
      */
@@ -134,7 +120,6 @@ public class ConfigurationViewController implements Initializable {
     public void setStage(Stage stage) {
         this.stage = stage;
         //MouseControlUtil.makeDraggable(deploy);
-
     }
 
     @FXML
@@ -149,6 +134,19 @@ public class ConfigurationViewController implements Initializable {
         //How to do that?
         //Set all inputs in Controller and runs the pipeline
         //language.equalsIgnoreCase(lang.getValue());
+        
+        ArrayList<String> stagesList = new ArrayList<>();
+        for (int i = 0; i< stages.length; i++)
+        {
+            if (stages[i]!=null)
+            {
+                stagesList.add(stages[i]);
+            }
+        }
+        String[] stages = new String[stagesList.size()];
+        stages = stagesList.toArray(stages);
+        
+        System.out.println(Arrays.toString(stages));
         
         try {
             controller.runPipeline(gitUrl.getText(), languageSelection, localGitRepo.getText(), jenkins.getText(), branch.getText(), stages);
@@ -182,6 +180,10 @@ public class ConfigurationViewController implements Initializable {
         static_a.setLayoutY(staticY);
         unit_test.setLayoutX(unitX);
         unit_test.setLayoutY(unitY);
+        for(int i = 0; i<stages.length; i++)
+        {
+            stages[i] = null;
+        }
     }
 
     public void handleDropDownTouchReleased(ActionEvent event)
@@ -193,7 +195,6 @@ public class ConfigurationViewController implements Initializable {
     public void handleCheckBox(ActionEvent event){
         System.out.println("box checked");
         CheckBox target = (CheckBox)event.getSource();
-        
         
         if(java == target){
             php.setSelected(false);
@@ -241,6 +242,7 @@ public class ConfigurationViewController implements Initializable {
             payloadFour = content.getString();
             stages[3] = payloadFour;
         }
+        System.out.println(Arrays.toString(stages));
     }
     
     @FXML
@@ -282,19 +284,14 @@ public class ConfigurationViewController implements Initializable {
         System.out.println("Drag Dropped");
     }
 
-
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-       
-        
         deployment.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 Dragboard db = deployment.startDragAndDrop(TransferMode.MOVE);
 
-                content.putString("Deployment");
+                content.putString("Deploy");
                 db.setContent(content);
                 System.out.println("drag detected");
                 event.consume();
@@ -318,7 +315,7 @@ public class ConfigurationViewController implements Initializable {
             public void handle(MouseEvent event) {
                 Dragboard db = static_a.startDragAndDrop(TransferMode.MOVE);
 
-                content.putString("Static Analysis");
+                content.putString("Static");
                 db.setContent(content);
                 System.out.println("drag detected");
                 event.consume();
@@ -330,15 +327,11 @@ public class ConfigurationViewController implements Initializable {
             public void handle(MouseEvent event) {
                 Dragboard db = unit_test.startDragAndDrop(TransferMode.MOVE);
 
-                content.putString("Unit Test");
+                content.putString("Unit");
                 db.setContent(content);
                 System.out.println("drag detected");
                 event.consume();
-
             }
         });
-        
-
     }
-
 }
