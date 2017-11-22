@@ -13,14 +13,12 @@ import javafx.scene.image.ImageView;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.image.Image;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -31,7 +29,7 @@ import javafx.scene.paint.Color;
 public class ConfigurationViewController implements Initializable {
 
     private int progress = 0;
-    private String[] stages;
+    private String[] stages = new String[5];
     public static ConfigurationViewController instance;
     private static iMainController controller;
     private Stage stage;
@@ -95,20 +93,13 @@ public class ConfigurationViewController implements Initializable {
     double unitX = 597.0;
     double unitY = 411.0;
     
-
-    
+    String payloadOne = "";
+    String payloadTwo = "";
+    String payloadThree = "";
+    String payloadFour = "";
 
     private ClipboardContent content = new ClipboardContent();
-
-    //private Image unitTest = new Image("..\\Images\\Icons\\UnitTest.png");
-    /*
-    //******Progress bar to be implemented on a later sprint//
-    @FXML
-    final ProgressBar pb = new ProgressBar(0);
-    @FXML
-    final ProgressIndicator pi = new ProgressIndicator(0);
-     */
-
+    
     /**
      * Creates the ConfigurationViewController
      */
@@ -129,12 +120,13 @@ public class ConfigurationViewController implements Initializable {
     public void setStage(Stage stage) {
         this.stage = stage;
         //MouseControlUtil.makeDraggable(deploy);
-
     }
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
         System.out.println("Opening Pipline Viewer Window");
+        
+        System.out.println(Arrays.toString(stages));
         //testLabel.setText(gitUrl.getText()+"\n"+branch.getText()+"\n"+jenkins.getText());
         // this area will change
         //System.out.println(gitUrl.getText()+"\n"+branch.getText()+"\n"+jenkins.getText());
@@ -142,6 +134,20 @@ public class ConfigurationViewController implements Initializable {
         //How to do that?
         //Set all inputs in Controller and runs the pipeline
         //language.equalsIgnoreCase(lang.getValue());
+        
+        ArrayList<String> stagesList = new ArrayList<>();
+        for (int i = 0; i< stages.length; i++)
+        {
+            if (stages[i]!=null)
+            {
+                stagesList.add(stages[i]);
+            }
+        }
+        String[] stages = new String[stagesList.size()];
+        stages = stagesList.toArray(stages);
+        
+        System.out.println(Arrays.toString(stages));
+        
         try {
             controller.runPipeline(gitUrl.getText(), languageSelection, localGitRepo.getText(), jenkins.getText(), branch.getText(), stages);
         } catch (Exception e) {
@@ -174,6 +180,10 @@ public class ConfigurationViewController implements Initializable {
         static_a.setLayoutY(staticY);
         unit_test.setLayoutX(unitX);
         unit_test.setLayoutY(unitY);
+        for(int i = 0; i<stages.length; i++)
+        {
+            stages[i] = null;
+        }
     }
 
     public void handleDropDownTouchReleased(ActionEvent event)
@@ -185,7 +195,6 @@ public class ConfigurationViewController implements Initializable {
     public void handleCheckBox(ActionEvent event){
         System.out.println("box checked");
         CheckBox target = (CheckBox)event.getSource();
-        
         
         if(java == target){
             php.setSelected(false);
@@ -220,6 +229,20 @@ public class ConfigurationViewController implements Initializable {
         event.consume();
         System.out.println(content.getString());
         System.out.println(target);
+        if (target == target_1){
+            payloadOne = content.getString();
+            stages[0] = payloadOne;
+        }else if (target == target_2){
+            payloadTwo = content.getString();
+            stages[1] = payloadTwo;
+        }else if (target == target_3){
+            payloadThree = content.getString();
+            stages[2] = payloadThree;
+        }else if (target == target_4){
+            payloadFour = content.getString();
+            stages[3] = payloadFour;
+        }
+        System.out.println(Arrays.toString(stages));
     }
     
     @FXML
@@ -261,17 +284,14 @@ public class ConfigurationViewController implements Initializable {
         System.out.println("Drag Dropped");
     }
 
-
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
         deployment.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 Dragboard db = deployment.startDragAndDrop(TransferMode.MOVE);
 
-                content.putString("Deployment");
+                content.putString("Deploy");
                 db.setContent(content);
                 System.out.println("drag detected");
                 event.consume();
@@ -295,7 +315,7 @@ public class ConfigurationViewController implements Initializable {
             public void handle(MouseEvent event) {
                 Dragboard db = static_a.startDragAndDrop(TransferMode.MOVE);
 
-                content.putString("Static Analysis");
+                content.putString("Static");
                 db.setContent(content);
                 System.out.println("drag detected");
                 event.consume();
@@ -307,13 +327,13 @@ public class ConfigurationViewController implements Initializable {
             public void handle(MouseEvent event) {
                 Dragboard db = unit_test.startDragAndDrop(TransferMode.MOVE);
 
-                content.putString("Unit Test");
+                content.putString("Unit");
                 db.setContent(content);
                 System.out.println("drag detected");
                 event.consume();
-
             }
         });
+<<<<<<< HEAD
         
 //        target_1.setOnDragDropped(new EventHandler<DragEvent>() {
 //            public void handle(DragEvent event) {
@@ -386,6 +406,7 @@ public class ConfigurationViewController implements Initializable {
 //                event.consume();
 //            }
 //        });
+=======
+>>>>>>> a2e15d12a5b41966dca923b569bdf65015589126
     }
-
 }
