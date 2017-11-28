@@ -520,7 +520,7 @@ public class MainController implements iMainController
     public String parseBuild()               //java only
     {
       String output = "Welcome to the build stage.  Currently, the Jenkins pipeline is building your project and compiling "
-                 + "the required files.";
+                 + "the required files.  ";
       //events
       if(this.getBuildStatus().contains("FAILURE"))
       {
