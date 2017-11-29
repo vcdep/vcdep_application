@@ -7,6 +7,7 @@ package com.supergalaxypenguin.vcdep.view.implementations;
 
 
 
+import com.supergalaxypenguin.vcdep.controller.implementations.MainController;
 import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.StageAnimation;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import com.supergalaxypenguin.vcdep.domain.StageInfo;
@@ -385,6 +386,7 @@ public class PipelineSceneController implements Initializable {
     {
         System.out.println("Test Go Back Button");
         this.getLastAnimation();
+        this.updateStatus();
     }
     
     /**
@@ -396,6 +398,7 @@ public class PipelineSceneController implements Initializable {
     {
         System.out.println("Test Forward Button");
         this.getNextAnimation();
+        this.updateStatus();
     }
     
     /**
@@ -418,6 +421,36 @@ public class PipelineSceneController implements Initializable {
         System.out.println("Test Re-Submit Button");
     }
     
+    private void updateStatus()
+    {
+    
+        if (stages.get(this.currentStage).equalsIgnoreCase("Checkout"))
+        {
+            this.status = ((MainController) controller).getCheckoutStatus();
+        }
+        else if (stages.get(this.currentStage).equalsIgnoreCase("Static"))
+        {
+            this.status = ((MainController) controller).getStaticAnalysisStatus();
+        }
+        else if (stages.get(this.currentStage).equalsIgnoreCase("Unit"))
+        {
+            this.status = ((MainController) controller).getUnitTestStatus();
+        }
+        else if (stages.get(this.currentStage).equalsIgnoreCase("Integration"))
+        {
+            this.status = ((MainController) controller).getIntegrationStatus();
+        }
+        else if (stages.get(this.currentStage).equalsIgnoreCase("Deploy"))
+        {
+            this.status = ((MainController) controller).getDeploymentStatus();
+        }
+        else if (stages.get(this.currentStage).equalsIgnoreCase("Build"))
+        {
+            this.status = ((MainController) controller).getBuildStatus();
+        }
+        
+    }
+    
     /**
      * ReSubmit button should clear all current animations and seek an updated log file to build new animations
      * @param event 
@@ -429,12 +462,12 @@ public class PipelineSceneController implements Initializable {
         if (this.displayLog)
         {
             this.btnLogAndScript.textProperty().set("Script");
-            this.updateScrollPane("Displaying Log");
+            this.updateScrollPane(this.status);
         }
         else
         {
             this.btnLogAndScript.textProperty().set("Log File");
-            this.updateScrollPane("Displaying Script");
+            this.updateScrollPane(this.status);
         }
         this.displayLog = !this.displayLog;
     }
@@ -450,10 +483,10 @@ public class PipelineSceneController implements Initializable {
         {
             label.setWrapText(true);
             label.setText(message);
-            label.setPrefWidth(365);
+            label.setPrefWidth(595);
             scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
-            scrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-            scrollPane.setPrefSize(375, 385);
+            scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+            scrollPane.setPrefSize(605, 499);
             scrollPane.setContent(label);
         }
         catch(Exception e)
