@@ -3,6 +3,8 @@ package com.supergalaxypenguin.vcdep;
 import com.supergalaxypenguin.vcdep.controller.implementations.MainController;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 

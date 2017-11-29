@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -25,6 +26,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -158,11 +165,47 @@ public class PipelineSceneController implements Initializable {
     private Button btnBuild;
     @FXML
     private Button btnLogAndScript;
+    @FXML
+    private Label deployment;
+    @FXML
+    private Label integration;
+    @FXML
+    private Label static_a;
+    @FXML
+    private Label unit_test;
+    @FXML
+    private Label build;
+    @FXML
+    private Rectangle target_1;
+    @FXML
+    private Rectangle target_2;
+    @FXML
+    private Rectangle target_3;
+    @FXML
+    private Rectangle target_4;
+    @FXML
+    private Rectangle target_5;
+    @FXML
+    private Button stageReset;
+          
     HashMap<StageType, Button> helpButtons = new HashMap<>();
     
     private Label label = new Label();
     
     private final HashMap<Integer, String> stages = new HashMap<>();
+    
+    private ClipboardContent content = new ClipboardContent();
+    
+    public final double deployX = 320.0;
+    public final double deployY = 14.0;
+    public final double integrateX = 440.0;
+    public final double integrateY = 14.0;
+    public final double staticX = 560.0;
+    public final double staticY = 14.0;
+    public final double unitX = 680.0;
+    public final double unitY = 14.0;
+    public final double buildX = 800.0;
+    public final double buildY = 14.0;
     
     /**
      * Initializes the controller class.
@@ -170,10 +213,139 @@ public class PipelineSceneController implements Initializable {
      * @param url
      * @param rb
      */
+    public void handleStageReset(ActionEvent event) {
+        deployment.setLayoutX(deployX);
+        deployment.setLayoutY(deployY);
+        integration.setLayoutX(integrateX);
+        integration.setLayoutY(integrateY);
+        static_a.setLayoutX(staticX);
+        static_a.setLayoutY(staticY);
+        unit_test.setLayoutX(unitX);
+        unit_test.setLayoutY(unitY);
+        build.setLayoutX(buildX);
+        build.setLayoutY(buildY);
+    }
+    @FXML
+    public void handleOnDragEntered(DragEvent event) {
+        /* the drag-and-drop gesture entered the target */
+        /* show to the user that it is an actual gesture target */
+        if (event.getGestureSource() != event.getGestureTarget()
+                && event.getDragboard().hasString()) {
+            Rectangle target = (Rectangle)event.getTarget();
+            target.setFill(Color.GREEN);
+        }
+        event.consume();
+        System.out.println("Drag Entered");
+    }
+    @FXML
+    public void handleOnDragOver(DragEvent event) 
+    {
+        Rectangle target = null;
+        /* data is dragged over the target */
+        /* accept it only if it is not dragged from the same node 
+         * and if it has a string data */
+        if (event.getGestureSource() != event.getGestureTarget()
+                && event.getDragboard().hasString()) 
+        {
+            target = (Rectangle)event.getTarget();
+            /* allow for moving */
+            event.acceptTransferModes(TransferMode.MOVE);
+            Label label = (Label)event.getGestureSource();
+            label.setLayoutX(target.getLayoutX());
+            label.setLayoutY(target.getLayoutY()-11);
+        }
+        event.consume();
+        System.out.println(content.getString());
+        System.out.println(target);
+    }    
+    
+    @FXML
+    public void handleOnDragExited(DragEvent event) {
+    /* mouse moved away, remove the graphical cues */
+        Rectangle target = (Rectangle)event.getTarget();
+        target.setFill(Color.BLACK);
+        event.consume();
+        System.out.println("Drag Exited");
+    }
+    
+    @FXML
+    public void handleOnDragDropped(DragEvent event) {
+        /* data dropped */
+        /* if there is a string data on dragboard, read it and use it */
+        Dragboard db = event.getDragboard();
+        boolean success = false;
+        if (db.hasString()) {
+            //target_1.setText(db.getString());
+            success = true;
+        }
+        /* let the source know whether the string was successfully 
+        * transferred and used */
+        event.setDropCompleted(success);
+        event.consume();
+        System.out.println("Drag Dropped");
+    }
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
+        deployment.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Dragboard db = deployment.startDragAndDrop(TransferMode.MOVE);
+
+                content.putString("Deploy");
+                db.setContent(content);
+                System.out.println("drag detected");
+                event.consume();
+
+            }
+        });
+        integration.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Dragboard db = integration.startDragAndDrop(TransferMode.MOVE);
+
+                content.putString("Integration");
+                db.setContent(content);
+                System.out.println("drag detected");
+                event.consume();
+
+            }
+        });
+        static_a.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Dragboard db = static_a.startDragAndDrop(TransferMode.MOVE);
+
+                content.putString("Static");
+                db.setContent(content);
+                System.out.println("drag detected");
+                event.consume();
+
+            }
+        });
+        unit_test.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Dragboard db = unit_test.startDragAndDrop(TransferMode.MOVE);
+
+                content.putString("Unit");
+                db.setContent(content);
+                System.out.println("drag detected");
+                event.consume();
+            }
+        });
+        build.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Dragboard db = build.startDragAndDrop(TransferMode.MOVE);
+
+                content.putString("build");
+                db.setContent(content);
+                System.out.println("drag detected");
+                event.consume();
+            }
+        });
         currentStage = -1;
 
         stages.put(0, "Checkout");
