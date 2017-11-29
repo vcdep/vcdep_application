@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane id="AnchorPane" prefHeight="741.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supergalaxypenguin.vcdep.view.implementations.PipelineSceneController">
+<AnchorPane id="AnchorPane" prefHeight="741.0" prefWidth="945.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supergalaxypenguin.vcdep.view.implementations.PipelineSceneController">
    <children>
       <ImageView fx:id="cartoonSpaceBackground" fitHeight="743.0" fitWidth="946.0" layoutY="-2.0">
          <image>
@@ -185,7 +180,7 @@
       <Button fx:id="btnCheckOut" layoutX="388.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleBtnCheckout" prefHeight="27.0" prefWidth="122.0" text="Checkout?" />
       <Button fx:id="btnUnit" layoutX="388.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleBtnUnit" prefHeight="27.0" prefWidth="122.0" text="Unit Test?" />
       <Button fx:id="btnSA" layoutX="388.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleBtnSA" prefHeight="27.0" prefWidth="122.0" text="Static Analysis?" />
-      <Button layoutX="28.0" layoutY="651.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="133.0" text="Log File/Script" />
+      <Button fx:id="btnLogAndScript" layoutX="28.0" layoutY="651.0" mnemonicParsing="false" onAction="#handleBtnLogAndScript" prefHeight="48.0" prefWidth="133.0" text="Log File/Script" />
       <ImageView fx:id="chkoutArrow1" fitHeight="18.0" fitWidth="31.0" layoutX="565.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/Icons/arrow-right.png" />

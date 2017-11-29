@@ -154,6 +154,8 @@ public class PipelineSceneController implements Initializable {
     private Button btnDeploy;
     @FXML
     private Button btnBuild;
+    @FXML
+    private Button btnLogAndScript;
     HashMap<StageType, Button> helpButtons = new HashMap<>();
     @FXML
     private Label label;
@@ -413,6 +415,16 @@ public class PipelineSceneController implements Initializable {
     private void handleBtnReSubmit(ActionEvent event)
     {
         System.out.println("Test Re-Submit Button");
+    }
+    
+    /**
+     * ReSubmit button should clear all current animations and seek an updated log file to build new animations
+     * @param event 
+     */
+    @FXML
+    private void handleBtnLogAndScript(ActionEvent event)
+    {
+        System.out.println("Test Logfile/Script Button");
     }
     
     /**

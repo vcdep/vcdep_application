@@ -384,6 +384,7 @@ public class MainController implements iMainController
     {
         return status;
     }
+    
     public int search(String stageInfo)
     {
        String [] stageArray = this.logFile.split("\n");
@@ -396,6 +397,7 @@ public class MainController implements iMainController
        }
        return -1;
     }
+    
     public String getCheckoutStatus()
     {
        String output = "";
@@ -411,6 +413,7 @@ public class MainController implements iMainController
        }
        return output;
     }
+    
     public String getBuildStatus()              //only run if it is a Java project
     {
        String output = "";
@@ -432,6 +435,7 @@ public class MainController implements iMainController
        }
        return output;
     }
+    
     public String getStaticAnalysisStatus()
     {
        String output = "";
@@ -447,6 +451,7 @@ public class MainController implements iMainController
        }
        return output;
     }
+    
     public String getUnitTestStatus()
     {
        String output = "";
@@ -462,6 +467,7 @@ public class MainController implements iMainController
        }
        return output;
     }
+    
     public String getIntegrationStatus()
     {
        String output = "";
@@ -477,6 +483,7 @@ public class MainController implements iMainController
        }
        return output;
     }
+    
     public String getDeploymentStatus()
     {
        String output = "";
@@ -492,6 +499,7 @@ public class MainController implements iMainController
        }
        return output;
     }
+    
     public String parseCheckout()
     {
        String output = "Welcome to the checkout stage.  Currently, the Jenkins pipeline is locating your Github repository "
@@ -517,6 +525,7 @@ public class MainController implements iMainController
        return (output);
 
     }
+    
     public String parseBuild()               //java only
     {
       String output = "Welcome to the build stage.  Currently, the Jenkins pipeline is building your project and compiling "
@@ -534,6 +543,7 @@ public class MainController implements iMainController
       System.out.println(output);
       return (output);
     }
+    
     public int findErrorCount()        //used to find staticAnalysis errors
     {
        int errorsCount=0;
@@ -559,6 +569,7 @@ public class MainController implements iMainController
           return errorsCount;
        }
     }
+    
     public String parseStaticAnalysis()
     {
       String output = "Welcome to the Static Analysis stage.  Currently, the Jenkins pipeline is comparing your code with coding "
@@ -576,6 +587,7 @@ public class MainController implements iMainController
        output =  output + "If you would like to see details, click the log file button below.\n";
        return (output);
     }
+    
     public String parseUnitTests()
     {
       String output = "Welcome to unit testing.  Currently, the Jenkins pipeline is running your code’s unit tests to ensure "
@@ -592,6 +604,7 @@ public class MainController implements iMainController
        output =  output + "If you would like to see details, click the log file button below.\n";
        return (output);
     }
+    
     public String parseIntegration()
     {
       String output = "Welcome to integration.  Currently the Jenkins pipeline is integrating the modules within your project,"
@@ -608,6 +621,7 @@ public class MainController implements iMainController
        output =  output + "If you would like to see details, click the log file button below.\n";
        return (output);
     }
+    
     public String parseDeployment()
     {
       String output = "Welcome to deployment.  Currently, the Jenkins pipeline is deploying your new solution to production "
@@ -617,4 +631,5 @@ public class MainController implements iMainController
        output =  output + "If you would like to see details, click the log file button below.\n";
        return (output);
     }
+    
 }
