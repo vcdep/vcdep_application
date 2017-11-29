@@ -81,22 +81,33 @@ public class ConfigurationViewController implements Initializable {
     private CheckBox php;
     @FXML
     private Button stageReset;
+    @FXML
+    private ImageView buildImage;
+    @FXML
+    private Label build;
+    @FXML
+    private Rectangle target_5;
     
     private String languageSelection = "";
     
-    double deployX = 238.0;
-    double deployY = 411.0;
-    double integrateX = 358.0;
-    double integrateY = 411.0;
-    double staticX = 480.0;
-    double staticY = 411.0;
-    double unitX = 597.0;
-    double unitY = 411.0;
+    public final double deployX = 238.0;
+    public final double deployY = 411.0;
+    public final double integrateX = 358.0;
+    public final double integrateY = 411.0;
+    public final double staticX = 480.0;
+    public final double staticY = 411.0;
+    public final double unitX = 597.0;
+    public final double unitY = 411.0;
+    public final double buildX = 714.0;
+    public final double buildY = 411.0;
     
     String payloadOne = "";
     String payloadTwo = "";
     String payloadThree = "";
     String payloadFour = "";
+    String payloadFive = "";
+    
+    
 
     private ClipboardContent content = new ClipboardContent();
     
@@ -140,13 +151,14 @@ public class ConfigurationViewController implements Initializable {
                 stagesList.add(stages[i]);
             }
         }
-        String[] stages = new String[stagesList.size()];
-        stages = stagesList.toArray(stages);
+        
+        //String[] stages = new String[stagesList.size()];
+        //stages = stagesList.toArray(stages);
         
         System.out.println(Arrays.toString(stages));
         
         try {
-            controller.runPipeline(gitUrl.getText(), languageSelection, localGitRepo.getText(), jenkins.getText(), branch.getText(), stages);
+            controller.runPipeline(gitUrl.getText(), languageSelection, localGitRepo.getText(), jenkins.getText(), branch.getText(), (String[])stagesList.toArray());
         } catch (Exception e) {
             System.out.println("Exception in controller.runpipline(params)");
         }
@@ -177,6 +189,8 @@ public class ConfigurationViewController implements Initializable {
         static_a.setLayoutY(staticY);
         unit_test.setLayoutX(unitX);
         unit_test.setLayoutY(unitY);
+        build.setLayoutX(buildX);
+        build.setLayoutY(buildY);
         for(int i = 0; i<stages.length; i++)
         {
             stages[i] = null;
@@ -195,12 +209,14 @@ public class ConfigurationViewController implements Initializable {
         
         if(java == target){
             php.setSelected(false);
-            cleanUp.setVisible(true);
+            build.setVisible(true);
+            target_5.setVisible(true);
             languageSelection = "java";
                     
         }else if(php == target){
             java.setSelected(false);
-            cleanUp.setVisible(false);
+            build.setVisible(false);
+            target_5.setVisible(false);
             languageSelection = "php";
         }
         System.out.println(languageSelection);
@@ -238,6 +254,9 @@ public class ConfigurationViewController implements Initializable {
         }else if (target == target_4){
             payloadFour = content.getString();
             stages[3] = payloadFour;
+        }else if (target == target_5){
+            payloadFive = content.getString();
+            stages[4] = payloadFive;
         }
         System.out.println(Arrays.toString(stages));
     }
@@ -283,6 +302,8 @@ public class ConfigurationViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        build.setVisible(false);
+        target_5.setVisible(false);
         deployment.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -330,5 +351,17 @@ public class ConfigurationViewController implements Initializable {
                 event.consume();
             }
         });
+        build.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Dragboard db = build.startDragAndDrop(TransferMode.MOVE);
+
+                content.putString("build");
+                db.setContent(content);
+                System.out.println("drag detected");
+                event.consume();
+            }
+        });
+        
     }
 }

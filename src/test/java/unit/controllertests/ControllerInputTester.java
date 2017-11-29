@@ -1474,7 +1474,7 @@ public class ControllerInputTester
        File logFile = new File("./src/main/resources/textFiles/javaConsoleText.txt");
        Scanner logScan = new Scanner(logFile);
        String actual = "Welcome to the build stage.  Currently, the Jenkins pipeline is building your project and compiling "
-               + "the required files.Build successful.  Continue to next stage.\n" + "If you would like to see details, click "
+               + "the required files.  Build successful.  Continue to next stage.\n" + "If you would like to see details, click "
                + "the log file button below.\n";
        String logText = "";
        while(logScan.hasNextLine())
