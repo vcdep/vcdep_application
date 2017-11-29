@@ -158,8 +158,8 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private Button btnLogAndScript;
     HashMap<StageType, Button> helpButtons = new HashMap<>();
-    @FXML
-    private Label label;
+    
+    private Label label = new Label();
     
     private final HashMap<Integer, String> stages = new HashMap<>();
     
@@ -429,10 +429,12 @@ public class PipelineSceneController implements Initializable {
         if (this.displayLog)
         {
             this.btnLogAndScript.textProperty().set("Script");
+            this.updateScrollPane("Displaying Log");
         }
         else
         {
             this.btnLogAndScript.textProperty().set("Log File");
+            this.updateScrollPane("Displaying Script");
         }
         this.displayLog = !this.displayLog;
     }
@@ -443,7 +445,7 @@ public class PipelineSceneController implements Initializable {
      */
     public void updateScrollPane(String message)
     {
-        status = message;
+        //status = message;
         try
         {
             label.setWrapText(true);
@@ -456,7 +458,7 @@ public class PipelineSceneController implements Initializable {
         }
         catch(Exception e)
         {
-            
+            e.printStackTrace();
         }
     }
     
