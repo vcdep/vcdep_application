@@ -180,7 +180,7 @@
       <Button fx:id="btnCheckOut" layoutX="388.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleBtnCheckout" prefHeight="27.0" prefWidth="122.0" text="Checkout?" />
       <Button fx:id="btnUnit" layoutX="388.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleBtnUnit" prefHeight="27.0" prefWidth="122.0" text="Unit Test?" />
       <Button fx:id="btnSA" layoutX="388.0" layoutY="152.0" mnemonicParsing="false" onAction="#handleBtnSA" prefHeight="27.0" prefWidth="122.0" text="Static Analysis?" />
-      <Button fx:id="btnLogAndScript" layoutX="28.0" layoutY="651.0" mnemonicParsing="false" onAction="#handleBtnLogAndScript" prefHeight="48.0" prefWidth="133.0" text="Log File/Script" />
+      <Button fx:id="btnLogAndScript" layoutX="28.0" layoutY="651.0" mnemonicParsing="false" onAction="#handleBtnLogAndScript" prefHeight="48.0" prefWidth="133.0" text="Log File" />
       <ImageView fx:id="chkoutArrow1" fitHeight="18.0" fitWidth="31.0" layoutX="565.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/Icons/arrow-right.png" />

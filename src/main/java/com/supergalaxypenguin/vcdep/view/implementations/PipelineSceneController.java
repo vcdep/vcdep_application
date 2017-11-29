@@ -44,6 +44,7 @@ public class PipelineSceneController implements Initializable {
     private ArrayList<Rectangle> backGrounds = new ArrayList<>();    //list of rectangle backgrounds for animations
     private ArrayList<StageAnimation> animations = new ArrayList<>();  //list of currently active animations
     private HashMap<String, Boolean> passFail = new HashMap<>();
+    private boolean displayLog = true;
     @FXML
     public ImageView chkoutImage1;
     @FXML
@@ -425,6 +426,15 @@ public class PipelineSceneController implements Initializable {
     private void handleBtnLogAndScript(ActionEvent event)
     {
         System.out.println("Test Logfile/Script Button");
+        if (this.displayLog)
+        {
+            this.btnLogAndScript.textProperty().set("Script");
+        }
+        else
+        {
+            this.btnLogAndScript.textProperty().set("Log File");
+        }
+        this.displayLog = !this.displayLog;
     }
     
     /**
