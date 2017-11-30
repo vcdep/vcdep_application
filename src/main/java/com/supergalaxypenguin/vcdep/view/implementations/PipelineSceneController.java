@@ -5,17 +5,17 @@
  */
 package com.supergalaxypenguin.vcdep.view.implementations;
 
-
-
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.StageType;
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.StageInfo;
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.StageAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.StageAnimation;
+import com.supergalaxypenguin.vcdep.controller.implementations.MainController;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
+import com.supergalaxypenguin.vcdep.domain.StageInfo;
+import com.supergalaxypenguin.vcdep.domain.StageType;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -24,6 +24,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -44,12 +50,11 @@ public class PipelineSceneController implements Initializable {
     private ArrayList<Rectangle> backGrounds = new ArrayList<>();    //list of rectangle backgrounds for animations
     private ArrayList<StageAnimation> animations = new ArrayList<>();  //list of currently active animations
     private HashMap<String, Boolean> passFail = new HashMap<>();
+    private boolean displayLog = true;
     @FXML
     public ImageView chkoutImage1;
     @FXML
     private ImageView chkoutImage2;
-    @FXML
-    private ImageView chkoutImage3;
     @FXML
     private ImageView chkoutImagePassed;
     @FXML
@@ -57,15 +62,9 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private ImageView chkoutArrow1;
     @FXML
-    private ImageView chkoutArrow2;
-    @FXML
-    private ImageView chkoutArrow3;
-    @FXML
     private ImageView SAImage1;
     @FXML
     private ImageView SAImage2;
-    @FXML
-    private ImageView SAImage3;
     @FXML
     private ImageView SAImagePassed;
     @FXML
@@ -75,15 +74,9 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private ImageView SAArrow2;
     @FXML
-    private ImageView SAArrow3;
-    @FXML
-    private ImageView SAArrow4;
-    @FXML
     private ImageView UnitImage1;
     @FXML
     private ImageView UnitImage2;
-    @FXML
-    private ImageView UnitImage3;
     @FXML
     private ImageView UnitImagePassed;
     @FXML
@@ -92,10 +85,6 @@ public class PipelineSceneController implements Initializable {
     private ImageView UnitArrow1;
     @FXML
     private ImageView UnitArrow2;
-    @FXML
-    private ImageView UnitArrow3;
-    @FXML
-    private ImageView UnitArrow4;
     @FXML
     private ImageView IntegrationImage1;
     @FXML
@@ -119,8 +108,6 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private ImageView DeployArrow1;
     @FXML
-    private ImageView DeployArrow2;
-    @FXML
     private ImageView BuildImage1;
     @FXML
     private ImageView BuildImage2;
@@ -128,6 +115,8 @@ public class PipelineSceneController implements Initializable {
     private ImageView BuildImagePassed;
     @FXML
     private ImageView BuildImageFailed;
+    @FXML
+    private ImageView BuildArrow1;
     @FXML
     private Rectangle stage0;
     @FXML
@@ -154,11 +143,49 @@ public class PipelineSceneController implements Initializable {
     private Button btnDeploy;
     @FXML
     private Button btnBuild;
-    HashMap<StageType, Button> helpButtons = new HashMap<>();
     @FXML
-    private Label label;
+    private Button btnLogAndScript;
+    @FXML
+    private Label deployment;
+    @FXML
+    private Label integration;
+    @FXML
+    private Label static_a;
+    @FXML
+    private Label unit_test;
+    @FXML
+    private Label build;
+    @FXML
+    private Rectangle target_1;
+    @FXML
+    private Rectangle target_2;
+    @FXML
+    private Rectangle target_3;
+    @FXML
+    private Rectangle target_4;
+    @FXML
+    private Rectangle target_5;
+    @FXML
+    private Button stageReset;
+          
+    HashMap<StageType, Button> helpButtons = new HashMap<>();
+    
+    private Label label = new Label();
     
     private final HashMap<Integer, String> stages = new HashMap<>();
+    
+    private ClipboardContent content = new ClipboardContent();
+    
+    public final double deployX = 320.0;
+    public final double deployY = 14.0;
+    public final double integrateX = 440.0;
+    public final double integrateY = 14.0;
+    public final double staticX = 560.0;
+    public final double staticY = 14.0;
+    public final double unitX = 680.0;
+    public final double unitY = 14.0;
+    public final double buildX = 800.0;
+    public final double buildY = 14.0;
     
     /**
      * Initializes the controller class.
@@ -166,10 +193,139 @@ public class PipelineSceneController implements Initializable {
      * @param url
      * @param rb
      */
+    public void handleStageReset(ActionEvent event) {
+        deployment.setLayoutX(deployX);
+        deployment.setLayoutY(deployY);
+        integration.setLayoutX(integrateX);
+        integration.setLayoutY(integrateY);
+        static_a.setLayoutX(staticX);
+        static_a.setLayoutY(staticY);
+        unit_test.setLayoutX(unitX);
+        unit_test.setLayoutY(unitY);
+        build.setLayoutX(buildX);
+        build.setLayoutY(buildY);
+    }
+    @FXML
+    public void handleOnDragEntered(DragEvent event) {
+        /* the drag-and-drop gesture entered the target */
+        /* show to the user that it is an actual gesture target */
+        if (event.getGestureSource() != event.getGestureTarget()
+                && event.getDragboard().hasString()) {
+            Rectangle target = (Rectangle)event.getTarget();
+            target.setFill(Color.GREEN);
+        }
+        event.consume();
+        System.out.println("Drag Entered");
+    }
+    @FXML
+    public void handleOnDragOver(DragEvent event) 
+    {
+        Rectangle target = null;
+        /* data is dragged over the target */
+        /* accept it only if it is not dragged from the same node 
+         * and if it has a string data */
+        if (event.getGestureSource() != event.getGestureTarget()
+                && event.getDragboard().hasString()) 
+        {
+            target = (Rectangle)event.getTarget();
+            /* allow for moving */
+            event.acceptTransferModes(TransferMode.MOVE);
+            Label label = (Label)event.getGestureSource();
+            label.setLayoutX(target.getLayoutX());
+            label.setLayoutY(target.getLayoutY()-11);
+        }
+        event.consume();
+        System.out.println(content.getString());
+        System.out.println(target);
+    }    
+    
+    @FXML
+    public void handleOnDragExited(DragEvent event) {
+    /* mouse moved away, remove the graphical cues */
+        Rectangle target = (Rectangle)event.getTarget();
+        target.setFill(Color.BLACK);
+        event.consume();
+        System.out.println("Drag Exited");
+    }
+    
+    @FXML
+    public void handleOnDragDropped(DragEvent event) {
+        /* data dropped */
+        /* if there is a string data on dragboard, read it and use it */
+        Dragboard db = event.getDragboard();
+        boolean success = false;
+        if (db.hasString()) {
+            //target_1.setText(db.getString());
+            success = true;
+        }
+        /* let the source know whether the string was successfully 
+        * transferred and used */
+        event.setDropCompleted(success);
+        event.consume();
+        System.out.println("Drag Dropped");
+    }
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
+        deployment.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Dragboard db = deployment.startDragAndDrop(TransferMode.MOVE);
+
+                content.putString("Deploy");
+                db.setContent(content);
+                System.out.println("drag detected");
+                event.consume();
+
+            }
+        });
+        integration.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Dragboard db = integration.startDragAndDrop(TransferMode.MOVE);
+
+                content.putString("Integration");
+                db.setContent(content);
+                System.out.println("drag detected");
+                event.consume();
+
+            }
+        });
+        static_a.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Dragboard db = static_a.startDragAndDrop(TransferMode.MOVE);
+
+                content.putString("Static");
+                db.setContent(content);
+                System.out.println("drag detected");
+                event.consume();
+
+            }
+        });
+        unit_test.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Dragboard db = unit_test.startDragAndDrop(TransferMode.MOVE);
+
+                content.putString("Unit");
+                db.setContent(content);
+                System.out.println("drag detected");
+                event.consume();
+            }
+        });
+        build.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Dragboard db = build.startDragAndDrop(TransferMode.MOVE);
+
+                content.putString("build");
+                db.setContent(content);
+                System.out.println("drag detected");
+                event.consume();
+            }
+        });
         currentStage = -1;
 
         stages.put(0, "Checkout");
@@ -207,95 +363,77 @@ public class PipelineSceneController implements Initializable {
         
         this.chkoutImage1.setVisible(false);
         this.chkoutImage2.setVisible(false);
-        this.chkoutImage3.setVisible(false);
         this.chkoutImageFailed.setVisible(false);
         this.chkoutImagePassed.setVisible(false);
         this.btnCheckOut.setVisible(false);
-        //this.chkoutArrow1.setVisible(false);
-        //this.chkoutArrow2.setVisible(false);
-        //this.chkoutArrow3.setVisible(false);
+        this.chkoutArrow1.setVisible(false);
         this.SAImage1.setVisible(false);
         this.SAImage2.setVisible(false);
-        this.SAImage3.setVisible(false);
         this.SAImageFailed.setVisible(false);
         this.SAImagePassed.setVisible(false);
         this.btnSA.setVisible(false);
-        //this.SAArrow1.setVisible(false);
-        //this.SAArrow2.setVisible(false);
-        //this.SAArrow3.setVisible(false);
-        //this.SAArrow4.setVisible(false);
+        this.SAArrow1.setVisible(false);
+        this.SAArrow2.setVisible(false);
         this.UnitImage1.setVisible(false);
         this.UnitImage2.setVisible(false);
-        this.UnitImage3.setVisible(false);
         this.UnitImageFailed.setVisible(false);
         this.UnitImagePassed.setVisible(false);
         this.btnUnit.setVisible(false);
-        //this.UnitArrow1.setVisible(false);
-        //this.UnitArrow2.setVisible(false);
-        //this.UnitArrow3.setVisible(false);
-        //this.UnitArrow4.setVisible(false);
+        this.UnitArrow1.setVisible(false);
+        this.UnitArrow2.setVisible(false);
         this.IntegrationImage1.setVisible(false);
         this.IntegrationImage2.setVisible(false);
         this.IntegrationImageFailed.setVisible(false);
         this.IntegrationImagePassed.setVisible(false);
         this.btnIntegration.setVisible(false);
-        //this.IntegrationArrow1.setVisible(false);
-        //this.IntegrationArrow2.setVisible(false);
+        this.IntegrationArrow1.setVisible(false);
+        this.IntegrationArrow2.setVisible(false);
         this.DeployImage1.setVisible(false);
         this.DeployImage2.setVisible(false);
         this.DeployImageFailed.setVisible(false);
         this.DeployImagePassed.setVisible(false);
         this.btnDeploy.setVisible(false);
-        //this.DeployArrow1.setVisible(false);
-        //this.DeployArrow2.setVisible(false);
-        //this.BuildImage1.setVisible(false);
-        //this.BuildImage2.setVisible(false);
+        this.DeployArrow1.setVisible(false);
+        this.BuildImage1.setVisible(false);
+        this.BuildImage2.setVisible(false);
         this.BuildImageFailed.setVisible(false);
         this.BuildImagePassed.setVisible(false);
+        this.BuildArrow1.setVisible(false);
         this.btnBuild.setVisible(false);
         
         this.animationIcons.put("chkoutImage1",this.chkoutImage1);
         this.animationIcons.put("chkoutImage2",this.chkoutImage2);
-        this.animationIcons.put("chkoutImage3",this.chkoutImage3);
         this.animationIcons.put("chkoutImageFailed",this.chkoutImageFailed);
         this.animationIcons.put("chkoutImagePassed",this.chkoutImagePassed);
-        //this.animationIcons.put("chkoutArrow1", this.chkoutArrow1);
-        //this.animationIcons.put("chkoutArrow2", this.chkoutArrow2);
-        //this.animationIcons.put("chkoutArrow3", this.chkoutArrow3);
+        this.animationIcons.put("chkoutArrow1", this.chkoutArrow1);
         this.animationIcons.put("SAImage1",this.SAImage1);
         this.animationIcons.put("SAImage2",this.SAImage2);
-        this.animationIcons.put("SAImage3",this.SAImage3);
         this.animationIcons.put("SAImageFailed",this.SAImageFailed);
         this.animationIcons.put("SAImagePassed",this.SAImagePassed);
-        //this.animationIcons.put("SAArrow1",this.SAArrow1);
-        //this.animationIcons.put("SAArrow2",this.SAArrow2);
-        //this.animationIcons.put("SAArrow3",this.SAArrow3);
-        //this.animationIcons.put("SAArrow4",this.SAArrow4);
+        this.animationIcons.put("SAArrow1",this.SAArrow1);
+        this.animationIcons.put("SAArrow2",this.SAArrow2);
         this.animationIcons.put("UnitImage1",this.UnitImage1);
         this.animationIcons.put("UnitImage2",this.UnitImage2);
-        this.animationIcons.put("UnitImage3",this.UnitImage3);
         this.animationIcons.put("UnitImageFailed",this.UnitImageFailed);
         this.animationIcons.put("UnitImagePassed",this.UnitImagePassed);
-        //this.animationIcons.put("UnitArrow1",this.UnitArrow1);
-        //this.animationIcons.put("UnitArrow2",this.UnitArrow2);
-        //this.animationIcons.put("UnitArrow3",this.UnitArrow3);
-        //this.animationIcons.put("UnitArrow4",this.UnitArrow4);
+        this.animationIcons.put("UnitArrow1",this.UnitArrow1);
+        this.animationIcons.put("UnitArrow2",this.UnitArrow2);
         this.animationIcons.put("IntegrationImage1",this.IntegrationImage1);
         this.animationIcons.put("IntegrationImage2",this.IntegrationImage2);
         this.animationIcons.put("IntegrationImageFailed",this.IntegrationImageFailed);
         this.animationIcons.put("IntegrationImagePassed",this.IntegrationImagePassed);
-        //this.animationIcons.put("IntegrationArrow1",this.IntegrationArrow1);
-        //this.animationIcons.put("IntegrationArrow2",this.IntegrationArrow2);
+        this.animationIcons.put("IntegrationArrow1",this.IntegrationArrow1);
+        this.animationIcons.put("IntegrationArrow2",this.IntegrationArrow2);
         this.animationIcons.put("DeployImage1",this.DeployImage1);
         this.animationIcons.put("DeployImage2",this.DeployImage2);
         this.animationIcons.put("DeployImageFailed",this.DeployImageFailed);
         this.animationIcons.put("DeployImagePassed",this.DeployImagePassed);
-        //this.animationIcons.put("DeployArrow1",this.DeployArrow1);
-        //this.animationIcons.put("DeployArrow2",this.DeployArrow2);
+        this.animationIcons.put("DeployArrow1",this.DeployArrow1);
         this.animationIcons.put("BuildImage1",this.BuildImage1);
         this.animationIcons.put("BuildImage2",this.BuildImage2);
         this.animationIcons.put("BuildImageFailed",this.BuildImageFailed);
         this.animationIcons.put("BuildImagePassed",this.BuildImagePassed);
+        this.animationIcons.put("BuildArrow1",this.BuildArrow1);
     }
     
     /**
@@ -382,6 +520,8 @@ public class PipelineSceneController implements Initializable {
     {
         System.out.println("Test Go Back Button");
         this.getLastAnimation();
+        this.updateStatus();
+        this.label.setText("");
     }
     
     /**
@@ -393,6 +533,8 @@ public class PipelineSceneController implements Initializable {
     {
         System.out.println("Test Forward Button");
         this.getNextAnimation();
+        this.updateStatus();
+        this.label.setText("");
     }
     
     /**
@@ -415,26 +557,96 @@ public class PipelineSceneController implements Initializable {
         System.out.println("Test Re-Submit Button");
     }
     
+    private void updateStatus()
+    {
+    
+        if (stages.get(this.currentStage).equalsIgnoreCase("Checkout"))
+        {
+            if (this.displayLog)
+                this.status = ((MainController) controller).getCheckoutStatus();
+            else
+                this.status = ((MainController) controller).parseCheckout();
+        }
+        else if (stages.get(this.currentStage).equalsIgnoreCase("Static"))
+        {
+            if (this.displayLog)
+                this.status = ((MainController) controller).getStaticAnalysisStatus();
+            else
+                this.status = ((MainController) controller).parseStaticAnalysis();
+        }
+        else if (stages.get(this.currentStage).equalsIgnoreCase("Unit"))
+        {
+            if (this.displayLog)
+                this.status = ((MainController) controller).getUnitTestStatus();
+            else
+                this.status = ((MainController) controller).parseUnitTests();
+        }
+        else if (stages.get(this.currentStage).equalsIgnoreCase("Integration"))
+        {
+            if (this.displayLog)
+                this.status = ((MainController) controller).getIntegrationStatus();
+            else
+                this.status = ((MainController) controller).parseIntegration();
+        }
+        else if (stages.get(this.currentStage).equalsIgnoreCase("Deploy"))
+        {
+            if (this.displayLog)
+                this.status = ((MainController) controller).getDeploymentStatus();
+            else
+                this.status = ((MainController) controller).parseDeployment();
+        }
+        else if (stages.get(this.currentStage).equalsIgnoreCase("Build"))
+        {
+            if (this.displayLog)
+                this.status = ((MainController) controller).getBuildStatus();
+            else
+                this.status = ((MainController) controller).parseBuild();
+        }
+        
+    }
+    
+    /**
+     * ReSubmit button should clear all current animations and seek an updated log file to build new animations
+     * @param event 
+     */
+    @FXML
+    private void handleBtnLogAndScript(ActionEvent event)
+    {
+        System.out.println("Test Logfile/Script Button");
+        if (this.displayLog)
+        {
+            this.btnLogAndScript.textProperty().set("Script");
+            this.updateScrollPane(this.status);
+        }
+        else
+        {
+            this.btnLogAndScript.textProperty().set("Log File");
+            this.updateScrollPane(this.status);
+        }
+        this.displayLog = !this.displayLog;
+        this.updateStatus();
+    }
+    
     /**
      * Updates the message in the scroll pane window
      * @param message 
      */
     public void updateScrollPane(String message)
     {
-        status = message;
+        //status = message;
         try
         {
             label.setWrapText(true);
             label.setText(message);
-            label.setPrefWidth(365);
+            label.setPrefWidth(595);
             scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
-            scrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-            scrollPane.setPrefSize(375, 385);
+            scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+            scrollPane.setPrefSize(605, 499);
             scrollPane.setContent(label);
         }
         catch(Exception e)
         {
-            
+            e.printStackTrace();
         }
     }
     
@@ -491,8 +703,13 @@ public class PipelineSceneController implements Initializable {
      */
     private void removeAnimation(int i)
     {
+        animations.get(i).stop();
         animations.get(i).moveToEnd();
         animations.remove(i);
+        if (animations.size() >0)
+        {
+            animations.get(animations.size()-1).play();
+        }
     }
     
     /**
@@ -500,11 +717,17 @@ public class PipelineSceneController implements Initializable {
      */
     private void getNextAnimation()
     {
-        if (this.currentStage<stageInfo.size()-1)
+        if (animations.size() > 0 && currentStage < stageInfo.size()-1)
+        {
+            animations.get(animations.size()-1).stop();
+        }
+        if (this.currentStage < stageInfo.size()-1)
         {
             createNewAnimations(this.currentStage);
             this.currentStage++;
+            animations.get(animations.size()-1).play();
         }
+        
     }
     
     /**

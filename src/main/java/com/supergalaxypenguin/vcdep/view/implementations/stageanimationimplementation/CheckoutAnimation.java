@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes;
+package com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation;
 
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.StageAnimation;
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.StageInfo;
+import com.supergalaxypenguin.vcdep.domain.StageInfo;
 import java.util.HashMap;
+import javafx.animation.SequentialTransition;
+import javafx.animation.TranslateTransition;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
@@ -15,19 +16,19 @@ import javafx.scene.shape.Rectangle;
  *
  * @author Howtoon
  */
-public class CheckoutAnimation extends StageAnimation{
+public class CheckoutAnimation extends StageAnimation{    
+    TranslateTransition arrow1 = new TranslateTransition();
+    SequentialTransition sequence;
+    int arrowDist = 122;
     
     public CheckoutAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
         super(info, backGround);
         
         ImageView[] _images = {animationIcons.get("chkoutImage1"), 
             animationIcons.get("chkoutImage2"), 
-            animationIcons.get("chkoutImage3"), 
             animationIcons.get("chkoutImagePassed"), 
-            animationIcons.get("chkoutImageFailed")//,
-            //animationIcons.get("chkoutArrow1"),
-            //animationIcons.get("chkoutArrow1"),
-            //animationIcons.get("chkoutArrow1")
+            animationIcons.get("chkoutImageFailed"),
+            animationIcons.get("chkoutArrow1")
         };
         super.images = _images;
         super.passImage = animationIcons.get("chkoutImagePassed");
@@ -37,11 +38,18 @@ public class CheckoutAnimation extends StageAnimation{
 
     @Override
     public void play() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Play Checkout animation");
+        
+        this.arrow1 = StageAnimation.getArrowAnimation(super.images[4], arrowDist);
+        sequence = new SequentialTransition(this.arrow1);
+        sequence.play();
     }
 
     @Override
     public void stop() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Stop Checkout animation");
+        
+        sequence.stop();
+        StageAnimation.resetArrow(super.images[4]);
     }
 }

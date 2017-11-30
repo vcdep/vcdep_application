@@ -3,14 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation;
+package com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation;
 
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.BuildAnimation;
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.CheckoutAnimation;
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.DeployAnimation;
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.IntegrationAnimation;
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.StaticAnimation;
-import com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation.AnimationTypes.UnitAnimation;
+import com.supergalaxypenguin.vcdep.domain.StageInfo;
+import com.supergalaxypenguin.vcdep.domain.StageType;
 import java.util.HashMap;
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.Button;
@@ -85,6 +81,40 @@ public abstract class StageAnimation{
         this.backGround = backGround;
     }
 
+    protected static TranslateTransition getArrowAnimation(ImageView _image, int X)
+    {
+        final TranslateTransition arrow = new TranslateTransition();
+        final ImageView image = _image;
+        
+        image.setVisible(true);
+        arrow.setNode(image);
+        arrow.setToX(X);
+        arrow.setDuration(Duration.seconds(3));
+        arrow.cycleCountProperty().setValue(1);
+        /*
+        arrow.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                arrow.setToX(0);
+                arrow.setDuration(Duration.seconds(0.0001));
+                image.setVisible(false);
+                //arrow.play();
+                event.consume();
+            }
+        });
+        */
+        return arrow;
+    }
+    
+    protected static void resetArrow(ImageView image)
+    {
+        TranslateTransition arrow1;
+        arrow1 = new TranslateTransition();
+        arrow1.setNode(image);
+        arrow1.setToX(0);
+        arrow1.setDuration(Duration.seconds(0.0001));
+        arrow1.play();
+    }
 
     /**
      * Move Icons to the proper stage position
@@ -130,7 +160,7 @@ public abstract class StageAnimation{
         moveToEnd = new TranslateTransition();
         moveToEnd.setNode(this.helpButton);
         moveToEnd.setToY(0);
-        moveToEnd.setDuration(Duration.seconds(1));
+        moveToEnd.setDuration(Duration.seconds(0.0001));
         moveToEnd.play();
         this.helpButton.setVisible(false);
         this.backGround.setVisible(false);
@@ -138,7 +168,7 @@ public abstract class StageAnimation{
             moveToEnd = new TranslateTransition();
             moveToEnd.setNode(i);
             moveToEnd.setToY(0);
-            moveToEnd.setDuration(Duration.seconds(0.00001));
+            moveToEnd.setDuration(Duration.seconds(0.0001));
             moveToEnd.play();
             i.setVisible(false);
         }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.supergalaxypenguin.vcdep.view.implementations.StageAnimationImplementation;
+package com.supergalaxypenguin.vcdep.domain;
 
 import java.util.HashMap;
 import javafx.scene.control.Button;
