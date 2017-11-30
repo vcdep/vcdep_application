@@ -5,14 +5,14 @@
  */
 package com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation;
 
+import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animations.StaticAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animations.DeployAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animations.CheckoutAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animations.BuildAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animations.IntegrationAnimation;
+import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animations.UnitAnimation;
 import com.supergalaxypenguin.vcdep.domain.StageInfo;
 import com.supergalaxypenguin.vcdep.domain.StageType;
-import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animationtypes.BuildAnimation;
-import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animationtypes.CheckoutAnimation;
-import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animationtypes.DeployAnimation;
-import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animationtypes.IntegrationAnimation;
-import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animationtypes.StaticAnimation;
-import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animationtypes.UnitAnimation;
 import java.util.HashMap;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;

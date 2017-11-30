@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animationtypes;
+package com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.animations;
 
 import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.StageAnimation;
 import com.supergalaxypenguin.vcdep.domain.StageInfo;
+import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.StageAnimation;
 import java.util.HashMap;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -19,30 +20,30 @@ import javafx.util.Duration;
  *
  * @author Howtoon
  */
-public class DeployAnimation extends StageAnimation{
+public class IntegrationAnimation extends StageAnimation{
     TranslateTransition arrow1 = new TranslateTransition();
     TranslateTransition arrow2 = new TranslateTransition();
-    int arrowDist = 110;
+    int arrowDist = 84;
     
-    public DeployAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
+    public IntegrationAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
         super(info, backGround);
         
-        ImageView[] _images = {animationIcons.get("DeployImage1"), 
-            animationIcons.get("DeployImage2"), 
-            animationIcons.get("DeployImagePassed"), 
-            animationIcons.get("DeployImageFailed"),
-            animationIcons.get("DeployArrow1"),
-            animationIcons.get("DeployArrow2")
+        ImageView[] _images = {animationIcons.get("IntegrationImage1"), 
+            animationIcons.get("IntegrationImage2"), 
+            animationIcons.get("IntegrationImagePassed"), 
+            animationIcons.get("IntegrationImageFailed"),
+            animationIcons.get("IntegrationArrow1"),
+            animationIcons.get("IntegrationArrow2")
         };
         super.images = _images;
-        super.passImage = animationIcons.get("DeployImagePassed");
-        super.failImage = animationIcons.get("DeployImageFailed");
+        super.passImage = animationIcons.get("IntegrationImagePassed");
+        super.failImage = animationIcons.get("IntegrationImageFailed");
         super.moveToStart();
     }
 
     @Override
     public void play() {
-        System.out.println("Play Deploy animation");
+        System.out.println("Play Integration animation");
         
         this.arrow1 = StageAnimation.getArrowAnimation(super.images[4], arrowDist);
         this.arrow2 = StageAnimation.getArrowAnimation(super.images[5], -arrowDist);
@@ -50,7 +51,7 @@ public class DeployAnimation extends StageAnimation{
 
     @Override
     public void stop() {
-        System.out.println("Stop Deploy animation");
+        System.out.println("Stop Integration animation");
         
         this.arrow1.stop();
         StageAnimation.resetArrow(super.images[4]);

@@ -7,8 +7,8 @@ package com.supergalaxypenguin.vcdep.view.implementations;
 
 
 
-import com.supergalaxypenguin.vcdep.controller.implementations.MainController;
 import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.StageAnimation;
+import com.supergalaxypenguin.vcdep.controller.implementations.MainController;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import com.supergalaxypenguin.vcdep.domain.StageInfo;
 import com.supergalaxypenguin.vcdep.domain.StageType;
