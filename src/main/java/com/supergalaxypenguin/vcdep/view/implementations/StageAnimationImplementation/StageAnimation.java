@@ -38,6 +38,7 @@ public abstract class StageAnimation{
     protected ImageView[] images;
     protected ImageView passImage;
     protected ImageView failImage;
+    //test
 //        private static final int ORIGIN = 137; 
 //        private static final int stdHeight = 54;
 //        private static final int stdWidth = 48;
