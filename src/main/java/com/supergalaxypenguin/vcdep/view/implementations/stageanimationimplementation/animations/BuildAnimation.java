@@ -21,7 +21,7 @@ public class BuildAnimation extends StageAnimation{
     
     TranslateTransition arrow1 = new TranslateTransition();
     SequentialTransition sequence;
-    int arrowDist = 120;
+    int arrowDist = 122;
     
     public BuildAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
         super(info, backGround);

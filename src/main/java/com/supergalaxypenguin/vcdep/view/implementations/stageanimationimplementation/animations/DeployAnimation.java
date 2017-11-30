@@ -24,7 +24,7 @@ import javafx.util.Duration;
 public class DeployAnimation extends StageAnimation{
     TranslateTransition arrow1 = new TranslateTransition();
     SequentialTransition sequence;
-    int arrowDist = 120;
+    int arrowDist = 122;
     
     public DeployAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
         super(info, backGround);

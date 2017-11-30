@@ -25,7 +25,7 @@ public class IntegrationAnimation extends StageAnimation{
     TranslateTransition arrow1 = new TranslateTransition();
     TranslateTransition arrow2 = new TranslateTransition();
     SequentialTransition sequence;
-    int arrowDist = 120;
+    int arrowDist = 122;
     int returnDist = 136;
     
     public IntegrationAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {

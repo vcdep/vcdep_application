@@ -99,16 +99,18 @@ public abstract class StageAnimation{
         arrow.setToX(X);
         arrow.setDuration(Duration.seconds(3));
         arrow.cycleCountProperty().setValue(1);
+        /*
         arrow.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 arrow.setToX(0);
                 arrow.setDuration(Duration.seconds(0.0001));
                 image.setVisible(false);
-                arrow.play();
+                //arrow.play();
                 event.consume();
             }
         });
+        */
         return arrow;
     }
     

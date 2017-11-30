@@ -22,8 +22,7 @@ import javafx.util.Duration;
 public class CheckoutAnimation extends StageAnimation{    
     TranslateTransition arrow1 = new TranslateTransition();
     SequentialTransition sequence;
-    int arrowDist = 120;
-    
+    int arrowDist = 122;
     
     public CheckoutAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
         super(info, backGround);
