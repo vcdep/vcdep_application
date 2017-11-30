@@ -559,6 +559,7 @@ public class PipelineSceneController implements Initializable {
         System.out.println("Test Go Back Button");
         this.getLastAnimation();
         this.updateStatus();
+        this.label.setText("");
     }
     
     /**
@@ -571,6 +572,7 @@ public class PipelineSceneController implements Initializable {
         System.out.println("Test Forward Button");
         this.getNextAnimation();
         this.updateStatus();
+        this.label.setText("");
     }
     
     /**
@@ -598,27 +600,45 @@ public class PipelineSceneController implements Initializable {
     
         if (stages.get(this.currentStage).equalsIgnoreCase("Checkout"))
         {
-            this.status = ((MainController) controller).getCheckoutStatus();
+            if (this.displayLog)
+                this.status = ((MainController) controller).getCheckoutStatus();
+            else
+                this.status = ((MainController) controller).parseCheckout();
         }
         else if (stages.get(this.currentStage).equalsIgnoreCase("Static"))
         {
-            this.status = ((MainController) controller).getStaticAnalysisStatus();
+            if (this.displayLog)
+                this.status = ((MainController) controller).getStaticAnalysisStatus();
+            else
+                this.status = ((MainController) controller).parseStaticAnalysis();
         }
         else if (stages.get(this.currentStage).equalsIgnoreCase("Unit"))
         {
-            this.status = ((MainController) controller).getUnitTestStatus();
+            if (this.displayLog)
+                this.status = ((MainController) controller).getUnitTestStatus();
+            else
+                this.status = ((MainController) controller).parseUnitTests();
         }
         else if (stages.get(this.currentStage).equalsIgnoreCase("Integration"))
         {
-            this.status = ((MainController) controller).getIntegrationStatus();
+            if (this.displayLog)
+                this.status = ((MainController) controller).getIntegrationStatus();
+            else
+                this.status = ((MainController) controller).parseIntegration();
         }
         else if (stages.get(this.currentStage).equalsIgnoreCase("Deploy"))
         {
-            this.status = ((MainController) controller).getDeploymentStatus();
+            if (this.displayLog)
+                this.status = ((MainController) controller).getDeploymentStatus();
+            else
+                this.status = ((MainController) controller).parseDeployment();
         }
         else if (stages.get(this.currentStage).equalsIgnoreCase("Build"))
         {
-            this.status = ((MainController) controller).getBuildStatus();
+            if (this.displayLog)
+                this.status = ((MainController) controller).getBuildStatus();
+            else
+                this.status = ((MainController) controller).parseBuild();
         }
         
     }
@@ -642,6 +662,7 @@ public class PipelineSceneController implements Initializable {
             this.updateScrollPane(this.status);
         }
         this.displayLog = !this.displayLog;
+        this.updateStatus();
     }
     
     /**

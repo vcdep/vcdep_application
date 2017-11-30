@@ -34,7 +34,7 @@ public class MainController implements iMainController
     private final Model model;
     private Stage javaFXStage;
     private static MainController instance = null;
-    private String logFile = "Started by remote host 192.30.252.40\n" +
+    private String logFile = "Started by remote host 192.30.252.41\n" +
 "Checking out git https://github.com/UWF-HMCSE-CS/DevOps_ConfigurationTools to read Jenkinsfile\n" +
 " > git rev-parse --is-inside-work-tree # timeout=10\n" +
 "Fetching changes from the remote Git repository\n" +
@@ -974,7 +974,7 @@ public class MainController implements iMainController
 "\n" +
 "FILE: /cdep/index/index.php\n" +
 "----------------------------------------------------------------------\n" +
-"FOUND 33 ERRORS AND 5 WARNINGS AFFECTING 26 LINES\n" +
+"FOUND 31 ERRORS AND 6 WARNINGS AFFECTING 25 LINES\n" +
 "----------------------------------------------------------------------\n" +
 " 26 | ERROR   | [ ] Missing file doc comment\n" +
 " 27 | ERROR   | [x] Spaces must be used to indent lines; tabs are not\n" +
@@ -999,10 +999,8 @@ public class MainController implements iMainController
 "    |         |     found 1\n" +
 " 35 | ERROR   | [x] Spaces must be used to indent lines; tabs are not\n" +
 "    |         |     allowed\n" +
-" 38 | ERROR   | [x] Spaces must be used to indent lines; tabs are not\n" +
-"    |         |     allowed\n" +
-" 39 | ERROR   | [x] Spaces must be used to indent lines; tabs are not\n" +
-"    |         |     allowed\n" +
+" 38 | WARNING | [ ] Line exceeds 85 characters; contains 97\n" +
+"    |         |     characters\n" +
 " 40 | WARNING | [ ] Line exceeds 85 characters; contains 103\n" +
 "    |         |     characters\n" +
 " 43 | ERROR   | [x] Spaces must be used to indent lines; tabs are not\n" +
@@ -1050,14 +1048,14 @@ public class MainController implements iMainController
 " 61 | ERROR   | [x] Spaces must be used to indent lines; tabs are not\n" +
 "    |         |     allowed\n" +
 "----------------------------------------------------------------------\n" +
-"PHPCBF CAN FIX THE 34 MARKED SNIFF VIOLATIONS AUTOMATICALLY\n" +
+"PHPCBF CAN FIX THE 32 MARKED SNIFF VIOLATIONS AUTOMATICALLY\n" +
 "----------------------------------------------------------------------\n" +
 "\n" +
 "Time: 25ms; Memory: 4Mb\n" +
 "\n" +
 "[Pipeline] }\n" +
-"$ docker stop --time=1 10518dfdbbf9156bbe2743f1d4539708b05a17d7df00383fc765beb3eadfae78\n" +
-"$ docker rm -f 10518dfdbbf9156bbe2743f1d4539708b05a17d7df00383fc765beb3eadfae78\n" +
+"$ docker stop --time=1 48eea2bbbf67954e3b32e286c7a91a64cda334dff9e46a4975650e88422eeb14\n" +
+"$ docker rm -f 48eea2bbbf67954e3b32e286c7a91a64cda334dff9e46a4975650e88422eeb14\n" +
 "[Pipeline] // withDockerContainer\n" +
 "[Pipeline] }\n" +
 "[Pipeline] // dir\n" +
@@ -1097,12 +1095,12 @@ public class MainController implements iMainController
 "\n" +
 "......                                                              6 / 6 (100%)\n" +
 "\n" +
-"Time: 22 ms, Memory: 4.00Mb\n" +
+"Time: 19 ms, Memory: 4.00Mb\n" +
 "\n" +
 "OK (6 tests, 6 assertions)\n" +
 "[Pipeline] }\n" +
-"$ docker stop --time=1 9d9dc6f2fda14c4c709284d335b23311f9a03740860fbe4370ff53650b2ea552\n" +
-"$ docker rm -f 9d9dc6f2fda14c4c709284d335b23311f9a03740860fbe4370ff53650b2ea552\n" +
+"$ docker stop --time=1 b62bf9a23e65914322806b533ea9df531f2fc1c055737668a535067c84f4137c\n" +
+"$ docker rm -f b62bf9a23e65914322806b533ea9df531f2fc1c055737668a535067c84f4137c\n" +
 "[Pipeline] // withDockerContainer\n" +
 "[Pipeline] }\n" +
 "[Pipeline] // dir\n" +
@@ -1137,14 +1135,27 @@ public class MainController implements iMainController
 "+ bash build.sh\n" +
 "PHPUnit 5.1.3 by Sebastian Bergmann and contributors.\n" +
 "\n" +
-".........                                                           9 / 9 (100%)\n" +
+"........F                                                           9 / 9 (100%)\n" +
 "\n" +
-"Time: 26 ms, Memory: 4.00Mb\n" +
+"Time: 27 ms, Memory: 4.00Mb\n" +
 "\n" +
-"OK (9 tests, 8 assertions)\n" +
+"There was 1 failure:\n" +
+"\n" +
+"1) Tester::testManufacturer\n" +
+"Failed asserting that two strings are equal.\n" +
+"--- Expected\n" +
+"+++ Actual\n" +
+"@@ @@\n" +
+"-'Alienware'\n" +
+"+'AlienWare'\n" +
+"\n" +
+"/cdep/tests/Tester.php:85\n" +
+"\n" +
+"FAILURES!\n" +
+"Tests: 9, Assertions: 8, Failures: 1.\n" +
 "[Pipeline] }\n" +
-"$ docker stop --time=1 5a3c49a0d94dc8773b755b290d339a0505eb910bd799846d32c7ece3d77ecdd7\n" +
-"$ docker rm -f 5a3c49a0d94dc8773b755b290d339a0505eb910bd799846d32c7ece3d77ecdd7\n" +
+"$ docker stop --time=1 9e2c4ffbefe5cd76174baeceb02ca7626e6ca554ff6ad77b81b70dd887e62406\n" +
+"$ docker rm -f 9e2c4ffbefe5cd76174baeceb02ca7626e6ca554ff6ad77b81b70dd887e62406\n" +
 "[Pipeline] // withDockerContainer\n" +
 "[Pipeline] }\n" +
 "[Pipeline] // dir\n" +
@@ -1152,35 +1163,14 @@ public class MainController implements iMainController
 "[Pipeline] // stage\n" +
 "[Pipeline] stage\n" +
 "[Pipeline] { (Staging)\n" +
-"[Pipeline] sh\n" +
-"[jenkins_pipeline] Running shell script\n" +
-"+ bash /home/ec2-user/workspace/DevOps/tests/staging/stage/php_stage/bash/push.sh se2_devops_tr_15\n" +
+"[Pipeline] echo\n" +
+"Skipping due to failure\n" +
 "[Pipeline] }\n" +
 "[Pipeline] // stage\n" +
 "[Pipeline] stage\n" +
 "[Pipeline] { (Merging)\n" +
-"[Pipeline] dir\n" +
-"Running in /home/ec2-user/workspace/jenkins_pipeline/se2_devops_tr_15\n" +
-"[Pipeline] {\n" +
-"[Pipeline] sh\n" +
-"[se2_devops_tr_15] Running shell script\n" +
-"+ git checkout master\n" +
-"Switched to branch 'master'\n" +
-"Your branch is up-to-date with 'origin/master'.\n" +
-"[Pipeline] sh\n" +
-"[se2_devops_tr_15] Running shell script\n" +
-"+ git merge feature\n" +
-"Updating 84d0695..ccc1bc7\n" +
-"Fast-forward\n" +
-" index/index.php | 4 ++--\n" +
-" 1 file changed, 2 insertions(+), 2 deletions(-)\n" +
-"[Pipeline] sh\n" +
-"[se2_devops_tr_15] Running shell script\n" +
-"+ git push origin master\n" +
-"To git@github.com:DevOpsActivity/se2_devops_tr_15.git\n" +
-"   84d0695..ccc1bc7  master -> master\n" +
-"[Pipeline] }\n" +
-"[Pipeline] // dir\n" +
+"[Pipeline] echo\n" +
+"Skipping due to failure\n" +
 "[Pipeline] }\n" +
 "[Pipeline] // stage\n" +
 "[Pipeline] stage\n" +
@@ -1196,8 +1186,7 @@ public class MainController implements iMainController
 "[Pipeline] }\n" +
 "[Pipeline] // node\n" +
 "[Pipeline] End of Pipeline\n" +
-"Finished: UNSTABLE\n" +
-"";
+"Finished: FAILURE";
     private int currentStage = 0;
     private String status = "Waiting for status update...";
     
