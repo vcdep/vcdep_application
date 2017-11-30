@@ -89,24 +89,26 @@ public abstract class StageAnimation{
         this.backGround = backGround;
     }
 
-    protected static TranslateTransition getArrowAnimation(ImageView image, int X)
+    protected static TranslateTransition getArrowAnimation(ImageView _image, int X)
     {
         final TranslateTransition arrow = new TranslateTransition();
+        final ImageView image = _image;
         
+        image.setVisible(true);
         arrow.setNode(image);
         arrow.setToX(X);
-        arrow.setDuration(Duration.seconds(1));
-        arrow.cycleCountProperty().setValue(3);
+        arrow.setDuration(Duration.seconds(3));
+        arrow.cycleCountProperty().setValue(1);
         arrow.setOnFinished(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 arrow.setToX(0);
                 arrow.setDuration(Duration.seconds(0.0001));
+                image.setVisible(false);
                 arrow.play();
                 event.consume();
             }
         });
-        arrow.play();
         return arrow;
     }
     
@@ -164,7 +166,7 @@ public abstract class StageAnimation{
         moveToEnd = new TranslateTransition();
         moveToEnd.setNode(this.helpButton);
         moveToEnd.setToY(0);
-        moveToEnd.setDuration(Duration.seconds(1));
+        moveToEnd.setDuration(Duration.seconds(0.0001));
         moveToEnd.play();
         this.helpButton.setVisible(false);
         this.backGround.setVisible(false);
@@ -172,7 +174,7 @@ public abstract class StageAnimation{
             moveToEnd = new TranslateTransition();
             moveToEnd.setNode(i);
             moveToEnd.setToY(0);
-            moveToEnd.setDuration(Duration.seconds(0.00001));
+            moveToEnd.setDuration(Duration.seconds(0.0001));
             moveToEnd.play();
             i.setVisible(false);
         }

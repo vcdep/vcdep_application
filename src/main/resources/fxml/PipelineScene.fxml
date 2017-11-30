@@ -53,6 +53,51 @@
       <Rectangle fx:id="stage3" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="672.0" layoutY="476.0" stroke="BLACK" strokeType="INSIDE" width="387.0" />
       <Rectangle fx:id="stage4" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="672.0" layoutY="561.0" stroke="BLACK" strokeType="INSIDE" width="387.0" />
       <Rectangle fx:id="stage5" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" layoutX="672.0" layoutY="646.0" stroke="BLACK" strokeType="INSIDE" width="387.0" />
+      <ImageView fx:id="BuildArrow1" fitHeight="23.0" fitWidth="33.0" layoutX="825.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons2/PackagePassInAnimationIcon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="chkoutArrow1" fitHeight="18.0" fitWidth="31.0" layoutX="825.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons2/PayloadPassInAnimationIcon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="SAArrow1" fitHeight="30.0" fitWidth="33.0" layoutX="825.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons2/CodePassInAnimationIcon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="UnitArrow1" fitHeight="30.0" fitWidth="33.0" layoutX="825.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons2/CodePassInAnimationIcon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="UnitArrow2" fitHeight="25.0" fitWidth="45.0" layoutX="945.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons2/ResultsPassInAnimationIcon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="IntegrationArrow1" fitHeight="30.0" fitWidth="33.0" layoutX="825.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons2/CodePassInAnimationIcon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="IntegrationArrow2" fitHeight="25.0" fitWidth="45.0" layoutX="945.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons2/ResultsPassInAnimationIcon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="DeployArrow1" fitHeight="23.0" fitWidth="33.0" layoutX="825.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons2/PackagePassInAnimationIcon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="SAArrow2" fitHeight="25.0" fitWidth="45.0" layoutX="945.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/AnimationIcons2/ResultsPassInAnimationIcon.png" />
+         </image>
+      </ImageView>
       <ImageView fx:id="UnitImage1" fitHeight="54.0" fitWidth="48.0" layoutX="805.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons2/Jenkins%20icon.png" />
@@ -179,46 +224,6 @@
       <Button fx:id="btnUnit" layoutX="676.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleBtnUnit" prefHeight="27.0" prefWidth="122.0" text="Unit Test?" />
       <Button fx:id="btnSA" layoutX="676.0" layoutY="248.0" mnemonicParsing="false" onAction="#handleBtnSA" prefHeight="27.0" prefWidth="122.0" text="Static Analysis?" />
       <Button fx:id="btnLogAndScript" layoutX="34.0" layoutY="735.0" mnemonicParsing="false" onAction="#handleBtnLogAndScript" prefHeight="48.0" prefWidth="133.0" text="Log File" />
-      <ImageView fx:id="chkoutArrow1" fitHeight="18.0" fitWidth="31.0" layoutX="853.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/AnimationIcons2/PayloadPassInAnimationIcon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="SAArrow1" fitHeight="18.0" fitWidth="31.0" layoutX="853.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/AnimationIcons2/CodePassInAnimationIcon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="SAArrow2" fitHeight="18.0" fitWidth="31.0" layoutX="910.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/AnimationIcons2/ResultsPassInAnimationIcon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="UnitArrow1" fitHeight="18.0" fitWidth="31.0" layoutX="853.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/AnimationIcons2/CodePassInAnimationIcon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="UnitArrow2" fitHeight="18.0" fitWidth="38.0" layoutX="910.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/AnimationIcons2/ResultsPassInAnimationIcon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="IntegrationArrow1" fitHeight="18.0" fitWidth="31.0" layoutX="853.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/AnimationIcons2/CodePassInAnimationIcon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="IntegrationArrow2" fitHeight="18.0" fitWidth="38.0" layoutX="910.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/AnimationIcons2/ResultsPassInAnimationIcon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="DeployArrow1" fitHeight="18.0" fitWidth="31.0" layoutX="853.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/AnimationIcons2/PackagePassInAnimationIcon.png" />
-         </image>
-      </ImageView>
       <Rectangle fx:id="target_111" arcHeight="5.0" arcWidth="5.0" height="171.0" layoutX="141.0" layoutY="9.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="800.0">
          <fill>
             <LinearGradient endX="1.0" startX="1.0" startY="1.0">
@@ -314,12 +319,7 @@
             <Image url="@../Images/AnimationIcons2/Jenkins%20icon.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="BuildArrow1" fitHeight="18.0" fitWidth="31.0" layoutX="853.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/AnimationIcons2/PackagePassInAnimationIcon.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="BuildImage3" fitHeight="54.0" fitWidth="48.0" layoutX="945.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="BuildImage2" fitHeight="54.0" fitWidth="48.0" layoutX="945.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/AnimationIcons2/Github%20icon.png" />
          </image>

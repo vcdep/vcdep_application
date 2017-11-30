@@ -9,6 +9,7 @@ import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplement
 import com.supergalaxypenguin.vcdep.domain.StageInfo;
 import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.StageAnimation;
 import java.util.HashMap;
+import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,22 +24,19 @@ import javafx.util.Duration;
 public class UnitAnimation extends StageAnimation{
     TranslateTransition arrow1 = new TranslateTransition();
     TranslateTransition arrow2 = new TranslateTransition();
-    TranslateTransition arrow3 = new TranslateTransition();
-    TranslateTransition arrow4 = new TranslateTransition();
-    int arrowDist = 58;
+    SequentialTransition sequence;
+    int arrowDist = 120;
+    int returnDist = 136;
     
     public UnitAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
         super(info, backGround);
     
         ImageView[] _images = {animationIcons.get("UnitImage1"), 
-            animationIcons.get("UnitImage2"), 
-            animationIcons.get("UnitImage3"), 
+            animationIcons.get("UnitImage2"),
             animationIcons.get("UnitImagePassed"), 
             animationIcons.get("UnitImageFailed"),
             animationIcons.get("UnitArrow1"),
-            animationIcons.get("UnitArrow2"),
-            animationIcons.get("UnitArrow3"),
-            animationIcons.get("UnitArrow4")
+            animationIcons.get("UnitArrow2")
         };
         super.images = _images;
         super.passImage = animationIcons.get("UnitImagePassed");
@@ -49,28 +47,20 @@ public class UnitAnimation extends StageAnimation{
     @Override
     public void play() {
         System.out.println("Play Unit animation");
-        
-                
-        this.arrow1 = StageAnimation.getArrowAnimation(super.images[5], arrowDist);
-        this.arrow2 = StageAnimation.getArrowAnimation(super.images[6], arrowDist);
-        this.arrow3 = StageAnimation.getArrowAnimation(super.images[7], -arrowDist);
-        this.arrow4 = StageAnimation.getArrowAnimation(super.images[8], -arrowDist);
+       
+        this.arrow1 = StageAnimation.getArrowAnimation(super.images[4], arrowDist);
+        this.arrow2 = StageAnimation.getArrowAnimation(super.images[5], -returnDist);
+        sequence = new SequentialTransition(this.arrow1, this.arrow2);
+        sequence.play();
     }
 
     @Override
     public void stop() {
         System.out.println("Stop Unit animation");
         
-        this.arrow1.stop();
-        StageAnimation.resetArrow(super.images[5]);
-        
-        this.arrow2.stop();
-        StageAnimation.resetArrow(super.images[6]);
+        sequence.stop();
 
-        this.arrow3.stop();
-        StageAnimation.resetArrow(super.images[7]); 
-        
-        this.arrow4.stop();
-        StageAnimation.resetArrow(super.images[8]);
+        StageAnimation.resetArrow(super.images[4]);
+        StageAnimation.resetArrow(super.images[5]);
     }
 }

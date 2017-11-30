@@ -9,6 +9,7 @@ import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplement
 import com.supergalaxypenguin.vcdep.domain.StageInfo;
 import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.StageAnimation;
 import java.util.HashMap;
+import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
@@ -20,9 +21,8 @@ import javafx.util.Duration;
  */
 public class CheckoutAnimation extends StageAnimation{    
     TranslateTransition arrow1 = new TranslateTransition();
-    TranslateTransition arrow2 = new TranslateTransition();
-    TranslateTransition arrow3 = new TranslateTransition();
-    int arrowDist = 58;
+    SequentialTransition sequence;
+    int arrowDist = 120;
     
     
     public CheckoutAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
@@ -30,12 +30,9 @@ public class CheckoutAnimation extends StageAnimation{
         
         ImageView[] _images = {animationIcons.get("chkoutImage1"), 
             animationIcons.get("chkoutImage2"), 
-            animationIcons.get("chkoutImage3"), 
             animationIcons.get("chkoutImagePassed"), 
             animationIcons.get("chkoutImageFailed"),
-            animationIcons.get("chkoutArrow1"),
-            animationIcons.get("chkoutArrow2"),
-            animationIcons.get("chkoutArrow3")
+            animationIcons.get("chkoutArrow1")
         };
         super.images = _images;
         super.passImage = animationIcons.get("chkoutImagePassed");
@@ -47,22 +44,16 @@ public class CheckoutAnimation extends StageAnimation{
     public void play() {
         System.out.println("Play Checkout animation");
         
-        this.arrow1 = StageAnimation.getArrowAnimation(super.images[5], arrowDist);
-        this.arrow2 = StageAnimation.getArrowAnimation(super.images[6], arrowDist);
-        this.arrow3 = StageAnimation.getArrowAnimation(super.images[7], -arrowDist);
+        this.arrow1 = StageAnimation.getArrowAnimation(super.images[4], arrowDist);
+        sequence = new SequentialTransition(this.arrow1);
+        sequence.play();
     }
 
     @Override
     public void stop() {
         System.out.println("Stop Checkout animation");
         
-        this.arrow1.stop();
-        StageAnimation.resetArrow(super.images[5]);
-        
-        this.arrow2.stop();
-        StageAnimation.resetArrow(super.images[6]);
-
-        this.arrow3.stop();
-        StageAnimation.resetArrow(super.images[7]);  
+        sequence.stop();
+        StageAnimation.resetArrow(super.images[4]);
     }
 }
