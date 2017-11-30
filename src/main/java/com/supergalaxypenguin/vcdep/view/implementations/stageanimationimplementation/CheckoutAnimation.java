@@ -19,6 +19,8 @@ import javafx.scene.shape.Rectangle;
 public class CheckoutAnimation extends StageAnimation{    
     TranslateTransition arrow1 = new TranslateTransition();
     SequentialTransition sequence;
+    int numArrows = 1;
+    int duration = 6;
     int arrowDist = 122;
     
     public CheckoutAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
@@ -40,7 +42,7 @@ public class CheckoutAnimation extends StageAnimation{
     public void play() {
         System.out.println("Play Checkout animation");
         
-        this.arrow1 = StageAnimation.getArrowAnimation(super.images[4], arrowDist);
+        this.arrow1 = StageAnimation.getArrowAnimation(super.images[4], arrowDist, duration);
         sequence = new SequentialTransition(this.arrow1);
         sequence.play();
     }

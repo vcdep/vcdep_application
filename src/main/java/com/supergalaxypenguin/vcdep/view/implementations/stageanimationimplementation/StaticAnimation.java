@@ -20,6 +20,8 @@ public class StaticAnimation extends StageAnimation{
     TranslateTransition arrow1 = new TranslateTransition();
     TranslateTransition arrow2 = new TranslateTransition();
     SequentialTransition sequence;
+    int numArrows = 2;
+    int duration = 6;
     int arrowDist = 122;
     int returnDist = 136;
     
@@ -43,8 +45,8 @@ public class StaticAnimation extends StageAnimation{
     public void play() {
         System.out.println("Play Static animation");
         
-        this.arrow1 = StageAnimation.getArrowAnimation(super.images[4], arrowDist);
-        this.arrow2 = StageAnimation.getArrowAnimation(super.images[5], -returnDist);
+        this.arrow1 = StageAnimation.getArrowAnimation(super.images[4], arrowDist, duration/numArrows);
+        this.arrow2 = StageAnimation.getArrowAnimation(super.images[5], -returnDist, duration/numArrows);
         sequence = new SequentialTransition(this.arrow1, this.arrow2);
         sequence.play();
     }

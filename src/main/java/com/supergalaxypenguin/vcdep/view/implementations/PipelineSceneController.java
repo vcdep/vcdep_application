@@ -14,6 +14,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,6 +26,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -50,6 +54,8 @@ public class PipelineSceneController implements Initializable {
     private ArrayList<Rectangle> backGrounds = new ArrayList<>();    //list of rectangle backgrounds for animations
     private ArrayList<StageAnimation> animations = new ArrayList<>();  //list of currently active animations
     private HashMap<String, Boolean> passFail = new HashMap<>();
+    private Timer timer;
+    private boolean isPlaying = false;
     private boolean displayLog = true;
     @FXML
     public ImageView chkoutImage1;
@@ -118,6 +124,10 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private ImageView BuildArrow1;
     @FXML
+    private ImageView PauseImage;
+    @FXML
+    private ImageView PlayImage;
+    @FXML
     private Rectangle stage0;
     @FXML
     private Rectangle stage1;
@@ -145,6 +155,10 @@ public class PipelineSceneController implements Initializable {
     private Button btnBuild;
     @FXML
     private Button btnLogAndScript;
+    @FXML
+    private Button btnPlay;
+    @FXML
+    private Button btnPause;
     @FXML
     private Label deployment;
     @FXML
@@ -193,6 +207,7 @@ public class PipelineSceneController implements Initializable {
      * @param url
      * @param rb
      */
+    @FXML
     public void handleStageReset(ActionEvent event) {
         deployment.setLayoutX(deployX);
         deployment.setLayoutY(deployY);
@@ -205,6 +220,7 @@ public class PipelineSceneController implements Initializable {
         build.setLayoutX(buildX);
         build.setLayoutY(buildY);
     }
+    
     @FXML
     public void handleOnDragEntered(DragEvent event) {
         /* the drag-and-drop gesture entered the target */
@@ -217,6 +233,7 @@ public class PipelineSceneController implements Initializable {
         event.consume();
         System.out.println("Drag Entered");
     }
+    
     @FXML
     public void handleOnDragOver(DragEvent event) 
     {
@@ -264,6 +281,11 @@ public class PipelineSceneController implements Initializable {
         event.consume();
         System.out.println("Drag Dropped");
     }
+    /**
+     * this method runs in order to setup the scene
+     * @param url
+     * @param rb 
+     */
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) 
@@ -328,6 +350,8 @@ public class PipelineSceneController implements Initializable {
         });
         currentStage = -1;
 
+        //Call this.controller to get stageInfo from log file parsing
+        
         stages.put(0, "Checkout");
         stages.put(1, "Static");
         stages.put(2, "Unit");
@@ -361,6 +385,7 @@ public class PipelineSceneController implements Initializable {
         
         parseStages(stages);
         
+        this.btnPause.setVisible(false);
         this.chkoutImage1.setVisible(false);
         this.chkoutImage2.setVisible(false);
         this.chkoutImageFailed.setVisible(false);
@@ -456,59 +481,87 @@ public class PipelineSceneController implements Initializable {
         clickedButton.setEffect(shadow);
     }
     
+    @FXML
     public void handleBtnCheckout(ActionEvent event)
     {
         System.out.println("Test btnCheckOut");
         //Open Help Window/Description
     }
     
+    @FXML
     public void handleBtnSA(ActionEvent event)
     {
         System.out.println("Test btnSA");
         //Open Help Window/Description
     }
     
+    @FXML
     public void handleBtnUnit(ActionEvent event)
     {
         System.out.println("Test btnUnit");
         //Open Help Window/Description
     }
     
+    @FXML
     public void handleBtnIntegration(ActionEvent event)
     {
         System.out.println("Test btnIntegration");
         //Open Help Window/Description
     }
     
+    @FXML
     public void handleBtnDeploy(ActionEvent event)
     {
         System.out.println("Test btnDeploy");
         //Open Help Window/Description
     }
     
+    @FXML
     public void handleBtnBuild(ActionEvent event)
     {
         System.out.println("Test btnBuild");
         //Open Help Window/Description
     }
     
-    /**
-     * Used to pause the play function
-     * @param event 
-     */
+    @FXML
     public void handleBtnPause(ActionEvent event)
     {
-        System.out.println("Test Pause Button");
+        System.out.println("Pause Now");
+        this.btnPause.setVisible(false);
+        this.btnPlay.setVisible(true);
+        timer.cancel();
+        isPlaying = false;
     }
-    
     /**
      * Play through the stages in a timed order
      * @param event 
      */
+    @FXML
     public void handleBtnPlay(ActionEvent event)
     {
-        System.out.println("Test Play Button");
-        
+        System.out.println("Play Now");
+        this.btnPlay.setVisible(false);
+        this.btnPause.setVisible(true);
+        isPlaying = true;
+        timer = new java.util.Timer();
+        timer.schedule(new TimerTask() 
+        {
+            public void run() 
+            {
+                if(currentStage == stageInfo.size()-1)
+                {
+                    this.cancel();
+                }
+                Platform.runLater(new Runnable() 
+                {
+                    public void run() 
+                    {
+                        getNextAnimation();
+                        updateStatus();
+                    }
+                });
+            }
+        }, 1, 12000);
     }
     
     /**
@@ -519,6 +572,13 @@ public class PipelineSceneController implements Initializable {
     private void handleBtnGoBack(ActionEvent event)
     {
         System.out.println("Test Go Back Button");
+        if(isPlaying)
+        {
+            timer.cancel();
+            this.btnPause.setVisible(false);
+            this.btnPlay.setVisible(true);
+            isPlaying = false;
+        }
         this.getLastAnimation();
         this.updateStatus();
         this.label.setText("");
@@ -532,9 +592,32 @@ public class PipelineSceneController implements Initializable {
     private void handleBtnForward(ActionEvent event)
     {
         System.out.println("Test Forward Button");
+        if(isPlaying)
+        {
+            timer.cancel();
+            this.btnPause.setVisible(false);
+            this.btnPlay.setVisible(true);
+            isPlaying = false;
+        }
         this.getNextAnimation();
         this.updateStatus();
         this.label.setText("");
+    }
+    
+    /**
+     * Go back to the configuration scene
+     * @param event 
+     */
+    @FXML
+    private void handleBtnReturn(ActionEvent event)
+    {
+        System.out.println("Return to Config Scene");
+        try{
+            this.controller.displayConfigurationScene();
+        }
+        catch(Exception e)
+        {
+        }
     }
     
     /**
@@ -727,7 +810,6 @@ public class PipelineSceneController implements Initializable {
             this.currentStage++;
             animations.get(animations.size()-1).play();
         }
-        
     }
     
     /**

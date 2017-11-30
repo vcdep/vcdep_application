@@ -19,6 +19,8 @@ import javafx.scene.shape.Rectangle;
 public class DeployAnimation extends StageAnimation{
     TranslateTransition arrow1 = new TranslateTransition();
     SequentialTransition sequence;
+    int numArrows = 1;
+    int duration = 6;
     int arrowDist = 122;
     
     public DeployAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
@@ -40,7 +42,7 @@ public class DeployAnimation extends StageAnimation{
     public void play() {
         System.out.println("Play Deploy animation");
         
-        this.arrow1 = StageAnimation.getArrowAnimation(super.images[4], arrowDist);
+        this.arrow1 = StageAnimation.getArrowAnimation(super.images[4], arrowDist, duration/numArrows);
         sequence = new SequentialTransition(this.arrow1);
         sequence.play();
     }

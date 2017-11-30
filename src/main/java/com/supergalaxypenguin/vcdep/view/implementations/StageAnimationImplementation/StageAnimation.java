@@ -81,7 +81,7 @@ public abstract class StageAnimation{
         this.backGround = backGround;
     }
 
-    protected static TranslateTransition getArrowAnimation(ImageView _image, int X)
+    protected static TranslateTransition getArrowAnimation(ImageView _image, int X, int duration)
     {
         final TranslateTransition arrow = new TranslateTransition();
         final ImageView image = _image;
@@ -89,20 +89,8 @@ public abstract class StageAnimation{
         image.setVisible(true);
         arrow.setNode(image);
         arrow.setToX(X);
-        arrow.setDuration(Duration.seconds(3));
-        arrow.cycleCountProperty().setValue(1);
-        /*
-        arrow.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                arrow.setToX(0);
-                arrow.setDuration(Duration.seconds(0.0001));
-                image.setVisible(false);
-                //arrow.play();
-                event.consume();
-            }
-        });
-        */
+        arrow.setDuration(Duration.seconds(duration));
+        arrow.cycleCountProperty().setValue(2);
         return arrow;
     }
     
