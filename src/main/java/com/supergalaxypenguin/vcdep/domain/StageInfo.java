@@ -19,6 +19,12 @@ public class StageInfo {
     private boolean passed;
     private Rectangle backGround;
     private Button helpButton;
+    private String logChunk;
+    private String script;
+    
+    public StageInfo(){
+        
+    }
     
     /**
      * Holds the info of a stage
@@ -108,5 +114,37 @@ public class StageInfo {
      */
     public void setPassed(boolean passed) {
         this.passed = passed;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public String getLogChunk() {
+        return logChunk;
+    }
+
+    /**
+     * 
+     * @param logChunk 
+     */
+    public void setLogChunk(String logChunk) {
+        this.logChunk = logChunk;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public String getScript() {
+        return script;
+    }
+
+    /**
+     * 
+     * @param script 
+     */
+    public void setScript(String script) {
+        this.script = script;
     }
 }
