@@ -90,7 +90,7 @@ public abstract class StageAnimation{
         arrow.setNode(image);
         arrow.setToX(X);
         arrow.setDuration(Duration.seconds(duration));
-        arrow.cycleCountProperty().setValue(2);
+        arrow.cycleCountProperty().setValue(1);
         return arrow;
     }
     
