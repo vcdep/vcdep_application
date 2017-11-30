@@ -559,6 +559,7 @@ public class PipelineSceneController implements Initializable {
             timer.cancel();
             this.btnPause.setVisible(false);
             this.btnPlay.setVisible(true);
+            isPlaying = false;
         }
         this.getLastAnimation();
         this.updateStatus();
@@ -578,6 +579,7 @@ public class PipelineSceneController implements Initializable {
             timer.cancel();
             this.btnPause.setVisible(false);
             this.btnPlay.setVisible(true);
+            isPlaying = false;
         }
         this.getNextAnimation();
         this.updateStatus();
