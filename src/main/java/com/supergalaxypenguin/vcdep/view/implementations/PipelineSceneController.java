@@ -220,6 +220,7 @@ public class PipelineSceneController implements Initializable {
         build.setLayoutX(buildX);
         build.setLayoutY(buildY);
     }
+    
     @FXML
     public void handleOnDragEntered(DragEvent event) {
         /* the drag-and-drop gesture entered the target */
@@ -232,6 +233,7 @@ public class PipelineSceneController implements Initializable {
         event.consume();
         System.out.println("Drag Entered");
     }
+    
     @FXML
     public void handleOnDragOver(DragEvent event) 
     {
@@ -348,6 +350,8 @@ public class PipelineSceneController implements Initializable {
         });
         currentStage = -1;
 
+        //Call this.controller to get stageInfo from log file parsing
+        
         stages.put(0, "Checkout");
         stages.put(1, "Static");
         stages.put(2, "Unit");
