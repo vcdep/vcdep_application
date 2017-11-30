@@ -14,6 +14,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,6 +26,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -50,6 +54,8 @@ public class PipelineSceneController implements Initializable {
     private ArrayList<Rectangle> backGrounds = new ArrayList<>();    //list of rectangle backgrounds for animations
     private ArrayList<StageAnimation> animations = new ArrayList<>();  //list of currently active animations
     private HashMap<String, Boolean> passFail = new HashMap<>();
+    private Timer timer;
+    private boolean isPlaying = false;
     private boolean displayLog = true;
     @FXML
     public ImageView chkoutImage1;
@@ -118,6 +124,10 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private ImageView BuildArrow1;
     @FXML
+    private ImageView PauseImage;
+    @FXML
+    private ImageView PlayImage;
+    @FXML
     private Rectangle stage0;
     @FXML
     private Rectangle stage1;
@@ -145,6 +155,10 @@ public class PipelineSceneController implements Initializable {
     private Button btnBuild;
     @FXML
     private Button btnLogAndScript;
+    @FXML
+    private Button btnPlay;
+    @FXML
+    private Button btnPause;
     @FXML
     private Label deployment;
     @FXML
@@ -361,6 +375,7 @@ public class PipelineSceneController implements Initializable {
         
         parseStages(stages);
         
+        this.btnPause.setVisible(false);
         this.chkoutImage1.setVisible(false);
         this.chkoutImage2.setVisible(false);
         this.chkoutImageFailed.setVisible(false);
@@ -492,23 +507,43 @@ public class PipelineSceneController implements Initializable {
         //Open Help Window/Description
     }
     
-    /**
-     * Used to pause the play function
-     * @param event 
-     */
     public void handleBtnPause(ActionEvent event)
     {
-        System.out.println("Test Pause Button");
+        System.out.println("Pause Now");
+        this.btnPause.setVisible(false);
+        this.btnPlay.setVisible(true);
+        timer.cancel();
+        isPlaying = false;
     }
-    
     /**
      * Play through the stages in a timed order
      * @param event 
      */
     public void handleBtnPlay(ActionEvent event)
     {
-        System.out.println("Test Play Button");
-        
+        System.out.println("Play Now");
+        this.btnPlay.setVisible(false);
+        this.btnPause.setVisible(true);
+        isPlaying = true;
+        timer = new java.util.Timer();
+        timer.schedule(new TimerTask() 
+        {
+            public void run() 
+            {
+                if(currentStage == stageInfo.size()-1)
+                {
+                    this.cancel();
+                }
+                Platform.runLater(new Runnable() 
+                {
+                    public void run() 
+                    {
+                        getNextAnimation();
+                        updateStatus();
+                    }
+                });
+            }
+        }, 1, 12000);
     }
     
     /**
@@ -519,6 +554,12 @@ public class PipelineSceneController implements Initializable {
     private void handleBtnGoBack(ActionEvent event)
     {
         System.out.println("Test Go Back Button");
+        if(isPlaying)
+        {
+            timer.cancel();
+            this.btnPause.setVisible(false);
+            this.btnPlay.setVisible(true);
+        }
         this.getLastAnimation();
         this.updateStatus();
         this.label.setText("");
@@ -532,6 +573,12 @@ public class PipelineSceneController implements Initializable {
     private void handleBtnForward(ActionEvent event)
     {
         System.out.println("Test Forward Button");
+        if(isPlaying)
+        {
+            timer.cancel();
+            this.btnPause.setVisible(false);
+            this.btnPlay.setVisible(true);
+        }
         this.getNextAnimation();
         this.updateStatus();
         this.label.setText("");
@@ -727,7 +774,6 @@ public class PipelineSceneController implements Initializable {
             this.currentStage++;
             animations.get(animations.size()-1).play();
         }
-        
     }
     
     /**
