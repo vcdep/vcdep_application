@@ -207,6 +207,7 @@ public class PipelineSceneController implements Initializable {
      * @param url
      * @param rb
      */
+    @FXML
     public void handleStageReset(ActionEvent event) {
         deployment.setLayoutX(deployX);
         deployment.setLayoutY(deployY);
@@ -278,6 +279,11 @@ public class PipelineSceneController implements Initializable {
         event.consume();
         System.out.println("Drag Dropped");
     }
+    /**
+     * this method runs in order to setup the scene
+     * @param url
+     * @param rb 
+     */
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle rb) 
@@ -471,42 +477,49 @@ public class PipelineSceneController implements Initializable {
         clickedButton.setEffect(shadow);
     }
     
+    @FXML
     public void handleBtnCheckout(ActionEvent event)
     {
         System.out.println("Test btnCheckOut");
         //Open Help Window/Description
     }
     
+    @FXML
     public void handleBtnSA(ActionEvent event)
     {
         System.out.println("Test btnSA");
         //Open Help Window/Description
     }
     
+    @FXML
     public void handleBtnUnit(ActionEvent event)
     {
         System.out.println("Test btnUnit");
         //Open Help Window/Description
     }
     
+    @FXML
     public void handleBtnIntegration(ActionEvent event)
     {
         System.out.println("Test btnIntegration");
         //Open Help Window/Description
     }
     
+    @FXML
     public void handleBtnDeploy(ActionEvent event)
     {
         System.out.println("Test btnDeploy");
         //Open Help Window/Description
     }
     
+    @FXML
     public void handleBtnBuild(ActionEvent event)
     {
         System.out.println("Test btnBuild");
         //Open Help Window/Description
     }
     
+    @FXML
     public void handleBtnPause(ActionEvent event)
     {
         System.out.println("Pause Now");
@@ -519,6 +532,7 @@ public class PipelineSceneController implements Initializable {
      * Play through the stages in a timed order
      * @param event 
      */
+    @FXML
     public void handleBtnPlay(ActionEvent event)
     {
         System.out.println("Play Now");
@@ -586,6 +600,10 @@ public class PipelineSceneController implements Initializable {
         this.label.setText("");
     }
     
+    /**
+     * Go back to the configuration scene
+     * @param event 
+     */
     @FXML
     private void handleBtnReturn(ActionEvent event)
     {
