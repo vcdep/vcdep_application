@@ -53,7 +53,7 @@ public class PipelineSceneController implements Initializable {
     private Timer timer;
     public ArrayList<StageInfo> stageInfos;
     private boolean isPlaying = false;
-    private boolean displayLog = true;
+    private boolean displayLog = false;
     @FXML
     public ImageView chkoutImage1;
     @FXML
@@ -564,7 +564,7 @@ public class PipelineSceneController implements Initializable {
         }
         this.getLastAnimation();
         this.updateStatus();
-        this.label.setText("");
+        
     }
     
     /**
@@ -584,7 +584,7 @@ public class PipelineSceneController implements Initializable {
         }
         this.getNextAnimation();
         this.updateStatus();
-        this.label.setText("");
+        
     }
     
     /**
@@ -626,12 +626,18 @@ public class PipelineSceneController implements Initializable {
     private void updateStatus()
     {
     
-        if (this.currentStage < 0) return;
+        if (this.currentStage < 0) {
+            this.status = "";
+            return;
+        }
         if (this.displayLog)
+        {
             this.status = this.stageInfos.get(currentStage).getLogChunk();
+        }
         else
+        {
             this.status = this.stageInfos.get(currentStage).getScript();
-        
+        }
     }
     
     /**
@@ -642,18 +648,18 @@ public class PipelineSceneController implements Initializable {
     private void handleBtnLogAndScript(ActionEvent event)
     {
         System.out.println("Test Logfile/Script Button");
+        this.displayLog = !this.displayLog;
+        this.updateStatus();
         if (this.displayLog)
         {
-            this.btnLogAndScript.textProperty().set("Script");
+            this.btnLogAndScript.textProperty().set("Display Script");
             this.updateScrollPane(this.status);
         }
         else
         {
-            this.btnLogAndScript.textProperty().set("Log File");
+            this.btnLogAndScript.textProperty().set("Display Log File");
             this.updateScrollPane(this.status);
         }
-        this.displayLog = !this.displayLog;
-        this.updateStatus();
     }
     
     /**
@@ -738,6 +744,7 @@ public class PipelineSceneController implements Initializable {
         if (animations.size() >0)
         {
             animations.get(animations.size()-1).play();
+            
         }
     }
     
@@ -755,6 +762,8 @@ public class PipelineSceneController implements Initializable {
             createNewAnimations(this.currentStage);
             this.currentStage++;
             animations.get(animations.size()-1).play();
+            this.updateStatus();
+            this.updateScrollPane(status);
         }
     }
     
@@ -767,6 +776,13 @@ public class PipelineSceneController implements Initializable {
         {
             removeAnimation(this.currentStage);
             this.currentStage--;
+            this.updateStatus();
+            this.updateScrollPane(status);
+        }
+        if (this.currentStage < 0)
+        {
+            status = "";
+            this.updateScrollPane(status);
         }
     }
     
@@ -782,7 +798,7 @@ public class PipelineSceneController implements Initializable {
      */
     private void parseStages()
     {
-            for (int i = 0; i<this.stageInfos.size(); i++)
+        for (int i = 0; i<this.stageInfos.size(); i++)
         {
             if (this.stageInfos.get(i).getType() == StageType.CHECKOUT)
             {   

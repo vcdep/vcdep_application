@@ -1825,6 +1825,7 @@ public class MainController implements iMainController
                 stageInfo.setLogChunk(this.getCheckoutStatus());
                 stageInfo = this.parseCheckout(stageInfo);
                 stageInfo.setType(StageType.CHECKOUT);
+                
             }
             else if (stage.equalsIgnoreCase("Static"))
             {
@@ -1863,7 +1864,10 @@ public class MainController implements iMainController
             }
             
             stageInfos.add(stageInfo);
-            
+            if (!stageInfo.isPassed())
+            {
+                break;
+            }
         }
         
         return stageInfos;
