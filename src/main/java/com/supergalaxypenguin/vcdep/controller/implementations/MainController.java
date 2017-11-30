@@ -7,6 +7,7 @@ package com.supergalaxypenguin.vcdep.controller.implementations;
 
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import com.supergalaxypenguin.vcdep.domain.StageInfo;
+import com.supergalaxypenguin.vcdep.domain.StageType;
 import com.supergalaxypenguin.vcdep.model.implementations.Model;
 import com.supergalaxypenguin.vcdep.view.implementations.ConfigurationViewController;
 import com.supergalaxypenguin.vcdep.view.implementations.PipelineSceneController;
@@ -1265,7 +1266,7 @@ public class MainController implements iMainController
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/PipelineScene.fxml"));
         this.pipelineSceneController = PipelineSceneController.getInstance();
         this.pipelineSceneController.setMainControllerInterface((iMainController) this);
-        this.pipelineSceneController.stageInfos = this.getStageInfos();
+        this.pipelineSceneController.setStageInfos(this.getStageInfos());
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
         javaFXStage.setTitle("Pipeline Viewer");
@@ -1823,42 +1824,42 @@ public class MainController implements iMainController
                 
                 stageInfo.setLogChunk(this.getCheckoutStatus());
                 stageInfo = this.parseCheckout(stageInfo);
-                
+                stageInfo.setType(StageType.CHECKOUT);
             }
             else if (stage.equalsIgnoreCase("Static"))
             {
                 
                 stageInfo.setLogChunk(this.getStaticAnalysisStatus());
                 stageInfo = this.parseStaticAnalysis(stageInfo);
-                
+                stageInfo.setType(StageType.STATIC);
             }
             else if (stage.equalsIgnoreCase("Unit"))
             {
                 
                 stageInfo.setLogChunk(this.getUnitTestStatus());
                 stageInfo = this.parseUnitTests(stageInfo);
-                
+                stageInfo.setType(StageType.UNIT);
             }
             else if (stage.equalsIgnoreCase("Integration"))
             {
                 
                 stageInfo.setLogChunk(this.getIntegrationStatus());
                 stageInfo = this.parseIntegration(stageInfo);
-                
+                stageInfo.setType(StageType.INTEGRATION);
             }
             else if (stage.equalsIgnoreCase("Deploy"))
             {
                 
                 stageInfo.setLogChunk(this.getDeploymentStatus());
                 stageInfo = this.parseDeployment(stageInfo);
-                
+                stageInfo.setType(StageType.DEPLOY);
             }
             else if (stage.equalsIgnoreCase("Build"))
             {
                 
                 stageInfo.setLogChunk(this.getBuildStatus());
                 stageInfo = this.parseBuild(stageInfo);
-                
+                stageInfo.setType(StageType.BUILD);
             }
             
             stageInfos.add(stageInfo);

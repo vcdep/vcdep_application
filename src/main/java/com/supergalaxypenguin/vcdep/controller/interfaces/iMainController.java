@@ -8,9 +8,6 @@ package com.supergalaxypenguin.vcdep.controller.interfaces;
 import com.supergalaxypenguin.vcdep.model.implementations.Model;
 import java.io.File;
 import java.io.IOException;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**

@@ -6,7 +6,6 @@
 package com.supergalaxypenguin.vcdep.view.implementations;
 
 import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.StageAnimation;
-import com.supergalaxypenguin.vcdep.controller.implementations.MainController;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import com.supergalaxypenguin.vcdep.domain.StageInfo;
 import com.supergalaxypenguin.vcdep.domain.StageType;
@@ -26,7 +25,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -49,11 +47,9 @@ public class PipelineSceneController implements Initializable {
     private final DropShadow shadow = new DropShadow();     // A generic drop shadow effect
     private final HashMap<String,ImageView> animationIcons = new HashMap<>();  //master list of animation icons/images
     private String log = "";    //log file as a String?
-    private ArrayList<StageInfo> stageInfo = new ArrayList<>();  //info about all stages from last pipe run 
     private int currentStage;   //The stage currently active (if no stage active = -1)
     private ArrayList<Rectangle> backGrounds = new ArrayList<>();    //list of rectangle backgrounds for animations
     private ArrayList<StageAnimation> animations = new ArrayList<>();  //list of currently active animations
-    private HashMap<String, Boolean> passFail = new HashMap<>();
     private Timer timer;
     public ArrayList<StageInfo> stageInfos;
     private boolean isPlaying = false;
@@ -352,20 +348,6 @@ public class PipelineSceneController implements Initializable {
             }
         });
         currentStage = -1;
-
-        //Call this.controller to get stageInfo from log file parsing
-
-        stages.put(0, "Checkout");
-        stages.put(1, "Static");
-        stages.put(2, "Unit");
-        stages.put(4, "Integration");
-        stages.put(3, "Deploy");
-        
-        this.passFail.put("Checkout", Boolean.TRUE);
-        this.passFail.put("Static", Boolean.TRUE);
-        this.passFail.put("Unit", Boolean.TRUE);
-        this.passFail.put("Integration", Boolean.FALSE);
-        this.passFail.put("Deploy", Boolean.TRUE);
         
         this.backGrounds.add(stage0);
         this.backGrounds.add(stage1);
@@ -385,8 +367,6 @@ public class PipelineSceneController implements Initializable {
         {
             backGrounds.get(i).setVisible(false);
         }
-        
-        parseStages(stages);
         
         this.btnPause.setVisible(false);
         this.chkoutImage1.setVisible(false);
@@ -551,7 +531,7 @@ public class PipelineSceneController implements Initializable {
         {
             public void run() 
             {
-                if(currentStage == stageInfo.size()-1)
+                if(currentStage == stageInfos.size()-1)
                 {
                     this.cancel();
                 }
@@ -646,6 +626,7 @@ public class PipelineSceneController implements Initializable {
     private void updateStatus()
     {
     
+        if (this.currentStage < 0) return;
         if (this.displayLog)
             this.status = this.stageInfos.get(currentStage).getLogChunk();
         else
@@ -742,7 +723,7 @@ public class PipelineSceneController implements Initializable {
      */
     private void createNewAnimations(int i)
     {
-        animations.add(StageAnimation.getInstance(stageInfo.get(i+1), this.animationIcons, backGrounds.get(i+1)));
+        animations.add(StageAnimation.getInstance(stageInfos.get(i+1), this.animationIcons, backGrounds.get(i+1)));
     }
     
     /**
@@ -765,11 +746,11 @@ public class PipelineSceneController implements Initializable {
      */
     private void getNextAnimation()
     {
-        if (animations.size() > 0 && currentStage < stageInfo.size()-1)
+        if (animations.size() > 0 && currentStage < stageInfos.size()-1)
         {
             animations.get(animations.size()-1).stop();
         }
-        if (this.currentStage < stageInfo.size()-1)
+        if (this.currentStage < stageInfos.size()-1)
         {
             createNewAnimations(this.currentStage);
             this.currentStage++;
@@ -788,58 +769,78 @@ public class PipelineSceneController implements Initializable {
             this.currentStage--;
         }
     }
+    
+    public void setStageInfos(ArrayList<StageInfo> stageInfos)
+    {
+        this.stageInfos = stageInfos;
+        this.parseStages();
+    }
+    
     /**
      * Create stage info from Stages List
      * @param stages List of stages
      */
-    private void parseStages(HashMap<Integer, String> stages)
+    private void parseStages()
     {
-            for (int i = 0; i<stages.size(); i++)
+            for (int i = 0; i<this.stageInfos.size(); i++)
         {
-            if (stages.get(i).compareToIgnoreCase("Checkout")==0)
+            if (this.stageInfos.get(i).getType() == StageType.CHECKOUT)
             {   
-                this.stageInfo.add(new StageInfo(StageType.CHECKOUT, i, this.passFail.get("Checkout"), backGrounds.get(i), this.helpButtons));
-                if (!this.stageInfo.get(i).isPassed())
+                
+                this.stageInfos.get(i).setBackGround(this.backGrounds.get(i));
+                this.stageInfos.get(i).setOrderNumber(i);
+                this.stageInfos.get(i).setHelpButton(this.btnCheckOut);
+                if (!this.stageInfos.get(i).isPassed())
                 {
                     break;
                 }
             }
-            else if(stages.get(i).compareToIgnoreCase("Static")==0)
+            else if(this.stageInfos.get(i).getType() == StageType.STATIC)
             {
-                this.stageInfo.add(new StageInfo(StageType.STATIC, i, this.passFail.get("Static"), backGrounds.get(i), this.helpButtons));
-                if (!this.stageInfo.get(i).isPassed())
+                this.stageInfos.get(i).setBackGround(this.backGrounds.get(i));
+                this.stageInfos.get(i).setOrderNumber(i);
+                this.stageInfos.get(i).setHelpButton(this.btnSA);
+                if (!this.stageInfos.get(i).isPassed())
                 {
                     break;
                 }
             }
-            else if(stages.get(i).compareToIgnoreCase("Unit")==0)
+            else if(this.stageInfos.get(i).getType() == StageType.UNIT)
             {
-                this.stageInfo.add(new StageInfo(StageType.UNIT, i, this.passFail.get("Unit"), backGrounds.get(i), this.helpButtons));
-                if (!this.stageInfo.get(i).isPassed())
+                this.stageInfos.get(i).setBackGround(this.backGrounds.get(i));
+                this.stageInfos.get(i).setOrderNumber(i);
+                this.stageInfos.get(i).setHelpButton(this.btnUnit);
+                if (!this.stageInfos.get(i).isPassed())
                 {
                     break;
                 }
             }
-            else if(stages.get(i).compareToIgnoreCase("Integration")==0)
+            else if(this.stageInfos.get(i).getType() == StageType.INTEGRATION)
             {
-                this.stageInfo.add(new StageInfo(StageType.INTEGRATION, i, this.passFail.get("Integration"), backGrounds.get(i), this.helpButtons));
-                if (!this.stageInfo.get(i).isPassed())
+                this.stageInfos.get(i).setBackGround(this.backGrounds.get(i));
+                this.stageInfos.get(i).setOrderNumber(i);
+                this.stageInfos.get(i).setHelpButton(this.btnIntegration);
+                if (!this.stageInfos.get(i).isPassed())
                 {
                     break;
                 }
             }
-            else if(stages.get(i).compareToIgnoreCase("Deploy")==0)
+            else if(this.stageInfos.get(i).getType() == StageType.DEPLOY)
             {
-                this.stageInfo.add(new StageInfo(StageType.DEPLOY, i, this.passFail.get("Deploy"), backGrounds.get(i), this.helpButtons));
-                if (!this.stageInfo.get(i).isPassed())
+                this.stageInfos.get(i).setBackGround(this.backGrounds.get(i));
+                this.stageInfos.get(i).setOrderNumber(i);
+                this.stageInfos.get(i).setHelpButton(this.btnDeploy);
+                if (!this.stageInfos.get(i).isPassed())
                 {
                     break;
                 }
             }
-            else if(stages.get(i).compareToIgnoreCase("Build")==0)
+            else if(this.stageInfos.get(i).getType() == StageType.BUILD)
             {
-                this.stageInfo.add(new StageInfo(StageType.BUILD, i, this.passFail.get("Build"), backGrounds.get(i), this.helpButtons));
-                if (!this.stageInfo.get(i).isPassed())
+                this.stageInfos.get(i).setBackGround(this.backGrounds.get(i));
+                this.stageInfos.get(i).setOrderNumber(i);
+                this.stageInfos.get(i).setHelpButton(this.btnBuild);
+                if (!this.stageInfos.get(i).isPassed())
                 {
                     break;
                 }
