@@ -333,5 +333,6 @@
             <Image url="@../Images/AnimationIcons2/Github%20icon.png" />
          </image>
       </ImageView>
+      <Button fx:id="btnReturn" layoutX="408.0" layoutY="735.0" mnemonicParsing="false" onAction="#handleBtnReturn" prefHeight="50.0" prefWidth="230.0" text="Return to Configuration Screen" />
    </children>
 </AnchorPane>

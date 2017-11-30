@@ -586,6 +586,18 @@ public class PipelineSceneController implements Initializable {
         this.label.setText("");
     }
     
+    @FXML
+    private void handleBtnReturn(ActionEvent event)
+    {
+        System.out.println("Return to Config Scene");
+        try{
+            this.controller.displayConfigurationScene();
+        }
+        catch(Exception e)
+        {
+        }
+    }
+    
     /**
      * Reset button should simply reset the drag and drop to its original position
      * @param event 
