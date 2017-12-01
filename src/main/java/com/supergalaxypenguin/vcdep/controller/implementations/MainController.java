@@ -6,11 +6,13 @@
 package com.supergalaxypenguin.vcdep.controller.implementations;
 
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
+import com.supergalaxypenguin.vcdep.domain.StageInfo;
 import com.supergalaxypenguin.vcdep.model.implementations.Model;
 import com.supergalaxypenguin.vcdep.view.implementations.ConfigurationViewController;
 import com.supergalaxypenguin.vcdep.view.implementations.PipelineSceneController;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -1263,6 +1265,7 @@ public class MainController implements iMainController
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/PipelineScene.fxml"));
         this.pipelineSceneController = PipelineSceneController.getInstance();
         this.pipelineSceneController.setMainControllerInterface((iMainController) this);
+        this.pipelineSceneController.stageInfos = this.getStageInfos();
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
         javaFXStage.setTitle("Pipeline Viewer");
@@ -1652,7 +1655,7 @@ public class MainController implements iMainController
        return output;
     }
     
-    public String parseCheckout()
+    public StageInfo parseCheckout(StageInfo stageInfo)
     {
        String output = "Welcome to the checkout stage.  Currently, the Jenkins pipeline is locating your Github repository "
                + "located at " + this.getGitHubURL() + " and grabbing the branch labelled " + this.getBranchName() + " and "
@@ -1667,33 +1670,42 @@ public class MainController implements iMainController
        //events
        if(this.getCheckoutStatus().contains("ERROR:"))
        {
-          output = output + "Build failed.  Github repository not found. Aborting.\n";
+           stageInfo.setPassed(false);
+           output = output + "Build failed.  Github repository not found. Aborting.\n";
        }
        else
        {
+          stageInfo.setPassed(true);
           output = output + "Build successful.  Continue to next stage.\n";
        }
        output =  output + "If you would like to see details, click the log file button below.\n";
-       return (output);
+       stageInfo.setScript(output);
+       
+       return stageInfo;
 
     }
     
-    public String parseBuild()               //java only
+    public StageInfo parseBuild(StageInfo stageInfo)               //java only
     {
+        
+        
       String output = "Welcome to the build stage.  Currently, the Jenkins pipeline is building your project and compiling "
                  + "the required files.  ";
       //events
       if(this.getBuildStatus().contains("FAILURE"))
       {
+          stageInfo.setPassed(false);
          output = output + "Build failed.  Unable to compile project. Aborting.\n";
       }
       else
       {
+            stageInfo.setPassed(true);
          output = output + "Build successful.  Continue to next stage.\n";
       }
       output =  output + "If you would like to see details, click the log file button below.\n";
-      System.out.println(output);
-      return (output);
+
+      stageInfo.setScript(output);
+      return stageInfo;
     }
     
     public int findErrorCount()        //used to find staticAnalysis errors
@@ -1722,7 +1734,7 @@ public class MainController implements iMainController
        }
     }
     
-    public String parseStaticAnalysis()
+    public StageInfo parseStaticAnalysis(StageInfo stageInfo)
     {
       String output = "Welcome to the Static Analysis stage.  Currently, the Jenkins pipeline is comparing your code with coding "
               + "standards, looking for ways to improve your coding structure.\n";
@@ -1737,51 +1749,124 @@ public class MainController implements iMainController
           output = output + "Static Analysis found no issues with your code.  Continue to next stage.\n";
        }
        output =  output + "If you would like to see details, click the log file button below.\n";
-       return (output);
+       
+       stageInfo.setPassed(true);
+       stageInfo.setScript(output);
+       return stageInfo;
     }
     
-    public String parseUnitTests()
+    public StageInfo parseUnitTests(StageInfo stageInfo)
     {
       String output = "Welcome to unit testing.  Currently, the Jenkins pipeline is running your code’s unit tests to ensure "
               + "that your changes still pass their respective unit tests.\n";
        //events
        if(this.getUnitTestStatus().contains("FAILURES!"))
        {
+           stageInfo.setPassed(false);
           output = output + "Unit testing found problems with your code. Aborting.\n";
        }
        else
        {
+           stageInfo.setPassed(true);
           output = output + "All the unit tests passed.  Continue to next stage.\n";
        }
        output =  output + "If you would like to see details, click the log file button below.\n";
-       return (output);
+       stageInfo.setScript(output);
+       
+       return stageInfo;
     }
     
-    public String parseIntegration()
+    public StageInfo parseIntegration(StageInfo stageInfo)
     {
       String output = "Welcome to integration.  Currently the Jenkins pipeline is integrating the modules within your project,"
               + " ensuring that the changes have not caused any integration issues.\n";
        //events
        if(this.getIntegrationStatus().contains("FAILURES!"))
        {
+           stageInfo.setPassed(false);
           output = output + "Integration testing found problems with your code. Aborting.\n";
        }
        else
        {
+          stageInfo.setPassed(true);
           output = output + "All the integration tests passed.  Continue to next stage.\n";
        }
        output =  output + "If you would like to see details, click the log file button below.\n";
-       return (output);
+       stageInfo.setScript(output);
+       return stageInfo;
     }
     
-    public String parseDeployment()
+    public StageInfo parseDeployment(StageInfo stageInfo)
     {
       String output = "Welcome to deployment.  Currently, the Jenkins pipeline is deploying your new solution to production "
               + "machines and checking that the new code is compatible with your production hardware and software.\n";
        //events
        output = output + "Your project passed the deployment stage.  Now your code is ready to be released.\n";
        output =  output + "If you would like to see details, click the log file button below.\n";
-       return (output);
+       
+       stageInfo.setPassed(true);
+       return stageInfo;
+    }
+    
+    public ArrayList<StageInfo> getStageInfos()
+    {
+        
+        ArrayList<StageInfo> stageInfos = new ArrayList<>();
+        
+        for (String stage : this.stages)
+        {
+            
+            StageInfo stageInfo = new StageInfo();
+            
+            if (stage.equalsIgnoreCase("Checkout"))
+            {
+                
+                stageInfo.setLogChunk(this.getCheckoutStatus());
+                stageInfo = this.parseCheckout(stageInfo);
+                
+            }
+            else if (stage.equalsIgnoreCase("Static"))
+            {
+                
+                stageInfo.setLogChunk(this.getStaticAnalysisStatus());
+                stageInfo = this.parseStaticAnalysis(stageInfo);
+                
+            }
+            else if (stage.equalsIgnoreCase("Unit"))
+            {
+                
+                stageInfo.setLogChunk(this.getUnitTestStatus());
+                stageInfo = this.parseUnitTests(stageInfo);
+                
+            }
+            else if (stage.equalsIgnoreCase("Integration"))
+            {
+                
+                stageInfo.setLogChunk(this.getIntegrationStatus());
+                stageInfo = this.parseIntegration(stageInfo);
+                
+            }
+            else if (stage.equalsIgnoreCase("Deploy"))
+            {
+                
+                stageInfo.setLogChunk(this.getDeploymentStatus());
+                stageInfo = this.parseDeployment(stageInfo);
+                
+            }
+            else if (stage.equalsIgnoreCase("Build"))
+            {
+                
+                stageInfo.setLogChunk(this.getBuildStatus());
+                stageInfo = this.parseBuild(stageInfo);
+                
+            }
+            
+            stageInfos.add(stageInfo);
+            
+        }
+        
+        return stageInfos;
+        
     }
     
 }

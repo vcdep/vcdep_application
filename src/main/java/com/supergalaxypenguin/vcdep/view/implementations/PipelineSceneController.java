@@ -55,6 +55,7 @@ public class PipelineSceneController implements Initializable {
     private ArrayList<StageAnimation> animations = new ArrayList<>();  //list of currently active animations
     private HashMap<String, Boolean> passFail = new HashMap<>();
     private Timer timer;
+    public ArrayList<StageInfo> stageInfos;
     private boolean isPlaying = false;
     private boolean displayLog = true;
     @FXML
@@ -290,6 +291,8 @@ public class PipelineSceneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
+        
+        
         deployment.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -351,7 +354,7 @@ public class PipelineSceneController implements Initializable {
         currentStage = -1;
 
         //Call this.controller to get stageInfo from log file parsing
-        
+
         stages.put(0, "Checkout");
         stages.put(1, "Static");
         stages.put(2, "Unit");
@@ -643,48 +646,10 @@ public class PipelineSceneController implements Initializable {
     private void updateStatus()
     {
     
-        if (stages.get(this.currentStage).equalsIgnoreCase("Checkout"))
-        {
-            if (this.displayLog)
-                this.status = ((MainController) controller).getCheckoutStatus();
-            else
-                this.status = ((MainController) controller).parseCheckout();
-        }
-        else if (stages.get(this.currentStage).equalsIgnoreCase("Static"))
-        {
-            if (this.displayLog)
-                this.status = ((MainController) controller).getStaticAnalysisStatus();
-            else
-                this.status = ((MainController) controller).parseStaticAnalysis();
-        }
-        else if (stages.get(this.currentStage).equalsIgnoreCase("Unit"))
-        {
-            if (this.displayLog)
-                this.status = ((MainController) controller).getUnitTestStatus();
-            else
-                this.status = ((MainController) controller).parseUnitTests();
-        }
-        else if (stages.get(this.currentStage).equalsIgnoreCase("Integration"))
-        {
-            if (this.displayLog)
-                this.status = ((MainController) controller).getIntegrationStatus();
-            else
-                this.status = ((MainController) controller).parseIntegration();
-        }
-        else if (stages.get(this.currentStage).equalsIgnoreCase("Deploy"))
-        {
-            if (this.displayLog)
-                this.status = ((MainController) controller).getDeploymentStatus();
-            else
-                this.status = ((MainController) controller).parseDeployment();
-        }
-        else if (stages.get(this.currentStage).equalsIgnoreCase("Build"))
-        {
-            if (this.displayLog)
-                this.status = ((MainController) controller).getBuildStatus();
-            else
-                this.status = ((MainController) controller).parseBuild();
-        }
+        if (this.displayLog)
+            this.status = this.stageInfos.get(currentStage).getLogChunk();
+        else
+            this.status = this.stageInfos.get(currentStage).getScript();
         
     }
     
