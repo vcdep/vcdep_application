@@ -183,6 +183,8 @@ public class PipelineSceneController implements Initializable {
     private Rectangle target_5;
     @FXML
     private Button stageReset;
+    
+    
           
     HashMap<StageType, Button> helpButtons = new HashMap<>();
     
