@@ -9,12 +9,16 @@ import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplement
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import com.supergalaxypenguin.vcdep.domain.StageInfo;
 import com.supergalaxypenguin.vcdep.domain.StageType;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -42,6 +46,7 @@ import javafx.scene.shape.Rectangle;
 public class PipelineSceneController implements Initializable {
 
     private String status;   //currently displayed text?
+    private String[] new_stages = new String[5];
     private static PipelineSceneController instance;   //Singleton instance
     private static iMainController controller;          //Reference to the main controller (Used to Call to Model)
     private final DropShadow shadow = new DropShadow();     // A generic drop shadow effect
@@ -197,7 +202,11 @@ public class PipelineSceneController implements Initializable {
     public final double unitY = 14.0;
     public final double buildX = 800.0;
     public final double buildY = 14.0;
-    
+    String payloadOne = "";
+    String payloadTwo = "";
+    String payloadThree = "";
+    String payloadFour = "";
+    String payloadFive = "";
     /**
      * Initializes the controller class.
      * runs upon load of view
@@ -251,6 +260,22 @@ public class PipelineSceneController implements Initializable {
         event.consume();
         System.out.println(content.getString());
         System.out.println(target);
+        if (target == target_1){
+            payloadOne = content.getString();
+            new_stages[0] = payloadOne;
+        }else if (target == target_2){
+            payloadTwo = content.getString();
+            new_stages[1] = payloadTwo;
+        }else if (target == target_3){
+            payloadThree = content.getString();
+            new_stages[2] = payloadThree;
+        }else if (target == target_4){
+            payloadFour = content.getString();
+            new_stages[3] = payloadFour;
+        }else if (target == target_5){
+            payloadFive = content.getString();
+            new_stages[4] = payloadFive;
+        }
     }    
     
     @FXML
@@ -620,6 +645,42 @@ public class PipelineSceneController implements Initializable {
     @FXML
     private void handleBtnReSubmit(ActionEvent event)
     {
+        
+        System.out.println("Opening Pipline Viewer Window");
+        
+       // System.out.println(Arrays.toString(stages));
+        // this area will change
+        //Check that all inputs are entered properly...
+        //How to do that?
+        //Set all inputs in Controller and runs the pipeline
+        
+        ArrayList<String> stagesList = new ArrayList<>();
+        for (int i = 0; i< new_stages.length; i++)
+        {
+            if (new_stages[i]!=null)
+            {
+                stagesList.add(new_stages[i]);
+            }
+        }
+        
+        //String[] stages = new String[stagesList.size()];
+        //stages = (String[])stagesList.toArray();
+        
+        //System.out.println(Arrays.toString(stages));
+        
+        try {
+            controller.runPipeline(controller.getGitHubURL(), controller.getLanguage(), controller.getLocalRepo(), controller.getJenkinsURL(), controller.getBranchName(), Arrays.copyOf(stagesList.toArray(), stagesList.size(), String[].class));
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Exception in controller.runpipline(params)");
+        }
+        try {
+            controller.displayPipelineScene();
+        } catch (IOException ex) {
+            Logger.getLogger(ConfigurationViewController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
+        
         System.out.println("Test Re-Submit Button");
     }
     
