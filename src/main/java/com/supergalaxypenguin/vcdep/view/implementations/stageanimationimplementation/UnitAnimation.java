@@ -48,6 +48,7 @@ public class UnitAnimation extends StageAnimation{
         this.arrow1 = StageAnimation.getArrowAnimation(super.images[4], arrowDist, duration/numArrows);
         this.arrow2 = StageAnimation.getArrowAnimation(super.images[5], -returnDist, duration/numArrows);
         sequence = new SequentialTransition(this.arrow1, this.arrow2);
+        sequence.setCycleCount(2);
         sequence.play();
     }
 

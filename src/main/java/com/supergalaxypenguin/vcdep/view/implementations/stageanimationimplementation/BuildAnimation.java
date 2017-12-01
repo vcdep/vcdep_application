@@ -45,6 +45,7 @@ public class BuildAnimation extends StageAnimation{
         
         this.arrow1 = StageAnimation.getArrowAnimation(super.images[4], arrowDist, duration/numArrows);
         sequence = new SequentialTransition(this.arrow1);
+        sequence.setCycleCount(2);
         sequence.play();
     }
 
