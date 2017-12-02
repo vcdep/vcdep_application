@@ -59,6 +59,7 @@ public class PipelineSceneController implements Initializable {
     public ArrayList<StageInfo> stageInfos;
     private boolean isPlaying = false;
     private boolean displayLog = false;
+    private String language = "";
     @FXML
     public ImageView chkoutImage1;
     @FXML
@@ -853,6 +854,15 @@ public class PipelineSceneController implements Initializable {
     {
         this.stageInfos = stageInfos;
         this.parseStages();
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+        //language selection logic goes here
     }
     
     /**

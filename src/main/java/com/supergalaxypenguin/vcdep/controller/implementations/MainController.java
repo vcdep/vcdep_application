@@ -1266,6 +1266,7 @@ public class MainController implements iMainController
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/PipelineScene.fxml"));
         this.pipelineSceneController = PipelineSceneController.getInstance();
         this.pipelineSceneController.setMainControllerInterface((iMainController) this);
+        this.pipelineSceneController.setLanguage(language);
         this.pipelineSceneController.setStageInfos(this.getStageInfos());
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
