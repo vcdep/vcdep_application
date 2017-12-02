@@ -9,7 +9,10 @@ import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplement
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import com.supergalaxypenguin.vcdep.domain.StageInfo;
 import com.supergalaxypenguin.vcdep.domain.StageType;
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +22,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -493,44 +497,50 @@ public class PipelineSceneController implements Initializable {
     }
     
     @FXML
-    public void handleBtnCheckout(ActionEvent event)
+    public void handleBtnCheckout(ActionEvent event) throws Exception
     {
         System.out.println("Test btnCheckOut");
+        Desktop.getDesktop().browse(new URI("http://vcdep.com/wiki/checkout"));
         //Open Help Window/Description
     }
     
     @FXML
-    public void handleBtnSA(ActionEvent event)
+    public void handleBtnSA(ActionEvent event) throws Exception
     {
         System.out.println("Test btnSA");
+        Desktop.getDesktop().browse(new URI("http://vcdep.com/wiki/static"));
         //Open Help Window/Description
     }
     
     @FXML
-    public void handleBtnUnit(ActionEvent event)
+    public void handleBtnUnit(ActionEvent event) throws Exception
     {
         System.out.println("Test btnUnit");
+        Desktop.getDesktop().browse(new URI("http://vcdep.com/wiki/unit"));
         //Open Help Window/Description
     }
     
     @FXML
-    public void handleBtnIntegration(ActionEvent event)
+    public void handleBtnIntegration(ActionEvent event) throws Exception
     {
         System.out.println("Test btnIntegration");
+        Desktop.getDesktop().browse(new URI("http://vcdep.com/wiki/integration"));
         //Open Help Window/Description
     }
     
     @FXML
-    public void handleBtnDeploy(ActionEvent event)
+    public void handleBtnDeploy(ActionEvent event) throws Exception
     {
         System.out.println("Test btnDeploy");
+        Desktop.getDesktop().browse(new URI("http://vcdep.com/wiki/deploy"));
         //Open Help Window/Description
     }
     
     @FXML
-    public void handleBtnBuild(ActionEvent event)
+    public void handleBtnBuild(ActionEvent event) throws Exception
     {
         System.out.println("Test btnBuild");
+        Desktop.getDesktop().browse(new URI("http://vcdep.com/wiki/build"));
         //Open Help Window/Description
     }
     
