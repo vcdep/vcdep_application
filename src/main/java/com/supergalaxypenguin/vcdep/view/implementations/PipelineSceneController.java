@@ -872,6 +872,18 @@ public class PipelineSceneController implements Initializable {
 
     public void setLanguage(String language) {
         this.language = language;
+        if(language == "java"){
+           
+            build.setVisible(true);
+            target_5.setVisible(true);
+            
+                    
+        }else if(language == "php"){
+            
+            build.setVisible(false);
+            target_5.setVisible(false);
+            
+        }
         //language selection logic goes here
     }
     
