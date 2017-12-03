@@ -1675,6 +1675,12 @@ public class MainController implements iMainController
            stageInfo.setPassed(false);
            output = output + "Build failed.  Github repository not found. Aborting.\n";
        }
+       else if (this.getCheckoutStatus().contains("Skipping due to failure"))
+       {
+           stageInfo.setPassed(true);
+           output = output + "Checkout not ran due to previously failed stage.";
+           
+       }
        else
        {
           stageInfo.setPassed(true);
@@ -1699,6 +1705,12 @@ public class MainController implements iMainController
           stageInfo.setPassed(false);
          output = output + "Build failed.  Unable to compile project. Aborting.\n";
       }
+      else if (this.getBuildStatus().contains("Skipping due to failure"))
+       {
+           stageInfo.setPassed(true);
+           output = output + "Build not ran due to previously failed stage.";
+           
+       }
       else
       {
             stageInfo.setPassed(true);
@@ -1746,6 +1758,12 @@ public class MainController implements iMainController
        {
           output = output + "Static Analysis found " + numErrors + " problems with your code.\n";
        }
+       else if (this.getStaticAnalysisStatus().contains("Skipping due to failure"))
+       {
+           stageInfo.setPassed(true);
+           output = output + "Static Analysis not ran due to previously failed stage.";
+           
+       }
        else
        {
           output = output + "Static Analysis found no issues with your code.  Continue to next stage.\n";
@@ -1766,6 +1784,12 @@ public class MainController implements iMainController
        {
            stageInfo.setPassed(false);
           output = output + "Unit testing found problems with your code. Aborting.\n";
+       }
+       else if (this.getUnitTestStatus().contains("Skipping due to failure"))
+       {
+           stageInfo.setPassed(true);
+           output = output + "Unit testing not ran due to previously failed stage.";
+           
        }
        else
        {
@@ -1788,6 +1812,12 @@ public class MainController implements iMainController
            stageInfo.setPassed(false);
           output = output + "Integration testing found problems with your code. Aborting.\n";
        }
+       else if (this.getIntegrationStatus().contains("Skipping due to failure"))
+       {
+           stageInfo.setPassed(true);
+           output = output + "Integration testing not ran due to previously failed stage.";
+           
+       }
        else
        {
           stageInfo.setPassed(true);
@@ -1803,7 +1833,16 @@ public class MainController implements iMainController
       String output = "Welcome to deployment.  Currently, the Jenkins pipeline is deploying your new solution to production "
               + "machines and checking that the new code is compatible with your production hardware and software.\n";
        //events
-       output = output + "Your project passed the deployment stage.  Now your code is ready to be released.\n";
+       if (this.getDeploymentStatus().contains("Skipping due to failure"))
+       {
+           
+           output = output + "Deployment stage not ran due to previously failed stage.";
+           
+       }
+       else
+       {
+            output = output + "Your project passed the deployment stage.  Now your code is ready to be released.\n";
+       }
        output =  output + "If you would like to see details, click the log file button below.\n";
        
        stageInfo.setPassed(true);
