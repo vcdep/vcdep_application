@@ -1910,9 +1910,7 @@ public class MainController implements iMainController
                 break;
             }
         }
-        
         return stageInfos;
-        
     }
     
 }
