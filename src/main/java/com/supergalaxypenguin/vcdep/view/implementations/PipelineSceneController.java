@@ -642,16 +642,6 @@ public class PipelineSceneController implements Initializable {
     }
     
     /**
-     * Reset button should simply reset the drag and drop to its original position
-     * @param event 
-     */
-    @FXML
-    private void handleBtnReset(ActionEvent event)
-    {
-        System.out.println("Test Reset Button");
-    }
-    
-    /**
      * ReSubmit button should clear all current animations and seek an updated log file to build new animations
      * @param event 
      */
