@@ -61,13 +61,17 @@ public class Model extends Thread implements Runnable
                 }
                 else
                 {
-                    boolean isDone = this.sendBuildMessage();
+                    //this.wait(1000000);
+                    isDone = this.sendBuildMessage();
+                    //System.out.println("Checking if build exists isDone: " + isDone);
+                    
                 }
             }
             
             String log = this.requestLogFile();
+            System.out.println("Got the log file");
             controller.setLogFile(log);
-            controller.updateStatusToView(log);
+            //controller.updateStatusToView(log);
         }
         catch(InterruptedException e)
         {
