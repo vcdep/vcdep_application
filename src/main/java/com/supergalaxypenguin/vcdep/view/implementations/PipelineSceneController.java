@@ -6,16 +6,23 @@
 package com.supergalaxypenguin.vcdep.view.implementations;
 
 import com.supergalaxypenguin.vcdep.view.implementations.stageanimationimplementation.StageAnimation;
-import com.supergalaxypenguin.vcdep.controller.implementations.MainController;
 import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import com.supergalaxypenguin.vcdep.domain.StageInfo;
 import com.supergalaxypenguin.vcdep.domain.StageType;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,7 +33,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
@@ -44,19 +50,20 @@ import javafx.scene.shape.Rectangle;
 public class PipelineSceneController implements Initializable {
 
     private String status;   //currently displayed text?
+    private String[] new_stages = new String[5];
     private static PipelineSceneController instance;   //Singleton instance
     private static iMainController controller;          //Reference to the main controller (Used to Call to Model)
     private final DropShadow shadow = new DropShadow();     // A generic drop shadow effect
     private final HashMap<String,ImageView> animationIcons = new HashMap<>();  //master list of animation icons/images
     private String log = "";    //log file as a String?
-    private ArrayList<StageInfo> stageInfo = new ArrayList<>();  //info about all stages from last pipe run 
     private int currentStage;   //The stage currently active (if no stage active = -1)
     private ArrayList<Rectangle> backGrounds = new ArrayList<>();    //list of rectangle backgrounds for animations
     private ArrayList<StageAnimation> animations = new ArrayList<>();  //list of currently active animations
-    private HashMap<String, Boolean> passFail = new HashMap<>();
     private Timer timer;
+    public ArrayList<StageInfo> stageInfos;
     private boolean isPlaying = false;
-    private boolean displayLog = true;
+    private boolean displayLog = false;
+    private String language = "";
     @FXML
     public ImageView chkoutImage1;
     @FXML
@@ -181,6 +188,8 @@ public class PipelineSceneController implements Initializable {
     private Rectangle target_5;
     @FXML
     private Button stageReset;
+    
+    
           
     HashMap<StageType, Button> helpButtons = new HashMap<>();
     
@@ -200,7 +209,11 @@ public class PipelineSceneController implements Initializable {
     public final double unitY = 14.0;
     public final double buildX = 800.0;
     public final double buildY = 14.0;
-    
+    String payloadOne = "";
+    String payloadTwo = "";
+    String payloadThree = "";
+    String payloadFour = "";
+    String payloadFive = "";
     /**
      * Initializes the controller class.
      * runs upon load of view
@@ -254,6 +267,22 @@ public class PipelineSceneController implements Initializable {
         event.consume();
         System.out.println(content.getString());
         System.out.println(target);
+        if (target == target_1){
+            payloadOne = content.getString();
+            new_stages[0] = payloadOne;
+        }else if (target == target_2){
+            payloadTwo = content.getString();
+            new_stages[1] = payloadTwo;
+        }else if (target == target_3){
+            payloadThree = content.getString();
+            new_stages[2] = payloadThree;
+        }else if (target == target_4){
+            payloadFour = content.getString();
+            new_stages[3] = payloadFour;
+        }else if (target == target_5){
+            payloadFive = content.getString();
+            new_stages[4] = payloadFive;
+        }
     }    
     
     @FXML
@@ -290,6 +319,8 @@ public class PipelineSceneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
+        
+        
         deployment.setOnDragDetected(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -349,20 +380,6 @@ public class PipelineSceneController implements Initializable {
             }
         });
         currentStage = -1;
-
-        //Call this.controller to get stageInfo from log file parsing
-        
-        stages.put(0, "Checkout");
-        stages.put(1, "Static");
-        stages.put(2, "Unit");
-        stages.put(4, "Integration");
-        stages.put(3, "Deploy");
-        
-        this.passFail.put("Checkout", Boolean.TRUE);
-        this.passFail.put("Static", Boolean.TRUE);
-        this.passFail.put("Unit", Boolean.TRUE);
-        this.passFail.put("Integration", Boolean.FALSE);
-        this.passFail.put("Deploy", Boolean.TRUE);
         
         this.backGrounds.add(stage0);
         this.backGrounds.add(stage1);
@@ -382,8 +399,6 @@ public class PipelineSceneController implements Initializable {
         {
             backGrounds.get(i).setVisible(false);
         }
-        
-        parseStages(stages);
         
         this.btnPause.setVisible(false);
         this.chkoutImage1.setVisible(false);
@@ -482,44 +497,50 @@ public class PipelineSceneController implements Initializable {
     }
     
     @FXML
-    public void handleBtnCheckout(ActionEvent event)
+    public void handleBtnCheckout(ActionEvent event) throws Exception
     {
         System.out.println("Test btnCheckOut");
+        Desktop.getDesktop().browse(new URI("http://vcdep.com/wiki/checkout"));
         //Open Help Window/Description
     }
     
     @FXML
-    public void handleBtnSA(ActionEvent event)
+    public void handleBtnSA(ActionEvent event) throws Exception
     {
         System.out.println("Test btnSA");
+        Desktop.getDesktop().browse(new URI("http://vcdep.com/wiki/static"));
         //Open Help Window/Description
     }
     
     @FXML
-    public void handleBtnUnit(ActionEvent event)
+    public void handleBtnUnit(ActionEvent event) throws Exception
     {
         System.out.println("Test btnUnit");
+        Desktop.getDesktop().browse(new URI("http://vcdep.com/wiki/unit"));
         //Open Help Window/Description
     }
     
     @FXML
-    public void handleBtnIntegration(ActionEvent event)
+    public void handleBtnIntegration(ActionEvent event) throws Exception
     {
         System.out.println("Test btnIntegration");
+        Desktop.getDesktop().browse(new URI("http://vcdep.com/wiki/integration"));
         //Open Help Window/Description
     }
     
     @FXML
-    public void handleBtnDeploy(ActionEvent event)
+    public void handleBtnDeploy(ActionEvent event) throws Exception
     {
         System.out.println("Test btnDeploy");
+        Desktop.getDesktop().browse(new URI("http://vcdep.com/wiki/deploy"));
         //Open Help Window/Description
     }
     
     @FXML
-    public void handleBtnBuild(ActionEvent event)
+    public void handleBtnBuild(ActionEvent event) throws Exception
     {
         System.out.println("Test btnBuild");
+        Desktop.getDesktop().browse(new URI("http://vcdep.com/wiki/build"));
         //Open Help Window/Description
     }
     
@@ -548,7 +569,7 @@ public class PipelineSceneController implements Initializable {
         {
             public void run() 
             {
-                if(currentStage == stageInfo.size()-1)
+                if(currentStage == stageInfos.size()-1)
                 {
                     this.cancel();
                 }
@@ -581,7 +602,7 @@ public class PipelineSceneController implements Initializable {
         }
         this.getLastAnimation();
         this.updateStatus();
-        this.label.setText("");
+        
     }
     
     /**
@@ -601,7 +622,7 @@ public class PipelineSceneController implements Initializable {
         }
         this.getNextAnimation();
         this.updateStatus();
-        this.label.setText("");
+        
     }
     
     /**
@@ -621,71 +642,66 @@ public class PipelineSceneController implements Initializable {
     }
     
     /**
-     * Reset button should simply reset the drag and drop to its original position
-     * @param event 
-     */
-    @FXML
-    private void handleBtnReset(ActionEvent event)
-    {
-        System.out.println("Test Reset Button");
-    }
-    
-    /**
      * ReSubmit button should clear all current animations and seek an updated log file to build new animations
      * @param event 
      */
     @FXML
     private void handleBtnReSubmit(ActionEvent event)
     {
+        
+        System.out.println("Opening Pipline Viewer Window");
+        
+       // System.out.println(Arrays.toString(stages));
+        // this area will change
+        //Check that all inputs are entered properly...
+        //How to do that?
+        //Set all inputs in Controller and runs the pipeline
+        
+        ArrayList<String> stagesList = new ArrayList<>();
+        for (int i = 0; i< new_stages.length; i++)
+        {
+            if (new_stages[i]!=null)
+            {
+                stagesList.add(new_stages[i]);
+            }
+        }
+        
+        //String[] stages = new String[stagesList.size()];
+        //stages = (String[])stagesList.toArray();
+        
+        //System.out.println(Arrays.toString(stages));
+        
+        try {
+            controller.runPipeline(controller.getGitHubURL(), controller.getLanguage(), controller.getLocalRepo(), controller.getJenkinsURL(), controller.getBranchName(), Arrays.copyOf(stagesList.toArray(), stagesList.size(), String[].class));
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Exception in controller.runpipline(params)");
+        }
+        try {
+            controller.displayPipelineScene();
+        } catch (IOException ex) {
+            Logger.getLogger(ConfigurationViewController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+        }
+        
         System.out.println("Test Re-Submit Button");
     }
     
     private void updateStatus()
     {
     
-        if (stages.get(this.currentStage).equalsIgnoreCase("Checkout"))
-        {
-            if (this.displayLog)
-                this.status = ((MainController) controller).getCheckoutStatus();
-            else
-                this.status = ((MainController) controller).parseCheckout();
+        if (this.currentStage < 0) {
+            this.status = "";
+            return;
         }
-        else if (stages.get(this.currentStage).equalsIgnoreCase("Static"))
+        if (this.displayLog)
         {
-            if (this.displayLog)
-                this.status = ((MainController) controller).getStaticAnalysisStatus();
-            else
-                this.status = ((MainController) controller).parseStaticAnalysis();
+            this.status = this.stageInfos.get(currentStage).getLogChunk();
         }
-        else if (stages.get(this.currentStage).equalsIgnoreCase("Unit"))
+        else
         {
-            if (this.displayLog)
-                this.status = ((MainController) controller).getUnitTestStatus();
-            else
-                this.status = ((MainController) controller).parseUnitTests();
+            this.status = this.stageInfos.get(currentStage).getScript();
         }
-        else if (stages.get(this.currentStage).equalsIgnoreCase("Integration"))
-        {
-            if (this.displayLog)
-                this.status = ((MainController) controller).getIntegrationStatus();
-            else
-                this.status = ((MainController) controller).parseIntegration();
-        }
-        else if (stages.get(this.currentStage).equalsIgnoreCase("Deploy"))
-        {
-            if (this.displayLog)
-                this.status = ((MainController) controller).getDeploymentStatus();
-            else
-                this.status = ((MainController) controller).parseDeployment();
-        }
-        else if (stages.get(this.currentStage).equalsIgnoreCase("Build"))
-        {
-            if (this.displayLog)
-                this.status = ((MainController) controller).getBuildStatus();
-            else
-                this.status = ((MainController) controller).parseBuild();
-        }
-        
     }
     
     /**
@@ -696,18 +712,18 @@ public class PipelineSceneController implements Initializable {
     private void handleBtnLogAndScript(ActionEvent event)
     {
         System.out.println("Test Logfile/Script Button");
+        this.displayLog = !this.displayLog;
+        this.updateStatus();
         if (this.displayLog)
         {
-            this.btnLogAndScript.textProperty().set("Script");
+            this.btnLogAndScript.textProperty().set("Display Script");
             this.updateScrollPane(this.status);
         }
         else
         {
-            this.btnLogAndScript.textProperty().set("Log File");
+            this.btnLogAndScript.textProperty().set("Display Log File");
             this.updateScrollPane(this.status);
         }
-        this.displayLog = !this.displayLog;
-        this.updateStatus();
     }
     
     /**
@@ -777,7 +793,7 @@ public class PipelineSceneController implements Initializable {
      */
     private void createNewAnimations(int i)
     {
-        animations.add(StageAnimation.getInstance(stageInfo.get(i+1), this.animationIcons, backGrounds.get(i+1)));
+        animations.add(StageAnimation.getInstance(stageInfos.get(i+1), this.animationIcons, backGrounds.get(i+1)));
     }
     
     /**
@@ -792,6 +808,7 @@ public class PipelineSceneController implements Initializable {
         if (animations.size() >0)
         {
             animations.get(animations.size()-1).play();
+            
         }
     }
     
@@ -800,15 +817,17 @@ public class PipelineSceneController implements Initializable {
      */
     private void getNextAnimation()
     {
-        if (animations.size() > 0 && currentStage < stageInfo.size()-1)
+        if (animations.size() > 0 && currentStage < stageInfos.size()-1)
         {
             animations.get(animations.size()-1).stop();
         }
-        if (this.currentStage < stageInfo.size()-1)
+        if (this.currentStage < stageInfos.size()-1)
         {
             createNewAnimations(this.currentStage);
             this.currentStage++;
             animations.get(animations.size()-1).play();
+            this.updateStatus();
+            this.updateScrollPane(status);
         }
     }
     
@@ -821,60 +840,108 @@ public class PipelineSceneController implements Initializable {
         {
             removeAnimation(this.currentStage);
             this.currentStage--;
+            this.updateStatus();
+            this.updateScrollPane(status);
+        }
+        if (this.currentStage < 0)
+        {
+            status = "";
+            this.updateScrollPane(status);
         }
     }
+    
+    public void setStageInfos(ArrayList<StageInfo> stageInfos)
+    {
+        this.stageInfos = stageInfos;
+        this.parseStages();
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+        if(language == "java"){
+           
+            build.setVisible(true);
+            target_5.setVisible(true);
+            
+                    
+        }else if(language == "php"){
+            
+            build.setVisible(false);
+            target_5.setVisible(false);
+            
+        }
+        //language selection logic goes here
+    }
+    
     /**
      * Create stage info from Stages List
      * @param stages List of stages
      */
-    private void parseStages(HashMap<Integer, String> stages)
+    private void parseStages()
     {
-            for (int i = 0; i<stages.size(); i++)
+        for (int i = 0; i<this.stageInfos.size(); i++)
         {
-            if (stages.get(i).compareToIgnoreCase("Checkout")==0)
+            if (this.stageInfos.get(i).getType() == StageType.CHECKOUT)
             {   
-                this.stageInfo.add(new StageInfo(StageType.CHECKOUT, i, this.passFail.get("Checkout"), backGrounds.get(i), this.helpButtons));
-                if (!this.stageInfo.get(i).isPassed())
+                
+                this.stageInfos.get(i).setBackGround(this.backGrounds.get(i));
+                this.stageInfos.get(i).setOrderNumber(i);
+                this.stageInfos.get(i).setHelpButton(this.btnCheckOut);
+                if (!this.stageInfos.get(i).isPassed())
                 {
                     break;
                 }
             }
-            else if(stages.get(i).compareToIgnoreCase("Static")==0)
+            else if(this.stageInfos.get(i).getType() == StageType.STATIC)
             {
-                this.stageInfo.add(new StageInfo(StageType.STATIC, i, this.passFail.get("Static"), backGrounds.get(i), this.helpButtons));
-                if (!this.stageInfo.get(i).isPassed())
+                this.stageInfos.get(i).setBackGround(this.backGrounds.get(i));
+                this.stageInfos.get(i).setOrderNumber(i);
+                this.stageInfos.get(i).setHelpButton(this.btnSA);
+                if (!this.stageInfos.get(i).isPassed())
                 {
                     break;
                 }
             }
-            else if(stages.get(i).compareToIgnoreCase("Unit")==0)
+            else if(this.stageInfos.get(i).getType() == StageType.UNIT)
             {
-                this.stageInfo.add(new StageInfo(StageType.UNIT, i, this.passFail.get("Unit"), backGrounds.get(i), this.helpButtons));
-                if (!this.stageInfo.get(i).isPassed())
+                this.stageInfos.get(i).setBackGround(this.backGrounds.get(i));
+                this.stageInfos.get(i).setOrderNumber(i);
+                this.stageInfos.get(i).setHelpButton(this.btnUnit);
+                if (!this.stageInfos.get(i).isPassed())
                 {
                     break;
                 }
             }
-            else if(stages.get(i).compareToIgnoreCase("Integration")==0)
+            else if(this.stageInfos.get(i).getType() == StageType.INTEGRATION)
             {
-                this.stageInfo.add(new StageInfo(StageType.INTEGRATION, i, this.passFail.get("Integration"), backGrounds.get(i), this.helpButtons));
-                if (!this.stageInfo.get(i).isPassed())
+                this.stageInfos.get(i).setBackGround(this.backGrounds.get(i));
+                this.stageInfos.get(i).setOrderNumber(i);
+                this.stageInfos.get(i).setHelpButton(this.btnIntegration);
+                if (!this.stageInfos.get(i).isPassed())
                 {
                     break;
                 }
             }
-            else if(stages.get(i).compareToIgnoreCase("Deploy")==0)
+            else if(this.stageInfos.get(i).getType() == StageType.DEPLOY)
             {
-                this.stageInfo.add(new StageInfo(StageType.DEPLOY, i, this.passFail.get("Deploy"), backGrounds.get(i), this.helpButtons));
-                if (!this.stageInfo.get(i).isPassed())
+                this.stageInfos.get(i).setBackGround(this.backGrounds.get(i));
+                this.stageInfos.get(i).setOrderNumber(i);
+                this.stageInfos.get(i).setHelpButton(this.btnDeploy);
+                if (!this.stageInfos.get(i).isPassed())
                 {
                     break;
                 }
             }
-            else if(stages.get(i).compareToIgnoreCase("Build")==0)
+            else if(this.stageInfos.get(i).getType() == StageType.BUILD)
             {
-                this.stageInfo.add(new StageInfo(StageType.BUILD, i, this.passFail.get("Build"), backGrounds.get(i), this.helpButtons));
-                if (!this.stageInfo.get(i).isPassed())
+                this.stageInfos.get(i).setBackGround(this.backGrounds.get(i));
+                this.stageInfos.get(i).setOrderNumber(i);
+                this.stageInfos.get(i).setHelpButton(this.btnBuild);
+                if (!this.stageInfos.get(i).isPassed())
                 {
                     break;
                 }

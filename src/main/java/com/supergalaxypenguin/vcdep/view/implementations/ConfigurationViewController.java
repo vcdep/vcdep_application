@@ -29,7 +29,7 @@ import javafx.scene.paint.Color;
 public class ConfigurationViewController implements Initializable {
 
     private int progress = 0;
-    private String[] stages = new String[5];
+    private String[] stages = new String[6];
     public static ConfigurationViewController instance;
     private static iMainController controller;
     private Stage stage;
@@ -243,21 +243,22 @@ public class ConfigurationViewController implements Initializable {
         event.consume();
         System.out.println(content.getString());
         System.out.println(target);
+        stages[0] = "checkout";
         if (target == target_1){
             payloadOne = content.getString();
-            stages[0] = payloadOne;
+            stages[1] = payloadOne;
         }else if (target == target_2){
             payloadTwo = content.getString();
-            stages[1] = payloadTwo;
+            stages[2] = payloadTwo;
         }else if (target == target_3){
             payloadThree = content.getString();
-            stages[2] = payloadThree;
+            stages[3] = payloadThree;
         }else if (target == target_4){
             payloadFour = content.getString();
-            stages[3] = payloadFour;
+            stages[4] = payloadFour;
         }else if (target == target_5){
             payloadFive = content.getString();
-            stages[4] = payloadFive;
+            stages[5] = payloadFive;
         }
         System.out.println(Arrays.toString(stages));
     }

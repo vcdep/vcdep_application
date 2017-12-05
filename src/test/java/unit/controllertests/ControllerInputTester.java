@@ -1323,7 +1323,7 @@ public class ControllerInputTester
        assertEquals(result, actual);
        
     }   
-    @Test
+    /*@Test
     public void TestCheckoutScript() throws FileNotFoundException
     {
        //Arrange
@@ -1486,5 +1486,5 @@ public class ControllerInputTester
        String result = controller.parseBuild();
        //Assert
        assertEquals(result, actual);
-    }
+    }*/
 }
