@@ -7,7 +7,10 @@ import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-
+/**
+ *  Main class for the VCDEP Application
+ * @author Howtoon
+ */
 public class MainApp extends Application {
 
     @Override

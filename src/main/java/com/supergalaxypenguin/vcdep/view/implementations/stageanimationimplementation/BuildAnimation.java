@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
 /**
- *
+ * This animation is for the Build stage
  * @author Howtoon
  */
 public class BuildAnimation extends StageAnimation{
@@ -24,6 +24,12 @@ public class BuildAnimation extends StageAnimation{
     int duration = 6;
     int arrowDist = 122;
     
+    /**
+     * Param constructor for this animation
+     * @param info the info associated with this stage
+     * @param animationIcons the icons associated with this animation
+     * @param backGround the background associated with this animation
+     */
     public BuildAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
         super(info, backGround);
         
@@ -39,6 +45,9 @@ public class BuildAnimation extends StageAnimation{
         super.moveToStart();
     }
 
+    /**
+     * Plays all the arrow Animations in order twice
+     */
     @Override
     public void play() {
         System.out.println("Play Build animation");
@@ -49,6 +58,9 @@ public class BuildAnimation extends StageAnimation{
         sequence.play();
     }
 
+    /**
+     * Stops all the animations and resets the icons to their original positions
+     */
     @Override
     public void stop() {
         System.out.println("Stop Build animation");

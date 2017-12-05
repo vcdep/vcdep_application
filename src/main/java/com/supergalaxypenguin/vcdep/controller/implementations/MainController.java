@@ -1204,7 +1204,7 @@ public class MainController implements iMainController
     }
     
     /**
-     * 
+     * Checks for an instance, if one is not available, it creates one
      * @return instance of MainController
      */
     public static MainController getInstance()
@@ -1623,6 +1623,7 @@ public class MainController implements iMainController
        }
        return output;
     }
+
     /**
      * Function to get the status of unit testing from the log file
      * @return String representing the unit testing status
@@ -1725,10 +1726,8 @@ public class MainController implements iMainController
      * @param stageInfo
      * @return the updated stageInfo
      */
-    public StageInfo parseBuild(StageInfo stageInfo)               //java only
-    {
-        
-        
+    public StageInfo parseBuild(StageInfo stageInfo)           
+    { 
       String output = "Welcome to the build stage.\n\n\tCurrently, the Jenkins pipeline is building your project and compiling "
                  + "the required files.  ";
       //events

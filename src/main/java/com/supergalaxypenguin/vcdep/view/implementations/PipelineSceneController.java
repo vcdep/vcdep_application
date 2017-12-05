@@ -60,10 +60,18 @@ public class PipelineSceneController implements Initializable {
     private ArrayList<Rectangle> backGrounds = new ArrayList<>();    //list of rectangle backgrounds for animations
     private ArrayList<StageAnimation> animations = new ArrayList<>();  //list of currently active animations
     private Timer timer;
+
+    /**
+     * List of StageInfo objects in the order that they will be displayed
+     */
     public ArrayList<StageInfo> stageInfos;
     private boolean isPlaying = false;
     private boolean displayLog = false;
     private String language = "";
+
+    /**
+     * JavaFX elements
+     */
     @FXML
     public ImageView chkoutImage1;
     @FXML
@@ -199,6 +207,9 @@ public class PipelineSceneController implements Initializable {
     
     private ClipboardContent content = new ClipboardContent();
     
+    /**
+     * Default layout coordinates for resetting the icons to their original positions
+     */
     public final double deployX = 320.0;
     public final double deployY = 14.0;
     public final double integrateX = 440.0;
@@ -209,16 +220,17 @@ public class PipelineSceneController implements Initializable {
     public final double unitY = 14.0;
     public final double buildX = 800.0;
     public final double buildY = 14.0;
+    
     String payloadOne = "";
     String payloadTwo = "";
     String payloadThree = "";
     String payloadFour = "";
     String payloadFive = "";
+    
     /**
      * Initializes the controller class.
      * runs upon load of view
-     * @param url
-     * @param rb
+     * @param event
      */
     @FXML
     public void handleStageReset(ActionEvent event) {
@@ -234,6 +246,11 @@ public class PipelineSceneController implements Initializable {
         build.setLayoutY(buildY);
     }
     
+    /**
+     * Not Used because image is set into correct position
+     * @Deprecated
+     * @param event 
+     */
     @FXML
     public void handleOnDragEntered(DragEvent event) {
         /* the drag-and-drop gesture entered the target */
@@ -247,6 +264,10 @@ public class PipelineSceneController implements Initializable {
         System.out.println("Drag Entered");
     }
     
+    /**
+     * Enables drag_over and sets the array of stages to their correct position
+     * @param event 
+     */
     @FXML
     public void handleOnDragOver(DragEvent event) 
     {
@@ -285,6 +306,11 @@ public class PipelineSceneController implements Initializable {
         }
     }    
     
+    /**
+     * Not Used because image is set into correct position
+     * @Deprecated
+     * @param event 
+     */
     @FXML
     public void handleOnDragExited(DragEvent event) {
     /* mouse moved away, remove the graphical cues */
@@ -294,6 +320,10 @@ public class PipelineSceneController implements Initializable {
         System.out.println("Drag Exited");
     }
     
+    /**
+     * Consumes the payload of the drag and drop content
+     * @param event 
+     */
     @FXML
     public void handleOnDragDropped(DragEvent event) {
         /* data dropped */
@@ -310,8 +340,9 @@ public class PipelineSceneController implements Initializable {
         event.consume();
         System.out.println("Drag Dropped");
     }
+
     /**
-     * this method runs in order to setup the scene
+     * This gets run when the view is first initialized to set up the View
      * @param url
      * @param rb 
      */
@@ -496,6 +527,11 @@ public class PipelineSceneController implements Initializable {
         clickedButton.setEffect(shadow);
     }
     
+    /**
+     * Opens a web browser to the wiki page associated with this stage
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     public void handleBtnCheckout(ActionEvent event) throws Exception
     {
@@ -504,6 +540,11 @@ public class PipelineSceneController implements Initializable {
         //Open Help Window/Description
     }
     
+    /**
+     * Opens a web browser to the wiki page associated with this stage
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     public void handleBtnSA(ActionEvent event) throws Exception
     {
@@ -512,6 +553,11 @@ public class PipelineSceneController implements Initializable {
         //Open Help Window/Description
     }
     
+    /**
+     * Opens a web browser to the wiki page associated with this stage
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     public void handleBtnUnit(ActionEvent event) throws Exception
     {
@@ -520,6 +566,11 @@ public class PipelineSceneController implements Initializable {
         //Open Help Window/Description
     }
     
+    /**
+     * Opens a web browser to the wiki page associated with this stage
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     public void handleBtnIntegration(ActionEvent event) throws Exception
     {
@@ -527,7 +578,12 @@ public class PipelineSceneController implements Initializable {
         Desktop.getDesktop().browse(new URI("http://vcdep.com/wiki/integration"));
         //Open Help Window/Description
     }
-    
+
+    /**
+     * Opens a web browser to the wiki page associated with this stage
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     public void handleBtnDeploy(ActionEvent event) throws Exception
     {
@@ -536,6 +592,11 @@ public class PipelineSceneController implements Initializable {
         //Open Help Window/Description
     }
     
+    /**
+     * Opens a web browser to the wiki page associated with this stage
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     public void handleBtnBuild(ActionEvent event) throws Exception
     {
@@ -544,6 +605,11 @@ public class PipelineSceneController implements Initializable {
         //Open Help Window/Description
     }
     
+    /**
+     * Opens a web browser to the wiki page associated with this stage
+     * @param event
+     * @throws Exception 
+     */
     @FXML
     public void handleBtnPause(ActionEvent event)
     {
@@ -553,6 +619,7 @@ public class PipelineSceneController implements Initializable {
         timer.cancel();
         isPlaying = false;
     }
+    
     /**
      * Play through the stages in a timed order
      * @param event 
@@ -687,6 +754,9 @@ public class PipelineSceneController implements Initializable {
         System.out.println("Test Re-Submit Button");
     }
     
+    /**
+     * sets the scrolling text box to the correct text
+     */
     private void updateStatus()
     {
     
@@ -850,16 +920,28 @@ public class PipelineSceneController implements Initializable {
         }
     }
     
+    /**
+     * Sets the list of stages to be used to create the animations
+     * @param stageInfos
+     */
     public void setStageInfos(ArrayList<StageInfo> stageInfos)
     {
         this.stageInfos = stageInfos;
         this.parseStages();
     }
 
+    /**
+     * returns the language of the project
+     * @return
+     */
     public String getLanguage() {
         return language;
     }
 
+    /**
+     * determines whether the build icon should be visible or not based on the language chosen
+     * @param language
+     */
     public void setLanguage(String language) {
         this.language = language;
         if(language == "java"){

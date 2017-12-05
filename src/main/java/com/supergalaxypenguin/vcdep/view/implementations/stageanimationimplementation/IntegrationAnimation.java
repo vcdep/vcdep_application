@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
 /**
- *
+ * This animation is for the Integration stage
  * @author Howtoon
  */
 public class IntegrationAnimation extends StageAnimation{
@@ -25,6 +25,12 @@ public class IntegrationAnimation extends StageAnimation{
     int arrowDist = 122;
     int returnDist = 136;
     
+    /**
+     * Param constructor for this animation
+     * @param info the info associated with this stage
+     * @param animationIcons the icons associated with this animation
+     * @param backGround the background associated with this animation
+     */
     public IntegrationAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
         super(info, backGround);
         
@@ -41,6 +47,9 @@ public class IntegrationAnimation extends StageAnimation{
         super.moveToStart();
     }
 
+    /**
+     * Plays all the arrow Animations in order twice
+     */
     @Override
     public void play() {
         System.out.println("Play Integration animation");
@@ -52,6 +61,9 @@ public class IntegrationAnimation extends StageAnimation{
         sequence.play();
     }
 
+    /**
+     * Stops all the animations and resets the icons to their original positions
+     */
     @Override
     public void stop() {
         System.out.println("Stop Integration animation");

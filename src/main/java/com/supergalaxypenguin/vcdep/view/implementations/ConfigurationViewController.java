@@ -26,6 +26,12 @@ import javafx.scene.input.*;
 import javafx.scene.paint.Color;
 
 //import jfxtras.lab.util.event;
+
+/**
+ * The configuration view controller is the ViewController that hold the logic for the first scene of the application
+ * In this window, the user will fill out the information necessary to run the pipeline 
+ * @author Howtoon
+ */
 public class ConfigurationViewController implements Initializable {
 
     private int progress = 0;
@@ -90,6 +96,9 @@ public class ConfigurationViewController implements Initializable {
     
     private String languageSelection = "";
     
+    /**
+     * Default layout coordinates for resetting the icons to their original positions
+     */
     public final double deployX = 238.0;
     public final double deployY = 411.0;
     public final double integrateX = 358.0;
@@ -128,6 +137,10 @@ public class ConfigurationViewController implements Initializable {
         this.controller = _controller;
     }
 
+    /**
+     * Sets the JavaFX stage being used by the application
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
         //MouseControlUtil.makeDraggable(deploy);
@@ -181,6 +194,10 @@ public class ConfigurationViewController implements Initializable {
         }
     }
 
+    /**
+     * Resets the staging area icons to their default positions
+     * @param event
+     */
     public void handleStageReset(ActionEvent event) {
         deployment.setLayoutX(deployX);
         deployment.setLayoutY(deployY);
@@ -198,11 +215,19 @@ public class ConfigurationViewController implements Initializable {
         }
     }
 
+    /**
+     * Not Used
+     * @param event
+     */
     public void handleDropDownTouchReleased(ActionEvent event)
     {
         System.out.println("Test Drop Down Touch Released");
     }
     
+    /**
+     * Sets the preferred language and whether or not the target_5 "build" is visible
+     * @param event
+     */
     @FXML
     public void handleCheckBox(ActionEvent event){
         System.out.println("box checked");
@@ -223,6 +248,10 @@ public class ConfigurationViewController implements Initializable {
         System.out.println(languageSelection);
     }
     
+    /**
+     * Enables drag_over and sets the array of stages to their correct position
+     * @param event
+     */
     @FXML
     public void handleOnDragOver(DragEvent event) 
     {
@@ -263,6 +292,11 @@ public class ConfigurationViewController implements Initializable {
         System.out.println(Arrays.toString(stages));
     }
     
+    /**
+     * Not Used because image is set into correct position
+     * @Deprecated
+     * @param event
+     */
     @FXML
     public void handleOnDragEntered(DragEvent event) {
         /* the drag-and-drop gesture entered the target */
@@ -276,6 +310,11 @@ public class ConfigurationViewController implements Initializable {
         System.out.println("Drag Entered");
     }
     
+    /**
+     * Not Used because image is set into correct position
+     * @Deprecated
+     * @param event
+     */
     @FXML
     public void handleOnDragExited(DragEvent event) {
     /* mouse moved away, remove the graphical cues */
@@ -285,6 +324,10 @@ public class ConfigurationViewController implements Initializable {
         System.out.println("Drag Exited");
     }
     
+    /**
+     * Consumes the payload of the drag and drop content
+     * @param event
+     */
     @FXML
     public void handleOnDragDropped(DragEvent event) {
         /* data dropped */
