@@ -21,14 +21,52 @@ import javafx.util.Duration;
  */
 public abstract class StageAnimation{
 
+    /**
+     * Enum of the StageType associated with this stage
+     */
     protected StageType type;         //What kind of Stage is it? Only one of each type is allowed
+
+    /**
+     * The order in which this stage is to be displayed
+     * Starts at 0
+     */
     protected int orderNumber;            //what number in the list of stages EG. 1st? 2nd? Starts at 0
+
+    /**
+     * Whether or not this stage passed
+     */
     protected boolean passed;         //did this stage fail?
+
+    /**
+     * This is the distance between the middle of stage backgrounds
+     * It is used to move each animation into position
+     */
     protected static final int OFFSET = 85;       //Space between middle of other stage backgrounds
+
+    /**
+     * The background associated with this stage
+     * It is dependent on the order that this stage is to be displayed in.
+     */
     protected Rectangle backGround;//The background Area
+
+    /**
+     * The help button associated with this stage
+     */
     protected Button helpButton;
+
+    /**
+     * The images that are necessary to animate this stage
+     */
     protected ImageView[] images;
+
+    /**
+     * The image to be displayed if this stage passed
+     */
     protected ImageView passImage;
+
+    /**
+     * The image to be displayed if this stage failed
+     */
     protected ImageView failImage;
 //        private static final int ORIGIN = 137; 
 //        private static final int stdHeight = 54;
@@ -72,6 +110,11 @@ public abstract class StageAnimation{
         }
     }
 
+    /**
+     * Param Constructor
+     * @param info
+     * @param backGround
+     */
     protected StageAnimation(StageInfo info, Rectangle backGround)
     {
         this.orderNumber = info.getOrderNumber();
@@ -81,6 +124,13 @@ public abstract class StageAnimation{
         this.backGround = backGround;
     }
 
+    /**
+     * Returns an moving animation
+     * @param _image image to be moved
+     * @param X how far in the X direction to move the image
+     * @param duration how long the animation should last
+     * @return
+     */
     protected static TranslateTransition getArrowAnimation(ImageView _image, int X, int duration)
     {
         final TranslateTransition arrow = new TranslateTransition();
@@ -94,6 +144,10 @@ public abstract class StageAnimation{
         return arrow;
     }
     
+    /**
+     * resets the image to its original position
+     * @param image
+     */
     protected static void resetArrow(ImageView image)
     {
         TranslateTransition arrow1;
@@ -105,7 +159,7 @@ public abstract class StageAnimation{
     }
 
     /**
-     * Move Icons to the proper stage position
+     * Moves all Icons and the button to the proper stage position
      */
     protected void moveToStart()
     {
@@ -140,7 +194,7 @@ public abstract class StageAnimation{
         }
     }
     /**
-     * Move Icons back to their original positions
+     * Move Icons and button back to their original positions
      */
     public void moveToEnd()
     {
@@ -162,7 +216,13 @@ public abstract class StageAnimation{
         }
     }
     
+    /**
+     * plays the animation
+     */
     public abstract void play();
     
+    /**
+     * stops the animation
+     */
     public abstract void stop();
 }
