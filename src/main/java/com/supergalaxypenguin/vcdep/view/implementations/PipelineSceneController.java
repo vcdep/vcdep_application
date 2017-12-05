@@ -211,15 +211,51 @@ public class PipelineSceneController implements Initializable {
      * Default layout coordinates for resetting the icons to their original positions
      */
     public final double deployX = 320.0;
-    public final double deployY = 14.0;
-    public final double integrateX = 440.0;
-    public final double integrateY = 14.0;
-    public final double staticX = 560.0;
-    public final double staticY = 14.0;
-    public final double unitX = 680.0;
-    public final double unitY = 14.0;
-    public final double buildX = 800.0;
-    public final double buildY = 14.0;
+
+   /**
+    * Default layout coordinates for resetting the icons to their original positions
+    */
+   public final double deployY = 14.0;
+
+   /**
+    * Default layout coordinates for resetting the icons to their original positions
+    */
+   public final double integrateX = 440.0;
+
+   /**
+    * Default layout coordinates for resetting the icons to their original positions
+    */
+   public final double integrateY = 14.0;
+
+   /**
+    * Default layout coordinates for resetting the icons to their original positions
+    */
+   public final double staticX = 560.0;
+
+   /**
+    * Default layout coordinates for resetting the icons to their original positions
+    */
+   public final double staticY = 14.0;
+
+   /**
+    * Default layout coordinates for resetting the icons to their original positions
+    */
+   public final double unitX = 680.0;
+
+   /**
+    * Default layout coordinates for resetting the icons to their original positions
+    */
+   public final double unitY = 14.0;
+
+   /**
+    * Default layout coordinates for resetting the icons to their original positions
+    */
+   public final double buildX = 800.0;
+
+   /**
+    * Default layout coordinates for resetting the icons to their original positions
+    */
+   public final double buildY = 14.0;
     
     String payloadOne = "";
     String payloadTwo = "";
@@ -607,8 +643,7 @@ public class PipelineSceneController implements Initializable {
     
     /**
      * Opens a web browser to the wiki page associated with this stage
-     * @param event
-     * @throws Exception 
+     * @param event 
      */
     @FXML
     public void handleBtnPause(ActionEvent event)
