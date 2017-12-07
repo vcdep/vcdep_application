@@ -16,11 +16,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="615.0" prefWidth="793.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supergalaxypenguin.vcdep.view.implementations.ConfigurationViewController">
+<AnchorPane id="AnchorPane" prefHeight="697.0" prefWidth="975.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supergalaxypenguin.vcdep.view.implementations.ConfigurationViewController">
     <children>
-      <ImageView fx:id="background" fitHeight="704.0" fitWidth="975.0" layoutX="-7.0" layoutY="-27.0" nodeOrientation="INHERIT">
+      <ImageView fx:id="background" fitHeight="697.0" fitWidth="982.0" layoutX="-7.0" layoutY="-2.0" nodeOrientation="INHERIT">
          <image>
-            <Image url="@../Images/galaxy-with-peng.jpg" />
+            <Image url="@../Images/galaxy.jpg" />
          </image>
       </ImageView>
       <Rectangle fx:id="target_11" arcHeight="5.0" arcWidth="5.0" blendMode="DIFFERENCE" height="327.0" layoutX="39.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="406.0">
@@ -46,7 +46,7 @@
             <Font name="Century Gothic Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="submit" layoutX="846.0" layoutY="659.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Submit">
+      <Button fx:id="submit" layoutX="846.0" layoutY="655.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Submit">
          <font>
             <Font name="Century Gothic" size="14.0" />
          </font>
