@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
 /**
- *
+ * This animation is for the Checkout stage
  * @author Howtoon
  */
 public class CheckoutAnimation extends StageAnimation{    
@@ -23,6 +23,12 @@ public class CheckoutAnimation extends StageAnimation{
     int duration = 6;
     int arrowDist = 122;
     
+    /**
+     * Param constructor for this animation
+     * @param info the info associated with this stage
+     * @param animationIcons the icons associated with this animation
+     * @param backGround the background associated with this animation
+     */
     public CheckoutAnimation(StageInfo info, HashMap<String, ImageView> animationIcons, Rectangle backGround) {
         super(info, backGround);
         
@@ -38,6 +44,9 @@ public class CheckoutAnimation extends StageAnimation{
         super.moveToStart();
     }
 
+    /**
+     * Plays all the arrow Animations in order twice
+     */
     @Override
     public void play() {
         System.out.println("Play Checkout animation");
@@ -48,6 +57,9 @@ public class CheckoutAnimation extends StageAnimation{
         sequence.play();
     }
 
+    /**
+     * Stops all the animations and resets the icons to their original positions
+     */
     @Override
     public void stop() {
         System.out.println("Stop Checkout animation");

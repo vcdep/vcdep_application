@@ -39,6 +39,10 @@ public class Model extends Thread implements Runnable
     private String buildMessage;
     private String configInput;
     private String jenkinsResponse;
+
+    /**
+     *
+     */
     public static Model instance;
     private static iMainController controller;
     private boolean isDone = false;
@@ -419,7 +423,7 @@ public class Model extends Thread implements Runnable
         
     }
     /*****************
-     * function to parse the result of the run for the model thread
+     * Function to parse the result of the run for the model thread
      * @param build (String)
      * @return String result
      */
@@ -431,7 +435,10 @@ public class Model extends Thread implements Runnable
         
         return result;
     }
-    
+    /******************
+     * Function to get the stages set on the object
+     * @return String[] 
+     */
     public String[] getStages()
     {
         return this.stages;

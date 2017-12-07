@@ -60,13 +60,18 @@ public interface iMainController
     
     /**
      * Sets the Java FX Stage
-     * @param _javaFXStage the JavaFX stage for the application
      */
     void setJavaFXStage(Stage _stage);
     
     /**
      * Runs the initializes and runs the pipeline.
      * 
+     * @param gitHubURL
+     * @param language
+     * @param localGitRepo
+     * @param jenkinsURL
+     * @param stages
+     * @param branchName
      */
     void runPipeline(String gitHubURL, String language, String localGitRepo, String jenkinsURL, String branchName, String[] stages);
     

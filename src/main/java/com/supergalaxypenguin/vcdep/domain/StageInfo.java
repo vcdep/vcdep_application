@@ -10,7 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.shape.Rectangle;
 
 /**
- *
+ *  This object holds all the information about a stage
+ * and is used to create the animations and hold the script and log info about each stage.
  * @author Howtoon
  */
 public class StageInfo {
@@ -22,12 +23,15 @@ public class StageInfo {
     private String logChunk;
     private String script;
     
+    /**
+     *  Empty constructor
+     */
     public StageInfo(){
         
     }
     
     /**
-     * Holds the info of a stage
+     * Param constructor
      * @param type
      * @param orderNumber
      * @param passed
@@ -43,10 +47,18 @@ public class StageInfo {
         this.helpButton = helpButtons.get(type);
     }
     
+    /**
+     * returns the help button associated with this stage
+     * @return
+     */
     public Button getHelpButton() {
         return helpButton;
     }
 
+    /**
+     * sets the help button associated with this stage
+     * @param helpButton
+     */
     public void setHelpButton(Button helpButton) {
         this.helpButton = helpButton;
     }
@@ -68,6 +80,7 @@ public class StageInfo {
     }
 
     /**
+     * Enum
      * StageType."stage_name"
      * 
      * @return 
@@ -77,8 +90,10 @@ public class StageInfo {
     }
 
     /**
+     * Enum
      * StageType."stage_name"
      *  
+     * @param type
      */
     public void setType(StageType type) {
         this.type = type;
@@ -95,6 +110,7 @@ public class StageInfo {
     /**
      * What order the stage goes in
      * 
+     * @param orderNumber
      */
     public void setOrderNumber(int orderNumber) {
         this.orderNumber = orderNumber;
@@ -110,6 +126,7 @@ public class StageInfo {
 
     /**
      * Whether or not the stage passed
+     * @param passed
      * @return 
      */
     public void setPassed(boolean passed) {
@@ -117,7 +134,7 @@ public class StageInfo {
     }
 
     /**
-     * 
+     * returns the portion of the log file associated with this stage
      * @return 
      */
     public String getLogChunk() {
@@ -125,7 +142,7 @@ public class StageInfo {
     }
 
     /**
-     * 
+     * sets the portion of the log file associated with this stage
      * @param logChunk 
      */
     public void setLogChunk(String logChunk) {
@@ -133,7 +150,7 @@ public class StageInfo {
     }
 
     /**
-     * 
+     * returns the script text associated with this stage
      * @return 
      */
     public String getScript() {
@@ -141,7 +158,7 @@ public class StageInfo {
     }
 
     /**
-     * 
+     * sets the script text associated with this stage
      * @param script 
      */
     public void setScript(String script) {

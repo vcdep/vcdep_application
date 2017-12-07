@@ -1204,7 +1204,7 @@ public class MainController implements iMainController
     }
     
     /**
-     * 
+     * Checks for an instance, if one is not available, it creates one
      * @return instance of MainController
      */
     public static MainController getInstance()
@@ -1542,7 +1542,11 @@ public class MainController implements iMainController
     {
         return status;
     }
-    
+    /**
+     * Helper function to search through log files and split the string
+     * @param stageInfo
+     * @return integer representing the index
+     */
     public int search(String stageInfo)
     {
        String [] stageArray = this.logFile.split("\n");
@@ -1555,7 +1559,10 @@ public class MainController implements iMainController
        }
        return -1;
     }
-    
+    /**
+     * Function to get the checkout status from the log file
+     * @return String representing the checkout status
+     */
     public String getCheckoutStatus()
     {
        String output = "";
@@ -1571,8 +1578,12 @@ public class MainController implements iMainController
        }
        return output;
     }
-    
-    public String getBuildStatus()              //only run if it is a Java project
+    /**
+     * Function to get the build status from the log file
+     * Function only runs on Java projects
+     * @return String representing the build status
+     */
+    public String getBuildStatus()              
     {
        String output = "";
        int index = search("[Pipeline] { (Build)");
@@ -1593,7 +1604,10 @@ public class MainController implements iMainController
        }
        return output;
     }
-    
+    /**
+     * Function to get the status of static analysis from the log file
+     * @return String representing the status of the SA stage
+     */
     public String getStaticAnalysisStatus()
     {
        String output = "";
@@ -1609,7 +1623,11 @@ public class MainController implements iMainController
        }
        return output;
     }
-    
+
+    /**
+     * Function to get the status of unit testing from the log file
+     * @return String representing the unit testing status
+     */
     public String getUnitTestStatus()
     {
        String output = "";
@@ -1625,7 +1643,10 @@ public class MainController implements iMainController
        }
        return output;
     }
-    
+    /**
+     * Function to get the integration status from the log file
+     * @return String representing the integration stage 
+     */
     public String getIntegrationStatus()
     {
        String output = "";
@@ -1641,7 +1662,10 @@ public class MainController implements iMainController
        }
        return output;
     }
-    
+    /**
+     * Function to get the deployment status from the log file
+     * @return String representing the deployment status
+     */
     public String getDeploymentStatus()
     {
        String output = "";
@@ -1657,7 +1681,11 @@ public class MainController implements iMainController
        }
        return output;
     }
-    
+    /**
+     * Function to parse the Checkout chunk from the log file
+     * @param stageInfo identifies the stage
+     * @return the updated stageInfo
+     */
     public StageInfo parseCheckout(StageInfo stageInfo)
     {
        String output = "Welcome to the checkout stage.\n\n\tCurrently, the Jenkins pipeline is locating your Github repository "
@@ -1693,11 +1721,13 @@ public class MainController implements iMainController
        return stageInfo;
 
     }
-    
-    public StageInfo parseBuild(StageInfo stageInfo)               //java only
-    {
-        
-        
+    /**
+     * Function to parse the build stage from the log file
+     * @param stageInfo
+     * @return the updated stageInfo
+     */
+    public StageInfo parseBuild(StageInfo stageInfo)           
+    { 
       String output = "Welcome to the build stage.\n\n\tCurrently, the Jenkins pipeline is building your project and compiling "
                  + "the required files.  ";
       //events
@@ -1722,7 +1752,10 @@ public class MainController implements iMainController
       stageInfo.setScript(output);
       return stageInfo;
     }
-    
+    /**
+     * Function to find the errors in the static analysis stage
+     * @return integer representing the number of errors
+     */
     public int findErrorCount()        //used to find staticAnalysis errors
     {
        int errorsCount=0;
@@ -1748,7 +1781,11 @@ public class MainController implements iMainController
           return errorsCount;
        }
     }
-    
+    /**
+     * Function to parse the static analysis chunk from the log file
+     * @param stageInfo
+     * @return the updated stageInfo
+     */
     public StageInfo parseStaticAnalysis(StageInfo stageInfo)
     {
       String output = "Welcome to the Static Analysis stage.\n\n\tCurrently, the Jenkins pipeline is comparing your code with coding "
@@ -1775,7 +1812,11 @@ public class MainController implements iMainController
        stageInfo.setScript(output);
        return stageInfo;
     }
-    
+    /**
+     * Function to parse the unit tests chunk from the log file
+     * @param stageInfo
+     * @return the updated stageInfo
+     */
     public StageInfo parseUnitTests(StageInfo stageInfo)
     {
       String output = "Welcome to unit testing.\n\n\tCurrently, the Jenkins pipeline is running your code’s unit tests to ensure "
@@ -1802,7 +1843,11 @@ public class MainController implements iMainController
        
        return stageInfo;
     }
-    
+    /**
+     * Function to parse the integration chunk from the log file
+     * @param stageInfo
+     * @return the updated stageInfo
+     */
     public StageInfo parseIntegration(StageInfo stageInfo)
     {
       String output = "Welcome to integration.\n\n\tCurrently the Jenkins pipeline is integrating the modules within your project,"
@@ -1828,7 +1873,11 @@ public class MainController implements iMainController
        stageInfo.setScript(output);
        return stageInfo;
     }
-    
+    /**
+     * Function to parse the deployment chunk from the log file
+     * @param stageInfo
+     * @return the updated stageInfo
+     */
     public StageInfo parseDeployment(StageInfo stageInfo)
     {
       String output = "Welcome to deployment.\n\n\tCurrently, the Jenkins pipeline is deploying your new solution to production "
@@ -1849,7 +1898,10 @@ public class MainController implements iMainController
        stageInfo.setPassed(true);
        return stageInfo;
     }
-    
+    /**
+     * Function to get all the stageInfo objects
+     * @return ArrayList of stageInfo objects
+     */
     public ArrayList<StageInfo> getStageInfos()
     {
         
