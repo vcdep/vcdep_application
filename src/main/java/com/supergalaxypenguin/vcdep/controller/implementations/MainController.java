@@ -1351,6 +1351,8 @@ public class MainController implements iMainController
         this.setBranchName(branchName);
         this.setStages(stages);
         model.setConfigInput(gitHubURL, language, localGitRepo, stages);
+        model.setBuildName(branchName);
+        model.buildExists(model.getBuildName());
         model.makeConfigInput();
         model.setBuildInput(jenkinsURL, branchName);
         model.makeBuildMessage();

@@ -33,12 +33,14 @@ public class Model extends Thread implements Runnable
     // All instance variables for defining a Jenkins Pipeline
     private String jenkinsURL;
     private String gitHubURL;
-    private String branchName;
+    private String branchName;               
     private String language;
     private String localGitRepo;
     private String buildMessage;
     private String configInput;
     private String jenkinsResponse;
+    private String buildName;
+    private int buildNumber;
 
     /**
      *
@@ -225,6 +227,26 @@ public class Model extends Thread implements Runnable
         this.localGitRepo = localGitRepo;
         
     }
+    /*******************************************
+     * Function to set the buildName of the unique build
+     * @param inputBuildName String representing unique identifier for the build
+     */
+    public void setBuildName(String inputBuildName)
+    {
+       
+       this.buildName = inputBuildName;
+       
+    }
+    /**************************
+     * Function sets the build number from Jenkins
+     * @param inputBuildNumber
+     */
+    public void setBuildNumber(int inputBuildNumber)
+    {
+       
+       this.buildNumber = inputBuildNumber;
+       
+    }
     
     /***************************
      * Function returns the Jenkins URL
@@ -290,6 +312,26 @@ public class Model extends Thread implements Runnable
         
         return this.jenkinsResponse;
         
+    }
+    /********************************************
+     * function to get the buildName
+     * @return String (the unique buildName based on the build number from jenkins)
+     */
+    public String getBuildName()
+    {
+       
+       return this.buildName;
+       
+    }
+    /****************************************
+     * Function to get the buildNumber
+     * @return int the unique buildNumber
+     */
+    public int getBuildNumber()
+    {
+       
+       return this.buildNumber;
+       
     }
  
     /****************************************
@@ -442,6 +484,44 @@ public class Model extends Thread implements Runnable
     public String[] getStages()
     {
         return this.stages;
+    }
+    
+    /*****************
+     * Function to query the V-CDEP server for the existence of a build
+     * @param buildName String representing the build from branchName input by user
+     */
+    public void buildExists(String buildName)
+    {
+       int localBuildNumber = -1;
+       //FIXME:  update the localBuildNumber with the new method
+       // localBuildNumber = //method
+       if(localBuildNumber >= 0)
+       {
+          this.setBuildNumber(localBuildNumber);
+       }
+       else
+       {
+          this.setBuildNumber(localBuildNumber);
+       }
+    }
+    /********************************
+     * Function checks to see if there is a more recent build
+     * @return Boolean true == new build, false == no new update
+     */
+    public Boolean checkBuildSequence()
+    {
+       int localBuildNumber = -1;
+       //FIXME:  update the localBuildNumber with the new method
+       //localBuildNumber = //method
+       if(localBuildNumber > this.getBuildNumber())
+       {
+          this.setBuildNumber(localBuildNumber);
+          return true;
+       }
+       else
+       {
+          return false;
+       }
     }
     
 }
