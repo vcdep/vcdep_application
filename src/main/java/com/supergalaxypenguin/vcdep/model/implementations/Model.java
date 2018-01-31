@@ -16,12 +16,14 @@ import com.supergalaxypenguin.vcdep.controller.interfaces.iMainController;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+
 
 /********************
  * @author natha
@@ -489,30 +491,67 @@ public class Model extends Thread implements Runnable
     /*****************
      * Function to query the V-CDEP server for the existence of a build
      * @param buildName String representing the build from branchName input by user
+     * @return int -1 no build, or the build number
      */
-    public void buildExists(String buildName)
-    {
-       int localBuildNumber = -1;
-       //FIXME:  update the localBuildNumber with the new method
-       // localBuildNumber = //method
-       if(localBuildNumber >= 0)
-       {
-          this.setBuildNumber(localBuildNumber);
-       }
-       else
-       {
-          this.setBuildNumber(localBuildNumber);
-       }
+   public int buildExists(String buildName) //FIXME: add unit test
+   {
+      int localBuildNumber = -1;
+      // localBuildNumber = //method
+      String buildURL = String.format("http://%s/vcdep/get_build", this.jenkinsURL);
+      try
+      {
+         HttpURLConnection conn = (HttpURLConnection)(new URL(buildURL)).openConnection();
+         conn.setDoOutput(true);
+         conn.setDoInput(true);
+         conn.setRequestProperty("Content-Type", "application/json");
+         conn.setRequestProperty("Accept", "application/json");
+         conn.setRequestMethod("POST");
+         JsonObject json = new JsonObject();
+         json.addProperty("buildName", buildName);
+         OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+         writer.write(json.toString());
+         writer.flush();
+         int code = conn.getResponseCode();
+         if (code == HttpURLConnection.HTTP_OK)
+         {
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String inputLine;       
+            StringBuffer res = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) 
+            {
+              res.append(inputLine);
+            }
+            in.close();
+            System.out.println(res.toString()); //for testing
+         }          
+      }
+      catch(Exception e)
+      {
+         e.printStackTrace();
+      }
+
+      if(localBuildNumber >= 0)
+      {
+         this.setBuildNumber(localBuildNumber);
+      }
+      else
+      {
+         this.setBuildNumber(localBuildNumber);
+      }
+      return localBuildNumber;
     }
     /********************************
      * Function checks to see if there is a more recent build
      * @return Boolean true == new build, false == no new update
      */
-    public Boolean checkBuildSequence()
+    public Boolean checkBuildSequence(int inputBuildNumber)
     {
-       int localBuildNumber = -1;
+       int localBuildNumber = inputBuildNumber;
        //FIXME:  update the localBuildNumber with the new method
        //localBuildNumber = //method
+
+       
        if(localBuildNumber > this.getBuildNumber())
        {
           this.setBuildNumber(localBuildNumber);
