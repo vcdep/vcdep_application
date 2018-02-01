@@ -42,7 +42,7 @@ public class Model extends Thread implements Runnable
     private String configInput;
     private String jenkinsResponse;
     private String buildName;
-    private int buildNumber;
+    private int buildNumber = -1;
 
     /**
      *
@@ -70,15 +70,15 @@ public class Model extends Thread implements Runnable
                 else
                 {
                     //this.wait(1000000);
-                    isDone = this.sendBuildMessage();
+                    isDone = this.checkBuildSequence(buildName); //this.sendBuildMessage();
                     //System.out.println("Checking if build exists isDone: " + isDone);
                     
                 }
             }
             
-            String log = this.requestLogFile();
+            // String log = this.requestLogFile();
             System.out.println("Got the log file");
-            controller.setLogFile(log);
+            //controller.setLogFile(log);
             //controller.updateStatusToView(log);
         }
         catch(InterruptedException e)
@@ -523,7 +523,20 @@ public class Model extends Thread implements Runnable
               res.append(inputLine);
             }
             in.close();
-            System.out.println(res.toString()); //for testing
+            
+            JsonParser parser = new JsonParser();
+            JsonObject response = (JsonObject) parser.parse(res.toString());
+            JsonElement element = response.get("build");
+            JsonArray array = element.getAsJsonArray();
+            if (array.size() > 0)
+            {
+                JsonElement buildNumber = array.get(0).getAsJsonObject().get("buildNumber");
+                localBuildNumber = Integer.parseInt(buildNumber.toString().replaceAll("\"", ""));
+                
+                String log = array.get(0).getAsJsonObject().get("logFile").toString();
+                System.out.println(log);
+                controller.setLogFile(log);
+            }
          }          
       }
       catch(Exception e)
@@ -531,36 +544,32 @@ public class Model extends Thread implements Runnable
          e.printStackTrace();
       }
 
-      if(localBuildNumber >= 0)
-      {
-         this.setBuildNumber(localBuildNumber);
-      }
-      else
-      {
-         this.setBuildNumber(localBuildNumber);
-      }
       return localBuildNumber;
+      
     }
     /********************************
      * Function checks to see if there is a more recent build
      * @return Boolean true == new build, false == no new update
      */
-    public Boolean checkBuildSequence(int inputBuildNumber)
+    public Boolean checkBuildSequence(String buildName)
     {
-       int localBuildNumber = inputBuildNumber;
-       //FIXME:  update the localBuildNumber with the new method
-       //localBuildNumber = //method
+        
+        int localBuildNumber = this.buildExists(buildName);
 
-       
-       if(localBuildNumber > this.getBuildNumber())
-       {
-          this.setBuildNumber(localBuildNumber);
-          return true;
-       }
-       else
-       {
-          return false;
-       }
+        if (localBuildNumber < 0)
+        {
+            this.setBuildNumber(localBuildNumber);
+            return false;
+        }
+        else if(localBuildNumber > this.getBuildNumber())
+        {
+            this.setBuildNumber(localBuildNumber);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     
 }
