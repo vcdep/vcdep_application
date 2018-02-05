@@ -177,7 +177,8 @@ public class ConfigurationViewController implements Initializable {
             System.out.println("Exception in controller.runpipline(params)");
         }
         try {
-            controller.displayPipelineScene();
+            //controller.displayPipelineScene();
+            controller.displayWaitScene();
         } catch (IOException ex) {
             Logger.getLogger(ConfigurationViewController.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);

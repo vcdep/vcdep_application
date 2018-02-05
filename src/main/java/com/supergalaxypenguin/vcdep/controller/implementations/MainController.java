@@ -14,6 +14,7 @@ import com.supergalaxypenguin.vcdep.view.implementations.PipelineSceneController
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -99,6 +100,22 @@ public class MainController implements iMainController
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
         javaFXStage.setTitle("Configuration Viewer");
+        javaFXStage.setScene(scene);
+        javaFXStage.show();
+    }
+    
+    /**
+     * displays the WaitScene
+     * @throws IOException 
+     */
+    @Override
+    public void displayWaitScene() throws IOException
+    {
+        this.pipelineSceneController = PipelineSceneController.getInstance();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/WaitScene.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        javaFXStage.setTitle("Waiting");
         javaFXStage.setScene(scene);
         javaFXStage.show();
     }
@@ -204,7 +221,8 @@ public class MainController implements iMainController
         model.setBuildInput(jenkinsURL, branchName);
         model.makeBuildMessage();
         model.checkBuildSequence(model.getBuildName());
-        model.start();
+        Platform.runLater(model);
+        //model.start();
         
     }
     

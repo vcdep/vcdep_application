@@ -78,6 +78,9 @@ public class Model extends Thread implements Runnable
             
             // String log = this.requestLogFile();
             System.out.println("Got the log file");
+            try {
+            controller.displayPipelineScene();
+            } catch(Exception e) {e.printStackTrace();}
             //controller.setLogFile(log);
             //controller.updateStatusToView(log);
         }
@@ -536,6 +539,7 @@ public class Model extends Thread implements Runnable
                 String log = array.get(0).getAsJsonObject().get("logFile").toString();
                 System.out.println(log);
                 controller.setLogFile(log);
+                //controller.updateStatusToView(log);
             }
          }          
       }

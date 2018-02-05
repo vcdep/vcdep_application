@@ -32,6 +32,12 @@ public interface iMainController
      * displays the PipelineScene
      * @throws IOException 
      */
+    void displayWaitScene() throws IOException;
+    
+    /**
+     * displays the PipelineScene
+     * @throws IOException 
+     */
     void displayPipelineScene() throws IOException;
     
     /**
