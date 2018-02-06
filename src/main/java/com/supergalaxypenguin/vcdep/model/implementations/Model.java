@@ -42,6 +42,7 @@ public class Model extends Thread implements Runnable
     private String configInput;
     private String jenkinsResponse;
     private String buildName;
+    private String logFile;
     private int buildNumber = -1;
 
     /**
@@ -79,7 +80,9 @@ public class Model extends Thread implements Runnable
             // String log = this.requestLogFile();
             System.out.println("Got the log file");
             try {
-            controller.displayPipelineScene();
+                controller.setLogFile(this.logFile);
+                controller.displayPipelineScene();
+                //controller.updateStatusToView(this.logFile);
             } catch(Exception e) {e.printStackTrace();}
             //controller.setLogFile(log);
             //controller.updateStatusToView(log);
@@ -537,9 +540,10 @@ public class Model extends Thread implements Runnable
                 localBuildNumber = Integer.parseInt(buildNumber.toString().replaceAll("\"", ""));
                 
                 String log = array.get(0).getAsJsonObject().get("logFile").toString();
-                System.out.println(log);
-                controller.setLogFile(log);
-                //controller.updateStatusToView(log);
+                log = log.replaceAll("\"", "");
+                log = log.replaceAll("\\\\n", "\n");
+                //System.out.println(log);
+                this.logFile = log;
             }
          }          
       }

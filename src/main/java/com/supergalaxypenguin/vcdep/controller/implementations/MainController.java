@@ -417,11 +417,14 @@ public class MainController implements iMainController
      */
     public int search(String stageInfo)
     {
-       String [] stageArray = this.logFile.split("\n");
+       String [] stageArray = this.logFile.split("\\n");
+       //System.out.println("Printing logfile");
+       //System.out.println(this.logFile);
        for(int i=0; i<stageArray.length; i++)
        {
           if(stageArray[i].equals(stageInfo))
           {
+              //System.out.println("Got eeeeemmmmmmmm");
              return i;
           }
        }
@@ -479,7 +482,7 @@ public class MainController implements iMainController
     public String getStaticAnalysisStatus()
     {
        String output = "";
-       int index = search("[Pipeline] { (Static Analysis)");
+       int index = search("[Pipeline] { (static)");
        String [] checkoutArray = this.logFile.split("\n");
        while(!checkoutArray[++index].contains("[Pipeline] { ("))
        {
@@ -499,7 +502,7 @@ public class MainController implements iMainController
     public String getUnitTestStatus()
     {
        String output = "";
-       int index = search("[Pipeline] { (Unit Testing)");
+       int index = search("[Pipeline] { (unit)");
        String [] checkoutArray = this.logFile.split("\n");
        while(!checkoutArray[++index].contains("[Pipeline] { ("))
        {
@@ -518,7 +521,7 @@ public class MainController implements iMainController
     public String getIntegrationStatus()
     {
        String output = "";
-       int index = search("[Pipeline] { (Integration Testing)");
+       int index = search("[Pipeline] { (integration)");
        String [] checkoutArray = this.logFile.split("\n");
        while(!checkoutArray[++index].contains("[Pipeline] { ("))
        {
@@ -537,7 +540,7 @@ public class MainController implements iMainController
     public String getDeploymentStatus()
     {
        String output = "";
-       int index = search("[Pipeline] { (Staging)");
+       int index = search("[Pipeline] { (staging)");
        String [] checkoutArray = this.logFile.split("\n");
        while(!checkoutArray[++index].contains("[Pipeline] { ("))
        {
