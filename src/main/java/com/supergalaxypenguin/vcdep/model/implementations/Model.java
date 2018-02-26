@@ -23,6 +23,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /********************
@@ -173,12 +174,12 @@ public class Model extends Thread implements Runnable
      */
     public String makeConfigInput()
     {
-        ArrayList<String> stages = new ArrayList<String>();
-        stages.add("static");
-        stages.add("unit");
-        stages.add("integration");
-        stages.add("staging");
-        Pipeline pipeline = new Pipeline(this.getLanguage(), stages);
+        //ArrayList<String> stages = new ArrayList<String>();
+        //stages.add("static");
+        //stages.add("unit");
+        //stages.add("integration");
+        //stages.add("staging");
+        Pipeline pipeline = new Pipeline(this.getLanguage(), Arrays.asList(this.getStages()));
         return this.createJson(pipeline);
 //       this.configInput = String.format();
     }

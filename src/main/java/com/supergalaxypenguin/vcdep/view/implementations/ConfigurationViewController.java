@@ -171,10 +171,10 @@ public class ConfigurationViewController implements Initializable {
         System.out.println(Arrays.toString(stages));
         
         try {
-            controller.runPipeline(gitUrl.getText(), languageSelection, localGitRepo.getText(), jenkins.getText(), branch.getText(), Arrays.copyOf(stagesList.toArray(), stagesList.size(), String[].class));
+            controller.runPipeline(gitUrl.getText().trim(), languageSelection, localGitRepo.getText().trim(), jenkins.getText().trim(), branch.getText().trim(), Arrays.copyOf(stagesList.toArray(), stagesList.size(), String[].class));
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Exception in controller.runpipline(params)");
+            System.out.println("Exception in controller.runpipeline(params)");
         }
         try {
             //controller.displayPipelineScene();
