@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane dividerPositions="0.29797979797979796" prefHeight="720.0" prefWidth="1080.0" styleClass="anchor" stylesheets="@../styles/pipelinescene.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+  <items>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" />
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="484.0" prefWidth="518.0">
+         <children>
+            <Label fx:id="deployment" contentDisplay="TOP" prefHeight="77.0" prefWidth="31.0" textAlignment="JUSTIFY" textFill="#c9c8c8">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="67.0" fitWidth="78.0" mouseTransparent="true">
+                     <image>
+                        <Image url="@../Images/Icons/Deployment.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="integration" contentDisplay="TOP">
+               <graphic>
+                  <ImageView fitHeight="67.0" fitWidth="78.0" mouseTransparent="true">
+                     <image>
+                        <Image url="@../Images/Icons/Integration.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="static_a" contentDisplay="TOP">
+               <graphic>
+                  <ImageView fitHeight="67.0" fitWidth="78.0" mouseTransparent="true">
+                     <image>
+                        <Image url="@../Images/Icons/Static_Analysis.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="unit_test" contentDisplay="TOP">
+               <graphic>
+                  <ImageView fitHeight="67.0" fitWidth="78.0" mouseTransparent="true">
+                     <image>
+                        <Image url="@../Images/Icons/UnitTest.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="build" contentDisplay="TOP">
+               <graphic>
+                  <ImageView fx:id="buildImage" fitHeight="67.0" fitWidth="78.0">
+                     <image>
+                        <Image url="@../Images/Icons/build.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <VBox layoutX="353.0" layoutY="14.0" spacing="5.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+               <children>
+                  <Rectangle fx:id="stage0" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" stroke="BLACK" strokeType="INSIDE" width="387.0" />
+                  <Rectangle fx:id="stage1" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" stroke="BLACK" strokeType="INSIDE" width="387.0" />
+                  <Rectangle fx:id="stage2" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" stroke="BLACK" strokeType="INSIDE" width="387.0" />
+                  <Rectangle fx:id="stage3" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" stroke="BLACK" strokeType="INSIDE" width="387.0" />
+                  <Rectangle fx:id="stage4" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" stroke="BLACK" strokeType="INSIDE" width="387.0" />
+                  <Rectangle fx:id="stage5" arcHeight="5.0" arcWidth="5.0" fill="#b2b2b2" height="77.0" stroke="BLACK" strokeType="INSIDE" width="387.0" />
+               </children>
+            </VBox>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
