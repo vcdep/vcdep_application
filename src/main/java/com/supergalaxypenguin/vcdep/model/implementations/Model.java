@@ -24,13 +24,14 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javafx.concurrent.Task;
 
 
 /********************
  * @author natha
  * @author agl11
  *******************/
-public class Model extends Thread implements Runnable
+public class Model extends Task<String>
 {
     
     // All instance variables for defining a Jenkins Pipeline
@@ -53,46 +54,6 @@ public class Model extends Thread implements Runnable
     private static iMainController controller;
     private boolean isDone = false;
     private String[] stages;
-
-    
-    /*************************
-     * Method implements run for thread
-     */
-    @Override
-    public void run()
-    {
-        try
-        {
-            while(!isDone)
-            {
-                if (this.isInterrupted())
-                {
-                    throw new InterruptedException();
-                }
-                else
-                {
-                    //this.wait(1000000);
-                    isDone = this.checkBuildSequence(buildName); //this.sendBuildMessage();
-                    //System.out.println("Checking if build exists isDone: " + isDone);
-                    
-                }
-            }
-            
-            // String log = this.requestLogFile();
-            System.out.println("Got the log file");
-            try {
-                controller.setLogFile(this.logFile);
-                controller.displayPipelineScene();
-                //controller.updateStatusToView(this.logFile);
-            } catch(Exception e) {e.printStackTrace();}
-            //controller.setLogFile(log);
-            //controller.updateStatusToView(log);
-        }
-        catch(InterruptedException e)
-        {
-            
-        }
-    }
     
     /*************************************
      * (Only for testing) Function creates the Model
@@ -537,7 +498,6 @@ public class Model extends Thread implements Runnable
                 String log = array.get(0).getAsJsonObject().get("logFile").toString();
                 log = log.replaceAll("\"", "");
                 log = log.replaceAll("\\\\n", "\n");
-                //System.out.println(log);
                 this.logFile = log;
             }
          }          
@@ -558,6 +518,7 @@ public class Model extends Thread implements Runnable
     {
         
         int localBuildNumber = this.buildExists(buildName);
+        System.out.println("Build Number: " + localBuildNumber + " Current Build Number: " + this.getBuildNumber());
 
         if (localBuildNumber < 0)
         {
@@ -573,6 +534,37 @@ public class Model extends Thread implements Runnable
         {
             return false;
         }
+    }
+
+    @Override
+    protected String call()
+    {
+        try
+        {
+            while(!isDone)
+            {
+                if (this.isCancelled())
+                {
+                    throw new InterruptedException();
+                }
+                else
+                {
+
+                    Thread.sleep(5000);
+                    isDone = this.checkBuildSequence(buildName);
+                    
+                }
+            }
+            
+            System.out.println("Got the log file");
+        }
+        catch(InterruptedException e)
+        {
+            System.out.println("Something went wrong...");
+            e.printStackTrace();
+        }
+        
+        return this.logFile;
     }
     
 }

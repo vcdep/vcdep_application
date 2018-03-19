@@ -14,7 +14,11 @@ import com.supergalaxypenguin.vcdep.view.implementations.PipelineSceneController
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -209,6 +213,7 @@ public class MainController implements iMainController
     @Override
     public void runPipeline(String gitHubURL, String language, String localGitRepo, String jenkinsURL, String branchName, String[] stages)
     {
+        
         this.setGitHubURL(gitHubURL);
         this.setLanguage(language);
         this.setLocalRepo(localGitRepo);
@@ -221,9 +226,25 @@ public class MainController implements iMainController
         model.setBuildInput(jenkinsURL, branchName);
         model.makeBuildMessage();
         model.checkBuildSequence(model.getBuildName());
-        Platform.runLater(model);
-        //model.start();
         
+        model.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, new EventHandler<WorkerStateEvent> () {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                String result = model.getValue();
+                MainController.getInstance().setLogFile(result);
+                try {
+                    MainController.getInstance().displayPipelineScene();
+                    //System.out.println("Logfile: " + result);
+                } catch (IOException ex) {
+                    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
+        Thread backgroundModel = new Thread(model);
+        backgroundModel.setDaemon(true);
+        backgroundModel.start();
+
     }
     
     /**
