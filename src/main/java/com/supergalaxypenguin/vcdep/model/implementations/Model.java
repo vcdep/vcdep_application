@@ -384,13 +384,14 @@ public class Model extends Task<String>
      * function to request the log file from Jenkins
      * @return String
      */
+    /**
     public String requestLogFile()
     {
         
         try
         {
             
-            String request = String.format("http://%s/job/jenkins_pipeline/%s/consoleText", this.jenkinsURL, this.branchName);
+            String request = String.format("http://%s/vcdep/get_build", this.jenkinsURL);
             
             URL url = new URL(request);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -403,7 +404,8 @@ public class Model extends Task<String>
                 
                 StringBuffer res = new StringBuffer();
                 
-                while ((inputLine = in.readLine()) != null) {
+                while ((inputLine = in.readLine()) != null) 
+                {
                 
                     res.append(inputLine + "\n");
                 
@@ -427,7 +429,7 @@ public class Model extends Task<String>
         
         return null;
         
-    }
+    }**/
     /*****************
      * Function to parse the result of the run for the model thread
      * @param build (String)
@@ -451,14 +453,12 @@ public class Model extends Task<String>
     }
     
     /*****************
-     * Function to query the V-CDEP server for the existence of a build
+     * Function to request the logFile from a build
      * @param buildName String representing the build from branchName input by user
-     * @return int -1 no build, or the build number
+     * @return String this.logFile
      */
-   public int buildExists(String buildName) //FIXME: add unit test
+   public String requestLogFile(String buildName) //FIXME: add unit test
    {
-      int localBuildNumber = -1;
-      // localBuildNumber = //method
       String buildURL = String.format("http://%s/vcdep/get_build", this.jenkinsURL);
       try
       {
@@ -492,12 +492,9 @@ public class Model extends Task<String>
             JsonArray array = element.getAsJsonArray();
             if (array.size() > 0)
             {
-                JsonElement buildNumber = array.get(0).getAsJsonObject().get("buildNumber");
-                localBuildNumber = Integer.parseInt(buildNumber.toString().replaceAll("\"", ""));
-                
                 String log = array.get(0).getAsJsonObject().get("logFile").toString();
                 log = log.replaceAll("\"", "");
-                log = log.replaceAll("\\\\n", "\n");
+                log = log.replaceAll("newline", "\n");
                 this.logFile = log;
             }
          }          
@@ -507,13 +504,14 @@ public class Model extends Task<String>
          e.printStackTrace();
       }
 
-      return localBuildNumber;
+      return this.logFile;
       
     }
     /********************************
      * Function checks to see if there is a more recent build
      * @return Boolean true == new build, false == no new update
      */
+   /**
     public Boolean checkBuildSequence(String buildName)
     {
         
@@ -535,28 +533,24 @@ public class Model extends Task<String>
             return false;
         }
     }
-
+**/
     @Override
     protected String call()
     {
         try
         {
-            while(!isDone)
+            if (this.isCancelled())
             {
-                if (this.isCancelled())
-                {
-                    throw new InterruptedException();
-                }
-                else
-                {
-
-                    Thread.sleep(5000);
-                    isDone = this.checkBuildSequence(buildName);
-                    
-                }
+               throw new InterruptedException();
+            }
+            else
+            {
+               String log = this.requestLogFile(buildName);
+               System.out.println(this.logFile);
             }
             
             System.out.println("Got the log file");
+            
         }
         catch(InterruptedException e)
         {

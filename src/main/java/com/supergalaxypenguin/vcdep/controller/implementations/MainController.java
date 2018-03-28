@@ -197,8 +197,7 @@ public class MainController implements iMainController
     @Override
     public String getLogFile()
     {
-        logFile = model.requestLogFile();
-        return logFile;
+        return this.logFile;
     }
     
     /**
@@ -225,7 +224,7 @@ public class MainController implements iMainController
         model.makeConfigInput();
         model.setBuildInput(jenkinsURL, branchName);
         model.makeBuildMessage();
-        model.checkBuildSequence(model.getBuildName());
+        //model.checkBuildSequence(model.getBuildName());
         
         model.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, new EventHandler<WorkerStateEvent> () {
             @Override
