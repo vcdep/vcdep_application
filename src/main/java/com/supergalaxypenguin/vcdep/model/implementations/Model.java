@@ -380,56 +380,6 @@ public class Model extends Task<String>
         
         return false;
     }
-    /***************************
-     * function to request the log file from Jenkins
-     * @return String
-     */
-    /**
-    public String requestLogFile()
-    {
-        
-        try
-        {
-            
-            String request = String.format("http://%s/vcdep/get_build", this.jenkinsURL);
-            
-            URL url = new URL(request);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            int code = conn.getResponseCode();
-            if (code == HttpURLConnection.HTTP_OK)
-            {
-                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                String inputLine;
-                
-                StringBuffer res = new StringBuffer();
-                
-                while ((inputLine = in.readLine()) != null) 
-                {
-                
-                    res.append(inputLine + "\n");
-                
-                }
-                
-                in.close();
-                this.jenkinsResponse = res.toString();
-                MainController.getInstance().setLogFile(this.jenkinsResponse);
-                System.out.println(this.jenkinsResponse);
-                return res.toString();
-
-            }
-        }
-        catch (Exception e)
-        {
-            
-            e.printStackTrace();
-            return null;
-            
-        }
-        
-        return null;
-        
-    }**/
     /*****************
      * Function to parse the result of the run for the model thread
      * @param build (String)
@@ -507,33 +457,6 @@ public class Model extends Task<String>
       return this.logFile;
       
     }
-    /********************************
-     * Function checks to see if there is a more recent build
-     * @return Boolean true == new build, false == no new update
-     */
-   /**
-    public Boolean checkBuildSequence(String buildName)
-    {
-        
-        int localBuildNumber = this.buildExists(buildName);
-        System.out.println("Build Number: " + localBuildNumber + " Current Build Number: " + this.getBuildNumber());
-
-        if (localBuildNumber < 0)
-        {
-            this.setBuildNumber(localBuildNumber);
-            return false;
-        }
-        else if(localBuildNumber > this.getBuildNumber())
-        {
-            this.setBuildNumber(localBuildNumber);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-**/
     @Override
     protected String call()
     {

@@ -320,50 +320,9 @@ public class ModelInputTester
 //        assertEquals(true, result);
 //         
 //    }
-    
-    /*************************
-     * Integration test
-     * Requires Jenkins server up and running to pass
-     *************************/
-    /**
-    @Test
-    public void TestBuildExistsFailsWithBuildNameExistingInDatabase()
-    {
 
-        // Arrange
-        Model model = Model.getInstance();
-        String buildName = "Does Not Exist";
-        model.setJenkinsURL(testIP);
 
-        // Act
-        int result = model.buildExists(buildName);
 
-        // Assert
-        assertEquals(-1, result);
-
-    }
-**/
-    /*************************
-     * Integration test
-     * Requires Jenkins server up and running to pass
-     *************************/
-    /**
-    @Test
-    public void TestBuildExistsPassesWithBuildNameExistingInDatabase()
-    {
-
-        // Arrange
-        Model model = Model.getInstance();
-        String buildName = "se2_devops_mw_1: feature";
-        model.setJenkinsURL(testIP);
-
-        // Act
-        int result = model.buildExists(buildName);
-
-        // Assert
-        assertNotEquals(-1, result);
-
-    }**/
 
 
 }
