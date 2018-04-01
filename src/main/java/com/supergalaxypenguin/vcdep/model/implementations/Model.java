@@ -412,7 +412,9 @@ public class Model extends Task<String>
       String buildURL = String.format("http://%s/vcdep/get_build", this.jenkinsURL);
       try
       {
+         System.out.println("URL: " + buildURL);
          HttpURLConnection conn = (HttpURLConnection)(new URL(buildURL)).openConnection();
+         conn.setConnectTimeout(500000);
          conn.setDoOutput(true);
          conn.setDoInput(true);
          conn.setRequestProperty("Content-Type", "application/json");
@@ -436,18 +438,21 @@ public class Model extends Task<String>
             }
             in.close();
             
+            
+            System.out.println("Response: " + res.toString());
             JsonParser parser = new JsonParser();
             JsonObject response = (JsonObject) parser.parse(res.toString());
-            JsonElement element = response.get("build");
-            JsonArray array = element.getAsJsonArray();
-            if (array.size() > 0)
-            {
-                String log = array.get(0).getAsJsonObject().get("logFile").toString();
-                log = log.replaceAll("\"", "");
-                log = log.replaceAll("newline", "\n");
-                this.logFile = log;
-            }
-         }          
+            String log = response.get("logFile").toString();
+            log = log.replaceAll("newline", "\n");
+            this.logFile = log;
+            
+         }
+         else
+         {
+             
+             System.out.println("Error occurred contacting server: " + code);
+             
+         }
       }
       catch(Exception e)
       {
@@ -469,7 +474,7 @@ public class Model extends Task<String>
             else
             {
                String log = this.requestLogFile(buildName);
-               System.out.println(this.logFile);
+               System.out.println("Log file: " + this.logFile);
             }
             
             System.out.println("Got the log file");
