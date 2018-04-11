@@ -102,7 +102,6 @@ public class MainController implements iMainController
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/ConfigurationScene.fxml"));
         this.configurationViewController.setMainControllerInterface((iMainController) this);
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
         javaFXStage.setTitle("Configuration Viewer");
         javaFXStage.setScene(scene);
         javaFXStage.show();
@@ -118,7 +117,6 @@ public class MainController implements iMainController
         this.pipelineSceneController = PipelineSceneController.getInstance();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/WaitScene.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
         javaFXStage.setTitle("Waiting");
         javaFXStage.setScene(scene);
         javaFXStage.show();
@@ -138,7 +136,6 @@ public class MainController implements iMainController
         this.pipelineSceneController.setLanguage(language);
         this.pipelineSceneController.setStageInfos(this.getStageInfos());
         Scene scene = new Scene(root);
-        //scene.getStylesheets().add("/styles/Styles.css");
         javaFXStage.setTitle("Pipeline Viewer");
         javaFXStage.setScene(scene);
         javaFXStage.show();
@@ -224,18 +221,23 @@ public class MainController implements iMainController
         model.makeConfigInput();
         model.setBuildInput(jenkinsURL, branchName);
         model.makeBuildMessage();
-        //model.checkBuildSequence(model.getBuildName());
         
         model.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, new EventHandler<WorkerStateEvent> () {
             @Override
             public void handle(WorkerStateEvent event) {
                 String result = model.getValue();
                 System.out.println("Logfile result: " + result);
+             
                 MainController.getInstance().setLogFile(result);
                 
                 try {
-                    MainController.getInstance().displayPipelineScene();
-                    //System.out.println("Logfile: " + result);
+                    
+                       
+                    if (result != null) {
+                        MainController.getInstance().displayPipelineScene();
+                    } else {
+                        MainController.getInstance().displayErrorScene();
+                    }
                 } catch (IOException ex) {
                     Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -858,6 +860,14 @@ public class MainController implements iMainController
             }
         }
         return stageInfos;
+    }
+
+    private void displayErrorScene() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ErrorScene.fxml"));
+        Scene scene = new Scene(root);
+        javaFXStage.setTitle("Error");
+        javaFXStage.setScene(scene);
+        javaFXStage.show();
     }
     
 }

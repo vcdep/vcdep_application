@@ -457,6 +457,7 @@ public class Model extends Task<String>
       catch(Exception e)
       {
          e.printStackTrace();
+         return null;
       }
 
       return this.logFile;
