@@ -43,6 +43,7 @@ public class MainController implements iMainController
     private Stage javaFXStage;
     private static MainController instance = null;
     private String logFile = "Waiting for Build to Finish";
+    private String[] logLines;
     private int currentStage = 0;
     private String status = "Waiting for status update...";
     
@@ -188,6 +189,15 @@ public class MainController implements iMainController
     }
     
     /**
+     * Store the Log File from the Jenkins Server
+     * @param _logFile stores the log file the was received from the Jenkins Server
+     */
+    public void setLogLines(String[] _logLines)
+    {
+        this.logLines = _logLines;
+    }
+    
+    /**
      * Gets the last Log File received from the Jenkins Server
      * @return Returns a String containing the file.
      */
@@ -195,6 +205,15 @@ public class MainController implements iMainController
     public String getLogFile()
     {
         return this.logFile;
+    }
+    
+    /**
+     * Gets the last Log File received from the Jenkins Server
+     * @return Returns a String containing the file.
+     */
+    public String[] getLogLines()
+    {
+        return this.logLines;
     }
     
     /**
@@ -229,7 +248,8 @@ public class MainController implements iMainController
                 System.out.println("Logfile result: " + result);
              
                 MainController.getInstance().setLogFile(result);
-                
+                MainController.getInstance().setLogLines(result.split("\n"));
+
                 try {
                     
                        
@@ -434,6 +454,7 @@ public class MainController implements iMainController
     {
         return status;
     }
+    
     /**
      * Helper function to search through log files and split the string
      * @param stageInfo
@@ -441,14 +462,10 @@ public class MainController implements iMainController
      */
     public int search(String stageInfo)
     {
-       String [] stageArray = this.logFile.split("\n");
-       //System.out.println("Printing logfile");
-       //System.out.println(this.logFile);
-       for(int i=0; i<stageArray.length; i++)
+       for(int i=0; i<this.logLines.length; i++)
        {
-          if(stageArray[i].equals(stageInfo))
+          if(this.logLines[i].equals(stageInfo))
           {
-              //System.out.println("Got eeeeemmmmmmmm");
              return i;
           }
        }
@@ -462,11 +479,10 @@ public class MainController implements iMainController
     {
        String output = "";
        int index = search("[Pipeline] { (Checkout)");
-       String [] checkoutArray = this.logFile.split("\n");
-       while(!checkoutArray[++index].contains("[Pipeline] { ("))
+       while(!this.logLines[++index].contains("[Pipeline] { ("))
        {
-          output = output + checkoutArray[index] + "\n";
-          if(index == checkoutArray.length-1)
+          output = output + this.logLines[index] + "\n";
+          if(index == this.logLines.length-1)
           {
              break;
           }
@@ -485,13 +501,13 @@ public class MainController implements iMainController
        String output = "";
        int index = search("[Pipeline] { (Build)");
        String [] checkoutArray = this.logFile.split("\n");
-       while(!checkoutArray[++index].contains("BUILD"))
+       while(!this.logLines[++index].contains("BUILD"))
        {
           continue; //LOL
        }
        String buildArray;
        index = index -1;
-       while(!checkoutArray[++index].contains("[Pipeline] { ("))
+       while(!this.logLines[++index].contains("[Pipeline] { ("))
        {
           output = output + checkoutArray[index] + "\n";
           if(index == checkoutArray.length-1)
@@ -509,11 +525,10 @@ public class MainController implements iMainController
     {
        String output = "";
        int index = search("[Pipeline] { (static)");
-       String [] checkoutArray = this.logFile.split("\n");
-       while(!checkoutArray[++index].contains("[Pipeline] { ("))
+       while(!this.logLines[++index].contains("[Pipeline] { ("))
        {
-          output = output + checkoutArray[index] + "\n";
-          if(index == checkoutArray.length-1)
+          output = output + this.logLines[index] + "\n";
+          if(index == this.logLines.length-1)
           {
              break;
           }
@@ -529,11 +544,10 @@ public class MainController implements iMainController
     {
        String output = "";
        int index = search("[Pipeline] { (unit)");
-       String [] checkoutArray = this.logFile.split("\n");
-       while(!checkoutArray[++index].contains("[Pipeline] { ("))
+       while(!this.logLines[++index].contains("[Pipeline] { ("))
        {
-          output = output + checkoutArray[index] + "\n";
-          if(index == checkoutArray.length-1)
+          output = output + this.logLines[index] + "\n";
+          if(index == this.logLines.length-1)
           {
              break;
           }
@@ -548,17 +562,17 @@ public class MainController implements iMainController
     {
        String output = "";
        int index = search("[Pipeline] { (integration)");
-       String [] checkoutArray = this.logFile.split("\n");
-       while(!checkoutArray[++index].contains("[Pipeline] { ("))
+       while(!this.logLines[++index].contains("[Pipeline] { ("))
        {
-          output = output + checkoutArray[index] + "\n";
-          if(index == checkoutArray.length-1)
+          output = output + this.logLines[index] + "\n";
+          if(index == this.logLines.length-1)
           {
              break;
           }
        }
        return output;
     }
+    
     /**
      * Function to get the deployment status from the log file
      * @return String representing the deployment status
@@ -567,17 +581,17 @@ public class MainController implements iMainController
     {
        String output = "";
        int index = search("[Pipeline] { (staging)");
-       String [] checkoutArray = this.logFile.split("\n");
-       while(!checkoutArray[++index].contains("[Pipeline] { ("))
+       while(!this.logLines[++index].contains("[Pipeline] { ("))
        {
-          output = output + checkoutArray[index] + "\n";
-          if(index == checkoutArray.length-1)
+          output = output + this.logLines[index] + "\n";
+          if(index == this.logLines.length-1)
           {
              break;
           }
        }
        return output;
     }
+    
     /**
      * Function to parse the Checkout chunk from the log file
      * @param stageInfo identifies the stage
