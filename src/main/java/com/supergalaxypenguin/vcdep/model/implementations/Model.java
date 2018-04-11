@@ -443,7 +443,7 @@ public class Model extends Task<String>
             JsonParser parser = new JsonParser();
             JsonObject response = (JsonObject) parser.parse(res.toString());
             String log = response.get("logFile").toString();
-            log = log.replaceAll("newline", "\n");
+            log = log.replaceAll("\\\\n", "\n");
             this.logFile = log;
             
          }

@@ -138,7 +138,7 @@ public class MainController implements iMainController
         this.pipelineSceneController.setLanguage(language);
         this.pipelineSceneController.setStageInfos(this.getStageInfos());
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
+        //scene.getStylesheets().add("/styles/Styles.css");
         javaFXStage.setTitle("Pipeline Viewer");
         javaFXStage.setScene(scene);
         javaFXStage.show();
@@ -230,7 +230,9 @@ public class MainController implements iMainController
             @Override
             public void handle(WorkerStateEvent event) {
                 String result = model.getValue();
+                System.out.println("Logfile result: " + result);
                 MainController.getInstance().setLogFile(result);
+                
                 try {
                     MainController.getInstance().displayPipelineScene();
                     //System.out.println("Logfile: " + result);
@@ -437,7 +439,7 @@ public class MainController implements iMainController
      */
     public int search(String stageInfo)
     {
-       String [] stageArray = this.logFile.split("\\n");
+       String [] stageArray = this.logFile.split("\n");
        //System.out.println("Printing logfile");
        //System.out.println(this.logFile);
        for(int i=0; i<stageArray.length; i++)
@@ -467,6 +469,8 @@ public class MainController implements iMainController
              break;
           }
        }
+       
+       System.out.println("Checkout stage: " + output);
        return output;
     }
     /**
