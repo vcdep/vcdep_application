@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -81,10 +82,6 @@ public class ConfigurationViewController implements Initializable {
     private Label unit_test;
     @FXML
     private ImageView cleanUp;
-    @FXML 
-    private CheckBox java;
-    @FXML
-    private CheckBox php;
     @FXML
     private Button stageReset;
     @FXML
@@ -93,6 +90,9 @@ public class ConfigurationViewController implements Initializable {
     private Label build;
     @FXML
     private Rectangle target_5;
+    
+    @FXML
+    private ComboBox languageComboBox;
     
     private String languageSelection = "";
     
@@ -169,9 +169,10 @@ public class ConfigurationViewController implements Initializable {
         //stages = (String[])stagesList.toArray();
         
         System.out.println(Arrays.toString(stages));
+        System.out.println("Combo Box: " + languageComboBox.getValue());
         
         try {
-            controller.runPipeline(gitUrl.getText().trim(), languageSelection, localGitRepo.getText().trim(), jenkins.getText().trim(), branch.getText().trim(), Arrays.copyOf(stagesList.toArray(), stagesList.size(), String[].class));
+            controller.runPipeline(gitUrl.getText().trim(), ("" + languageComboBox.getValue()).toLowerCase(), localGitRepo.getText().trim(), jenkins.getText().trim(), branch.getText().trim(), Arrays.copyOf(stagesList.toArray(), stagesList.size(), String[].class));
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Exception in controller.runpipeline(params)");
@@ -223,30 +224,6 @@ public class ConfigurationViewController implements Initializable {
     public void handleDropDownTouchReleased(ActionEvent event)
     {
         System.out.println("Test Drop Down Touch Released");
-    }
-    
-    /**
-     * Sets the preferred language and whether or not the target_5 "build" is visible
-     * @param event
-     */
-    @FXML
-    public void handleCheckBox(ActionEvent event){
-        System.out.println("box checked");
-        CheckBox target = (CheckBox)event.getSource();
-        
-        if(java == target){
-            php.setSelected(false);
-            build.setVisible(true);
-            target_5.setVisible(true);
-            languageSelection = "java";
-                    
-        }else if(php == target){
-            java.setSelected(false);
-            build.setVisible(false);
-            target_5.setVisible(false);
-            languageSelection = "php";
-        }
-        System.out.println(languageSelection);
     }
     
     /**
@@ -408,6 +385,10 @@ public class ConfigurationViewController implements Initializable {
                 event.consume();
             }
         });
+        
+        languageComboBox.getItems().removeAll(languageComboBox.getItems());
+        languageComboBox.getItems().addAll("Select a Language", "PHP", "Java");
+        languageComboBox.getSelectionModel().select("Select a Language");
         
     }
 }

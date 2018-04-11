@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -17,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="695.0" prefWidth="982.0" styleClass="anchor" stylesheets="@../styles/configscene.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supergalaxypenguin.vcdep.view.implementations.ConfigurationViewController">
+<AnchorPane id="AnchorPane" prefHeight="695.0" prefWidth="982.0" styleClass="anchor" stylesheets="@../styles/configscene.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.supergalaxypenguin.vcdep.view.implementations.ConfigurationViewController">
     <children>
       <AnchorPane layoutX="39.0" layoutY="22.0" AnchorPane.leftAnchor="39.0">
          <children>
@@ -64,17 +63,7 @@
             <TextField id="branch" fx:id="branch" layoutX="7.0" layoutY="94.0" prefHeight="25.0" prefWidth="384.0" promptText="Branch" style="-fx-background-color: lightgrey;" />
             <TextField id="gitUrl" fx:id="gitUrl" layoutX="7.0" layoutY="27.0" prefHeight="25.0" prefWidth="384.0" promptText="Git Repo" style="-fx-background-color: lightgrey;" />
             <Button fx:id="browse" contentDisplay="RIGHT" layoutX="319.0" layoutY="226.0" mnemonicParsing="false" onAction="#handleBrowseButton" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: lightgrey;" text="Browse" />
-            <CheckBox fx:id="java" layoutX="125.0" layoutY="280.0" mnemonicParsing="false" onAction="#handleCheckBox" text="Java" textFill="#ebe4e4">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </CheckBox>
-            <CheckBox fx:id="php" layoutX="252.0" layoutY="280.0" mnemonicParsing="false" onAction="#handleCheckBox" text="PHP" textFill="#fcefef">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </CheckBox>
-            <ComboBox layoutX="331.0" layoutY="281.0" prefWidth="150.0" promptText="Select a Language" />
+            <ComboBox fx:id="languageComboBox" layoutX="128.0" layoutY="282.0" prefWidth="150.0" promptText="Select a Language" />
          </children>
       </AnchorPane>
       <Button fx:id="submit" layoutX="846.0" layoutY="655.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Submit" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="70.0">
