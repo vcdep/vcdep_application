@@ -696,7 +696,8 @@ public class MainController implements iMainController
     public StageInfo parseStaticAnalysis(StageInfo stageInfo)
     {
       String output = "Welcome to the Static Analysis stage.\n\n\tCurrently, the Jenkins pipeline is comparing your code with coding "
-              + "standards, looking for ways to improve your coding structure.\n";
+              + "standards, looking for ways to improve your coding structure.\n This pipelline uses PHP Code_Sniffer for performing"
+              + " Static Analysis. It is currently using the default coding standard, which using the PEAR coding standard for PHP, to compare against your code.";
        //events
        int numErrors = this.findErrorCount();
        if(numErrors > 0)
@@ -727,7 +728,7 @@ public class MainController implements iMainController
     public StageInfo parseUnitTests(StageInfo stageInfo)
     {
       String output = "Welcome to unit testing.\n\n\tCurrently, the Jenkins pipeline is running your code’s unit tests to ensure "
-              + "that your changes still pass their respective unit tests.\n";
+              + "that your changes still pass their respective unit tests.\nThe unit tests are written using PHPUnit framework.";
        //events
        if(this.getUnitTestStatus().contains("FAILURES!"))
        {
@@ -758,7 +759,7 @@ public class MainController implements iMainController
     public StageInfo parseIntegration(StageInfo stageInfo)
     {
       String output = "Welcome to integration.\n\n\tCurrently the Jenkins pipeline is integrating the modules within your project,"
-              + " ensuring that the changes have not caused any integration issues.\n";
+              + " ensuring that the changes have not caused any integration issues.\nThe integration tests are written using PHPUnit framework.";
        //events
        if(this.getIntegrationStatus().contains("FAILURES!"))
        {
@@ -788,7 +789,8 @@ public class MainController implements iMainController
     public StageInfo parseDeployment(StageInfo stageInfo)
     {
       String output = "Welcome to deployment.\n\n\tCurrently, the Jenkins pipeline is deploying your new solution to production "
-              + "machines and checking that the new code is compatible with your production hardware and software.\n";
+              + "machines and checking that the new code is compatible with your production hardware and software.\n"
+              + "Your website is being hosted using apache which is a HTTP server.";
        //events
        if (this.getDeploymentStatus().contains("Skipping due to failure"))
        {
