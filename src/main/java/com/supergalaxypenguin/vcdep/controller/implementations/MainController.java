@@ -245,15 +245,11 @@ public class MainController implements iMainController
             @Override
             public void handle(WorkerStateEvent event) {
                 String result = model.getValue();
-                System.out.println("Logfile result: " + result);
              
-                MainController.getInstance().setLogFile(result);
-                MainController.getInstance().setLogLines(result.split("\n"));
-
                 try {
-                    
-                       
                     if (result != null) {
+                        MainController.getInstance().setLogFile(result);
+                        MainController.getInstance().setLogLines(result.split("\n"));
                         MainController.getInstance().displayPipelineScene();
                     } else {
                         MainController.getInstance().displayErrorScene();

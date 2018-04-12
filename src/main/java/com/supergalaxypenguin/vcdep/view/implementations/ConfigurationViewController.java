@@ -148,9 +148,9 @@ public class ConfigurationViewController implements Initializable {
 
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        System.out.println("Opening Pipline Viewer Window");
+//        System.out.println("Opening Pipline Viewer Window");
         
-        System.out.println(Arrays.toString(stages));
+//        System.out.println(Arrays.toString(stages));
         // this area will change
         //Check that all inputs are entered properly...
         //How to do that?
@@ -168,8 +168,8 @@ public class ConfigurationViewController implements Initializable {
         //String[] stages = new String[stagesList.size()];
         //stages = (String[])stagesList.toArray();
         
-        System.out.println(Arrays.toString(stages));
-        System.out.println("Combo Box: " + languageComboBox.getValue());
+//        System.out.println(Arrays.toString(stages));
+//        System.out.println("Combo Box: " + languageComboBox.getValue());
         
         try {
             controller.runPipeline(gitUrl.getText().trim(), ("" + languageComboBox.getValue()).toLowerCase(), localGitRepo.getText().trim(), jenkins.getText().trim(), branch.getText().trim(), Arrays.copyOf(stagesList.toArray(), stagesList.size(), String[].class));
@@ -223,7 +223,7 @@ public class ConfigurationViewController implements Initializable {
      */
     public void handleDropDownTouchReleased(ActionEvent event)
     {
-        System.out.println("Test Drop Down Touch Released");
+//        System.out.println("Test Drop Down Touch Released");
     }
     
     /**
@@ -248,26 +248,25 @@ public class ConfigurationViewController implements Initializable {
             label.setLayoutY(target.getLayoutY()-11);
         }
         event.consume();
-        System.out.println(content.getString());
-        System.out.println(target);
-        stages[0] = "checkout";
+//        System.out.println(content.getString());
+//        System.out.println(target);
         if (target == target_1){
             payloadOne = content.getString();
-            stages[1] = payloadOne;
+            stages[0] = payloadOne.toLowerCase();
         }else if (target == target_2){
             payloadTwo = content.getString();
-            stages[2] = payloadTwo;
+            stages[1] = payloadTwo.toLowerCase();
         }else if (target == target_3){
             payloadThree = content.getString();
-            stages[3] = payloadThree;
+            stages[2] = payloadThree;
         }else if (target == target_4){
             payloadFour = content.getString();
-            stages[4] = payloadFour;
+            stages[3] = payloadFour.toLowerCase();
         }else if (target == target_5){
             payloadFive = content.getString();
-            stages[5] = payloadFive;
+            stages[4] = payloadFive.toLowerCase();
         }
-        System.out.println(Arrays.toString(stages));
+//        System.out.println(Arrays.toString(stages));
     }
     
     /**
@@ -285,7 +284,7 @@ public class ConfigurationViewController implements Initializable {
             target.setFill(Color.GREEN);
         }
         event.consume();
-        System.out.println("Drag Entered");
+//        System.out.println("Drag Entered");
     }
     
     /**
@@ -299,7 +298,7 @@ public class ConfigurationViewController implements Initializable {
         Rectangle target = (Rectangle)event.getTarget();
         target.setFill(Color.BLACK);
         event.consume();
-        System.out.println("Drag Exited");
+//        System.out.println("Drag Exited");
     }
     
     /**
@@ -320,7 +319,7 @@ public class ConfigurationViewController implements Initializable {
         * transferred and used */
         event.setDropCompleted(success);
         event.consume();
-        System.out.println("Drag Dropped");
+//        System.out.println("Drag Dropped");
     }
 
     @Override
@@ -334,7 +333,7 @@ public class ConfigurationViewController implements Initializable {
 
                 content.putString("Deploy");
                 db.setContent(content);
-                System.out.println("drag detected");
+//                System.out.println("drag detected");
                 event.consume();
 
             }
@@ -346,7 +345,7 @@ public class ConfigurationViewController implements Initializable {
 
                 content.putString("Integration");
                 db.setContent(content);
-                System.out.println("drag detected");
+//                System.out.println("drag detected");
                 event.consume();
 
             }
@@ -358,7 +357,7 @@ public class ConfigurationViewController implements Initializable {
 
                 content.putString("Static");
                 db.setContent(content);
-                System.out.println("drag detected");
+//                System.out.println("drag detected");
                 event.consume();
 
             }
@@ -370,7 +369,7 @@ public class ConfigurationViewController implements Initializable {
 
                 content.putString("Unit");
                 db.setContent(content);
-                System.out.println("drag detected");
+//                System.out.println("drag detected");
                 event.consume();
             }
         });
@@ -381,7 +380,7 @@ public class ConfigurationViewController implements Initializable {
 
                 content.putString("build");
                 db.setContent(content);
-                System.out.println("drag detected");
+//                System.out.println("drag detected");
                 event.consume();
             }
         });
