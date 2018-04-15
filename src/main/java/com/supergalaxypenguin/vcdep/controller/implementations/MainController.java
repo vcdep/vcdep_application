@@ -14,9 +14,11 @@ import com.supergalaxypenguin.vcdep.view.implementations.PipelineSceneController
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.concurrent.Service;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -241,28 +243,36 @@ public class MainController implements iMainController
         model.setBuildInput(jenkinsURL, branchName);
         model.makeBuildMessage();
         
+        System.out.println("Repo: " + gitHubURL + " Language: " + language + " Jenkins: " + jenkinsURL + " Stages: " + Arrays.toString(stages));
+        
+        
+        
         model.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, new EventHandler<WorkerStateEvent> () {
             @Override
             public void handle(WorkerStateEvent event) {
                 String result = model.getValue();
+                model.reset();
              
                 try {
                     if (result != null) {
                         MainController.getInstance().setLogFile(result);
                         MainController.getInstance().setLogLines(result.split("\n"));
                         MainController.getInstance().displayPipelineScene();
+                        System.out.println("Result not null");
+
                     } else {
                         MainController.getInstance().displayErrorScene();
+                        System.out.println("Why is result null?");
+
                     }
                 } catch (IOException ex) {
                     Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                 }
             }
         });
         
-        Thread backgroundModel = new Thread(model);
-        backgroundModel.setDaemon(true);
-        backgroundModel.start();
+        model.start();
 
     }
     

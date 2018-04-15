@@ -161,7 +161,7 @@ public class ConfigurationViewController implements Initializable {
         {
             if (stages[i]!=null)
             {
-                stagesList.add(stages[i]);
+                stagesList.add(stages[i].toLowerCase());
             }
         }
         

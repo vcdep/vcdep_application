@@ -764,7 +764,7 @@ public class PipelineSceneController implements Initializable {
         {
             if (new_stages[i]!=null)
             {
-                stagesList.add(new_stages[i]);
+                stagesList.add(new_stages[i].toLowerCase());
             }
         }
         
@@ -774,13 +774,13 @@ public class PipelineSceneController implements Initializable {
         //System.out.println(Arrays.toString(stages));
         
         try {
-            controller.runPipeline(controller.getGitHubURL(), controller.getLanguage(), controller.getLocalRepo(), controller.getJenkinsURL(), controller.getBranchName(), Arrays.copyOf(stagesList.toArray(), stagesList.size(), String[].class));
+            controller.runPipeline(controller.getGitHubURL().toLowerCase(), controller.getLanguage().toLowerCase(), controller.getLocalRepo(), controller.getJenkinsURL(), controller.getBranchName().toLowerCase(), Arrays.copyOf(stagesList.toArray(), stagesList.size(), String[].class));
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Exception in controller.runpipline(params)");
         }
         try {
-            controller.displayPipelineScene();
+            controller.displayWaitScene();
         } catch (IOException ex) {
             Logger.getLogger(ConfigurationViewController.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex);

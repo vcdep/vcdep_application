@@ -24,6 +24,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 
 
@@ -31,7 +32,7 @@ import javafx.concurrent.Task;
  * @author natha
  * @author agl11
  *******************/
-public class Model extends Task<String>
+public class Model extends Service<String>
 {
     
     // All instance variables for defining a Jenkins Pipeline
@@ -409,6 +410,8 @@ public class Model extends Task<String>
      */
    public String requestLogFile(String buildName) //FIXME: add unit test
    {
+       
+       System.out.println("Requesting log file...");
       String buildURL = String.format("http://%s/vcdep/get_build", this.jenkinsURL);
       try
       {
@@ -463,31 +466,38 @@ public class Model extends Task<String>
       return this.logFile;
       
     }
-    @Override
-    protected String call()
-    {
-        try
+   
+   @Override
+   protected Task<String> createTask() {
+       return new Task<String>() {
+           @Override
+        protected String call()
         {
-            if (this.isCancelled())
+            try
             {
-               throw new InterruptedException();
+                if (this.isCancelled())
+                {
+                   throw new InterruptedException();
+                }
+                else
+                {
+                   String log = Model.this.requestLogFile(buildName);
+                   System.out.println("Log file: " + Model.this.logFile);
+                }
+
+                System.out.println("Got the log file");
+
             }
-            else
+            catch(InterruptedException e)
             {
-               String log = this.requestLogFile(buildName);
-               System.out.println("Log file: " + this.logFile);
+                System.out.println("Something went wrong...");
+                e.printStackTrace();
             }
-            
-            System.out.println("Got the log file");
-            
+
+            return Model.this.logFile;
         }
-        catch(InterruptedException e)
-        {
-            System.out.println("Something went wrong...");
-            e.printStackTrace();
-        }
-        
-        return this.logFile;
-    }
+       };
+   }
+    
     
 }
