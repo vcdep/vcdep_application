@@ -403,6 +403,151 @@ public class Model extends Service<String>
         return this.stages;
     }
     
+    public String setBuild(String buildName) {
+        
+        String url = String.format("http://%s/vcdep/set_build", this.jenkinsURL);
+        try {
+            HttpURLConnection conn = (HttpURLConnection)(new URL(url)).openConnection();
+            conn.setConnectTimeout(500000);
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestMethod("POST");
+            
+            JsonObject json = new JsonObject();
+            json.addProperty("buildName", buildName);
+            OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+            writer.write(json.toString());
+            writer.flush();
+            
+            int code = conn.getResponseCode();
+            if (code == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String inputLine;       
+                StringBuffer res = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) 
+                {
+                  res.append(inputLine);
+                }
+                in.close();
+            
+            
+                System.out.println("Response: " + res.toString());
+                JsonParser parser = new JsonParser();
+                JsonObject response = (JsonObject) parser.parse(res.toString());
+                String name = response.get("buildName").toString();
+                return name;
+            
+            }
+            else {
+                System.out.println("Error occurred contacting server: " + code);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        
+        return null;
+    }
+    
+    public String poll(String buildName) {
+        String url = String.format("http://%s/vcdep/polling", this.jenkinsURL);
+        try {
+            HttpURLConnection conn = (HttpURLConnection)(new URL(url)).openConnection();
+            conn.setConnectTimeout(500000);
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestMethod("POST");
+            
+            JsonObject json = new JsonObject();
+            json.addProperty("buildName", buildName);
+            OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+            writer.write(json.toString());
+            writer.flush();
+            
+            int code = conn.getResponseCode();
+            if (code == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String inputLine;       
+                StringBuffer res = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) 
+                {
+                  res.append(inputLine);
+                }
+                in.close();
+            
+            
+                System.out.println("Response: " + res.toString());
+                JsonParser parser = new JsonParser();
+                JsonObject response = (JsonObject) parser.parse(res.toString());
+                String finished = response.get("finished").toString();
+                return finished;
+            
+            }
+            else {
+                System.out.println("Error occurred contacting server: " + code);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        
+        return null;
+    }
+    
+    public String getLog(String buildName) {
+        String url = String.format("http://%s/vcdep/get_log", this.jenkinsURL);
+        try {
+            HttpURLConnection conn = (HttpURLConnection)(new URL(url)).openConnection();
+            conn.setConnectTimeout(500000);
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setRequestMethod("POST");
+            
+            JsonObject json = new JsonObject();
+            json.addProperty("buildName", buildName);
+            OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+            writer.write(json.toString());
+            writer.flush();
+            
+            int code = conn.getResponseCode();
+            if (code == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String inputLine;       
+                StringBuffer res = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) 
+                {
+                  res.append(inputLine);
+                }
+                in.close();
+            
+            
+                System.out.println("Response: " + res.toString());
+                JsonParser parser = new JsonParser();
+                JsonObject response = (JsonObject) parser.parse(res.toString());
+                String logFile = response.get("logFile").toString();
+                return logFile;
+            
+            }
+            else {
+                System.out.println("Error occurred contacting server: " + code);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        
+        return null;
+    }
+    
     /*****************
      * Function to request the logFile from a build
      * @param buildName String representing the build from branchName input by user
@@ -473,28 +618,48 @@ public class Model extends Service<String>
            @Override
         protected String call()
         {
-            try
-            {
+            
+            try {
                 if (this.isCancelled())
                 {
                    throw new InterruptedException();
                 }
-                else
-                {
-                   String log = Model.this.requestLogFile(buildName);
-                   System.out.println("Log file: " + Model.this.logFile);
+                
+                Model.this.setBuild(buildName);
+                String finished = Model.this.poll(buildName);
+                while (!finished.equals("true")) {
+                    finished = Model.this.poll(buildName);
                 }
-
-                System.out.println("Got the log file");
-
-            }
-            catch(InterruptedException e)
-            {
+                Model.this.logFile = Model.this.getLog(buildName);
+            } catch (InterruptedException e) {
                 System.out.println("Something went wrong...");
                 e.printStackTrace();
             }
-
+            
             return Model.this.logFile;
+//            try
+//            {
+//                if (this.isCancelled())
+//                {
+//                   throw new InterruptedException();
+//                }
+//                else
+//                {
+//                    
+//                   //String log = Model.this.requestLogFile(buildName);
+//                   //System.out.println("Log file: " + Model.this.logFile);
+//                }
+//
+//                System.out.println("Got the log file");
+//
+//            }
+//            catch(InterruptedException e)
+//            {
+//                System.out.println("Something went wrong...");
+//                e.printStackTrace();
+//            }
+//
+//            return Model.this.logFile;
         }
        };
    }
