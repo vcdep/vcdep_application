@@ -760,6 +760,7 @@ public class PipelineSceneController implements Initializable {
         //Set all inputs in Controller and runs the pipeline
         
         ArrayList<String> stagesList = new ArrayList<>();
+        stagesList.add("checkout");
         for (int i = 0; i< new_stages.length; i++)
         {
             if (new_stages[i]!=null)

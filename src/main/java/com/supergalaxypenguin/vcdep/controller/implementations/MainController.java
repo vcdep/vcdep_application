@@ -64,6 +64,7 @@ public class MainController implements iMainController
              
                 try {
                     if (result != null) {
+                        System.out.println("Logfile: " + result);
                         MainController.getInstance().setLogFile(result);
                         MainController.getInstance().setLogLines(result.split("\n"));
                         MainController.getInstance().displayPipelineScene();
@@ -157,7 +158,7 @@ public class MainController implements iMainController
     @Override
     public void displayPipelineScene() throws IOException
     {
-        this.pipelineSceneController = PipelineSceneController.getInstance();
+//        this.pipelineSceneController = PipelineSceneController.getInstance();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/PipelineScene.fxml"));
         this.pipelineSceneController = PipelineSceneController.getInstance();
         this.pipelineSceneController.setMainControllerInterface((iMainController) this);
@@ -486,6 +487,7 @@ public class MainController implements iMainController
     public String getCheckoutStatus()
     {
        String output = "";
+       System.out.println("Log Lines: " + Arrays.toString(logLines));
        int index = search("[Pipeline] { (Checkout)");
        while(!this.logLines[++index].contains("[Pipeline] { ("))
        {
@@ -835,16 +837,18 @@ public class MainController implements iMainController
             
             if (stage.equalsIgnoreCase("Checkout"))
             {
-                
-                stageInfo.setLogChunk(this.getCheckoutStatus());
+                String checkoutChunk = this.getCheckoutStatus();
+                System.out.println("Checkout LogChunk: " + checkoutChunk);
+                stageInfo.setLogChunk(checkoutChunk);
                 stageInfo = this.parseCheckout(stageInfo);
                 stageInfo.setType(StageType.CHECKOUT);
                 
             }
             else if (stage.equalsIgnoreCase("Static"))
             {
-                
-                stageInfo.setLogChunk(this.getStaticAnalysisStatus());
+                String staticChunk = this.getStaticAnalysisStatus();
+                System.out.println("Static Analysis LogChunk: " + staticChunk);
+                stageInfo.setLogChunk(staticChunk);
                 stageInfo = this.parseStaticAnalysis(stageInfo);
                 stageInfo.setType(StageType.STATIC);
             }

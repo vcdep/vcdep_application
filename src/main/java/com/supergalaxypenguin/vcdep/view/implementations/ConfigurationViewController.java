@@ -157,7 +157,8 @@ public class ConfigurationViewController implements Initializable {
         //Set all inputs in Controller and runs the pipeline
         
         ArrayList<String> stagesList = new ArrayList<>();
-        for (int i = 0; i< stages.length; i++)
+        stagesList.add("checkout");
+        for (int i = 1; i< stages.length; i++)
         {
             if (stages[i]!=null)
             {
@@ -331,7 +332,7 @@ public class ConfigurationViewController implements Initializable {
             public void handle(MouseEvent event) {
                 Dragboard db = deployment.startDragAndDrop(TransferMode.MOVE);
 
-                content.putString("Deploy");
+                content.putString("deploy");
                 db.setContent(content);
 //                System.out.println("drag detected");
                 event.consume();
@@ -343,7 +344,7 @@ public class ConfigurationViewController implements Initializable {
             public void handle(MouseEvent event) {
                 Dragboard db = integration.startDragAndDrop(TransferMode.MOVE);
 
-                content.putString("Integration");
+                content.putString("integration");
                 db.setContent(content);
 //                System.out.println("drag detected");
                 event.consume();
@@ -355,7 +356,7 @@ public class ConfigurationViewController implements Initializable {
             public void handle(MouseEvent event) {
                 Dragboard db = static_a.startDragAndDrop(TransferMode.MOVE);
 
-                content.putString("Static");
+                content.putString("static");
                 db.setContent(content);
 //                System.out.println("drag detected");
                 event.consume();
@@ -367,7 +368,7 @@ public class ConfigurationViewController implements Initializable {
             public void handle(MouseEvent event) {
                 Dragboard db = unit_test.startDragAndDrop(TransferMode.MOVE);
 
-                content.putString("Unit");
+                content.putString("unit");
                 db.setContent(content);
 //                System.out.println("drag detected");
                 event.consume();

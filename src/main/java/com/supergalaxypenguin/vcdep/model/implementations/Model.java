@@ -136,7 +136,7 @@ public class Model extends Service<String>
      */
     public String makeConfigInput()
     {
-        Pipeline pipeline = new Pipeline(this.getLanguage(), Arrays.asList(this.getStages()));
+        Pipeline pipeline = new Pipeline(this.getLanguage(), Arrays.asList(this.getStages()).subList(1, this.getStages().length));
         return this.createJson(pipeline);
     }
     
@@ -535,6 +535,7 @@ public class Model extends Service<String>
                 JsonParser parser = new JsonParser();
                 JsonObject response = (JsonObject) parser.parse(res.toString());
                 String logFile = response.get("logFile").toString();
+                logFile = logFile.replaceAll("\\\\n", "\n");
                 return logFile;
             
             }
