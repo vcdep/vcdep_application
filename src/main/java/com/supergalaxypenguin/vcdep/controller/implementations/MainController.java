@@ -57,6 +57,31 @@ public class MainController implements iMainController
         configurationViewController = new ConfigurationViewController();
         model = Model.getInstance();
         model.setController((iMainController) this);
+        model.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, new EventHandler<WorkerStateEvent> () {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                String result = model.getValue();
+             
+                try {
+                    if (result != null) {
+                        MainController.getInstance().setLogFile(result);
+                        MainController.getInstance().setLogLines(result.split("\n"));
+                        MainController.getInstance().displayPipelineScene();
+                        System.out.println("Result not null");
+
+                    } else {
+                        MainController.getInstance().displayErrorScene();
+                        System.out.println("Why is result null?");
+
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
+                }
+                
+                model.reset();
+            }
+        });
     }
     
     /**
@@ -247,30 +272,7 @@ public class MainController implements iMainController
         
         
         
-        model.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, new EventHandler<WorkerStateEvent> () {
-            @Override
-            public void handle(WorkerStateEvent event) {
-                String result = model.getValue();
-                model.reset();
-             
-                try {
-                    if (result != null) {
-                        MainController.getInstance().setLogFile(result);
-                        MainController.getInstance().setLogLines(result.split("\n"));
-                        MainController.getInstance().displayPipelineScene();
-                        System.out.println("Result not null");
-
-                    } else {
-                        MainController.getInstance().displayErrorScene();
-                        System.out.println("Why is result null?");
-
-                    }
-                } catch (IOException ex) {
-                    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-                    ex.printStackTrace();
-                }
-            }
-        });
+        
         
         model.start();
 

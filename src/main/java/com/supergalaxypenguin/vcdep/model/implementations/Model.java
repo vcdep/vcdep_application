@@ -482,10 +482,11 @@ public class Model extends Service<String>
                 in.close();
             
             
-                System.out.println("Response: " + res.toString());
+                
                 JsonParser parser = new JsonParser();
                 JsonObject response = (JsonObject) parser.parse(res.toString());
                 String finished = response.get("finished").toString();
+//                System.out.println("Finished: " + finished);
                 return finished;
             
             }
@@ -627,8 +628,10 @@ public class Model extends Service<String>
                 
                 Model.this.setBuild(buildName);
                 String finished = Model.this.poll(buildName);
-                while (!finished.equals("true")) {
+                while (!finished.equals("\"true\"")) {
                     finished = Model.this.poll(buildName);
+//                    System.out.println("We are finished: " + finished);
+                    Thread.sleep(1000);
                 }
                 Model.this.logFile = Model.this.getLog(buildName);
             } catch (InterruptedException e) {
