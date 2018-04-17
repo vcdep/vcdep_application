@@ -804,7 +804,7 @@ public class MainController implements iMainController
     {
       String output = "Welcome to deployment.\n\n\tCurrently, the Jenkins pipeline is deploying your new solution to production "
               + "machines and checking that the new code is compatible with your production hardware and software.\n"
-              + "Your website is being hosted using apache which is a HTTP server.";
+              + "Your website is being hosted using apache which is a software system for hosting HTTP servers.";
        //events
        if (this.getDeploymentStatus().contains("Skipping due to failure"))
        {
@@ -819,6 +819,7 @@ public class MainController implements iMainController
        output =  output + "\nIf you would like to see details, click the log file button below.\n";
        
        stageInfo.setPassed(true);
+       stageInfo.setScript(output);
        return stageInfo;
     }
     /**
@@ -838,7 +839,7 @@ public class MainController implements iMainController
             if (stage.equalsIgnoreCase("Checkout"))
             {
                 String checkoutChunk = this.getCheckoutStatus();
-                System.out.println("Checkout LogChunk: " + checkoutChunk);
+//                System.out.println("Checkout LogChunk: " + checkoutChunk);
                 stageInfo.setLogChunk(checkoutChunk);
                 stageInfo = this.parseCheckout(stageInfo);
                 stageInfo.setType(StageType.CHECKOUT);
@@ -847,7 +848,7 @@ public class MainController implements iMainController
             else if (stage.equalsIgnoreCase("Static"))
             {
                 String staticChunk = this.getStaticAnalysisStatus();
-                System.out.println("Static Analysis LogChunk: " + staticChunk);
+//                System.out.println("Static Analysis LogChunk: " + staticChunk);
                 stageInfo.setLogChunk(staticChunk);
                 stageInfo = this.parseStaticAnalysis(stageInfo);
                 stageInfo.setType(StageType.STATIC);

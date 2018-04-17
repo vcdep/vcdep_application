@@ -158,7 +158,7 @@ public class ConfigurationViewController implements Initializable {
         
         ArrayList<String> stagesList = new ArrayList<>();
         stagesList.add("checkout");
-        for (int i = 1; i< stages.length; i++)
+        for (int i = 0; i< stages.length; i++)
         {
             if (stages[i]!=null)
             {

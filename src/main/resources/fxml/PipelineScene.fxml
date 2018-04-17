@@ -237,7 +237,7 @@
             <InnerShadow choke="0.26" color="WHITE" />
          </effect>
       </Rectangle>
-      <Rectangle fx:id="target_5" arcHeight="5.0" arcWidth="5.0" blendMode="SRC_ATOP" height="67.0" layoutX="800.0" layoutY="105.0" onDragDropped="#handleOnDragDropped" onDragEntered="#handleOnDragEntered" onDragExited="#handleOnDragExited" onDragOver="#handleOnDragOver" stroke="BLACK" strokeType="INSIDE" width="78.0">
+      <Rectangle fx:id="target_5" arcHeight="5.0" arcWidth="5.0" blendMode="SRC_ATOP" disable="true" height="67.0" layoutX="800.0" layoutY="105.0" onDragDropped="#handleOnDragDropped" onDragEntered="#handleOnDragEntered" onDragExited="#handleOnDragExited" onDragOver="#handleOnDragOver" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="78.0">
          <effect>
             <InnerShadow choke="0.26" color="WHITE" />
          </effect>
@@ -294,7 +294,7 @@
       </Label>
       <Label fx:id="build" contentDisplay="TOP" layoutX="800.0" layoutY="21.0">
          <graphic>
-            <ImageView fx:id="buildImage" fitHeight="67.0" fitWidth="78.0">
+            <ImageView fx:id="buildImage" disable="true" fitHeight="67.0" fitWidth="78.0" opacity="0.0">
                <image>
                   <Image url="@../Images/Icons/build.png" />
                </image>
