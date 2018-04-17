@@ -173,7 +173,7 @@ public class ConfigurationViewController implements Initializable {
 //        System.out.println("Combo Box: " + languageComboBox.getValue());
         
         try {
-            controller.runPipeline(gitUrl.getText().trim(), ("" + languageComboBox.getValue()).toLowerCase(), localGitRepo.getText().trim(), jenkins.getText().trim(), branch.getText().trim(), Arrays.copyOf(stagesList.toArray(), stagesList.size(), String[].class));
+            controller.runPipeline(gitUrl.getText().toLowerCase().trim(), ("" + languageComboBox.getValue()).toLowerCase(), localGitRepo.getText().trim(), jenkins.getText().trim(), branch.getText().toLowerCase().trim(), Arrays.copyOf(stagesList.toArray(), stagesList.size(), String[].class));
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Exception in controller.runpipeline(params)");
