@@ -8,9 +8,6 @@ package com.supergalaxypenguin.vcdep.controller.interfaces;
 import com.supergalaxypenguin.vcdep.model.implementations.Model;
 import java.io.File;
 import java.io.IOException;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -30,6 +27,12 @@ public interface iMainController
      * @throws java.io.IOException
      */
     void displayConfigurationScene() throws IOException;
+    
+    /**
+     * displays the PipelineScene
+     * @throws IOException 
+     */
+    void displayWaitScene() throws IOException;
     
     /**
      * displays the PipelineScene
@@ -63,13 +66,18 @@ public interface iMainController
     
     /**
      * Sets the Java FX Stage
-     * @param _javaFXStage the JavaFX stage for the application
      */
     void setJavaFXStage(Stage _stage);
     
     /**
      * Runs the initializes and runs the pipeline.
      * 
+     * @param gitHubURL
+     * @param language
+     * @param localGitRepo
+     * @param jenkinsURL
+     * @param stages
+     * @param branchName
      */
     void runPipeline(String gitHubURL, String language, String localGitRepo, String jenkinsURL, String branchName, String[] stages);
     

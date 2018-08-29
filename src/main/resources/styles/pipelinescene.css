@@ -1,0 +1,10 @@
+.button {
+    -fx-font-weight: bold;
+}
+
+.anchor {
+    -fx-background-image: url("../Images/PipeLineBackground.jpg");
+    -fx-background-size: stretch;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}

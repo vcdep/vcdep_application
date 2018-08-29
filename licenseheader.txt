@@ -1,0 +1,8 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Created by Super Penguin Galaxy
+${licensePrefix}2017 UWF - CEN4053 ${licensePrefix}
+<#if licenseLast??>
+${licenseLast}
+</#if>
